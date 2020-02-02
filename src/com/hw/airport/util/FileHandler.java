@@ -1,21 +1,17 @@
 package com.hw.airport.util;
 
-import java.util.Map;
-
-import com.hw.airport.model.Booking;
-import com.hw.airport.model.Flight;
+import java.util.List;
 
 public class FileHandler {
-
-	public Map<String, Flight> loadFlightsFile(String flightsFileName) {
-		// TODO Auto-generated method stub
+	
+	//Reads the data from the file with the given name and load it in a list of string array.
+	public static List<String[]> parseFile(String fileName){
+		
 		return null;
+		
 	}
 
-	public Map<String, Booking> loadBookingFile(String bookingFileName) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 	
 }

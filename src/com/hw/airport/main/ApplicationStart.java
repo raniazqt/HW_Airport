@@ -2,8 +2,10 @@ package com.hw.airport.main;
 
 import java.util.Map;
 
+import com.hw.airport.GUI.ScreenTemplate;
 import com.hw.airport.model.Booking;
 import com.hw.airport.model.Flight;
+import com.hw.airport.service.DataSvc;
 import com.hw.airport.util.FileHandler;
 
 public class ApplicationStart {
@@ -18,12 +20,16 @@ public class ApplicationStart {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 	
-		FileHandler fileHandler = null;
-		String flightsFileName = null;
-		String bookingFileName = null;
+		/*
+		 * DataSvc dataSvc = null; String flightsFileName = null; String bookingFileName
+		 * = null;
+		 * 
+		 * flightsInfo = dataSvc.loadFlightsData(flightsFileName); bookingList =
+		 * dataSvc.loadBookingData(bookingFileName);
+		 */
 		
-		flightsInfo = fileHandler.loadFlightsFile(flightsFileName);
-		bookingList = fileHandler.loadBookingFile(bookingFileName);
+		ScreenTemplate template = new ScreenTemplate();
+		template.createGUITemplate();
 	}
 
 }

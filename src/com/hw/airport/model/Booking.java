@@ -10,6 +10,11 @@ public class Booking {
 	private String refCode;
 	private String flightCode;
 	private boolean isCheckedIn;
+	private double totalBaggageWeight;
+	private double totalBaggageVolume;
+	private double xtraBagVolChrg;
+	private double xtraBagWghtChrg;
+	
 	public String getFirstName() {
 		return firstName;
 	}
