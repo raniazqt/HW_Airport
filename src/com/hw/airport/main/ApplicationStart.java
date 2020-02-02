@@ -22,8 +22,8 @@ public class ApplicationStart {
 		String flightsFileName = null;
 		String bookingFileName = null;
 		
-		flightsInfo = fileHandler.loadFlightsFile(flightsFileName);
-		bookingList = fileHandler.loadBookingFile(bookingFileName);
+		//flightsInfo = fileHandler.loadFlightsFile(flightsFileName);
+		//bookingList = fileHandler.loadBookingFile(bookingFileName);
 	}
 
 }
