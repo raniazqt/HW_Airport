@@ -1,5 +1,6 @@
 package com.hw.airport.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,7 +14,12 @@ public class DataSvcImpl implements DataSvc {
 	@Override
 	public Map<String, Flight> loadFlightsData(String flightsFileName) {
 		List<String[]> flightsData = FileHandler.parseFile(flightsFileName);
-		return null;
+		//read file data into hashmap
+		//Temp code to populate the flight map
+		Map<String, Flight> flights = new HashMap<String, Flight>();
+		flights.put("HW123", new Flight("HW123","DXB","LAX","AA"));
+		
+		return flights;
 	}
 
 	@Override

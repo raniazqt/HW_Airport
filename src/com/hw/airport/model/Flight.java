@@ -19,6 +19,15 @@ public class Flight {
 	private double xtraBagCharge;
 	//charge for extra weight per luggage 
 	private double xtraWghtCharge;
+	
+	
+	public Flight(String code, String toAirport, String fromAirport, String carrier) {
+		super();
+		this.code = code;
+		this.toAirport = toAirport;
+		this.fromAirport = fromAirport;
+		this.carrier = carrier;
+	}
 	public String getCode() {
 		return code;
 	}
