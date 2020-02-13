@@ -1,6 +1,10 @@
 package com.hw.airport.service;
 
+import com.hw.airport.model.AppData;
+
 public class BaggageSvcImpl implements BaggageSvc{
+	
+	AppData appData = AppData.getInstance();
 
 	@Override
 	public double getTheTotalBagVolumesOnFlight(String flightCode) {
