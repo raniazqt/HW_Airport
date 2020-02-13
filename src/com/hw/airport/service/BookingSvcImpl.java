@@ -9,7 +9,8 @@ public class BookingSvcImpl implements BookingSvc {
 
 	@Override
 	public Booking findBookingByLastNameAndRefCode(String lastName, String refCode) {
-		return appData.bookingList.get("HW123");
+
+		return appData.getBookingList().get(refCode);
 	}
 
 	@Override
