@@ -36,6 +36,6 @@ public class ApplicationStart {
 		contentPanel.setBorder(new LineBorder(Color.cyan, 4));
 
 		ScreenTemplate template = new ScreenTemplate();
-		template.createGUITemplate(contentPanel);
+		template.createAndShowGUI();
 	}
 }

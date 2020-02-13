@@ -1,92 +1,219 @@
 package com.hw.airport.GUI;
 
-import java.awt.Color;
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-import javax.swing.border.LineBorder;
+import javax.swing.JTextField;
 
+public class ScreenTemplate extends JFrame implements ActionListener {
 
-public class ScreenTemplate extends JFrame  implements ActionListener{
-	
-@Override
-  public Dimension getPreferredSize() {
-    return new Dimension(800, 600);
-  }
+	public void welcome(Container pane) {
 
+		JPanel Banner = new JPanel();
 
-	public void createGUITemplate(JPanel contentPanel){
+		try {
+			BufferedImage img = ImageIO.read(
+					new File("C:\\Users\\Bruce-Inspiron\\Documents\\MS\\SEM2\\AS\\F21AS_CW\\HW_Airport\\img.png"));
+			ImageIcon icon = new ImageIcon(img);
+			Banner.add(new JLabel(icon));
 
-		//set up window title
-		setTitle("HW Airport");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
-		setLayout(null);
-       // setLayout(new GridLayout(3, 1));
-       setLayout(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.weightx = 1;
-        gbc.weighty = 1;
-        gbc.anchor = GridBagConstraints.NORTHWEST;
-       
-		//disable standard close button
-		setDefaultCloseOperation(this.EXIT_ON_CLOSE);
-		ImageIcon header = new ImageIcon("./resources/images/header.png");
-		JLabel imageLabel = new JLabel(header); 
-	//	imageLabel.setLocation(10, 10);
+		Banner.add(new JLabel("Welcome"));
 
-//		add(imageLabel);
+		JPanel button = new JPanel();
+		button.add(new JButton("Check In"));
 
-		JPanel headerPanel = new JPanel(new FlowLayout(SwingConstants.LEADING));
-		headerPanel.setBorder(new LineBorder(Color.RED, 4));
-		headerPanel.setSize(200, 200);
-		headerPanel.add(imageLabel);
-		add(headerPanel,gbc);
-		//label1.setBounds(20,20,100,20);
+		JPanel top = new JPanel(new CardLayout());
+		top.add(Banner);
+		JPanel bot = new JPanel();
 
-		// to provide a 20 x 20 offset, an empty border will do nicely.
-		// imageLabel.setBorder(new EmptyBorder(10, 10, 0, 0));
+		bot.add(button);
 
-		// Did you actually check the Java Docs for these methods? 
-		// They do not do what you seem to think they do.
-		//label1.SetAlignmentX(20);
-		//label1.SetAlignmentY(20);
-		headerPanel.add(imageLabel);
-		  gbc.anchor = GridBagConstraints.CENTER;
-		add(contentPanel, gbc);
-		JPanel footerPanel = new JPanel(new FlowLayout(SwingConstants.BOTTOM));
-		add(footerPanel);
-		footerPanel.setBorder(new LineBorder(Color.blue, 4));
+		pane.add(top, BorderLayout.CENTER);
+		pane.add(bot, BorderLayout.PAGE_END);
+	}
+
+	public void checkIn(Container pane) {
+
+		JPanel top = new JPanel();
+		top.add(new JLabel("Check In"));
+
+		JPanel mid = new JPanel();
+
+		mid.setLayout(new BoxLayout(mid, BoxLayout.Y_AXIS));
+
+		JPanel mid1 = new JPanel(new CardLayout());
+		JPanel cen1 = new JPanel();
+
+		cen1.add(new JLabel("Name"));
+		cen1.add(new JTextField("Words Go here"));
+
+		mid1.add(cen1);
+
+		JPanel mid2 = new JPanel(new CardLayout());
+		JPanel cen2 = new JPanel();
+
+		cen2.add(new JLabel("Booking Reference"));
+		cen2.add(new JTextField("Words Go here"));
+
+		mid2.add(cen2);
+
+		mid.add(mid1);
+		mid.add(mid2);
+
+		JPanel bot = new JPanel();
+		bot.add(new JButton("Baggage Check"));
+
+		pane.add(top, BorderLayout.PAGE_START);
+
+		pane.add(mid, BorderLayout.CENTER);
+
+		pane.add(bot, BorderLayout.PAGE_END);
+
+	}
+
+	public void baggage(Container pane) {
+
+		JPanel top = new JPanel();
+		top.add(new JLabel("Baggage Check"));
+
+		JPanel mid = new JPanel();
+
+		mid.setLayout(new BoxLayout(mid, BoxLayout.Y_AXIS));
+
+		JPanel mid1 = new JPanel(new CardLayout());
+		JPanel cen1 = new JPanel();
+
+		cen1.add(new JLabel("Weight"));
+		cen1.add(new JTextField("Meters"));
+
+		mid1.add(cen1);
+
+		JPanel mid2 = new JPanel(new CardLayout());
+		JPanel cen2 = new JPanel();
+
+		cen2.add(new JLabel("Height"));
+		cen2.add(new JTextField("Meters"));
+
+		mid2.add(cen2);
+
+		JPanel mid3 = new JPanel(new CardLayout());
+		JPanel cen3 = new JPanel();
+
+		cen3.add(new JLabel("Length"));
+		cen3.add(new JTextField("Meters"));
+
+		mid3.add(cen3);
+
+		JPanel mid4 = new JPanel(new CardLayout());
+		JPanel cen4 = new JPanel();
+
+		cen4.add(new JLabel("Breadth"));
+		cen4.add(new JTextField("Meters"));
+
+		mid4.add(cen4);
+
+		mid.add(mid1);
+		mid.add(mid2);
+		mid.add(mid3);
+		mid.add(mid4);
+
+		JPanel bot = new JPanel();
+		bot.add(new JButton("Baggage Eval"));
+
+		pane.add(top, BorderLayout.PAGE_START);
+
+		pane.add(mid, BorderLayout.CENTER);
+
+		pane.add(bot, BorderLayout.PAGE_END);
+
+	}
+
+	public void fees(Container pane) {
+
+		JPanel top = new JPanel();
+		top.add(new JLabel("Excess Fees"));
+
+		JPanel mid = new JPanel();
+
+		mid.setLayout(new BoxLayout(mid, BoxLayout.Y_AXIS));
+
+		JPanel mid1 = new JPanel(new CardLayout());
+		JPanel cen1 = new JPanel();
+
+		cen1.add(new JLabel("Weight Fees"));
+		cen1.add(new JLabel("$XX"));
+
+		mid1.add(cen1);
+
+		JPanel mid2 = new JPanel(new CardLayout());
+		JPanel cen2 = new JPanel();
+
+		cen2.add(new JLabel("Volume Fees:"));
+		cen2.add(new JLabel("$XX"));
+
+		mid2.add(cen2);
+
+		mid.add(mid1);
+		mid.add(mid2);
+
+		JPanel bot = new JPanel();
+		bot.add(new JButton("Pay"));
+
+		pane.add(top, BorderLayout.PAGE_START);
+
+		pane.add(mid, BorderLayout.CENTER);
+
+		pane.add(bot, BorderLayout.PAGE_END);
+
+	}
+
+	public void end(Container pane) {
 		
-		  gbc.anchor = GridBagConstraints.SOUTHWEST;
-		JLabel footerLabel = new JLabel("FOOTER");
-		footerPanel.add(footerLabel,gbc);
+		JPanel Banner = new JPanel();
+
+		
+		try {
+			BufferedImage img = ImageIO.read(
+					new File("C:\\Users\\Bruce-Inspiron\\Documents\\MS\\SEM2\\AS\\F21AS_CW\\HW_Airport\\img.png"));
+			ImageIcon icon = new ImageIcon(img);
+			Banner.add(new JLabel(icon));
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		Banner.add(new JLabel("Welcome"));
+
 		
 
-		//	imageLabel.setVisible(true);
+		JPanel top = new JPanel();
+		Banner.setLayout(new BoxLayout(Banner, BoxLayout.Y_AXIS));
+		
+		top.add(Banner);
+		
 
-		//	setupSouthPanel();
-		//setupNorthPanel();
-		//setupCenterPanel();
-
-		//pack and set visible
-		pack();
-		setVisible(true);
-
-		/* gobf = new GridOfButtonsFrame(staffList);
-        gobf.pack(); 
-        gobf.setVisible(true);*/
+		pane.add(top, BorderLayout.CENTER);
+		
 	}
 
 	@Override
@@ -95,5 +222,23 @@ public class ScreenTemplate extends JFrame  implements ActionListener{
 
 	}
 
+	/**
+	 * Create the GUI and show it. For thread safety, this method should be invoked
+	 * from the event dispatch thread.
+	 */
+	public static void createAndShowGUI() {
+		// Create and set up the window.
+		JFrame frame = new JFrame("Check-In");
+		
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		// Create and set up the content pane.
+		ScreenTemplate demo = new ScreenTemplate();
+		demo.end(frame.getContentPane());
+
+		// Display the window.
+		frame.pack();
+		frame.setVisible(true);
+	}
 
 }
