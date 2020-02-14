@@ -1,5 +1,6 @@
 package com.hw.airport.model;
 
+// same thing as booking.
 public class Flight {
 	//flight number
 	private String code;
