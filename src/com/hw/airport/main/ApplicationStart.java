@@ -19,10 +19,11 @@ import com.hw.airport.service.FlightSvcImpl;
 public class ApplicationStart {
 
 	public static void main(String[] args) throws HWAirportException {
+		//we need an ApplicationManager that allocates and initializes all services and handles the simulation otherwise the main function would be messy
+		// service dependencies should be handled on construction.
+		//this  stuff is why we had to create an architecture upfront.
 		AppData appData = AppData.getInstance();
-
 		DataSvc dataSvc = new DataSvcImpl();
-		
 		FlightSvc flightSvc = new FlightSvcImpl();
 
 		String flightsFileName = null; 
@@ -34,10 +35,8 @@ public class ApplicationStart {
 		Flight flight = flightSvc.getFlightByCode("AA123");
 		System.out.println("Flight data " + flight.getCarrier() + " " + flight.getToAirport());
 		String code = "AA123";
-		
-		
-		
-		System.out.println("Baggage max volum allowed for Flight code " + code + " is " + flightSvc.getMaxVolumePerBagForFlight(code));
+
+		System.out.println("Baggage max volume allowed for Flight code " + code + " is " + flightSvc.getMaxVolumePerBagForFlight(code));
 		System.out.println("Baggage max weight allowed for Flight code " + code + " is " + flightSvc.getMaxWeightPerBagForFlight(code));
 		
 		/*

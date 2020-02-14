@@ -10,6 +10,6 @@ public interface BookingSvc {
 	
 	public int getCountOfCheckedInPassengersByFlight(String flightCode);
 	
-	public double claculateXtraFeeChargedForFlight(String flightCode);
+	public double calculateExtraChargeForFlight(String flightCode);
 
 }
