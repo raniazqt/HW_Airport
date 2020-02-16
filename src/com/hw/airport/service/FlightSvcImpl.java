@@ -10,7 +10,7 @@ public class FlightSvcImpl implements FlightSvc {
 	@Override
 	public double getMaxVolumePerBagForFlight(String flightCode) throws HWAirportException {
 		Flight flight = appData.getFlightsInfo().get(flightCode);
-		if (null == flight) {
+		if (flight == null) {
 			throw new HWAirportException("No flight was found with the code " + flightCode);
 		}
 		return flight.getMaxBagVolume();
