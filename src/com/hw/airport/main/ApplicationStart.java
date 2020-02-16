@@ -30,7 +30,7 @@ public class ApplicationStart {
 
 		appData.setFlightsInfo(dataSvc.loadFlightsData(flightsFileName)); 
 		appData.setBookingList(dataSvc.loadBookingData(bookingFileName));
-		
+		 
 		Flight flight = flightSvc.getFlightByCode("AA123");
 		System.out.println("Flight data " + flight.getCarrier() + " " + flight.getToAirport());
 		String code = "AA123";

@@ -10,5 +10,5 @@ public interface FlightSvc {
 	public double getMaxWeightPerBagForFlight(String flightCode) throws HWAirportException;
 	public double getFlightMaxCapacity(String flightCode) throws HWAirportException;
 	public boolean isMaxVolumeExceededForFlight(String flightCode, double totalVolum) throws HWAirportException;
-	public Flight getFlightByCode(String code) throws HWAirportException;
+	public Flight getFlightByCode(String code);
 }

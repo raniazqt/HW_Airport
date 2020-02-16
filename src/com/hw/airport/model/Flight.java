@@ -21,6 +21,10 @@ public class Flight {
 	private double xtraWghtChargePerKg;
 	private double xtraVolumeCharge;
 	
+	private double maxFlightVolume;
+	private double maxFlightWeight;
+	
+	
 	
 	
 	public Flight(String code, String toAirport, String fromAirport, String carrier, int maxPasngrCnt,
@@ -122,6 +126,26 @@ public class Flight {
 
 	public void setXtraVolumeCharge(double xtraVolumeCharge) {
 		this.xtraVolumeCharge = xtraVolumeCharge;
+	}
+
+
+	public double getMaxFlightVolume() {
+		return maxFlightVolume;
+	}
+
+
+	public void setMaxFlightVolume(double maxFlightVolume) {
+		this.maxFlightVolume = maxFlightVolume;
+	}
+
+
+	public double getMaxFlightWeight() {
+		return maxFlightWeight;
+	}
+
+
+	public void setMaxFlightWeight(double maxFlightWeight) {
+		this.maxFlightWeight = maxFlightWeight;
 	}
 	
 	
