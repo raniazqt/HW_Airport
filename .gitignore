@@ -26,3 +26,4 @@ src/module-info.java
 .settings/org.eclipse.jdt.core.prefs
 *.xml
 *.iml
+/target/

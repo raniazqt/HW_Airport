@@ -34,8 +34,8 @@ class FlightSvcImplTest {
 	@Before
 	public void createFlightMockData() throws HWAirportException {
 		
-		flights.put("AA123", new Flight("AA123", "DXB", "DFW", "AAL",200, 1, 23, 60, 150, 10, 50));
-		flights.put("AF999", new Flight("AF999", "DXB", "LAX", "AFR",120, 1, 23, 90, 250, 30, 100));
+		flights.put("AA123", new Flight("AA123", "DXB", "DFW", "AAL",200, 1, 23, 60, 150, 10, 50, 0, 0));
+		flights.put("AF999", new Flight("AF999", "DXB", "LAX", "AFR",120, 1, 23, 90, 250, 30, 100, 0, 0));
 		
 		when(appData.getFlightsInfo()).thenReturn(flights);
 		
