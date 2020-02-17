@@ -15,11 +15,11 @@ import javax.swing.JOptionPane;
      * Creates new 'Welcome screen' form FullDetails
      */
     public DisplayPaymentWindow() {
-        initComponents();
+        initPaymentWindow();
     }
     
     public DisplayPaymentWindow(Integer pno) {
-        initComponents();
+        initPaymentWindow();
         
         Pno.setText(pno.toString());
         
@@ -70,7 +70,7 @@ import javax.swing.JOptionPane;
     
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     // Constructor - creating objects for Full details form
-    private void initComponents() {
+    private void initPaymentWindow() {
 
         JPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -383,7 +383,7 @@ import javax.swing.JOptionPane;
             JOptionPane.showMessageDialog(null, "Please Enter Passenger Booking Number");
         }else{
 
-            PassengerSuperClass obj = new PassengerSuperClass();
+          /*  PassengerSuperClass obj = new PassengerSuperClass();
             
             obj = obj.getFullDetails(Pno.getText());
             
@@ -399,7 +399,7 @@ import javax.swing.JOptionPane;
                     Level.setSelectedItem(obj.level);
                     Category.setSelectedItem(obj.category);
             
-            }
+            }*/
         }
         
     }
@@ -409,45 +409,6 @@ import javax.swing.JOptionPane;
         // Handling code here:
     }
     	//GEN-LAST:event_AgeActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-    	
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DisplayPaymentWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DisplayPaymentWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DisplayPaymentWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DisplayPaymentWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        
-        //</editor-fold>
-
-        /* Create and display the form */
-        
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new DisplayPaymentWindow().setVisible(true);
-            }
-        });
-    }
 
     	// Variables declaration - do not modify//GEN-BEGIN:variables
     
