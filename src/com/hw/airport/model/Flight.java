@@ -22,11 +22,17 @@ public class Flight {
 	private double xtraWghtChargePerKg;
 	private double xtraVolumeCharge;
 	
+	private double maxFlightVolume;
+	private double maxFlightWeight;
 	
 	
+	
+	
+	
+
 	public Flight(String code, String toAirport, String fromAirport, String carrier, int maxPasngrCnt,
 			int bagPerPsngrCnt, int maxBagWeight, double maxBagVolume, double xtraBagCharge, double xtraWghtChargePerKg,
-			double xtraVolumeCharge) {
+			double xtraVolumeCharge, double maxFlightVolume, double maxFlightWeight) {
 		super();
 		this.code = code;
 		this.toAirport = toAirport;
@@ -39,6 +45,8 @@ public class Flight {
 		this.xtraBagCharge = xtraBagCharge;
 		this.xtraWghtChargePerKg = xtraWghtChargePerKg;
 		this.xtraVolumeCharge = xtraVolumeCharge;
+		this.maxFlightVolume = maxFlightVolume;
+		this.maxFlightWeight = maxFlightWeight;
 	}
 
 
@@ -120,11 +128,24 @@ public class Flight {
 		return xtraVolumeCharge;
 	}
 
-
 	public void setXtraVolumeCharge(double xtraVolumeCharge) {
 		this.xtraVolumeCharge = xtraVolumeCharge;
 	}
-	
-	
 
+	public double getMaxFlightVolume() {
+		return maxFlightVolume;
+	}
+
+	public void setMaxFlightVolume(double maxFlightVolume) {
+		this.maxFlightVolume = maxFlightVolume;
+	}
+
+	public double getMaxFlightWeight() {
+		return maxFlightWeight;
+	}
+
+	public void setMaxFlightWeight(double maxFlightWeight) {
+		this.maxFlightWeight = maxFlightWeight;
+	}
+	
 }

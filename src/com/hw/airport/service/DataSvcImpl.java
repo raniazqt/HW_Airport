@@ -16,9 +16,9 @@ public class DataSvcImpl implements DataSvc {
 		List<String[]> flightsData = FileHandler.parseFile(flightsFileName);
 		//read file data into hashmap
 		//Temp code to populate the flight map
-		flightsData.add(new String[] {"AA123", "DXB", "DFW", "AAL","200", "1", "23", "60", "150", "10", "50"});
-		flightsData.add(new String[] {"AF999", "DXB", "LAX", "AFR","120", "1", "23", "90", "250", "30", "100"});
-		flightsData.add(new String[] {"AI123", "DXB", "DEL", "AIC","300", "1", "30", "90", "350", "70", "80"});
+		flightsData.add(new String[] {"AA123", "DXB", "DFW", "AAL","200", "1", "23", "60", "150", "10", "50","1000","2000"});
+		flightsData.add(new String[] {"AF999", "DXB", "LAX", "AFR","120", "1", "23", "90", "250", "30", "100","1000","2000"});
+		flightsData.add(new String[] {"AI123", "DXB", "DEL", "AIC","300", "1", "30", "90", "350", "70", "80","1000","2000"});
 		
 				
 		Map<String, Flight> flights = new HashMap<String, Flight>();
@@ -26,7 +26,8 @@ public class DataSvcImpl implements DataSvc {
 		for(String[] line : flightsData ) {
 			Flight flight = new Flight(line[0], line[1], line[2], line[3],Integer.parseInt(line[4]),
 					Integer.parseInt(line[5]), Integer.parseInt(line[6]), Double.parseDouble(line[7]),
-					Double.parseDouble(line[8]),Double.parseDouble(line[9]),Double.parseDouble(line[10]));
+					Double.parseDouble(line[8]),Double.parseDouble(line[9]),Double.parseDouble(line[10]),
+					Double.parseDouble(line[11]), Double.parseDouble(line[12]));
 			flights.put(line[0],flight);
 		}
 		/*
@@ -49,10 +50,10 @@ public class DataSvcImpl implements DataSvc {
 		List<String[]> bookingData = FileHandler.parseFile(bookingFileName);
 		
 		bookingData.add(new String[] {"Martin","Raymond","ABC123","AA123","FALSE"});
-		bookingData.add(new String[] {"Martin","Raymond","SAL777","MS123","FALSE"});
+		bookingData.add(new String[] {"Martin","Raymond","SAL777","AI123","FALSE"});
 
 		bookingData.add(new String[] {"Rose","Henry","DES220","AA123","FALSE"});
-		bookingData.add(new String[] {"Betty","Wayne","OPR900","GA123","FALSE"});
+		bookingData.add(new String[] {"Betty","Wayne","OPR900","AF999","FALSE"});
 
 
 		Map<String, Booking> bookingList = new HashMap<String, Booking>();

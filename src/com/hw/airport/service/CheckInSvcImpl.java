@@ -37,7 +37,7 @@ public class CheckInSvcImpl implements CheckInSvc {
 	}
 	
 	@Override
-	public void doCheckIn(String lastName, String bookingRef) {
+	public void doCheckIn(String lastName, String bookingRef) throws HWAirportException {
 		Booking booking = bookingSvc.findBookingByLastNameAndRefCode(lastName, bookingRef);
 		if (null == booking) {
 			System.out.println("No booking found for given last name and reference code");

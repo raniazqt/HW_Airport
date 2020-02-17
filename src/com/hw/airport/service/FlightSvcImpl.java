@@ -44,11 +44,8 @@ public class FlightSvcImpl implements FlightSvc {
 	}
 	
 	@Override
-	public Flight getFlightByCode(String code) throws HWAirportException {
+	public Flight getFlightByCode(String code) {
 		Flight flight = appData.getFlightsInfo().get(code);
-		if (null == flight) {
-			throw new HWAirportException("No flight was found with the code " + code);
-		}
 		return flight;
 	}
 
