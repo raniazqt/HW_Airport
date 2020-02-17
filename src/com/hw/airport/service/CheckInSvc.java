@@ -1,10 +1,11 @@
 package com.hw.airport.service;
 
-public interface CheckInSvc {
-	public double calculateExtraBaggageCharge(String flightCode, int baggageCnt);
-	public double getExtraBaggageChargeByFlight(String flightCode);
-	public boolean doCheckIn(String lastName, String bookingRef);
-	
-	
+import com.hw.airport.exception.HWAirportException;
+import com.hw.airport.model.Booking;
+import com.hw.airport.model.BookingCharge;
 
+public interface CheckInSvc {
+	public void doCheckIn(String lastName, String bookingRef) throws HWAirportException;
+	BookingCharge calculateXtraChargeForPasngr(BookingCharge charge) throws HWAirportException;
+	Booking retrieveBookingByCodeAndLastName(String lastName, String bookingRef) throws HWAirportException;
 }

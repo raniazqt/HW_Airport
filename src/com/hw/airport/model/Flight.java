@@ -1,5 +1,6 @@
 package com.hw.airport.model;
 
+// same thing as booking.
 public class Flight {
 	//flight number
 	private String code;
@@ -18,9 +19,37 @@ public class Flight {
 	//charge for each extra luggage
 	private double xtraBagCharge;
 	//charge for extra weight per luggage 
-	private double xtraWghtCharge;
+	private double xtraWghtChargePerKg;
+	private double xtraVolumeCharge;
+	
+	private double maxFlightVolume;
+	private double maxFlightWeight;
 	
 	
+	
+	
+	
+
+	public Flight(String code, String toAirport, String fromAirport, String carrier, int maxPasngrCnt,
+			int bagPerPsngrCnt, int maxBagWeight, double maxBagVolume, double xtraBagCharge, double xtraWghtChargePerKg,
+			double xtraVolumeCharge, double maxFlightVolume, double maxFlightWeight) {
+		super();
+		this.code = code;
+		this.toAirport = toAirport;
+		this.fromAirport = fromAirport;
+		this.carrier = carrier;
+		this.maxPasngrCnt = maxPasngrCnt;
+		this.bagPerPsngrCnt = bagPerPsngrCnt;
+		this.maxBagWeight = maxBagWeight;
+		this.maxBagVolume = maxBagVolume;
+		this.xtraBagCharge = xtraBagCharge;
+		this.xtraWghtChargePerKg = xtraWghtChargePerKg;
+		this.xtraVolumeCharge = xtraVolumeCharge;
+		this.maxFlightVolume = maxFlightVolume;
+		this.maxFlightWeight = maxFlightWeight;
+	}
+
+
 	public Flight(String code, String toAirport, String fromAirport, String carrier) {
 		super();
 		this.code = code;
@@ -28,6 +57,8 @@ public class Flight {
 		this.fromAirport = fromAirport;
 		this.carrier = carrier;
 	}
+	
+	
 	public String getCode() {
 		return code;
 	}
@@ -82,13 +113,39 @@ public class Flight {
 	public void setXtraBagCharge(double xtraBagCharge) {
 		this.xtraBagCharge = xtraBagCharge;
 	}
-	public double getXtraWghtCharge() {
-		return xtraWghtCharge;
-	}
-	public void setXtraWghtCharge(double xtraWghtCharge) {
-		this.xtraWghtCharge = xtraWghtCharge;
-	}
 	
-	
+	public double getXtraWghtChargePerKg() {
+		return xtraWghtChargePerKg;
+	}
 
+
+	public void setXtraWghtChargePerKg(double xtraWghtChargePerKg) {
+		this.xtraWghtChargePerKg = xtraWghtChargePerKg;
+	}
+
+
+	public double getXtraVolumeCharge() {
+		return xtraVolumeCharge;
+	}
+
+	public void setXtraVolumeCharge(double xtraVolumeCharge) {
+		this.xtraVolumeCharge = xtraVolumeCharge;
+	}
+
+	public double getMaxFlightVolume() {
+		return maxFlightVolume;
+	}
+
+	public void setMaxFlightVolume(double maxFlightVolume) {
+		this.maxFlightVolume = maxFlightVolume;
+	}
+
+	public double getMaxFlightWeight() {
+		return maxFlightWeight;
+	}
+
+	public void setMaxFlightWeight(double maxFlightWeight) {
+		this.maxFlightWeight = maxFlightWeight;
+	}
+	
 }
