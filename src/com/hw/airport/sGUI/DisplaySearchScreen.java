@@ -46,7 +46,7 @@ public class DisplaySearchScreen extends javax.swing.JFrame {
 		jLabel4.setFont(new java.awt.Font("Helvetica", 1, 18)); // NOI18N
 		jLabel4.setText("Flight Number");
 
-		Name.setEditable(false);
+		Name.setEditable(true);
 		Name.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
 		Name.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -54,7 +54,7 @@ public class DisplaySearchScreen extends javax.swing.JFrame {
 			}
 		});
 
-		PassengerCheckedIn.setEditable(false);
+		PassengerCheckedIn.setEditable(true);
 		PassengerCheckedIn.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
 		PassengerCheckedIn.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,7 +94,8 @@ public class DisplaySearchScreen extends javax.swing.JFrame {
 		jPanel3Layout.setHorizontalGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGroup(jPanel3Layout.createSequentialGroup().addGroup(jPanel3Layout
 						.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-						.addGroup(jPanel3Layout.createSequentialGroup().addGap(115, 115, 115).addComponent(jLabel8))
+						.addGroup(jPanel3Layout.createSequentialGroup().addGap(115, 115, 115)
+								)
 						.addGroup(jPanel3Layout.createSequentialGroup().addContainerGap().addComponent(jLabel3)
 								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60,
 										Short.MAX_VALUE)
@@ -102,12 +103,10 @@ public class DisplaySearchScreen extends javax.swing.JFrame {
 										javax.swing.GroupLayout.PREFERRED_SIZE)))
 						.addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 								.addGroup(jPanel3Layout.createSequentialGroup().addGap(62, 62, 62)
-										.addComponent(Pno, javax.swing.GroupLayout.PREFERRED_SIZE, 200,
-												javax.swing.GroupLayout.PREFERRED_SIZE)
+									
 										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59,
 												Short.MAX_VALUE)
-										.addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 92,
-												javax.swing.GroupLayout.PREFERRED_SIZE)
+									
 										.addGap(20, 20, 20))
 								.addGroup(jPanel3Layout.createSequentialGroup().addGap(85, 85, 85).addComponent(jLabel4)
 										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33,
@@ -122,10 +121,8 @@ public class DisplaySearchScreen extends javax.swing.JFrame {
 		jPanel3Layout.setVerticalGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGroup(jPanel3Layout.createSequentialGroup()
 						.addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-								.addComponent(jLabel8)
-								.addComponent(Pno, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
-								.addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE,
-										javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+								
+								)
 						.addGap(68, 68, 68)
 						.addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
 								.addComponent(Name, javax.swing.GroupLayout.PREFERRED_SIZE, 32,
@@ -138,7 +135,7 @@ public class DisplaySearchScreen extends javax.swing.JFrame {
 						.addContainerGap(47, Short.MAX_VALUE)));
 
 		JPanel1.add(jPanel3);
-		jPanel3.setBounds(30, 80, 820, 280);
+		jPanel3.setBounds(30, 80, 780, 280);
 
 		jLabel2.setBackground(new java.awt.Color(240, 255, 255));
 		jLabel2.setFont(new java.awt.Font("Helvetica", 3, 36));
