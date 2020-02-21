@@ -17,7 +17,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
 
-public class ScreenTemplate extends JFrame  implements ActionListener{
+public class ScreenTemplate extends JFrame  implements ActionListener {
 	
 @Override
   public Dimension getPreferredSize() {
