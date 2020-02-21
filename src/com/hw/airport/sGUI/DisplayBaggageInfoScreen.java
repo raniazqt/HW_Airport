@@ -31,7 +31,7 @@ public class DisplayBaggageInfoScreen extends javax.swing.JFrame {
 		jLabel5 = new javax.swing.JLabel();
 		jLabel6 = new javax.swing.JLabel();
 		Length = new javax.swing.JTextField();
-		Email = new javax.swing.JTextField();
+		Width = new javax.swing.JTextField();
 		Submit = new javax.swing.JButton();
 		jLabel7 = new javax.swing.JLabel();
 		Cancel = new javax.swing.JButton();
@@ -41,7 +41,7 @@ public class DisplayBaggageInfoScreen extends javax.swing.JFrame {
 		Pno = new javax.swing.JTextField();
 		jLabel9 = new javax.swing.JLabel();
 		Height = new javax.swing.JTextField();
-		Width = new javax.swing.JTextField();
+		Weight = new javax.swing.JTextField();
 		jLabel2 = new javax.swing.JLabel();
 		jLabel1 = new javax.swing.JLabel();
 
@@ -78,8 +78,8 @@ public class DisplayBaggageInfoScreen extends javax.swing.JFrame {
 			}
 		});
 
-		Email.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
-		Email.addActionListener(new java.awt.event.ActionListener() {
+		Width.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
+		Width.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				EmailActionPerformed(evt);
 			}
@@ -120,8 +120,8 @@ public class DisplayBaggageInfoScreen extends javax.swing.JFrame {
 			}
 		});
 
-		Width.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
-		Width.addActionListener(new java.awt.event.ActionListener() {
+		Weight.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
+		Weight.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				AgeActionPerformed(evt);
 			}
@@ -151,7 +151,7 @@ public class DisplayBaggageInfoScreen extends javax.swing.JFrame {
 												.addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 49,
 														javax.swing.GroupLayout.PREFERRED_SIZE)
 												.addGap(59, 59, 59)
-												.addComponent(Width, javax.swing.GroupLayout.PREFERRED_SIZE, 200,
+												.addComponent(Weight, javax.swing.GroupLayout.PREFERRED_SIZE, 200,
 														javax.swing.GroupLayout.PREFERRED_SIZE)))
 										.addGroup(jPanel3Layout
 												.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -193,7 +193,7 @@ public class DisplayBaggageInfoScreen extends javax.swing.JFrame {
 														.addPreferredGap(
 																javax.swing.LayoutStyle.ComponentPlacement.RELATED,
 																javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-														.addComponent(Email, javax.swing.GroupLayout.PREFERRED_SIZE,
+														.addComponent(Width, javax.swing.GroupLayout.PREFERRED_SIZE,
 																200, javax.swing.GroupLayout.PREFERRED_SIZE)))))
 						.addContainerGap()));
 		jPanel3Layout.setVerticalGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -217,7 +217,7 @@ public class DisplayBaggageInfoScreen extends javax.swing.JFrame {
 												.addComponent(jLabel3)
 												.addComponent(Length, javax.swing.GroupLayout.PREFERRED_SIZE, 32,
 														javax.swing.GroupLayout.PREFERRED_SIZE)
-												.addComponent(jLabel4).addComponent(Email,
+												.addComponent(jLabel4).addComponent(Width,
 														javax.swing.GroupLayout.PREFERRED_SIZE, 32,
 														javax.swing.GroupLayout.PREFERRED_SIZE))
 										.addGroup(jPanel3Layout
@@ -226,7 +226,7 @@ public class DisplayBaggageInfoScreen extends javax.swing.JFrame {
 														.addGroup(jPanel3Layout
 																.createParallelGroup(
 																		javax.swing.GroupLayout.Alignment.BASELINE)
-																.addComponent(jLabel7).addComponent(Width,
+																.addComponent(jLabel7).addComponent(Weight,
 																		javax.swing.GroupLayout.PREFERRED_SIZE, 32,
 																		javax.swing.GroupLayout.PREFERRED_SIZE)))
 												.addGroup(jPanel3Layout.createSequentialGroup().addGap(20, 20, 20)
@@ -286,11 +286,11 @@ public class DisplayBaggageInfoScreen extends javax.swing.JFrame {
 
 			if (Length.getText().isEmpty() || Length.getText().charAt(0) == ' ') {
 				JOptionPane.showMessageDialog(null, "Please Enter Baggage Length (cm) ");
-			} else if (Email.getText().isEmpty()) {
+			} else if (Width.getText().isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Please Enter Baggage Width (cm) ");
 			} else if (Height.getText().isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Please Enter Baggage Height (cm) ");
-			} else if (Width.getText().isEmpty()) {
+			} else if (Weight.getText().isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Please Enter Baggage Weight (Kg) ");
 			} else {
 
@@ -315,7 +315,7 @@ public class DisplayBaggageInfoScreen extends javax.swing.JFrame {
 
 						String parts[] = f.split(",");
 
-						if (parts[2].equals(Email.getText())
+						if (parts[2].equals(Width.getText())
 								&& parts[5].equals(Category.getSelectedItem().toString())) {
 							chk = 1;
 							break;
@@ -339,7 +339,7 @@ public class DisplayBaggageInfoScreen extends javax.swing.JFrame {
 
 					fout = new FileWriter("Passengers.txt", true);
 
-					fout.write(Pno.getText() + "," + Length.getText() + "," + Email.getText() + "," + Width.getText()
+					fout.write(Pno.getText() + "," + Length.getText() + "," + Width.getText() + "," + Weight.getText()
 							+ "," + Height.getText() + "," + Category.getSelectedItem().toString() + ","
 							+ FeesToPay.getSelectedItem().toString());
 					fout.write(System.lineSeparator());
@@ -384,12 +384,12 @@ public class DisplayBaggageInfoScreen extends javax.swing.JFrame {
 	}// GEN-LAST:event_AgeActionPerformed
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
-	private javax.swing.JTextField Width;
+	private javax.swing.JTextField Weight;
 	private javax.swing.JButton Cancel;
 	private javax.swing.JComboBox<String> Category;
 	private javax.swing.JTextField Pno;
 	private javax.swing.JTextField Height;
-	private javax.swing.JTextField Email;
+	private javax.swing.JTextField Width;
 	private javax.swing.JComboBox<String> FeesToPay;
 	private javax.swing.JTextField Length;
 	private javax.swing.JButton Submit;
