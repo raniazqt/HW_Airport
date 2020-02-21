@@ -10,10 +10,10 @@ public class DisplayWelcomeScreen extends javax.swing.JFrame {
 	 */
 	public DisplayWelcomeScreen() {
 		jPanel1 = new javax.swing.JPanel();
+		
+		
 		jButton1 = new javax.swing.JButton();
-		jButton5 = new javax.swing.JButton();
-		jButton6 = new javax.swing.JButton();
-		jButton7 = new javax.swing.JButton();
+		
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -22,14 +22,14 @@ public class DisplayWelcomeScreen extends javax.swing.JFrame {
 				new java.awt.Font("Helvetica", 1, 14))); // NOI18N
 		jPanel1.setLayout(null);
 
-		jButton6.setText("Check In");
-		jButton6.addActionListener(new java.awt.event.ActionListener() {
+		jButton1.setText("Check In");
+		jButton1.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jButton6ActionPerformed(evt);
 			}
 		});
-		jPanel1.add(jButton6);
-		jButton6.setBounds(60, 80, 130, 30);
+		jPanel1.add(jButton1);
+		jButton1.setBounds(130, 100, 130, 30);
 
 	
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -53,14 +53,6 @@ public class DisplayWelcomeScreen extends javax.swing.JFrame {
 	// GEN-LAST:event_jButton6ActionPerformed
 	/*
 	 * 
-	 * private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) { //
-	 * GEN-FIRST:event_jButton1ActionPerformed // Registration button creates new
-	 * registrant
-	 * 
-	 * DisplayBaggageInfoScreen obj = new DisplayBaggageInfoScreen();
-	 * obj.setVisible(true); this.setVisible(false);
-	 * 
-	 * }// GEN-LAST:event_jButton1ActionPerformed
 	 * 
 	 * private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) { //
 	 * GEN-FIRST:event_jButton5ActionPerformed // Handling code here for the
@@ -97,7 +89,6 @@ public class DisplayWelcomeScreen extends javax.swing.JFrame {
 
 	private javax.swing.JButton jButton1;
 	private javax.swing.JButton jButton5;
-	private javax.swing.JButton jButton6;
 	private javax.swing.JButton jButton7;
 	private javax.swing.JPanel jPanel1;
 	// End of variables declaration
