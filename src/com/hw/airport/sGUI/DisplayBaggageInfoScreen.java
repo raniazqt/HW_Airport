@@ -26,24 +26,29 @@ public class DisplayBaggageInfoScreen extends javax.swing.JFrame {
 		jPanel1 = new javax.swing.JPanel();
 		jPanel2 = new javax.swing.JPanel();
 		jPanel3 = new javax.swing.JPanel();
+
+		jLabel1 = new javax.swing.JLabel();
+		jLabel2 = new javax.swing.JLabel();
+
 		jLabel3 = new javax.swing.JLabel();
 		jLabel4 = new javax.swing.JLabel();
 		jLabel5 = new javax.swing.JLabel();
 		jLabel6 = new javax.swing.JLabel();
+		jLabel7 = new javax.swing.JLabel();
+		jLabel8 = new javax.swing.JLabel();
+
 		Length = new javax.swing.JTextField();
 		Width = new javax.swing.JTextField();
-		Submit = new javax.swing.JButton();
-		jLabel7 = new javax.swing.JLabel();
-		Cancel = new javax.swing.JButton();
-		Category = new javax.swing.JComboBox<>();
-		FeesToPay = new javax.swing.JComboBox<>();
-		jLabel8 = new javax.swing.JLabel();
-		Pno = new javax.swing.JTextField();
-		jLabel9 = new javax.swing.JLabel();
 		Height = new javax.swing.JTextField();
 		Weight = new javax.swing.JTextField();
-		jLabel2 = new javax.swing.JLabel();
-		jLabel1 = new javax.swing.JLabel();
+
+		Submit = new javax.swing.JButton();
+		Calc = new javax.swing.JButton();
+
+		Category = new javax.swing.JComboBox<>();
+		FeesToPay = new javax.swing.JComboBox<>();
+
+		jLabel9 = new javax.swing.JLabel();
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,11 +77,8 @@ public class DisplayBaggageInfoScreen extends javax.swing.JFrame {
 		jLabel7.setText("Width");
 
 		Length.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
-			
 
 		Width.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
-	
-			
 
 		Submit.setText("Submit");
 		Submit.addActionListener(new java.awt.event.ActionListener() {
@@ -85,20 +87,15 @@ public class DisplayBaggageInfoScreen extends javax.swing.JFrame {
 			}
 		});
 
-		Cancel.setText("Cancel");
-		Cancel.addActionListener(new java.awt.event.ActionListener() {
+		Calc.setText("Fee:");
+		Calc.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				CancelActionPerformed(evt);
+				CalcActionPerformed(evt);
 			}
 		});
 
 		Category.setModel(new javax.swing.DefaultComboBoxModel<>(
 				new String[] { "First Class", "Business Class", "Economy Class" }));
-		Category.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				CategorieActionPerformed(evt);
-			}
-		});
 
 		FeesToPay.setModel(new javax.swing.DefaultComboBoxModel<>(
 				new String[] { "Pay Excess Baggage Fees", "No Baggage to Check In" }));
@@ -107,24 +104,13 @@ public class DisplayBaggageInfoScreen extends javax.swing.JFrame {
 		jLabel9.setText("Class");
 
 		Height.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
-		Height.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				CountryActionPerformed(evt);
-			}
-		});
 
 		Weight.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
-		Weight.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				AgeActionPerformed(evt);
-			}
-		});
 
 		javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
 		jPanel3.setLayout(jPanel3Layout);
 		jPanel3Layout.setHorizontalGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(jPanel3Layout.createSequentialGroup().addGap(191, 191, 191).addComponent(jLabel8)
-						.addGap(62, 62, 62)
+				.addGroup(jPanel3Layout.createSequentialGroup().addGap(191, 191, 191).addGap(62, 62, 62)
 
 						.addGap(0, 0, Short.MAX_VALUE))
 				.addGroup(jPanel3Layout.createSequentialGroup().addContainerGap()
@@ -137,9 +123,9 @@ public class DisplayBaggageInfoScreen extends javax.swing.JFrame {
 												.addComponent(FeesToPay, javax.swing.GroupLayout.PREFERRED_SIZE, 200,
 														javax.swing.GroupLayout.PREFERRED_SIZE))
 										.addGroup(jPanel3Layout.createSequentialGroup()
-												.addComponent(Cancel, javax.swing.GroupLayout.PREFERRED_SIZE, 77,
+												.addComponent(Calc, javax.swing.GroupLayout.PREFERRED_SIZE, 77,
 														javax.swing.GroupLayout.PREFERRED_SIZE)
-												.addGap(173, 173, 173))
+												.addGap(173, 173, 173).addComponent(jLabel8))
 										.addGroup(jPanel3Layout.createSequentialGroup()
 												.addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 49,
 														javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -172,7 +158,8 @@ public class DisplayBaggageInfoScreen extends javax.swing.JFrame {
 														.addComponent(Submit, javax.swing.GroupLayout.PREFERRED_SIZE,
 																77, javax.swing.GroupLayout.PREFERRED_SIZE)
 														.addGap(52, 52, 52))))
-								.addGroup(jPanel3Layout.createSequentialGroup().addGap(33).addComponent(jLabel3).addGap(63, 63, 63)
+								.addGroup(jPanel3Layout.createSequentialGroup().addGap(33).addComponent(jLabel3)
+										.addGap(63, 63, 63)
 										.addComponent(
 												Length, javax.swing.GroupLayout.PREFERRED_SIZE, 200,
 												javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -189,52 +176,58 @@ public class DisplayBaggageInfoScreen extends javax.swing.JFrame {
 														.addComponent(Width, javax.swing.GroupLayout.PREFERRED_SIZE,
 																200, javax.swing.GroupLayout.PREFERRED_SIZE)))))
 						.addContainerGap()));
-		jPanel3Layout.setVerticalGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(jPanel3Layout.createSequentialGroup()
-						.addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-								jPanel3Layout.createSequentialGroup().addComponent(jLabel8).addGap(23, 23, 23)))
-						.addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-								.addGroup(jPanel3Layout.createSequentialGroup().addGap(0, 0, Short.MAX_VALUE)
-										.addGroup(jPanel3Layout
+		jPanel3Layout
+				.setVerticalGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+						.addGroup(jPanel3Layout.createSequentialGroup().addGroup(
+								jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+										.addGroup(jPanel3Layout.createSequentialGroup().addGap(23, 23, 23)))
+								.addGroup(jPanel3Layout
+										.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+										.addGroup(
+												jPanel3Layout.createSequentialGroup().addGap(0, 0, Short.MAX_VALUE)
+														.addGroup(jPanel3Layout
+																.createParallelGroup(
+																		javax.swing.GroupLayout.Alignment.BASELINE)
+																.addComponent(jLabel6).addComponent(FeesToPay,
+																		javax.swing.GroupLayout.PREFERRED_SIZE, 30,
+																		javax.swing.GroupLayout.PREFERRED_SIZE)
+																.addComponent(jLabel9).addComponent(Category,
+																		javax.swing.GroupLayout.PREFERRED_SIZE, 30,
+																		javax.swing.GroupLayout.PREFERRED_SIZE))
+														.addGap(81, 81, 81))
+										.addGroup(jPanel3Layout.createSequentialGroup().addGroup(jPanel3Layout
 												.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-												.addComponent(jLabel6)
-												.addComponent(FeesToPay, javax.swing.GroupLayout.PREFERRED_SIZE, 30,
-														javax.swing.GroupLayout.PREFERRED_SIZE)
-												.addComponent(jLabel9).addComponent(Category,
-														javax.swing.GroupLayout.PREFERRED_SIZE, 30,
-														javax.swing.GroupLayout.PREFERRED_SIZE))
-										.addGap(81, 81, 81))
-								.addGroup(jPanel3Layout.createSequentialGroup()
-										.addGroup(jPanel3Layout
-												.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-												.addComponent(jLabel3)
-												.addComponent(Length, javax.swing.GroupLayout.PREFERRED_SIZE, 32,
+												.addComponent(jLabel3).addComponent(
+														Length, javax.swing.GroupLayout.PREFERRED_SIZE, 32,
 														javax.swing.GroupLayout.PREFERRED_SIZE)
 												.addComponent(jLabel4).addComponent(Width,
 														javax.swing.GroupLayout.PREFERRED_SIZE, 32,
 														javax.swing.GroupLayout.PREFERRED_SIZE))
-										.addGroup(jPanel3Layout
-												.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-												.addGroup(jPanel3Layout.createSequentialGroup().addGap(31, 31, 31)
-														.addGroup(jPanel3Layout
-																.createParallelGroup(
+												.addGroup(jPanel3Layout
+														.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+														.addGroup(jPanel3Layout.createSequentialGroup()
+																.addGap(31, 31, 31)
+																.addGroup(jPanel3Layout.createParallelGroup(
 																		javax.swing.GroupLayout.Alignment.BASELINE)
-																.addComponent(jLabel7).addComponent(Weight,
-																		javax.swing.GroupLayout.PREFERRED_SIZE, 32,
-																		javax.swing.GroupLayout.PREFERRED_SIZE)))
-												.addGroup(jPanel3Layout.createSequentialGroup().addGap(20, 20, 20)
-														.addGroup(jPanel3Layout
-																.createParallelGroup(
+																		.addComponent(jLabel7).addComponent(Weight,
+																				javax.swing.GroupLayout.PREFERRED_SIZE,
+																				32,
+																				javax.swing.GroupLayout.PREFERRED_SIZE)))
+														.addGroup(jPanel3Layout.createSequentialGroup()
+																.addGap(20, 20, 20)
+																.addGroup(jPanel3Layout.createParallelGroup(
 																		javax.swing.GroupLayout.Alignment.BASELINE)
-																.addComponent(jLabel5).addComponent(Height,
-																		javax.swing.GroupLayout.PREFERRED_SIZE, 32,
-																		javax.swing.GroupLayout.PREFERRED_SIZE))))
-										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 144,
-												Short.MAX_VALUE)))
-						.addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-								.addComponent(Submit, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
-								.addComponent(Cancel, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE))
-						.addContainerGap()));
+																		.addComponent(jLabel5).addComponent(Height,
+																				javax.swing.GroupLayout.PREFERRED_SIZE,
+																				32,
+																				javax.swing.GroupLayout.PREFERRED_SIZE))))
+												.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+														144, Short.MAX_VALUE)))
+								.addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+										.addComponent(Submit, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+										.addComponent(Calc, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+										.addComponent(jLabel8))
+								.addContainerGap()));
 
 		jPanel2.add(jPanel3);
 		jPanel3.setBounds(30, 80, 760, 360);
@@ -260,120 +253,63 @@ public class DisplayBaggageInfoScreen extends javax.swing.JFrame {
 		pack();
 	}// </editor-fold>//GEN-END:initComponents
 
-
 	private void SubmitActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_SubmitActionPerformed
 		// TODO add your handling code here:
-		try {
 
-			if (Length.getText().isEmpty() || Length.getText().charAt(0) == ' ') {
-				JOptionPane.showMessageDialog(null, "Please Enter Baggage Length (cm) ");
-			} else if (Width.getText().isEmpty()) {
-				JOptionPane.showMessageDialog(null, "Please Enter Baggage Width (cm) ");
-			} else if (Height.getText().isEmpty()) {
-				JOptionPane.showMessageDialog(null, "Please Enter Baggage Height (cm) ");
-			} else if (Weight.getText().isEmpty()) {
-				JOptionPane.showMessageDialog(null, "Please Enter Baggage Weight (Kg) ");
-			} else {
+		if (Length.getText().isEmpty() || Length.getText().charAt(0) == ' ') {
+			JOptionPane.showMessageDialog(null, "Please Enter Baggage Length (cm) ");
+		} else if (Width.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Please Enter Baggage Width (cm) ");
+		} else if (Height.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Please Enter Baggage Height (cm) ");
+		} else if (Weight.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Please Enter Baggage Weight (Kg) ");
+		} else {
 
-				boolean flag;
-				String c = "";
+			boolean flag;
+			String c = "";
 
-				// Validation of email and category
+			// Validation of email and category
 
-				int chk = 0;
+			int chk = 0;
 
-				String f = null;
+			String f = null;
 
-				try {
+			if (chk == 1) {
+				JOptionPane.showMessageDialog(null, "Another Passenger with this Email is already Selected!!");
+			}
 
-					FileReader fin;
+			else {
 
-					fin = new FileReader("Passengers.txt");
+				JOptionPane.showMessageDialog(null, "Check-In Successful");
 
-					BufferedReader br = new BufferedReader(fin);
-
-					while ((f = br.readLine()) != null) {
-
-						String parts[] = f.split(",");
-
-						if (parts[2].equals(Width.getText())
-								&& parts[5].equals(Category.getSelectedItem().toString())) {
-							chk = 1;
-							break;
-						}
-
-					}
-					fin.close();
-					br.close();
-
-				} catch (IOException ex) {
-					JOptionPane.showMessageDialog(null, ex);
-				}
-
-				if (chk == 1) {
-					JOptionPane.showMessageDialog(null, "Another Passenger with this Email is already Selected!!");
-				}
-
-				else {
-
-					FileWriter fout;
-
-					fout = new FileWriter("Passengers.txt", true);
-
-					fout.write(Pno.getText() + "," + Length.getText() + "," + Width.getText() + "," + Weight.getText()
-							+ "," + Height.getText() + "," + Category.getSelectedItem().toString() + ","
-							+ FeesToPay.getSelectedItem().toString());
-					fout.write(System.lineSeparator());
-					fout.close();
-
-					JOptionPane.showMessageDialog(null, "Baggage Registration Successful");
-
-					DisplayWelcomeScreen obj = new DisplayWelcomeScreen();
-					obj.setVisible(true);
-					this.setVisible(false);
-
-				}
+				DisplayWelcomeScreen obj = new DisplayWelcomeScreen();
+				obj.setVisible(true);
+				this.setVisible(false);
 
 			}
-		} catch (IOException e) {
-			JOptionPane.showMessageDialog(null, e);
+
 		}
 
 	}// GEN-LAST:event_SubmitActionPerformed
 
-	private void CancelActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_CancelActionPerformed
+	private void CalcActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_CancelActionPerformed
 		// TODO add your handling code here:
-		DisplayWelcomeScreen obj = new DisplayWelcomeScreen();
-		obj.setVisible(true);
-		this.setVisible(false);
+
 	}// GEN-LAST:event_CancelActionPerformed
 
-	private void CnoActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_CnoActionPerformed
-		// TODO add your handling code here:
-	}// GEN-LAST:event_CnoActionPerformed
-
-	private void CategorieActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_CategorieActionPerformed
-		// TODO add your handling code here:
-	}// GEN-LAST:event_CategorieActionPerformed
-
-	private void CountryActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_CountryActionPerformed
-		// TODO add your handling code here:
-	}// GEN-LAST:event_CountryActionPerformed
-
-	private void AgeActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_AgeActionPerformed
-		// TODO add your handling code here:
-	}// GEN-LAST:event_AgeActionPerformed
-
+	
 	// Variables declaration - do not modify//GEN-BEGIN:variables
 	private javax.swing.JTextField Weight;
-	private javax.swing.JButton Cancel;
+
 	private javax.swing.JComboBox<String> Category;
-	private javax.swing.JTextField Pno;
 	private javax.swing.JTextField Height;
 	private javax.swing.JTextField Width;
 	private javax.swing.JComboBox<String> FeesToPay;
 	private javax.swing.JTextField Length;
 	private javax.swing.JButton Submit;
+	private javax.swing.JButton Calc;
+
 	private javax.swing.JLabel jLabel1;
 	private javax.swing.JLabel jLabel2;
 	private javax.swing.JLabel jLabel3;
