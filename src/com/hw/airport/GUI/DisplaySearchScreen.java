@@ -1,4 +1,4 @@
-package com.hw.airport.sGUI;
+package com.hw.airport.GUI;
 
 import javax.swing.JOptionPane;
 

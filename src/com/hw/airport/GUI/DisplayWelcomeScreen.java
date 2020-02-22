@@ -1,4 +1,4 @@
-package com.hw.airport.sGUI;
+package com.hw.airport.GUI;
 
 /**
  * @author Simon Grange, Safa Al Ameri, Bruce Tauro
