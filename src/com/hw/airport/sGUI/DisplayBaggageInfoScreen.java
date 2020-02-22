@@ -72,18 +72,11 @@ public class DisplayBaggageInfoScreen extends javax.swing.JFrame {
 		jLabel7.setText("Width");
 
 		Length.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
-		Length.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				NameActionPerformed(evt);
-			}
-		});
+			
 
 		Width.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
-		Width.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				EmailActionPerformed(evt);
-			}
-		});
+	
+			
 
 		Submit.setText("Submit");
 		Submit.addActionListener(new java.awt.event.ActionListener() {
@@ -179,7 +172,7 @@ public class DisplayBaggageInfoScreen extends javax.swing.JFrame {
 														.addComponent(Submit, javax.swing.GroupLayout.PREFERRED_SIZE,
 																77, javax.swing.GroupLayout.PREFERRED_SIZE)
 														.addGap(52, 52, 52))))
-								.addGroup(jPanel3Layout.createSequentialGroup().addComponent(jLabel3).addGap(63, 63, 63)
+								.addGroup(jPanel3Layout.createSequentialGroup().addGap(33).addComponent(jLabel3).addGap(63, 63, 63)
 										.addComponent(
 												Length, javax.swing.GroupLayout.PREFERRED_SIZE, 200,
 												javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -267,18 +260,6 @@ public class DisplayBaggageInfoScreen extends javax.swing.JFrame {
 		pack();
 	}// </editor-fold>//GEN-END:initComponents
 
-	@SuppressWarnings("resource")
-	private void NameActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_NameActionPerformed
-		// TODO add your handling code here:
-		Scanner input = new Scanner(System.in);
-		String s = input.nextLine();
-	}// GEN-LAST:event_NameActionPerformed
-
-	private void EmailActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_EmailActionPerformed
-		// TODO add your handling code here:
-		Scanner input = new Scanner(System.in);
-		String s = input.nextLine();
-	}// GEN-LAST:event_EmailActionPerformed
 
 	private void SubmitActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_SubmitActionPerformed
 		// TODO add your handling code here:

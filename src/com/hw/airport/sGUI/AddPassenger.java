@@ -224,9 +224,7 @@ public class AddPassenger extends javax.swing.JFrame {
 
                 JOptionPane.showMessageDialog(null, "Added Successfully");
 
-                Manager obj = new Manager();
-                obj.setVisible(true);
-                this.setVisible(false);
+              
             
         }catch (IOException e) {
             JOptionPane.showMessageDialog(null, e);
@@ -238,9 +236,7 @@ public class AddPassenger extends javax.swing.JFrame {
         
     	// Handling code
     	
-        Manager obj = new Manager();
-        obj.setVisible(true);
-        this.setVisible(false);
+       
     }
     //GEN-LAST:event_CancelActionPerformed
 

@@ -1,1 +1,2 @@
 ,1,2,3,1,Economy Class,No Baggage to Check In
+,32,32,32,32,First Class,Pay Excess Baggage Fees
