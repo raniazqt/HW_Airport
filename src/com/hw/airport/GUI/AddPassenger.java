@@ -1,4 +1,4 @@
-package com.hw.airport.sGUI;
+package com.hw.airport.GUI;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -224,7 +224,7 @@ public class AddPassenger extends javax.swing.JFrame {
 
                 JOptionPane.showMessageDialog(null, "Added Successfully");
 
-                Manager obj = new Manager();
+                WelcomeWindow obj = new WelcomeWindow();
                 obj.setVisible(true);
                 this.setVisible(false);
             
@@ -238,7 +238,7 @@ public class AddPassenger extends javax.swing.JFrame {
         
     	// Handling code
     	
-        Manager obj = new Manager();
+        WelcomeWindow obj = new WelcomeWindow();
         obj.setVisible(true);
         this.setVisible(false);
     }

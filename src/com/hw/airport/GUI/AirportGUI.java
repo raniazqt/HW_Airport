@@ -12,6 +12,4 @@ public interface AirportGUI {
 	
 	public void displayCheckInConfirmationScreen();
 	
-	
-
 }

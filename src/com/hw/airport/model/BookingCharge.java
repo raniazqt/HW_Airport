@@ -14,6 +14,20 @@ public class BookingCharge {
 		super();
 	}
 
+	
+	public BookingCharge(String refCode, String lastName, int bagCnt, double length, double width, double depth,
+			double weight) {
+		super();
+		this.refCode = refCode;
+		this.lastName = lastName;
+		this.bagCnt = bagCnt;
+		this.length = length;
+		this.width = width;
+		this.depth = depth;
+		this.weight = weight;
+	}
+
+
 	public BookingCharge(String refCode, String lastName, int bagCnt, double length, double width, double depth,
 			double weight, double weightCharge, double volumeCharge) {
 		super();
@@ -98,6 +112,11 @@ public class BookingCharge {
 
 	public void setVolumeCharge(double volumeCharge) {
 		this.volumeCharge = volumeCharge;
+	}
+
+
+	public double getTotalChg() {
+		return this.volumeCharge + this.weightCharge;
 	}
 	
 }
