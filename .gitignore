@@ -27,3 +27,5 @@ src/module-info.java
 *.xml
 *.iml
 /target/
+.settings/org.eclipse.m2e.core.prefs
+/.classpath

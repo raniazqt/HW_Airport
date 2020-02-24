@@ -1,24 +1,18 @@
 package com.hw.airport.main;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
 import com.hw.airport.exception.HWAirportException;
-import com.hw.airport.model.AppData;
-import com.hw.airport.service.DataSvc;
-import com.hw.airport.service.DataSvcImpl;
-import com.hw.airport.service.FlightSvc;
-import com.hw.airport.service.FlightSvcImpl;
-import com.hw.airport.service.ReportSvc;
-import com.hw.airport.service.ReportSvcImpl;
 
 public class ApplicationStart {
-	
+
 	public static void main(String[] args) throws HWAirportException {
-		//we need an ApplicationManager that allocates and initializes all services and handles the simulation otherwise the main function would be messy
+		ApplicationManager appManager = new ApplicationManager();
+		appManager.execute();
+	}
+		//we need an ApplicationManager that allocates and initializes all services and handles the simulation otherwise 
+		//the main function would be messy
 		// service dependencies should be handled on construction.
 		//this  stuff is why we had to create an architecture upfront.
-		  AppData appData = AppData.getInstance(); DataSvc dataSvc = new DataSvcImpl();
+		 /* AppData appData = AppData.getInstance(); DataSvc dataSvc = new DataSvcImpl();
 		  FlightSvc flightSvc = new FlightSvcImpl();
 		  
 		  String flightsFileName = null; String bookingFileName = null;
@@ -39,7 +33,7 @@ public class ApplicationStart {
 		
 		
 		  
-		 /* Flight flight = flightSvc.getFlightByCode("AA123");
+		  Flight flight = flightSvc.getFlightByCode("AA123");
 		  System.out.println("Flight data " + flight.getCarrier() + " " +
 		  flight.getToAirport()); String code = "AA123";
 		  
@@ -54,6 +48,6 @@ public class ApplicationStart {
 		 * 
 		 * ScreenTemplate template = new ScreenTemplate();
 		 * template.createGUITemplate(contentPanel);
-		 */
+		 
 	}
-}
+*/}

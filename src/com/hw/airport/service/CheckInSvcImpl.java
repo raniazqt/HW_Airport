@@ -6,7 +6,7 @@ import com.hw.airport.model.BookingCharge;
 import com.hw.airport.model.Flight;
 
 public class CheckInSvcImpl implements CheckInSvc {
-	
+
 	private BookingSvc bookingSvc = new BookingSvcImpl();
 	private FlightSvc flightSvc = new FlightSvcImpl();
 
@@ -18,13 +18,13 @@ public class CheckInSvcImpl implements CheckInSvc {
 		}
 		return booking;
 	}
-	
+
 	@Override
 	public BookingCharge calculateXtraChargeForPasngr(BookingCharge charge) throws HWAirportException {
 		Booking booking = this.retrieveBookingByCodeAndLastName(
 				charge.getLastName(), charge.getRefCode());
 		Flight flight = flightSvc.getFlightByCode(booking.getFlightCode());
-		
+
 		double volume = charge.getLength() * charge.getWidth() * charge.getDepth();
 		if (volume > flight.getMaxBagVolume()) {
 			charge.setVolumeCharge(flight.getXtraVolumeCharge());
@@ -35,7 +35,7 @@ public class CheckInSvcImpl implements CheckInSvc {
 		}
 		return charge;
 	}
-	
+
 	@Override
 	public void doCheckIn(String lastName, String bookingRef) throws HWAirportException {
 		Booking booking = bookingSvc.findBookingByLastNameAndRefCode(lastName, bookingRef);
@@ -44,5 +44,17 @@ public class CheckInSvcImpl implements CheckInSvc {
 		}else {
 			bookingSvc.updateBookingStatus(lastName, bookingRef, true);
 		}
+	}
+
+	@Override
+	public boolean confirmCheckin(Booking booking) {
+		
+		boolean status= false;
+		try {
+			status = bookingSvc.updateBookingStatus(booking.getLastName(), booking.getRefCode(), true);
+		} catch (HWAirportException e) {
+			status = false;
+		}
+		return status;
 	}
 }

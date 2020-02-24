@@ -90,7 +90,7 @@ public class Booking {
 	public void setXtraBagWghtChrg(double xtraBagWghtChrg) {
 		this.xtraBagWghtChrg = xtraBagWghtChrg;
 	}
-		
-	
-
+	public String getFullName() {
+		return this.firstName + " " + this.lastName;
+	}
 }
