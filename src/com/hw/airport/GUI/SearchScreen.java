@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
+import javax.swing.WindowConstants;
 
 import com.hw.airport.exception.HWAirportException;
 import com.hw.airport.model.Booking;
@@ -27,11 +28,18 @@ import com.hw.airport.service.CheckInSvcImpl;
  */
 public class SearchScreen extends JFrame {
 	private CheckInSvc checkinSvc = new CheckInSvcImpl();
+
+	private JPanel mainPnl;
+	private JPanel scndPnl;
+	private JPanel searchPnl;
+
 	private JTextField bookingRefFld;
 	private JTextField lastNameFld;
 	private JButton submitBtn;
-	JLabel lastNameLbl;
-
+	
+	private JLabel lastNameLbl;
+	private JLabel titleLbl;
+	private JLabel jLabel1;
 	// Search results section
 	JPanel searchRsltPnl = new JPanel();
 	JTextField flightNmbrFld = new JTextField();
@@ -43,41 +51,35 @@ public class SearchScreen extends JFrame {
 	JButton checkinBtn = new JButton("Check in");
 	JButton cancel = new JButton("Cancel");
 
-
-
 	private JLabel bookingRefLabel;
-
-	/**
-	 * Creates new form ShortDetails
-	 */
 	public SearchScreen() {
 
-		/*
-		 * JPanel footer = GUIUtil.getFooterPanel(); JPanel header =
-		 * GUIUtil.getHeader();
-		 */
-		lastNameLbl = new JLabel();
+		searchPnl = new JPanel();
+		mainPnl = new JPanel();
+		scndPnl = new JPanel();
+		
+
+		mainPnl.setLayout(null);
+		scndPnl.setLayout(null);
+		searchPnl.setLayout(null);
+
+
+		// Search fields last name & booking reference with a submit button		
+		lastNameLbl = new JLabel("Last Name");
 		lastNameFld = new JTextField(20);
-		submitBtn = new JButton();
-		bookingRefLabel = new JLabel();
+		submitBtn = new JButton("Submit");
+		bookingRefLabel = new JLabel("Booking Reference");
 		bookingRefFld = new JTextField(10);
 
-		// Search fields last name & booking reference with a submit button
-		lastNameLbl.setFont(new Font("Helvetica", 1, 12));
-		lastNameLbl.setText("Last Name");
+		titleLbl = new JLabel();
+		jLabel1 = new JLabel("label1");
 
-		lastNameFld.setEditable(true);
-		lastNameFld.setFont(new Font("Helvetica", 0, 12));
+		//Main frame setup
+		this.setFont(new Font("Helvetica", 1, 12));
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		this.setLayout(null);
 
 
-		bookingRefLabel.setFont(new Font("Helvetica", 1, 12));
-		bookingRefLabel.setText("Booking Reference");
-
-		bookingRefFld.setFont(new Font("Helvetica", 0, 12));
-		bookingRefFld.setEditable(true);
-		bookingRefFld.setFont(new Font("Helvetica", 0, 14));
-
-		submitBtn.setText("Next");
 		submitBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
 				performSearchAction(evt);
@@ -85,62 +87,156 @@ public class SearchScreen extends JFrame {
 		});
 
 		//Search result panel components 
-		flightNmbrLbl.setFont(new Font("Helvetica", 1, 12));
 		flightNmbrLbl.setText("Flight Number");
-		flightNmbrFld.setFont(new Font("Helvetica", 1, 12));
 		flightNmbrFld.setEditable(false);
 
+		/*
+		 * searchRsltPnl.setBackground(new Color(240, 255, 255)); GroupLayout
+		 * searchPanelLayout = new GroupLayout(searchRsltPnl);
+		 * searchRsltPnl.setLayout(searchPanelLayout);
+		 * searchPanelLayout.setHorizontalGroup(buildSearchResultHorizontalLayout(
+		 * searchPanelLayout));
+		 * searchPanelLayout.setVerticalGroup(buildSearchResultVerticalLayout(
+		 * searchPanelLayout));
+		 */
+		/************ Search Form***************/
+		GroupLayout searchLayout = new GroupLayout(searchPnl);
+		searchPnl.setLayout(searchLayout);
 
-		searchRsltPnl.setBackground(new Color(240, 255, 255));
-		GroupLayout searchPanelLayout = new GroupLayout(searchRsltPnl);
-		searchRsltPnl.setLayout(searchPanelLayout);
-		searchPanelLayout.setHorizontalGroup(buildSearchResultHorizontalLayout(searchPanelLayout));
-		searchPanelLayout.setVerticalGroup(buildSearchResultVerticalLayout(searchPanelLayout));
+		searchLayout.setHorizontalGroup( 
+				searchLayout.createSequentialGroup()
+				.addContainerGap(20,50)
+				.addGroup(searchLayout.createSequentialGroup())
+				.addGroup( searchLayout.createParallelGroup( GroupLayout.Alignment.LEADING )
+						.addGap(20)
+						.addComponent(bookingRefLabel)
+						.addComponent(lastNameLbl))
+				.addGap(10)
+				.addGroup( searchLayout.createParallelGroup( GroupLayout.Alignment.LEADING )
+						.addComponent(bookingRefFld, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lastNameFld, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE))
+				.addGroup(searchLayout.createSequentialGroup()
+						.addContainerGap(50,50)
+						.addComponent(submitBtn ))
+				);
 
+		// Vertically, we want to align each label with its textfield
+		// on the baseline of the components
+		searchLayout.setVerticalGroup( 
+				searchLayout.createSequentialGroup()
+				.addGroup( searchLayout.createParallelGroup( GroupLayout.Alignment.BASELINE )
+						.addComponent( bookingRefLabel )
+						.addComponent( bookingRefFld ))
+				.addGroup( searchLayout.createParallelGroup( GroupLayout.Alignment.BASELINE )
+						.addComponent( lastNameLbl )
+						.addComponent( lastNameFld) )
+				.addGroup(searchLayout.createSequentialGroup()
+						.addGroup(searchLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+								//	.addGap(20,20)
+								.addComponent(submitBtn)
+								))
+				);
 
-		JPanel formPanel = new JPanel();
-		formPanel.setBackground(new Color(240, 255, 255));
-		formPanel
-		.setBorder(BorderFactory.createTitledBorder(null, "Check In Here", 0, 0, new Font("Helvetica", 1, 14))); // NOI18N
+		scndPnl.add(searchPnl);
+		searchPnl.setBackground(new Color(240, 255, 255));
+		searchPnl.setBounds(30, 80, 760, 360);
 
-		GroupLayout formPanelLayout = new GroupLayout(formPanel);
-		formPanel.setLayout(formPanelLayout);
-		formPanelLayout.setHorizontalGroup(buildFormHorizontalLayout(formPanelLayout));
-		formPanelLayout.setVerticalGroup(buildFormVerticalLayout(formPanelLayout));
+		titleLbl .setBackground(new Color(240, 255, 255));
+		titleLbl.setFont(new Font("Helvetica", 3, 16));
+		titleLbl.setText("Find Booking");
+		scndPnl.add(titleLbl);
+		titleLbl.setBounds(0, 10, 360, 60); 
+		scndPnl.add(jLabel1);
+		jLabel1.setBounds(0, 0, 600, 0);
+
+		
+		mainPnl.add(scndPnl);
+		scndPnl.setBounds(0, 0, 810, 500);
+		mainPnl.setBackground(new java.awt.Color(240, 255, 255));
+
+		jLabel1 = new JLabel("Confirmation");
+
+		GroupLayout jPanel2Layout = new GroupLayout(scndPnl);
+		scndPnl.setLayout(jPanel2Layout);
+
+		jPanel2Layout.setHorizontalGroup(
+				jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addGroup(jPanel2Layout.createSequentialGroup()
+						.addGap(237, 237, 237)
+						.addComponent(jLabel1)
+						.addContainerGap(236, Short.MAX_VALUE))
+				);
+		jPanel2Layout.setVerticalGroup(
+				jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addGroup(jPanel2Layout.createSequentialGroup()
+						.addContainerGap()
+						.addComponent(jLabel1)
+						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+				);
+
+		mainPnl.add(scndPnl);
+		scndPnl.setBounds(0, 0, 810, 500);
 
 		GroupLayout layout = new GroupLayout(getContentPane());
 		getContentPane().setLayout(layout);
-		layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-				.addGap(0, 830, Short.MAX_VALUE)
-				.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(
-						GroupLayout.Alignment.TRAILING,
-						layout.createSequentialGroup().addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(formPanel, GroupLayout.PREFERRED_SIZE, 810, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-				.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(
-						GroupLayout.Alignment.TRAILING,
-						layout.createSequentialGroup().addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(searchRsltPnl, GroupLayout.PREFERRED_SIZE, 210, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))));
-
-		layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-				.addGap(0, 440, Short.MAX_VALUE)
-				.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(
-						GroupLayout.Alignment.TRAILING,
-						layout.createSequentialGroup().addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(formPanel, GroupLayout.PREFERRED_SIZE, 380, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-				.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(
-						GroupLayout.Alignment.TRAILING,
-						layout.createSequentialGroup().addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(searchRsltPnl, GroupLayout.PREFERRED_SIZE, 380, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+		layout.setHorizontalGroup(
+				layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addComponent(mainPnl, GroupLayout.DEFAULT_SIZE, 811, Short.MAX_VALUE)
 				);
-
-
+		layout.setVerticalGroup(
+				layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addComponent(mainPnl, GroupLayout.DEFAULT_SIZE, 499, Short.MAX_VALUE)
+				);
 		pack();
-		setVisible(true);
-	}
+		this.setVisible(true);
+
+		/*
+		 * 
+		 * JPanel formPanel = new JPanel(); formPanel.setBackground(new Color(240, 255,
+		 * 255)); formPanel .setBorder(BorderFactory.createTitledBorder(null,
+		 * "Check In Here", 0, 0, new Font("Helvetica", 1, 14))); // NOI18N
+		 * 
+		 * GroupLayout formPanelLayout = new GroupLayout(formPanel);
+		 * formPanel.setLayout(formPanelLayout);
+		 * formPanelLayout.setHorizontalGroup(buildFormHorizontalLayout(formPanelLayout)
+		 * );
+		 * formPanelLayout.setVerticalGroup(buildFormVerticalLayout(formPanelLayout));
+		 * 
+		 * GroupLayout layout = new GroupLayout(getContentPane());
+		 * getContentPane().setLayout(layout);
+		 * layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.
+		 * LEADING) .addGap(0, 830, Short.MAX_VALUE)
+		 * .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(
+		 * GroupLayout.Alignment.TRAILING,
+		 * layout.createSequentialGroup().addContainerGap(GroupLayout.DEFAULT_SIZE,
+		 * Short.MAX_VALUE) .addComponent(formPanel, GroupLayout.PREFERRED_SIZE, 810,
+		 * GroupLayout.PREFERRED_SIZE) .addContainerGap(GroupLayout.DEFAULT_SIZE,
+		 * Short.MAX_VALUE)))
+		 * .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(
+		 * GroupLayout.Alignment.TRAILING,
+		 * layout.createSequentialGroup().addContainerGap(GroupLayout.DEFAULT_SIZE,
+		 * Short.MAX_VALUE) .addComponent(searchRsltPnl, GroupLayout.PREFERRED_SIZE,
+		 * 210, GroupLayout.PREFERRED_SIZE) .addContainerGap(GroupLayout.DEFAULT_SIZE,
+		 * Short.MAX_VALUE))));
+		 * 
+		 * layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.
+		 * LEADING) .addGap(0, 440, Short.MAX_VALUE)
+		 * .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(
+		 * GroupLayout.Alignment.TRAILING,
+		 * layout.createSequentialGroup().addContainerGap(GroupLayout.DEFAULT_SIZE,
+		 * Short.MAX_VALUE) .addComponent(formPanel, GroupLayout.PREFERRED_SIZE, 380,
+		 * GroupLayout.PREFERRED_SIZE) .addContainerGap(GroupLayout.DEFAULT_SIZE,
+		 * Short.MAX_VALUE)))
+		 * .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(
+		 * GroupLayout.Alignment.TRAILING,
+		 * layout.createSequentialGroup().addContainerGap(GroupLayout.DEFAULT_SIZE,
+		 * Short.MAX_VALUE) .addComponent(searchRsltPnl, GroupLayout.PREFERRED_SIZE,
+		 * 380, GroupLayout.PREFERRED_SIZE) .addContainerGap(GroupLayout.DEFAULT_SIZE,
+		 * Short.MAX_VALUE))) );
+		 * 
+		 * 
+		 * pack(); setVisible(true);
+		 */	}
 
 	private ParallelGroup buildFormVerticalLayout(GroupLayout formPanelLayout) {
 		return formPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -156,70 +252,6 @@ public class SearchScreen extends JFrame {
 						.addContainerGap(47, Short.MAX_VALUE));
 	}
 
-	private ParallelGroup buildFormHorizontalLayout(GroupLayout formPanelLayout) {
-		return formPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-				.addGroup(formPanelLayout.createSequentialGroup().addGroup(formPanelLayout
-						.createParallelGroup(GroupLayout.Alignment.TRAILING)
-						.addGroup(formPanelLayout.createSequentialGroup().addGap(115, 115, 115))
-						.addGroup(formPanelLayout.createSequentialGroup().addContainerGap()
-								.addComponent(lastNameLbl)
-								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
-								.addComponent(lastNameFld, GroupLayout.PREFERRED_SIZE, 200,GroupLayout.PREFERRED_SIZE)))
-						.addGroup(formPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-								.addGroup(formPanelLayout.createSequentialGroup().addGap(62, 62, 62)
-										.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
-										.addGap(20, 20, 20))
-								.addGroup(formPanelLayout.createSequentialGroup().addGap(85, 85, 85)
-										.addComponent(bookingRefLabel)
-										.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-										.addComponent(bookingRefFld, GroupLayout.PREFERRED_SIZE, 200,
-												GroupLayout.PREFERRED_SIZE)
-										.addContainerGap())))
-				.addGroup(GroupLayout.Alignment.TRAILING,
-						formPanelLayout.createSequentialGroup()
-						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(submitBtn, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE)
-						.addGap(329, 329, 329));
-	}
-
-	/*************************************************************/
-	private ParallelGroup buildSearchResultHorizontalLayout(GroupLayout panelLayout) {
-		return panelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-				.addGroup(panelLayout.createSequentialGroup().addGroup(panelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-						.addGroup(panelLayout.createSequentialGroup().addGap(115, 115, 115))
-						.addGroup(panelLayout.createSequentialGroup().addContainerGap()
-								.addComponent(nameLbl)
-								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
-								.addComponent(nameFld, GroupLayout.PREFERRED_SIZE, 800,GroupLayout.PREFERRED_SIZE)))
-						.addGroup(panelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-								.addGroup(panelLayout.createSequentialGroup().addGap(62, 62, 62)
-										.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
-										.addGap(20, 20, 20))
-								.addGroup(panelLayout.createSequentialGroup().addGap(85, 85, 85)
-										.addComponent(bookingLbl)
-										.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-										.addComponent(bookingFld, GroupLayout.PREFERRED_SIZE, 200,
-												GroupLayout.PREFERRED_SIZE)
-										.addContainerGap())));
-						
-	}
-
-	private ParallelGroup buildSearchResultVerticalLayout(GroupLayout formPanelLayout) {
-		return formPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-				.addGroup(formPanelLayout.createSequentialGroup()
-						.addGroup(formPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false))
-						.addGap(68, 68, 68)
-						.addGroup(formPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-								.addComponent(nameLbl, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
-								.addComponent(nameFld)
-								.addComponent(bookingLbl)
-								.addComponent(bookingFld, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE))
-						.addGap(38, 38, 38)
-						
-						);
-	}
-
-	
 
 	private void performSearchAction(ActionEvent evt) {
 		StringBuffer msg = new StringBuffer();
@@ -244,7 +276,7 @@ public class SearchScreen extends JFrame {
 				BaggageInfoScreen obj = new BaggageInfoScreen(booking);
 				obj.setVisible(true);
 				this.setVisible(false);
-				
+
 			} catch (HWAirportException e) {
 				JOptionPane.showMessageDialog(this,e.getMessage());
 			}

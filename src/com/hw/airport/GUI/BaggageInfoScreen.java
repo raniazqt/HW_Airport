@@ -40,7 +40,7 @@ public class BaggageInfoScreen extends JFrame {
 	private JTextField bookingRefFld ;
 	private JTextField flightCdFld;
 	private JTextField nameFld;
-	
+
 
 	private JButton cancelBtn;
 	private JButton submitBtn;
@@ -65,7 +65,7 @@ public class BaggageInfoScreen extends JFrame {
 	 * Creates new form Registration for baggage check in
 	 * @param booking 
 	 */
-	
+
 	public BaggageInfoScreen(Booking bookingObj) {
 		this.booking = bookingObj;
 		jPanel1 = new JPanel();
@@ -95,10 +95,10 @@ public class BaggageInfoScreen extends JFrame {
 		lastNameFld = new JTextField(booking.getLastName());
 		nameFld = new JTextField(booking.getFirstName() + " " + booking.getLastName());
 		flightCdFld = new JTextField(booking.getFlightCode());
-		
+
 		flightCdFld.setEditable(false);
 		nameFld.setEditable(false);
-		
+
 
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
@@ -213,7 +213,7 @@ public class BaggageInfoScreen extends JFrame {
 						.addComponent( depthFld ) )
 				.addGroup(bagPanelLayout.createSequentialGroup()
 						.addGroup(bagPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-						//	.addGap(20,20)
+								//	.addGap(20,20)
 								.addComponent(cancelBtn )
 								.addComponent(submitBtn)))
 				);
@@ -223,94 +223,6 @@ public class BaggageInfoScreen extends JFrame {
 
 
 
-		/*
-		 * bagPanelLayout.setHorizontalGroup(
-		 * bagPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-		 * .addGroup(bagPanelLayout.createSequentialGroup() .addGap(191, 191, 191)
-		 * .addComponent(bookingCdLbl) .addGap(62, 62, 62) .addComponent(bookingRefFld,
-		 * GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE) .addGap(0, 0,
-		 * Short.MAX_VALUE)) .addGroup(bagPanelLayout.createSequentialGroup()
-		 * .addContainerGap()
-		 * .addGroup(bagPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-		 * .addGroup(bagPanelLayout.createSequentialGroup()
-		 * .addGroup(bagPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING,
-		 * false) .addGroup(bagPanelLayout.createSequentialGroup() .addComponent(feeLbl)
-		 * .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED,
-		 * GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE) .addComponent(feesFld,
-		 * GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE))
-		 * .addGroup(bagPanelLayout.createSequentialGroup() .addComponent(cancelBtn,
-		 * GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE) .addGap(173, 173,
-		 * 173)) .addGroup(bagPanelLayout.createSequentialGroup()
-		 * .addComponent(widthLbl, GroupLayout.PREFERRED_SIZE, 49,
-		 * GroupLayout.PREFERRED_SIZE) .addGap(59, 59, 59) .addComponent(widthFld,
-		 * GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)) .addGap(106,
-		 * 106, 106) // .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 43,
-		 * Short.MAX_VALUE)
-		 * .addGroup(bagPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-		 * .addComponent(heightLbl) .addComponent(heightFld,
-		 * GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 200,
-		 * GroupLayout.PREFERRED_SIZE) .addComponent(depthLbl) .addComponent(depthFld,
-		 * GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 200,
-		 * GroupLayout.PREFERRED_SIZE))) .addGroup(GroupLayout.Alignment.TRAILING,
-		 * bagPanelLayout.createSequentialGroup()
-		 * .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED,
-		 * GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE) .addComponent(submitBtn,
-		 * GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE) .addGap(52, 52,
-		 * 52))) .addGroup(bagPanelLayout.createSequentialGroup()
-		 * .addComponent(depthLbl) .addGap(63, 63, 63) .addComponent(depthFld,
-		 * GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE) .addGap(106,
-		 * 106, 106)
-		 * .addGroup(bagPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-		 * .addGroup(bagPanelLayout.createSequentialGroup() .addComponent(depthLbl)
-		 * .addGap(0, 0, Short.MAX_VALUE))
-		 * .addGroup(bagPanelLayout.createSequentialGroup() .addComponent(weightLbl)
-		 * .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED,
-		 * GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE) ))))) .addContainerGap()) );
-		 * bagPanelLayout.setVerticalGroup(
-		 * bagPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-		 * .addComponent(bookingCdLbl) .addComponent(bookingRefFld)
-		 * .addComponent(depthLbl) .addComponent(depthFld) .addComponent(heightFld)
-		 * .addComponent(cancelBtn) .addComponent(submitBtn) .addComponent(feeLbl)
-		 * .addComponent(feesFld) .addComponent(heightLbl) .addComponent(heightFld)
-		 * .addComponent(widthLbl) .addComponent(widthFld) .addComponent(weightLbl)
-		 * .addComponent(weightFld) );
-		 * 
-		 * 
-		 */				/*
-		 * jPanel3Layout.setVerticalGroup(
-		 * jPanel3Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-		 * .addGroup(jPanel3Layout.createSequentialGroup()
-		 * .addGroup(jPanel3Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-		 * .addGroup(jPanel3Layout.createSequentialGroup() .addComponent(bookingCdLbl)
-		 * .addGap(23, 23, 23)) .addComponent(bookingRefFld,
-		 * GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 32,
-		 * GroupLayout.PREFERRED_SIZE))
-		 * .addGroup(jPanel3Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-		 * .addGroup(jPanel3Layout.createSequentialGroup() .addGap(0, 0,
-		 * Short.MAX_VALUE)
-		 * .addGroup(jPanel3Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-		 * .addComponent(feeLbl) .addComponent(feesFld, GroupLayout.PREFERRED_SIZE, 30,
-		 * GroupLayout.PREFERRED_SIZE)) .addGap(81, 81, 81))
-		 * .addGroup(jPanel3Layout.createSequentialGroup()
-		 * .addGroup(jPanel3Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-		 * .addComponent(depthLbl) .addComponent(depthFld, GroupLayout.PREFERRED_SIZE,
-		 * 32, GroupLayout.PREFERRED_SIZE) .addComponent(weightLbl) )
-		 * .addGroup(jPanel3Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-		 * .addGroup(jPanel3Layout.createSequentialGroup() .addGap(31, 31, 31)
-		 * .addGroup(jPanel3Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-		 * .addComponent(widthLbl) .addComponent(widthFld, GroupLayout.PREFERRED_SIZE,
-		 * 32, GroupLayout.PREFERRED_SIZE)))
-		 * .addGroup(jPanel3Layout.createSequentialGroup() .addGap(20, 20, 20)
-		 * .addGroup(jPanel3Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-		 * .addComponent(heightLbl) .addComponent(heightFld, GroupLayout.PREFERRED_SIZE,
-		 * 32, GroupLayout.PREFERRED_SIZE))))
-		 * .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 144,
-		 * Short.MAX_VALUE)))
-		 * .addGroup(jPanel3Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-		 * .addComponent(submitBtn, GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
-		 * .addComponent(cancelBtn, GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE))
-		 * .addContainerGap()) );
-		 */ 
 		jPanel2.add(baggagePanel);
 		baggagePanel.setBounds(30, 80, 760, 360);
 
@@ -356,17 +268,19 @@ public class BaggageInfoScreen extends JFrame {
 				//TODO: Display the results
 				JOptionPane.showMessageDialog(null,
 						"Volume Charge" + bookingChg.getVolumeCharge()+" "+
-						"Weight Charge" + bookingChg.getWeightCharge());
+								"Weight Charge" + bookingChg.getWeightCharge());
 				if (bookingChg.getVolumeCharge() <= 0 && bookingChg.getWeightCharge() <=0) {
 					boolean status = checkInSvc.confirmCheckin(booking);
 					if (status) {
+						this.setVisible(false);
 						CheckInConfirmationScreen confirmationScrn = new CheckInConfirmationScreen(booking, bookingChg);
+						
 					}else {
 						JOptionPane.showMessageDialog(null,"Failed to check in. Please try again");
 					}
 				}else {
-					PaymentWindow paymentScrn = new PaymentWindow(booking,bookingChg);
 					this.setVisible(false);
+					PaymentWindow paymentScrn = new PaymentWindow(booking,bookingChg);
 				}
 			} catch (HWAirportException e) {
 				e.printStackTrace();
