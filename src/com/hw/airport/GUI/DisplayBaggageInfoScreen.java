@@ -66,8 +66,7 @@ public class DisplayBaggageInfoScreen extends javax.swing.JFrame {
 
 		Category = new javax.swing.JLabel();
 		FeesToPay = new javax.swing.JComboBox<>();
-
-
+		
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
 		jPanel1.setLayout(null);
@@ -87,17 +86,19 @@ public class DisplayBaggageInfoScreen extends javax.swing.JFrame {
 
 		heiLbl.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
 		heiLbl.setText("Height");
+		
+		widLbl.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
+		widLbl.setText("Width");
 
 		feeLbl.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
 		feeLbl.setText("Fees To Pay (GBP) ");
 
-		widLbl.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
-		widLbl.setText("Width");
-
+		
 		Length.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
-
 		Width.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
-
+		Height.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
+		Weight.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
+		
 		Submit.setText("Submit");
 		Submit.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,22 +113,16 @@ public class DisplayBaggageInfoScreen extends javax.swing.JFrame {
 			}
 		});
 
-		
 
 		FeesToPay.setModel(new javax.swing.DefaultComboBoxModel<>(
 				new String[] { "Pay Excess Baggage Fees", "No Baggage to Check In" }));
 
 	
 
-		Height.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
-
-		Weight.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
-
 		javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
 		jPanel3.setLayout(jPanel3Layout);
 		jPanel3Layout.setHorizontalGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGroup(jPanel3Layout.createSequentialGroup().addGap(191, 191, 191).addGap(62, 62, 62)
-
 						.addGap(0, 0, Short.MAX_VALUE))
 				.addGroup(jPanel3Layout.createSequentialGroup().addContainerGap()
 						.addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -146,7 +141,7 @@ public class DisplayBaggageInfoScreen extends javax.swing.JFrame {
 												.addComponent(widLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 49,
 														javax.swing.GroupLayout.PREFERRED_SIZE)
 												.addGap(59, 59, 59)
-												.addComponent(Weight, javax.swing.GroupLayout.PREFERRED_SIZE, 200,
+												.addComponent(Width, javax.swing.GroupLayout.PREFERRED_SIZE, 200,
 														javax.swing.GroupLayout.PREFERRED_SIZE)))
 										.addGroup(jPanel3Layout
 												.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -189,9 +184,11 @@ public class DisplayBaggageInfoScreen extends javax.swing.JFrame {
 														.addPreferredGap(
 																javax.swing.LayoutStyle.ComponentPlacement.RELATED,
 																javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-														.addComponent(Width, javax.swing.GroupLayout.PREFERRED_SIZE,
+														.addComponent(Weight, javax.swing.GroupLayout.PREFERRED_SIZE,
 																200, javax.swing.GroupLayout.PREFERRED_SIZE)))))
 						.addContainerGap()));
+		
+		
 		jPanel3Layout
 				.setVerticalGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 						.addGroup(jPanel3Layout.createSequentialGroup().addGroup(
@@ -216,7 +213,7 @@ public class DisplayBaggageInfoScreen extends javax.swing.JFrame {
 												.addComponent(lenLbl).addComponent(
 														Length, javax.swing.GroupLayout.PREFERRED_SIZE, 32,
 														javax.swing.GroupLayout.PREFERRED_SIZE)
-												.addComponent(weiLbl).addComponent(Width,
+												.addComponent(weiLbl).addComponent(Weight,
 														javax.swing.GroupLayout.PREFERRED_SIZE, 32,
 														javax.swing.GroupLayout.PREFERRED_SIZE))
 												.addGroup(jPanel3Layout
@@ -225,7 +222,7 @@ public class DisplayBaggageInfoScreen extends javax.swing.JFrame {
 																.addGap(31, 31, 31)
 																.addGroup(jPanel3Layout.createParallelGroup(
 																		javax.swing.GroupLayout.Alignment.BASELINE)
-																		.addComponent(widLbl).addComponent(Weight,
+																		.addComponent(widLbl).addComponent(Width,
 																				javax.swing.GroupLayout.PREFERRED_SIZE,
 																				32,
 																				javax.swing.GroupLayout.PREFERRED_SIZE)))
