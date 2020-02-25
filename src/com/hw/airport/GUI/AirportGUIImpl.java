@@ -4,7 +4,7 @@ public class AirportGUIImpl implements AirportGUI {
 
 	@Override
 	public void displayWelcomeScreen() {
-		// TODO Auto-generated method stub
+		new WelcomeWindow().setVisible(true);;
 
 	}
 

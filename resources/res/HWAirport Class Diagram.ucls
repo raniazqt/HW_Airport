@@ -1,254 +1,274 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.2.4" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
-  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
-  <class id="1" language="java" name="com.hw.airport.GUI.ScreenTemplate" project="HWAirport" 
-    file="/HWAirport/src/com/hw/airport/GUI/ScreenTemplate.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="156" width="268" x="717" y="37"/>    
-    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="2" language="java" name="com.hw.airport.service.DataSvcImpl" project="HWAirport" 
+  associations="true" dependencies="true" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="com.hw.airport.service.DataSvcImpl" project="HWAirport" 
     file="/HWAirport/src/com/hw/airport/service/DataSvcImpl.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="136" width="355" x="322" y="37"/>    
-    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+    <position height="-1" width="-1" x="524" y="1237"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="com.hw.airport.service.FlightSvcImpl" project="HWAirport" 
+  <class id="2" language="java" name="com.hw.airport.service.FlightSvcImpl" project="HWAirport" 
     file="/HWAirport/src/com/hw/airport/service/FlightSvcImpl.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="196" width="414" x="3081" y="37"/>    
-    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+    <position height="-1" width="-1" x="2109" y="546"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="com.hw.airport.service.ReportSvcImpl" project="HWAirport" 
+  <class id="3" language="java" name="com.hw.airport.service.ReportSvcImpl" project="HWAirport" 
     file="/HWAirport/src/com/hw/airport/service/ReportSvcImpl.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="136" width="348" x="1630" y="37"/>    
-    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+    <position height="-1" width="-1" x="931" y="1225"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="com.hw.airport.model.AppData" project="HWAirport" 
+  <class id="4" language="java" name="com.hw.airport.model.AppData" project="HWAirport" 
     file="/HWAirport/src/com/hw/airport/model/AppData.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="116" width="182" x="2901" y="273"/>    
-    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+    <position height="-1" width="-1" x="1547" y="743"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="com.hw.airport.util.FileHandler" project="HWAirport" 
+  <class id="5" language="java" name="com.hw.airport.util.FileHandler" project="HWAirport" 
     file="/HWAirport/src/com/hw/airport/util/FileHandler.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="116" width="239" x="43" y="37"/>    
-    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+    <position height="-1" width="-1" x="455" y="1013"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="7" language="java" name="com.hw.airport.service.FlightSvc" project="HWAirport" 
+  <interface id="6" language="java" name="com.hw.airport.service.FlightSvc" project="HWAirport" 
     file="/HWAirport/src/com/hw/airport/service/FlightSvc.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="3385" y="360"/>    
-    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+    <position height="-1" width="-1" x="2109" y="772"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="8" language="java" name="com.hw.airport.service.BaggageSvcImpl" project="HWAirport" 
+  <class id="7" language="java" name="com.hw.airport.service.BaggageSvcImpl" project="HWAirport" 
     file="/HWAirport/src/com/hw/airport/service/BaggageSvcImpl.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="136" width="355" x="2018" y="37"/>    
-    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+    <position height="-1" width="-1" x="1372" y="999"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="9" language="java" name="com.hw.airport.service.BookingSvcImpl" project="HWAirport" 
+  <class id="8" language="java" name="com.hw.airport.service.BookingSvcImpl" project="HWAirport" 
     file="/HWAirport/src/com/hw/airport/service/BookingSvcImpl.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="176" width="448" x="2593" y="37"/>    
-    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+    <position height="-1" width="-1" x="1045" y="524"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="10" language="java" name="com.hw.airport.GUI.AirportGUI" project="HWAirport" 
+  <interface id="9" language="java" name="com.hw.airport.GUI.AirportGUI" project="HWAirport" 
     file="/HWAirport/src/com/hw/airport/GUI/AirportGUI.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="3782" y="356"/>    
-    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+    <position height="-1" width="-1" x="1746" y="1255"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="11" language="java" name="com.hw.airport.main.ApplicationStart" project="HWAirport" 
+  <class id="10" language="java" name="com.hw.airport.main.ApplicationStart" project="HWAirport" 
     file="/HWAirport/src/com/hw/airport/main/ApplicationStart.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="116" width="163" x="1427" y="37"/>    
-    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+    <position height="-1" width="-1" x="1078" y="90"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="12" language="java" name="com.hw.airport.model.Booking" project="HWAirport" 
+  <class id="11" language="java" name="com.hw.airport.model.Booking" project="HWAirport" 
     file="/HWAirport/src/com/hw/airport/model/Booking.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="536" width="227" x="2767" y="489"/>    
-    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+    <position height="-1" width="-1" x="1471" y="127"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="13" language="java" name="com.hw.airport.GUI.AirportGUIImpl" project="HWAirport" 
+  <class id="12" language="java" name="com.hw.airport.GUI.AirportGUIImpl" project="HWAirport" 
     file="/HWAirport/src/com/hw/airport/GUI/AirportGUIImpl.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="196" width="313" x="3587" y="37"/>    
-    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+    <position height="-1" width="-1" x="1746" y="1029"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="14" language="java" name="com.hw.airport.service.ReportSvc" project="HWAirport" 
+  <interface id="13" language="java" name="com.hw.airport.service.ReportSvc" project="HWAirport" 
     file="/HWAirport/src/com/hw/airport/service/ReportSvc.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="116" width="348" x="1630" y="273"/>    
-    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+    <position height="-1" width="-1" x="991" y="1461"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="15" language="java" name="com.hw.airport.service.BookingSvc" project="HWAirport" 
+  <interface id="14" language="java" name="com.hw.airport.service.BookingSvc" project="HWAirport" 
     file="/HWAirport/src/com/hw/airport/service/BookingSvc.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="156" width="448" x="2413" y="273"/>    
-    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+    <position height="-1" width="-1" x="1036" y="755"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="16" language="java" name="com.hw.airport.service.BaggageSvc" project="HWAirport" 
+  <interface id="15" language="java" name="com.hw.airport.service.BaggageSvc" project="HWAirport" 
     file="/HWAirport/src/com/hw/airport/service/BaggageSvc.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="116" width="355" x="2018" y="273"/>    
-    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+    <position height="-1" width="-1" x="1372" y="1225"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="17" language="java" name="com.hw.airport.service.DataSvc" project="HWAirport" 
+  <interface id="16" language="java" name="com.hw.airport.service.DataSvc" project="HWAirport" 
     file="/HWAirport/src/com/hw/airport/service/DataSvc.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="116" width="355" x="322" y="273"/>    
-    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+    <position height="-1" width="-1" x="524" y="1463"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="18" language="java" name="com.hw.airport.service.CheckInSvc" project="HWAirport" 
+  <interface id="17" language="java" name="com.hw.airport.service.CheckInSvc" project="HWAirport" 
     file="/HWAirport/src/com/hw/airport/service/CheckInSvc.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="136" width="362" x="1025" y="273"/>    
-    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+    <position height="-1" width="-1" x="2133" y="1258"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="19" language="java" name="com.hw.airport.service.CheckInSvcImpl" project="HWAirport" 
+  <class id="18" language="java" name="com.hw.airport.service.CheckInSvcImpl" project="HWAirport" 
     file="/HWAirport/src/com/hw/airport/service/CheckInSvcImpl.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="156" width="362" x="1025" y="37"/>    
-    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+    <position height="-1" width="-1" x="2124" y="1009"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="20" language="java" name="com.hw.airport.model.Flight" project="HWAirport" 
+  <class id="19" language="java" name="com.hw.airport.model.Flight" project="HWAirport" 
     file="/HWAirport/src/com/hw/airport/model/Flight.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="696" width="254" x="3034" y="489"/>    
-    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+    <position height="-1" width="-1" x="1752" y="207"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="com.hw.airport.exception.HWAirportException" project="HWAirport" 
+    file="/HWAirport/src/com/hw/airport/exception/HWAirportException.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="946" y="1005"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
   <realization id="21">    
-    <end type="SOURCE" refId="8"/>    
-    <end type="TARGET" refId="16"/>  
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="13"/>  
   </realization>  
-  <realization id="22">    
-    <end type="SOURCE" refId="13"/>    
-    <end type="TARGET" refId="10"/>  
-  </realization>  
-  <association id="23">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="24" name="bookingList"/>      
-      <multiplicity id="25" minimum="0" maximum="2147483647"/>    
+  <association id="22">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="23" name="appData">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="24" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
+    <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="26">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="27" name="flightsInfo"/>      
-      <multiplicity id="28" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="20" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="29">    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="30" name="appData"/>      
-      <multiplicity id="31" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="32">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="14"/>  
+  <realization id="25">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="9"/>  
   </realization>  
-  <realization id="33">    
-    <end type="SOURCE" refId="2"/>    
+  <realization id="26">    
+    <end type="SOURCE" refId="18"/>    
     <end type="TARGET" refId="17"/>  
   </realization>  
-  <association id="34">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="35" name="appData"/>      
-      <multiplicity id="36" minimum="0" maximum="1"/>    
+  <association id="27">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="28" name="bookingList">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="29" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="30">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="31" name="appData">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="32" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="33">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="15"/>  
+  </realization>  
+  <association id="34">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="35" name="appData">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="36" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <realization id="37">    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="15"/>  
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="14"/>  
   </realization>  
-  <association id="38">    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="39" name="appData"/>      
-      <multiplicity id="40" minimum="0" maximum="1"/>    
+  <realization id="38">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="6"/>  
+  </realization>  
+  <realization id="39">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="16"/>  
+  </realization>  
+  <association id="40">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="41" name="flightsInfo">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="42" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
+    <end type="TARGET" refId="19" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="41">    
-    <end type="SOURCE" refId="19"/>    
-    <end type="TARGET" refId="18"/>  
-  </realization>  
-  <realization id="42">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="7"/>  
-  </realization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="false" protected="true" private="true" static="true"/>    
