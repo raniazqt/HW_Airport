@@ -26,165 +26,152 @@ import com.hw.airport.service.CheckInSvcImpl;
 public class SearchScreen extends JFrame {
 	private CheckInSvc checkinSvc = new CheckInSvcImpl();
 
-	private JPanel mainPnl;
-	private JPanel scndPnl;
-	private JPanel searchPnl;
-
-	private JTextField bookingRefFld;
-	private JTextField lastNameFld;
-	private JButton submitBtn;
-	
-	private JLabel lastNameLbl;
-	private JLabel titleLbl;
-	private JLabel jLabel1;
-	// Search results section
-	JPanel searchRsltPnl = new JPanel();
+	private javax.swing.JPanel JPanel1;
+	private javax.swing.JTextField lastNameFld;
+	private javax.swing.JTextField bookingRefFld;
+	private javax.swing.JButton submitBtn;
+	private javax.swing.JLabel jLabel1;
+	private javax.swing.JLabel titleLbl;
+	private javax.swing.JLabel lastNameLbl;
+	private javax.swing.JLabel bookingLbl;
+	private javax.swing.JPanel jPanel3;
 
 	private JLabel bookingRefLabel;
-	
-	
+
 	public SearchScreen() {
+		JPanel1 = new javax.swing.JPanel();
+		jPanel3 = new javax.swing.JPanel();
+		jLabel1 = new javax.swing.JLabel();
+		titleLbl = new javax.swing.JLabel();
+		lastNameLbl = new javax.swing.JLabel();
+		bookingLbl = new javax.swing.JLabel();
+		lastNameFld = new javax.swing.JTextField();
+		bookingRefFld = new javax.swing.JTextField();
+		submitBtn = new javax.swing.JButton();
 
-		searchPnl = new JPanel();
-		mainPnl = new JPanel();
-		scndPnl = new JPanel();
-		
+		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-		mainPnl.setLayout(null);
-		scndPnl.setLayout(null);
-		searchPnl.setLayout(null);
+		JPanel1.setLayout(null);
 
+		jPanel3.setBackground(new java.awt.Color(240, 255, 255));
+		jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Check In Here", 0, 0,
+				new java.awt.Font("Helvetica", 1, 14))); // NOI18N
 
-		// Search fields last name & booking reference with a submit button		
-		lastNameLbl = new JLabel("Last Name");
-		lastNameFld = new JTextField(20);
-		submitBtn = new JButton("Submit");
-		bookingRefLabel = new JLabel("Booking Reference");
-		bookingRefFld = new JTextField(10);
+		lastNameLbl.setFont(new java.awt.Font("Helvetica", 1, 18)); // NOI18N
+		lastNameLbl.setText("Last Name");
 
-		titleLbl = new JLabel();
-		jLabel1 = new JLabel("label1");
+		bookingLbl.setFont(new java.awt.Font("Helvetica", 1, 18)); // NOI18N
+		bookingLbl.setText("Booking Number");
 
-		//Main frame setup
-		this.setFont(new Font("Helvetica", 1, 12));
-		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		this.setLayout(null);
+		lastNameFld.setEditable(true);
+		lastNameFld.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
 
+		bookingRefFld.setEditable(true);
+		bookingRefFld.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
 
-		submitBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
+		/*
+		 * SHould point to the DisplayBaggageInfoScreen ? make actionPerformed PRIVATE
+		 * as this class only
+		 */
+		submitBtn.setText("Next");
+		submitBtn.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				performSearchAction(evt);
 			}
 		});
 
-		
-		
-		/************ Search Form***************/
-		GroupLayout searchLayout = new GroupLayout(searchPnl);
-		searchPnl.setLayout(searchLayout);
+		javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+		jPanel3.setLayout(jPanel3Layout);
+		jPanel3Layout.setHorizontalGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(jPanel3Layout.createSequentialGroup().addGroup(jPanel3Layout
+						.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+						.addGroup(jPanel3Layout.createSequentialGroup().addGap(115, 115, 115))
+						.addGroup(jPanel3Layout.createSequentialGroup().addContainerGap().addComponent(lastNameLbl)
+								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60,
+										Short.MAX_VALUE)
+								.addComponent(lastNameFld, javax.swing.GroupLayout.PREFERRED_SIZE, 200,
+										javax.swing.GroupLayout.PREFERRED_SIZE)))
+						.addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+								.addGroup(jPanel3Layout.createSequentialGroup().addGap(62, 62, 62)
 
-		searchLayout.setHorizontalGroup( 
-				searchLayout.createSequentialGroup()
-				.addContainerGap(20,50)
-				.addGroup(searchLayout.createSequentialGroup())
-				.addGroup( searchLayout.createParallelGroup( GroupLayout.Alignment.LEADING )
-						.addGap(20)
-						.addComponent(bookingRefLabel)
-						.addComponent(lastNameLbl))
-				.addGap(10)
-				.addGroup( searchLayout.createParallelGroup( GroupLayout.Alignment.LEADING )
-						.addComponent(bookingRefFld, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lastNameFld, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE))
-				.addGroup(searchLayout.createSequentialGroup()
-						.addContainerGap(50,50)
-						.addComponent(submitBtn ))
-				);
+										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59,
+												Short.MAX_VALUE)
 
-		// Vertically, we want to align each label with its textfield
-		// on the baseline of the components
-		searchLayout.setVerticalGroup( 
-				searchLayout.createSequentialGroup()
-				.addGroup( searchLayout.createParallelGroup( GroupLayout.Alignment.BASELINE )
-						.addComponent( bookingRefLabel )
-						.addComponent( bookingRefFld ))
-				.addGroup( searchLayout.createParallelGroup( GroupLayout.Alignment.BASELINE )
-						.addComponent( lastNameLbl )
-						.addComponent( lastNameFld) )
-				.addGroup(searchLayout.createSequentialGroup()
-						.addGroup(searchLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-								//	.addGap(20,20)
-								.addComponent(submitBtn)
-								))
-				);
+										.addGap(20, 20, 20))
+								.addGroup(jPanel3Layout.createSequentialGroup().addGap(85, 85, 85)
+										.addComponent(bookingLbl)
+										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33,
+												Short.MAX_VALUE)
+										.addComponent(bookingRefFld, javax.swing.GroupLayout.PREFERRED_SIZE, 200,
+												javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addContainerGap())))
+				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+						.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addComponent(submitBtn,
+								javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addGap(329, 329, 329)));
+		jPanel3Layout.setVerticalGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(jPanel3Layout.createSequentialGroup()
+						.addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
 
-		scndPnl.add(searchPnl);
-		searchPnl.setBackground(new Color(240, 255, 255));
-		searchPnl.setBounds(30, 80, 760, 360);
+						).addGap(68, 68, 68)
+						.addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+								.addComponent(lastNameFld, javax.swing.GroupLayout.PREFERRED_SIZE, 32,
+										javax.swing.GroupLayout.PREFERRED_SIZE)
+								.addComponent(lastNameLbl).addComponent(bookingLbl).addComponent(bookingRefFld,
+										javax.swing.GroupLayout.PREFERRED_SIZE, 32,
+										javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addGap(38, 38, 38).addComponent(submitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37,
+								javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addContainerGap(47, Short.MAX_VALUE)));
 
-		titleLbl .setBackground(new Color(240, 255, 255));
-		titleLbl.setFont(new Font("Helvetica", 3, 16));
-		titleLbl.setText("Find Booking");
-		scndPnl.add(titleLbl);
-		titleLbl.setBounds(0, 10, 360, 60); 
-		scndPnl.add(jLabel1);
+		JPanel1.add(jPanel3);
+		jPanel3.setBounds(30, 80, 780, 280);
+
+		titleLbl.setBackground(new java.awt.Color(240, 255, 255));
+		titleLbl.setFont(new java.awt.Font("Helvetica", 3, 36));
+		// titleLbl.setFont(new java.awt.Color(0, 139, 139); // NOI18N
+		titleLbl.setText("Welcome to Scotia Air");
+		JPanel1.add(titleLbl);
+		titleLbl.setBounds(200, 10, 400, 60);
+		JPanel1.add(jLabel1);
 		jLabel1.setBounds(0, 0, 600, 0);
 
-		
-		mainPnl.add(scndPnl);
-		scndPnl.setBounds(0, 0, 810, 500);
-		mainPnl.setBackground(new java.awt.Color(240, 255, 255));
-
-		jLabel1 = new JLabel("Confirmation");
-
-		GroupLayout jPanel2Layout = new GroupLayout(scndPnl);
-		scndPnl.setLayout(jPanel2Layout);
-
-		jPanel2Layout.setHorizontalGroup(
-				jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-				.addGroup(jPanel2Layout.createSequentialGroup()
-						.addGap(237, 237, 237)
-						.addComponent(jLabel1)
-						.addContainerGap(236, Short.MAX_VALUE))
-				);
-		jPanel2Layout.setVerticalGroup(
-				jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-				.addGroup(jPanel2Layout.createSequentialGroup()
-						.addContainerGap()
-						.addComponent(jLabel1)
-						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-				);
-
-		mainPnl.add(scndPnl);
-		scndPnl.setBounds(0, 0, 810, 500);
-
-		GroupLayout layout = new GroupLayout(getContentPane());
+		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 		getContentPane().setLayout(layout);
 		layout.setHorizontalGroup(
-				layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-				.addComponent(mainPnl, GroupLayout.DEFAULT_SIZE, 811, Short.MAX_VALUE)
-				);
+				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 830, Short.MAX_VALUE)
+						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+								.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+										.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+										.addComponent(JPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 810,
+												javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))));
 		layout.setVerticalGroup(
-				layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-				.addComponent(mainPnl, GroupLayout.DEFAULT_SIZE, 499, Short.MAX_VALUE)
-				);
+				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 440, Short.MAX_VALUE)
+						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+								.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+										.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+										.addComponent(JPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 418,
+												javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))));
+
 		pack();
-		this.setVisible(true);
 
 	}
 
 	private void performSearchAction(ActionEvent evt) {
-		if (lastNameFld.getText().isEmpty()||bookingRefFld.getText().isEmpty()) {
+		if (lastNameFld.getText().isEmpty() || bookingRefFld.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Please Enter Passenger Booking Details");
-		} 
-		else {
+		} else {
 			try {
-				Booking booking = checkinSvc.retrieveBookingByCodeAndLastName(lastNameFld.getText(), bookingRefFld.getText());
+				Booking booking = checkinSvc.retrieveBookingByCodeAndLastName(lastNameFld.getText(),
+						bookingRefFld.getText());
 				BaggageInfoScreen obj = new BaggageInfoScreen(booking);
 				obj.setVisible(true);
 				this.setVisible(false);
 
 			} catch (HWAirportException e) {
-				JOptionPane.showMessageDialog(this,e.getMessage());
+				JOptionPane.showMessageDialog(this, e.getMessage());
 			}
 
 		}

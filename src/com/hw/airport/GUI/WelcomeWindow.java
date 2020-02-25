@@ -48,6 +48,8 @@ public class WelcomeWindow extends JFrame {
 
 	private void psngrBtnActionPerformed(ActionEvent evt) {
 		SearchScreen obj = new SearchScreen();
+		obj.setVisible(true);
+		this.setVisible(false);
 	}
 
 }
