@@ -39,14 +39,6 @@ public class SearchScreen extends JFrame {
 	private JLabel jLabel1;
 	// Search results section
 	JPanel searchRsltPnl = new JPanel();
-	JTextField flightNmbrFld = new JTextField();
-	JTextField nameFld = new JTextField();
-	JLabel nameLbl = new JLabel("Passenger Name");
-	JLabel bookingLbl = new JLabel("Booking Reference");
-	JTextField bookingFld = new JTextField();
-	JLabel flightNmbrLbl = new JLabel("Flight Number");
-	JButton checkinBtn = new JButton("Check in");
-	JButton cancel = new JButton("Cancel");
 
 	private JLabel bookingRefLabel;
 	
@@ -85,19 +77,8 @@ public class SearchScreen extends JFrame {
 			}
 		});
 
-		//Search result panel components 
-		flightNmbrLbl.setText("Flight Number");
-		flightNmbrFld.setEditable(false);
-
-		/*
-		 * searchRsltPnl.setBackground(new Color(240, 255, 255)); GroupLayout
-		 * searchPanelLayout = new GroupLayout(searchRsltPnl);
-		 * searchRsltPnl.setLayout(searchPanelLayout);
-		 * searchPanelLayout.setHorizontalGroup(buildSearchResultHorizontalLayout(
-		 * searchPanelLayout));
-		 * searchPanelLayout.setVerticalGroup(buildSearchResultVerticalLayout(
-		 * searchPanelLayout));
-		 */
+		
+		
 		/************ Search Form***************/
 		GroupLayout searchLayout = new GroupLayout(searchPnl);
 		searchPnl.setLayout(searchLayout);
@@ -198,9 +179,6 @@ public class SearchScreen extends JFrame {
 		else {
 			try {
 				Booking booking = checkinSvc.retrieveBookingByCodeAndLastName(lastNameFld.getText(), bookingRefFld.getText());
-				bookingFld.setText(booking.getRefCode());
-				nameFld.setText(booking.getFirstName().concat(" ").concat(booking.getLastName()));
-				flightNmbrFld.setText(booking.getFlightCode());
 				BaggageInfoScreen obj = new BaggageInfoScreen(booking);
 				obj.setVisible(true);
 				this.setVisible(false);
