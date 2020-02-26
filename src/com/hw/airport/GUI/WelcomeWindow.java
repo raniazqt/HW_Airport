@@ -70,6 +70,7 @@ public class WelcomeWindow extends JFrame{
 	}
 
 	private void openSerchWindow(ActionEvent evt) {
+		this.setVisible(false);
 		SearchScreen obj = new SearchScreen();
 	}
 	private void closeActionPerformed(ActionEvent evt) {
