@@ -219,7 +219,4 @@ public class PaymentWindow extends JFrame {
 		this.setVisible(false);
 	}
 
-	public static void main(String [] args) {
-		PaymentWindow obj = new PaymentWindow(new Booking(), new BookingCharge());
-	}
 }

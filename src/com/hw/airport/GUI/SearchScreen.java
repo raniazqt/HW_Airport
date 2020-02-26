@@ -152,12 +152,10 @@ public class SearchScreen extends JFrame {
 			try {
 				Booking booking = checkinSvc.retrieveBookingByCodeAndLastName(lastNameFld.getText(),
 						bookingRefFld.getText());
-				BaggageInfoScreen obj = new BaggageInfoScreen(booking);
+				BaggageInfoScreen_ obj = new BaggageInfoScreen_(booking);
 				obj.setVisible(true);
 
-				DisplayBaggageInfoScreen obj2 = new DisplayBaggageInfoScreen();
-				obj2.setVisible(true);
-
+				
 				this.setVisible(false);
 
 			} catch (HWAirportException e) {

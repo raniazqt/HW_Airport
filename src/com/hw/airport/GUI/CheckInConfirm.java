@@ -28,15 +28,15 @@ public class CheckInConfirm extends javax.swing.JFrame {
     private javax.swing.JLabel nameLbl;
     private javax.swing.JLabel titleLbl;
     //GEN-END:variables
-  
+
     public CheckInConfirm(Booking booking, BookingCharge bookingChrgObj) {
-        initComponents();
+        initComponents(booking,bookingChrgObj);
     }
 
    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents(Booking booking, BookingCharge bookingChrgObj) {
 
         jPanel1 = new javax.swing.JPanel();
         nameLbl = new javax.swing.JLabel();
@@ -57,19 +57,19 @@ public class CheckInConfirm extends javax.swing.JFrame {
 
         nameLbl.setText("Passenger Name:");
 
-        nameFld.setText("Name");
+        nameFld.setText(booking.getFullName());
 
         flightCdLbl.setText("Flight Code:");
 
-        flightCdFld.setText("Fcode");
+        flightCdFld.setText(booking.getFlightCode());
 
         bookingCdLbl.setText("Booking Code:");
 
         feeLbl.setText("Fee Paid:");
 
-        bookingRefFld.setText("BKcode");
+        bookingRefFld.setText(booking.getRefCode());
 
-        feesFld.setText("Fee");
+        feesFld.setText(String.valueOf(bookingChrgObj.getTotalChg()));
 
         doneBtn.setText("Confirm");
         doneBtn.addActionListener(new java.awt.event.ActionListener() {
