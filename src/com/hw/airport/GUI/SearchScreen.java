@@ -96,7 +96,7 @@ public class SearchScreen extends javax.swing.JFrame {
 
 		pack();
 
-	}
+}
 
 	private void performSearchAction(ActionEvent evt) {
 		if (lastNameFld.getText().isEmpty() || bookingRefFld.getText().isEmpty()) {

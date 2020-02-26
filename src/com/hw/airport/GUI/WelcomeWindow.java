@@ -42,7 +42,6 @@ public class WelcomeWindow extends JFrame {
 		pack();
 	}
 
-
 	private void psngrBtnActionPerformed(ActionEvent evt) {
 
 		SearchScreen obj = new SearchScreen();
