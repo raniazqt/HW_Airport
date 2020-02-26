@@ -4,12 +4,8 @@ import com.hw.airport.GUI.AirportGUI;
 import com.hw.airport.GUI.AirportGUIImpl;
 import com.hw.airport.exception.HWAirportException;
 import com.hw.airport.model.AppData;
-import com.hw.airport.service.CheckInSvc;
-import com.hw.airport.service.CheckInSvcImpl;
 import com.hw.airport.service.DataSvc;
 import com.hw.airport.service.DataSvcImpl;
-import com.hw.airport.service.FlightSvc;
-import com.hw.airport.service.FlightSvcImpl;
 
 enum ApplicationState
 {
@@ -24,8 +20,8 @@ public class ApplicationManager {
 	private AirportGUI gui;
 	private ApplicationState appState;
 	private DataSvc dataSvc;
-	String flightsFileName = ""; 
-	String bookingFileName = "";
+	String flightsFileName = "flights.csv"; 
+	String bookingFileName = "bookings.csv";
 
 	public ApplicationManager() {
 		gui = new AirportGUIImpl();
@@ -36,8 +32,14 @@ public class ApplicationManager {
 	private void start() {
 		// any setup logic here.
 		AppData appData = AppData.getInstance(); 
-		appData.setFlightsInfo(dataSvc.loadFlightsData(flightsFileName));
-		appData.setBookingList(dataSvc.loadBookingData(bookingFileName));
+		try {
+			appData.setFlightsInfo(dataSvc.loadFlightsData(flightsFileName));
+			appData.setBookingList(dataSvc.loadBookingData(bookingFileName));
+		} catch (HWAirportException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 
 		appState = ApplicationState.INITIALIZED;
 		gui.displayWelcomeScreen();

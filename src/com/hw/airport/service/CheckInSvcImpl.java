@@ -23,8 +23,10 @@ public class CheckInSvcImpl implements CheckInSvc {
 	public BookingCharge calculateXtraChargeForPasngr(BookingCharge charge) throws HWAirportException {
 		Booking booking = this.retrieveBookingByCodeAndLastName(
 				charge.getLastName(), charge.getRefCode());
-		Flight flight = flightSvc.getFlightByCode(booking.getFlightCode());
-
+		Flight flight = flightSvc.getFlightByCode(booking.getFlightCode().toLowerCase());
+		if(null == flight) {
+			throw new HWAirportException("Flight information not found");
+		}
 		double volume = charge.getLength() * charge.getWidth() * charge.getDepth();
 		if (volume > flight.getMaxBagVolume()) {
 			charge.setVolumeCharge(flight.getXtraVolumeCharge());
