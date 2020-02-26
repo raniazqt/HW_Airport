@@ -18,9 +18,11 @@ public class WelcomeWindow extends JFrame {
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-		contentPanel.setBackground(new java.awt.Color(240, 255, 255));
-		contentPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Welcome to the Check In", 0, 0,
-				new java.awt.Font("Helvetica", 1, 14))); // NOI18N
+
+		contentPanel.setBackground(new Color(240, 255, 255));
+		contentPanel.setBorder(BorderFactory.createTitledBorder(null, "Welcome to the Check In", 0, 0,
+				new Font("Helvetica", 1, 14))); 
+
 		contentPanel.setLayout(null);
 
 		psngrBtn.setText("Check In");
