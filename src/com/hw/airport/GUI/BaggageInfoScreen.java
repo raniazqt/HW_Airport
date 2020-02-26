@@ -210,8 +210,8 @@ public class BaggageInfoScreen extends javax.swing.JFrame {
 			try {
 				bookingChg = checkInSvc.calculateXtraChargeForPasngr(bookingChg);
 				// TODO: Display the results
-				JOptionPane.showMessageDialog(null, "Volume Charge" + bookingChg.getVolumeCharge() + " "
-						+ "Weight Charge" + bookingChg.getWeightCharge());
+				JOptionPane.showMessageDialog(null, "Volume Charge: " + bookingChg.getVolumeCharge() + " "
+						+ "Weight Charge: " + bookingChg.getWeightCharge());
 				if (bookingChg.getVolumeCharge() <= 0 && bookingChg.getWeightCharge() <= 0) {
 					boolean status = checkInSvc.confirmCheckin(booking);
 					if (status) {
@@ -223,7 +223,9 @@ public class BaggageInfoScreen extends javax.swing.JFrame {
 					}
 				} else {
 					this.setVisible(false);
+					
 					PaymentWindow paymentScrn = new PaymentWindow(booking, bookingChg);
+					paymentScrn.setVisible(true);
 				}
 			} catch (HWAirportException e) {
 				e.printStackTrace();
