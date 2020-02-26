@@ -17,10 +17,7 @@ import com.hw.airport.model.Booking;
 import com.hw.airport.service.CheckInSvc;
 import com.hw.airport.service.CheckInSvcImpl;
 
-/**
- *
- * @author Bruce-Inspiron
- */
+
 public class SearchScreen extends javax.swing.JFrame {
 	
 	private CheckInSvc checkinSvc = new CheckInSvcImpl();
@@ -81,7 +78,7 @@ public class SearchScreen extends javax.swing.JFrame {
 								GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 						.addGap(18, 18, 18).addComponent(submitBtn).addContainerGap(20, Short.MAX_VALUE)));
 
-		titleLbl.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+		titleLbl.setFont(new java.awt.Font("Tahoma", 0, 16)); 
 		titleLbl.setText("Welcome to ScotiaAir");
 
 		GroupLayout layout = new GroupLayout(getContentPane());

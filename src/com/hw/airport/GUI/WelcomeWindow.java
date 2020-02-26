@@ -27,7 +27,8 @@ public class WelcomeWindow extends JFrame {
 
 		contentPanel.setBackground(new Color(240, 255, 255));
 		contentPanel.setBorder(BorderFactory.createTitledBorder(null, "Welcome to the Check In", 0, 0,
-				new Font("Helvetica", 1, 14))); // NOI18N
+				new Font("Helvetica", 1, 14))); 
+
 		contentPanel.setLayout(null);
 
 		psngrBtn.setText("Check In");

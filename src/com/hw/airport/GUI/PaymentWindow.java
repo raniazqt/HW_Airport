@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.hw.airport.GUI;
 
 import java.awt.event.ActionEvent;
@@ -24,10 +20,7 @@ import com.hw.airport.model.BookingCharge;
 import com.hw.airport.service.CheckInSvc;
 import com.hw.airport.service.CheckInSvcImpl;
 
-/**
- *
- * @author Bruce
- */
+
 public class PaymentWindow extends javax.swing.JFrame {
 
 	private CheckInSvc checkInSvc = new CheckInSvcImpl();
@@ -178,7 +171,7 @@ public class PaymentWindow extends javax.swing.JFrame {
 						.addGap(35, 35, 35).addComponent(submitBtn)
 						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 
-		titleLabel.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+		titleLabel.setFont(new java.awt.Font("Tahoma", 0, 16)); 
 		titleLabel.setText("Fees Payment");
 
 		GroupLayout layout = new GroupLayout(getContentPane());
