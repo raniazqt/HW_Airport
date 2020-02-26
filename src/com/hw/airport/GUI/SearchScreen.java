@@ -93,8 +93,10 @@ public class SearchScreen extends javax.swing.JFrame {
 								javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
 						.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 
+
 		pack();
-	}
+
+}
 
 	private void performSearchAction(ActionEvent evt) {
 		if (lastNameFld.getText().isEmpty() || bookingRefFld.getText().isEmpty()) {
