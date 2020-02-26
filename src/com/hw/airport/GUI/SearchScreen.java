@@ -152,7 +152,7 @@ public class SearchScreen extends JFrame {
 			try {
 				Booking booking = checkinSvc.retrieveBookingByCodeAndLastName(lastNameFld.getText(),
 						bookingRefFld.getText());
-				BaggageInfoScreen_ obj = new BaggageInfoScreen_(booking);
+				BaggageInfoScreen obj = new BaggageInfoScreen(booking);
 				obj.setVisible(true);
 
 				

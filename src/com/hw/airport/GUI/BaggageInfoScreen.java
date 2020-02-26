@@ -1,132 +1,95 @@
-package com.hw.airport.GUI;												
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.hw.airport.GUI;
 
-import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BorderFactory;
-import javax.swing.GroupLayout;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.LayoutStyle;
-import javax.swing.WindowConstants;
 
 import com.hw.airport.exception.HWAirportException;
 import com.hw.airport.model.Booking;
 import com.hw.airport.model.BookingCharge;
 import com.hw.airport.service.CheckInSvc;
 import com.hw.airport.service.CheckInSvcImpl;
+
 /**
  *
- * @author Simon Grange, Safa Al Ameri, 
+ * @author Bruce-Inspiron
  */
-/**
- * DisplayBaggageInfoScreen collects the necessary Baggage Check In Information for 
- * calculation of excess weight or size and so incurring excess charges.
- */
-public class BaggageInfoScreen extends JFrame {
+public class BaggageInfoScreen extends javax.swing.JFrame {
+
 	private CheckInSvc checkInSvc = new CheckInSvcImpl();
 	private Booking booking;
-	private JTextField widthFld;
-	private JTextField heightFld;
-	private JTextField feesFld;
-	private JTextField depthFld;
-	private JTextField weightFld;
-	private JTextField lastNameFld;
-	private JTextField bookingRefFld ;
-	private JTextField flightCdFld;
-	private JTextField nameFld;
-
-
-	private JButton cancelBtn;
-	private JButton submitBtn;
-
-	JLabel nameLbl;
-	JLabel flightCdLbl;
-	private JLabel jLabel1;
-	private JLabel titleLbl;
-	private JLabel heightLbl;
-	private JLabel weightLbl;
-	private JLabel depthLbl;
-	private JLabel feeLbl;
-	private JLabel widthLbl;
-	private JLabel bookingCdLbl;
-
-	private JPanel jPanel1;
-	private JPanel jPanel2;
-	private JPanel baggagePanel;
-
 	BookingCharge bookingChg;
-	/**
-	 * Creates new form Registration for baggage check in
-	 * @param booking 
-	 */
+
+	private javax.swing.JLabel bookingCdLbl;
+	private javax.swing.JLabel bookingRefFld;
+	private javax.swing.JTextField depthFld;
+	private javax.swing.JLabel depthLbl;
+	private javax.swing.JLabel flightCdFld;
+	private javax.swing.JLabel flightCdLbl;
+	private javax.swing.JTextField heightFld;
+	private javax.swing.JLabel heightLbl;
+	private javax.swing.JPanel jPanel1;
+	private javax.swing.JLabel nameFld;
+	private javax.swing.JLabel nameLbl;
+	private javax.swing.JButton submitBtn;
+	private javax.swing.JLabel titleLabel;
+	private javax.swing.JTextField weightFld;
+	private javax.swing.JLabel weightLbl;
+	private javax.swing.JTextField widthFld;
+	private javax.swing.JLabel widthLbl;
 
 	public BaggageInfoScreen(Booking bookingObj) {
+
 		this.booking = bookingObj;
-		jPanel1 = new JPanel();
-		jPanel2 = new JPanel();
-		baggagePanel = new JPanel();
+		jPanel1 = new javax.swing.JPanel();
+		nameLbl = new javax.swing.JLabel();
+		bookingCdLbl = new javax.swing.JLabel();
+		nameFld = new javax.swing.JLabel();
+		flightCdLbl = new javax.swing.JLabel();
+		flightCdFld = new javax.swing.JLabel();
+		bookingRefFld = new javax.swing.JLabel();
+		weightLbl = new javax.swing.JLabel();
+		depthLbl = new javax.swing.JLabel();
+		weightFld = new javax.swing.JTextField();
+		depthFld = new javax.swing.JTextField();
+		heightLbl = new javax.swing.JLabel();
+		widthLbl = new javax.swing.JLabel();
+		heightFld = new javax.swing.JTextField();
+		widthFld = new javax.swing.JTextField();
+		submitBtn = new javax.swing.JButton();
+		titleLabel = new javax.swing.JLabel();
 
-		nameLbl = new JLabel("Name");
-		flightCdLbl = new JLabel("Flight Code");
-		depthLbl = new JLabel();
-		weightLbl = new JLabel();
-		widthLbl = new JLabel();
-		feeLbl = new JLabel();
-		heightLbl = new JLabel();
-		bookingCdLbl = new JLabel();
-		jLabel1 = new JLabel();
-		titleLbl = new JLabel();
+		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-		submitBtn = new JButton();
-		cancelBtn = new JButton();
+		jPanel1.setBackground(new java.awt.Color(240, 255, 255));
+		jPanel1.setBorder(
+				javax.swing.BorderFactory.createTitledBorder("Please complete the information about your baggage"));
 
-		depthFld = new JTextField();
-		bookingRefFld = new JTextField(booking.getRefCode());
-		heightFld = new JTextField();
-		widthFld = new JTextField();
-		feesFld = new JTextField();;
-		weightFld = new JTextField();
-		lastNameFld = new JTextField(booking.getLastName());
-		nameFld = new JTextField(booking.getFirstName() + " " + booking.getLastName());
-		flightCdFld = new JTextField(booking.getFlightCode());
+		nameLbl.setText("Passenger Name:");
 
-		flightCdFld.setEditable(false);
-		nameFld.setEditable(false);
+		bookingCdLbl.setText("Booking Code:");
 
-
-		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
-		jPanel1.setLayout(null);
-
-		jPanel2.setLayout(null);
-
-		// Main panel pale blue background
-		baggagePanel.setBackground(new java.awt.Color(240, 255, 255));
-		baggagePanel.setBorder(BorderFactory.createTitledBorder(null, "Please complete the information about your baggage", 0, 0, new java.awt.Font("Helvetica", 1, 14))); 
-
-		depthLbl.setFont(new java.awt.Font("Helvetica", 1, 14)); 
-		depthLbl.setText("Depth");
-
-		weightLbl.setFont(new java.awt.Font("Helvetica", 1, 14)); 
 		weightLbl.setText("Weight");
 
-		heightLbl.setFont(new java.awt.Font("Helvetica", 1, 14)); 
+		depthLbl.setText("Length");
+
 		heightLbl.setText("Height");
 
-		feeLbl.setFont(new java.awt.Font("Helvetica", 1, 14)); 
-		feeLbl.setText("Fees To Pay (GBP) ");
-
-		widthLbl.setFont(new java.awt.Font("Helvetica", 1, 14)); 
 		widthLbl.setText("Width");
 
-		depthFld.setFont(new java.awt.Font("Helvetica", 0, 14)); 
+		flightCdLbl.setText("Flight Code:");
+		
+		nameFld.setText(booking.getFirstName() + " " + booking.getLastName());
 
+		flightCdFld.setText(booking.getFlightCode());
+
+		bookingRefFld.setText(booking.getRefCode());
 
 		submitBtn.setText("Submit");
 		submitBtn.addActionListener(new ActionListener() {
@@ -135,169 +98,137 @@ public class BaggageInfoScreen extends JFrame {
 			}
 		});
 
-		cancelBtn.setText("Cancel");
-		cancelBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
-				CancelActionPerformed(evt);
-			}
-		});
+		javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+		jPanel1.setLayout(jPanel1Layout);
+		jPanel1Layout.setHorizontalGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(jPanel1Layout.createSequentialGroup().addGroup(jPanel1Layout
+						.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+						.addGroup(jPanel1Layout.createSequentialGroup().addGap(33, 33, 33).addGroup(jPanel1Layout
+								.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+								.addGroup(jPanel1Layout.createSequentialGroup().addGroup(jPanel1Layout
+										.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+										.addGroup(
+												javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout
+														.createSequentialGroup().addGroup(jPanel1Layout
+																.createParallelGroup(
+																		javax.swing.GroupLayout.Alignment.LEADING)
+																.addComponent(depthLbl).addComponent(weightLbl))
+														.addGap(11, 11, 11)
+														.addGroup(jPanel1Layout.createParallelGroup(
+																javax.swing.GroupLayout.Alignment.LEADING).addComponent(
+																		weightFld,
+																		javax.swing.GroupLayout.PREFERRED_SIZE, 69,
+																		javax.swing.GroupLayout.PREFERRED_SIZE)
+																.addComponent(depthFld,
+																		javax.swing.GroupLayout.PREFERRED_SIZE, 69,
+																		javax.swing.GroupLayout.PREFERRED_SIZE)))
+										.addGroup(javax.swing.GroupLayout.Alignment.LEADING,
+												jPanel1Layout.createSequentialGroup().addComponent(nameLbl)
+														.addGap(16, 16, 16).addComponent(nameFld)))
+										.addGap(64, 64, 64)
+										.addGroup(jPanel1Layout
+												.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+												.addGroup(
+														jPanel1Layout.createSequentialGroup().addComponent(flightCdLbl)
+																.addGap(30, 30, 30).addComponent(flightCdFld))
+												.addGroup(jPanel1Layout.createSequentialGroup().addGroup(jPanel1Layout
+														.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+														.addComponent(heightLbl).addComponent(widthLbl))
+														.addGap(18, 18, 18)
+														.addGroup(jPanel1Layout
+																.createParallelGroup(
+																		javax.swing.GroupLayout.Alignment.LEADING)
+																.addComponent(heightFld,
+																		javax.swing.GroupLayout.PREFERRED_SIZE, 69,
+																		javax.swing.GroupLayout.PREFERRED_SIZE)
+																.addComponent(widthFld,
+																		javax.swing.GroupLayout.PREFERRED_SIZE, 69,
+																		javax.swing.GroupLayout.PREFERRED_SIZE)))))
+								.addGroup(jPanel1Layout.createSequentialGroup().addComponent(bookingCdLbl)
+										.addGap(31, 31, 31).addComponent(bookingRefFld))))
+						.addGroup(jPanel1Layout.createSequentialGroup().addGap(157, 157, 157).addComponent(submitBtn)))
+						.addGap(0, 29, Short.MAX_VALUE)));
+		jPanel1Layout.setVerticalGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(jPanel1Layout.createSequentialGroup().addGap(21, 21, 21)
+						.addGroup(jPanel1Layout
+								.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(nameLbl)
+								.addComponent(nameFld).addComponent(flightCdLbl).addComponent(flightCdFld))
+						.addGap(18, 18, 18)
+						.addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+								.addComponent(bookingCdLbl).addComponent(bookingRefFld))
+						.addGap(26, 26, 26)
+						.addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+								.addComponent(weightLbl)
+								.addComponent(weightFld, javax.swing.GroupLayout.PREFERRED_SIZE,
+										javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+								.addComponent(heightLbl).addComponent(heightFld, javax.swing.GroupLayout.PREFERRED_SIZE,
+										javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+						.addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+								.addComponent(depthFld, javax.swing.GroupLayout.PREFERRED_SIZE,
+										javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+								.addComponent(depthLbl).addComponent(widthLbl).addComponent(widthFld,
+										javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+										javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addGap(35, 35, 35).addComponent(submitBtn)
+						.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 
+		titleLabel.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+		titleLabel.setText("Check in Baggage Information");
 
-		bookingCdLbl.setFont(new java.awt.Font("Helvetica", 1, 14)); 
-		bookingCdLbl.setText("Passenger Booking Number");
-
-		bookingRefFld.setEditable(false);
-		bookingRefFld.setFont(new java.awt.Font("Helvetica", 0, 14)); 
-
-
-		heightFld.setFont(new java.awt.Font("Helvetica", 0, 14)); 
-		widthFld.setFont(new java.awt.Font("Helvetica", 0, 14)); 
-
-		GroupLayout bagPanelLayout = new GroupLayout(baggagePanel);
-		baggagePanel.setLayout(bagPanelLayout);
-
-
-		bagPanelLayout.setHorizontalGroup( 
-				bagPanelLayout.createSequentialGroup()
-				.addContainerGap(20,50)
-				.addGroup(bagPanelLayout.createSequentialGroup())
-				.addGroup( bagPanelLayout.createParallelGroup( GroupLayout.Alignment.LEADING )
-						.addGap(20)
-						.addComponent(bookingCdLbl)
-						.addComponent(nameLbl)
-						.addComponent(flightCdLbl)
-						.addComponent(weightLbl )
-						.addComponent(heightLbl )
-						.addComponent( widthLbl )
-						.addComponent( depthLbl ) )
-				.addGap(10)
-				.addGroup( bagPanelLayout.createParallelGroup( GroupLayout.Alignment.LEADING )
-						.addComponent(bookingRefFld, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
-						.addComponent(nameFld, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
-						.addComponent(flightCdFld, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
-						.addComponent(weightFld, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE) 
-						.addComponent(heightFld , GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
-						.addComponent( widthFld , GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
-						.addComponent( depthFld , GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE))
-				.addGroup(bagPanelLayout.createSequentialGroup()
-						.addContainerGap(50,50)
-						.addComponent(cancelBtn )
-						.addGap(100)
-						.addComponent(submitBtn))
-				);
-
-		// Vertically, we want to align each label with its textfield
-		// on the baseline of the components
-		bagPanelLayout.setVerticalGroup( 
-				bagPanelLayout.createSequentialGroup()
-				.addGroup( bagPanelLayout.createParallelGroup( GroupLayout.Alignment.BASELINE )
-						.addComponent( bookingCdLbl )
-						.addComponent( bookingRefFld ))
-				.addGroup( bagPanelLayout.createParallelGroup( GroupLayout.Alignment.BASELINE )
-						.addComponent( nameLbl )
-						.addComponent( nameFld ) )
-				.addGroup( bagPanelLayout.createParallelGroup( GroupLayout.Alignment.BASELINE )
-						.addComponent( flightCdLbl )
-						.addComponent( flightCdFld ) )
-				.addGroup( bagPanelLayout.createParallelGroup( GroupLayout.Alignment.BASELINE )
-						.addComponent( weightLbl )
-						.addComponent( weightFld ) )
-				.addGroup( bagPanelLayout.createParallelGroup( GroupLayout.Alignment.BASELINE )
-						.addComponent( heightLbl )
-						.addComponent( heightFld ) )
-				.addGroup( bagPanelLayout.createParallelGroup( GroupLayout.Alignment.BASELINE )
-						.addComponent( widthLbl )
-						.addComponent( widthFld ) )
-				.addGroup( bagPanelLayout.createParallelGroup( GroupLayout.Alignment.BASELINE )
-						.addComponent( depthLbl )
-						.addComponent( depthFld ) )
-				.addGroup(bagPanelLayout.createSequentialGroup()
-						.addGroup(bagPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-								//	.addGap(20,20)
-								.addComponent(cancelBtn )
-								.addComponent(submitBtn)))
-				);
-
-
-
-
-
-
-		jPanel2.add(baggagePanel);
-		baggagePanel.setBounds(30, 80, 760, 360);
-
-		titleLbl.setBackground(new java.awt.Color(240, 255, 255));
-		titleLbl.setFont(new java.awt.Font("Helvetica", 3, 16)); 
-		titleLbl.setText("Baggage Check In Information");
-		jPanel2.add(titleLbl);
-		titleLbl.setBounds(0, 10, 360, 60);
-		jPanel2.add(jLabel1);
-		jLabel1.setBounds(0, 0, 600, 0);
-
-		jPanel1.add(jPanel2);
-		jPanel2.setBounds(0, 0, 810, 500);
-
-		GroupLayout layout = new GroupLayout(getContentPane());
+		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 		getContentPane().setLayout(layout);
-		layout.setHorizontalGroup(
-				layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-				.addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, 811, Short.MAX_VALUE)
-				);
-		layout.setVerticalGroup(
-				layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-				.addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, 499, Short.MAX_VALUE)
-				);
+		layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(layout
+				.createSequentialGroup().addContainerGap()
+				.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+						.addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE,
+								javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addGroup(
+								layout.createSequentialGroup().addComponent(titleLabel).addGap(0, 0, Short.MAX_VALUE)))
+				.addContainerGap()));
+		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(layout
+				.createSequentialGroup().addGap(9, 9, 9).addComponent(titleLabel)
+				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED).addComponent(jPanel1,
+						javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+				.addGap(18, 18, 18)));
 
 		pack();
-		this.setVisible(true);
 	}
 
-	private void submitActionPerformed(ActionEvent evt) {//GEN-FIRST:event_SubmitActionPerformed
-		if(depthFld.getText().isEmpty() || depthFld.getText().charAt(0) == ' '){
-			JOptionPane.showMessageDialog(null,"Please Enter Baggage Length (cm) ");
-		}else if(heightFld.getText().isEmpty()){
-			JOptionPane.showMessageDialog(null,"Please Enter Baggage Height (cm) ");
-		}else if(widthFld.getText().isEmpty()){
-			JOptionPane.showMessageDialog(null,"Please Enter Baggage Weight (Kg) ");                
-		}else{
-			//Calculate xtra fees if any
-			bookingChg = 
-					new BookingCharge(bookingRefFld.getText(), lastNameFld.getText(), 1, Double.valueOf(heightFld.getText()), Double.valueOf(widthFld.getText()), Double.valueOf(depthFld.getText()), Double.valueOf(weightFld.getText()));
+	private void submitActionPerformed(ActionEvent evt) {// GEN-FIRST:event_SubmitActionPerformed
+		if (depthFld.getText().isEmpty() || depthFld.getText().charAt(0) == ' ') {
+			JOptionPane.showMessageDialog(null, "Please Enter Baggage Length (cm) ");
+		} else if (heightFld.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Please Enter Baggage Height (cm) ");
+		} else if (widthFld.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Please Enter Baggage Weight (Kg) ");
+		} else {
+			// Calculate xtra fees if any
+			bookingChg = new BookingCharge(bookingRefFld.getText(), booking.getLastName(), 1,
+					Double.valueOf(heightFld.getText()), Double.valueOf(widthFld.getText()),
+					Double.valueOf(depthFld.getText()), Double.valueOf(weightFld.getText()));
 			try {
 				bookingChg = checkInSvc.calculateXtraChargeForPasngr(bookingChg);
-				//TODO: Display the results
-				JOptionPane.showMessageDialog(null,
-						"Volume Charge" + bookingChg.getVolumeCharge()+" "+
-								"Weight Charge" + bookingChg.getWeightCharge());
-				if (bookingChg.getVolumeCharge() <= 0 && bookingChg.getWeightCharge() <=0) {
+				// TODO: Display the results
+				JOptionPane.showMessageDialog(null, "Volume Charge" + bookingChg.getVolumeCharge() + " "
+						+ "Weight Charge" + bookingChg.getWeightCharge());
+				if (bookingChg.getVolumeCharge() <= 0 && bookingChg.getWeightCharge() <= 0) {
 					boolean status = checkInSvc.confirmCheckin(booking);
 					if (status) {
 						this.setVisible(false);
 						CheckInConfirmationScreen confirmationScrn = new CheckInConfirmationScreen(booking, bookingChg);
-						
-					}else {
-						JOptionPane.showMessageDialog(null,"Failed to check in. Please try again");
+
+					} else {
+						JOptionPane.showMessageDialog(null, "Failed to check in. Please try again");
 					}
-				}else {
+				} else {
 					this.setVisible(false);
-					PaymentWindow paymentScrn = new PaymentWindow(booking,bookingChg);
+					PaymentWindow paymentScrn = new PaymentWindow(booking, bookingChg);
 				}
 			} catch (HWAirportException e) {
 				e.printStackTrace();
 			}
-		}				
+		}
 	}
-
-	private void CancelActionPerformed(ActionEvent evt) {
-		WelcomeWindow obj = new WelcomeWindow();
-		obj.setVisible(true);
-		this.setVisible(false);
-	}
-
-	public static void main(String[] args) {
-		BaggageInfoScreen bagScreen = new BaggageInfoScreen(new Booking("","","ABC","",false));
-
-	}
-
 
 }
