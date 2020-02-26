@@ -1,12 +1,8 @@
 package com.hw.airport.GUI;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.GroupLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class WelcomeWindow extends JFrame {
@@ -48,6 +44,8 @@ public class WelcomeWindow extends JFrame {
 
 	private void psngrBtnActionPerformed(ActionEvent evt) {
 		SearchScreen obj = new SearchScreen();
+		obj.setVisible(true);
+		this.setVisible(false);
 	}
 
 }
