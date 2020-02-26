@@ -188,10 +188,5 @@ public class CheckInConfirmationScreen extends JFrame {
 		this.setVisible(false);
 	}
 
-	public static void main(String[] args) {
-		new CheckInConfirmationScreen(new Booking("","","ABC","",false), new BookingCharge());
-
-	}
-
 
 }
