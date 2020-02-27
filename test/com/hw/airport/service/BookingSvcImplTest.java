@@ -2,9 +2,11 @@ package com.hw.airport.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.mockito.*;
+
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 
 import com.hw.airport.model.AppData;
 
