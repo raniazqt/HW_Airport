@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.hw.airport.exception.HWAirportException;
+import com.hw.airport.exception.*;
 import com.hw.airport.model.AppData;
 import com.hw.airport.model.Booking;
 import com.hw.airport.model.Flight;
@@ -23,12 +23,18 @@ public class BookingSvcImpl implements BookingSvc {
 	 * @return Passenger booking object if found and null if not
 	 */
 	@Override
-	public Booking findBookingByLastNameAndRefCode(String lastName, String refCode) {
+	public Booking findBookingByLastNameAndRefCode(String lastName, String refCode) throws HWAirportException {
 		Booking booking = appData.getBookingList().get(refCode.toLowerCase());
-		if (null != booking && lastName.equalsIgnoreCase(booking.getLastName())) {
-			return booking;
+
+		if(booking == null) {
+			throw new NullBookingException();
 		}
-		return null;
+
+		if (!lastName.equalsIgnoreCase(booking.getLastName())) {
+			throw new BookingLastNameMismatchException();
+		}
+
+		return booking;
 	}
 
 	/**
@@ -42,14 +48,14 @@ public class BookingSvcImpl implements BookingSvc {
 	public boolean updateBookingStatus(String lastName, String refCode, boolean status) throws HWAirportException {
 		Booking updatedBooking = findBookingByLastNameAndRefCode(lastName, refCode);
 		if (null == updatedBooking) {
-			throw new HWAirportException("No booking was found with reference " + refCode +" and last name " + lastName);
+			throw new MissingBookingException();
 		}
 		updatedBooking.setCheckedIn(status);
 		appData.getBookingList().put(refCode, updatedBooking);
 		return true;
 	}
 
-	/*
+	/**
 	 * Count the number of passengers in a given flight. 
 	 * The passenger is counted only if the check in status is true
 	 * @param flightCode for which the passengers are booked
@@ -86,8 +92,9 @@ public class BookingSvcImpl implements BookingSvc {
 		double totalExtraVol = 0.0;
 		
 		if(null == flight) {
-			throw new HWAirportException("No flight was found with the code " + flightCode);
+			throw new MissingFlightException(flightCode, "booking service");
 		}
+
 		List<Booking> bookingsByFlight = this.findAllBookingForFlight(flightCode);
 		for (Booking booking : bookingsByFlight) {
 				if(booking.isCheckedIn()) {
@@ -116,9 +123,8 @@ public class BookingSvcImpl implements BookingSvc {
 		return flightBooking;
 	}
 
-	/* Helper method that extracts the booking from the Map into a flat list
-	 * for easier manipulation 
-	 * @param  none
+	/** Helper method that extracts the booking from the Map into a flat list
+	 * for easier manipulation
 	 * @return Flat list of all bookings
 	 */
 	private List<Booking> extractBookingList() {
