@@ -38,7 +38,7 @@ public class WelcomeWindow extends JFrame {
 	        contentPanel.setBackground(new java.awt.Color(240, 255, 255));
 	        contentPanel.setBorder(BorderFactory.createTitledBorder(null, "Welcome to the Check In", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 16))); 
 
-	        imgLbl.setIcon(new ImageIcon("C:\\Users\\Bruce-Inspiron\\Documents\\MS\\SEM2\\AS\\F21AS_CW\\airport_pic.png")); 
+	        imgLbl.setIcon(new ImageIcon("resources\\images\\airport_pic.png")); 
 
 	        psngrBtn.setText("Check In");
 	    	psngrBtn.addActionListener(new ActionListener() {
