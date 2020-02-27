@@ -1,51 +1,79 @@
 package com.hw.airport.GUI;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class WelcomeWindow extends JFrame {
-
+public class WelcomeWindow extends JFrame{
+	private JButton staffBtn = new JButton();
 	private JButton psngrBtn = new JButton();
-
-	private JPanel contentPanel;
+	private JButton closeBtn = new JButton();
+	private JPanel contentPanel = GUIUtil.getContentPanel();
 
 	public WelcomeWindow() {
 
-		contentPanel = new javax.swing.JPanel();
-		psngrBtn = new javax.swing.JButton();
+		ImageIcon image = new ImageIcon("./resources/images/airport_pic.png");
+		JLabel label = new JLabel();
+		label.setIcon(image);
+		contentPanel.add(label);
+		label.setBounds(0, 0, image.getIconWidth(), 450);
 
-		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+		staffBtn.setText("Staff");
+		
 
-		contentPanel.setBackground(new java.awt.Color(240, 255, 255));
-		contentPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Welcome to the Check In", 0, 0,
-				new java.awt.Font("Helvetica", 1, 14))); // NOI18N
-		contentPanel.setLayout(null);
+		contentPanel.add(staffBtn);
+		staffBtn.setBounds(20, 450, 100, 40);
 
-		psngrBtn.setText("Check In");
-		psngrBtn.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				psngrBtnActionPerformed(evt);
+		psngrBtn.setText("Passenger");
+		psngrBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				openSerchWindow(evt);
 			}
 		});
 		contentPanel.add(psngrBtn);
-		psngrBtn.setBounds(130, 100, 130, 30);
+		psngrBtn.setBounds(200, 450, 100, 40);
 
-		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+		closeBtn.setText("Close Program");
+		closeBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				closeActionPerformed(evt);
+			}
+		});
+		contentPanel.add(closeBtn);
+		closeBtn.setBounds(320, 450, 140, 40);
+
+		JPanel footer = GUIUtil.getFooterPanel();
+		JPanel header = GUIUtil.getHeader();
+
+		GroupLayout layout = new GroupLayout(getContentPane());
 		getContentPane().setLayout(layout);
-		layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(
-				contentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE));
-		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(
-				contentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE));
+		layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addGroup(layout.createSequentialGroup()
+						.addComponent(header, GroupLayout.PREFERRED_SIZE, 600, GroupLayout.PREFERRED_SIZE)
+						.addGap(0, 0, Short.MAX_VALUE))
+				.addComponent(contentPanel, GroupLayout.PREFERRED_SIZE, 600, GroupLayout.PREFERRED_SIZE)
+				.addComponent(footer, GroupLayout.PREFERRED_SIZE, 600, GroupLayout.PREFERRED_SIZE));
+		layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addGroup(layout.createSequentialGroup()
+						.addComponent(header, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+						.addComponent(contentPanel, GroupLayout.PREFERRED_SIZE, 500, GroupLayout.PREFERRED_SIZE)
+						.addComponent(footer, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+						.addGap(0, 0, Short.MAX_VALUE)));
 
 		pack();
+		setVisible(true);
 	}
-	private void psngrBtnActionPerformed(ActionEvent evt) {
 
+	private void openSerchWindow(ActionEvent evt) {
 		SearchScreen obj = new SearchScreen();
-		obj.setVisible(true);
-		this.setVisible(false);
+	}
+	private void closeActionPerformed(ActionEvent evt) {
+		System.exit(0);
 	}
 
 }
