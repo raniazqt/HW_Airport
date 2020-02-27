@@ -220,12 +220,14 @@ public class BaggageInfoScreen extends javax.swing.JFrame {
 	}
 
 	private void submitActionPerformed(ActionEvent evt) {// GEN-FIRST:event_SubmitActionPerformed
-		if (depthFld.getText().isEmpty() || depthFld.getText().charAt(0) == ' ') {
-			JOptionPane.showMessageDialog(null, "Please Enter Baggage Length (cm) ");
-		} else if (heightFld.getText().isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Please Enter Baggage Height (cm) ");
-		} else if (widthFld.getText().isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Please Enter Baggage Weight (Kg) ");
+		if (depthFld.getText().isEmpty() || depthFld.getText().charAt(0) == ' ' || Integer.parseInt(depthFld.getText()) < 0 ) {
+			JOptionPane.showMessageDialog(null, "Please Correct Baggage Length (cm) ");
+		} else if (heightFld.getText().isEmpty() || Integer.parseInt(heightFld.getText()) < 0) {
+			JOptionPane.showMessageDialog(null, "Please Correct Baggage Height (cm) ");
+		} else if (widthFld.getText().isEmpty() || Integer.parseInt(widthFld.getText()) < 0) {
+			JOptionPane.showMessageDialog(null, "Please Correct Baggage Weight (Kg) ");
+		} else if (weightFld.getText().isEmpty() || Integer.parseInt(weightFld.getText()) < 0) {
+			JOptionPane.showMessageDialog(null, "Please Correct Baggage Weight (Kg) ");
 		} else {
 			// Calculate xtra fees if any
 			bookingChg = new BookingCharge(bookingRefFld.getText(), booking.getLastName(), 1,
