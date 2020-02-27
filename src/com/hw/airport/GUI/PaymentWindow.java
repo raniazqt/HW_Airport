@@ -13,6 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 import javax.swing.WindowConstants;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.TitledBorder;
 
 import com.hw.airport.exception.HWAirportException;
 import com.hw.airport.model.Booking;
@@ -35,11 +37,11 @@ public class PaymentWindow extends javax.swing.JFrame {
 	private JLabel flightCdLbl;
 	private JTextField cvvFld;
 	private JLabel cvvLbl;
-	private JPanel jPanel1;
+	private JPanel contentPanel;
 	private JLabel nameFld;
 	private JLabel nameLbl;
 	private JButton submitBtn;
-	private JLabel titleLabel;
+	private JLabel titleLbl;
 	private JTextField cardFld;
 	private JLabel cardLbl;
 	
@@ -49,148 +51,161 @@ public class PaymentWindow extends javax.swing.JFrame {
 		this.booking = bookingObj;
 		this.bookingChg = bookingChgObj;
 		
-		jPanel1 = new JPanel();
-		nameLbl = new JLabel();
-		bookingCdLbl = new JLabel();
-		nameFld = new JLabel();
-		flightCdLbl = new JLabel();
-		flightCdFld = new JLabel();
-		bookingRefFld = new JLabel();
-		cardLbl = new JLabel();
-		expiryLbl = new JLabel();
-		cardFld = new JTextField();
-		expiryFld = new JTextField();
-		cvvLbl = new JLabel();
-	
-		cvvFld = new JTextField();
-		
-		submitBtn = new JButton();
-		titleLabel = new JLabel();
+		    contentPanel = new JPanel();
+	        submitBtn = new JButton();
+	        nameLbl = new JLabel();
+	        bookingCdLbl = new JLabel();
+	        titleLbl = new JLabel();
+	        flightCdLbl = new JLabel();
+	        bookingRefFld = new JLabel();
+	        nameFld = new JLabel();
+	        cardLbl = new JLabel();
+	        flightCdFld = new JLabel();
+	        cardFld = new JTextField();
+	        cvvLbl = new JLabel();
+	        expiryLbl = new JLabel();
+	        expiryFld = new JTextField();
+	        cvvFld = new JTextField();
 
-		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+	        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-		jPanel1.setBackground(new java.awt.Color(240, 255, 255));
-		jPanel1.setBorder(
-				BorderFactory.createTitledBorder("Please complete the Payment information below"));
+	        contentPanel.setBackground(new java.awt.Color(240, 255, 255));
+	        contentPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED), "Enter your Credit card details", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 16))); 
 
-		nameLbl.setText("Passenger Name:");
+	        submitBtn.setText("Submit");
 
-		bookingCdLbl.setText("Booking Code:");
+	        nameLbl.setFont(new java.awt.Font("Tahoma", 0, 18)); 
+	        nameLbl.setText("Last Name:");
 
-		cardLbl.setText("Card Number:");
+	        bookingCdLbl.setFont(new java.awt.Font("Tahoma", 0, 18)); 
+	        bookingCdLbl.setText("Booking Code:");
 
-		expiryLbl.setText("Expiry:");
+	        titleLbl.setFont(new java.awt.Font("Tahoma", 0, 24)); 
+	        titleLbl.setText("Excess Baggage Payment");
 
-		cvvLbl.setText("CVV:");
+	        flightCdLbl.setFont(new java.awt.Font("Tahoma", 0, 18)); 
+	        flightCdLbl.setText("Flight Code:");
+
+	        bookingRefFld.setFont(new java.awt.Font("Tahoma", 0, 18)); 
+	        
+
+	        nameFld.setFont(new java.awt.Font("Tahoma", 0, 18)); 
+	       
+
+	        cardLbl.setFont(new java.awt.Font("Tahoma", 0, 18)); 
+	        cardLbl.setText("Card Number:");
+
+	        flightCdFld.setFont(new java.awt.Font("Tahoma", 0, 18)); 
 
 
+			nameFld.setText(booking.getFirstName() + " " + booking.getLastName());
 
-		flightCdLbl.setText("Flight Code:");
-		
-		nameFld.setText(booking.getFirstName() + " " + booking.getLastName());
+			flightCdFld.setText(booking.getFlightCode());
 
-		flightCdFld.setText(booking.getFlightCode());
+			bookingRefFld.setText(booking.getRefCode());
 
-		bookingRefFld.setText(booking.getRefCode());
+			submitBtn.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent evt) {
+					submitActionPerformed(evt);
+				}
+			});
 
-		submitBtn.setText("Submit");
-		submitBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
-				submitActionPerformed(evt);
-			}
-		});
+	        cvvLbl.setFont(new java.awt.Font("Tahoma", 0, 18)); 
+	        cvvLbl.setText("CVV");
 
-		GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
-		jPanel1.setLayout(jPanel1Layout);
-		jPanel1Layout.setHorizontalGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-				.addGroup(jPanel1Layout.createSequentialGroup().addGroup(jPanel1Layout
-						.createParallelGroup(GroupLayout.Alignment.LEADING)
-						.addGroup(jPanel1Layout.createSequentialGroup().addGap(33, 33, 33).addGroup(jPanel1Layout
-								.createParallelGroup(GroupLayout.Alignment.LEADING)
-								.addGroup(jPanel1Layout.createSequentialGroup().addGroup(jPanel1Layout
-										.createParallelGroup(GroupLayout.Alignment.TRAILING)
-										.addGroup(
-												GroupLayout.Alignment.LEADING, jPanel1Layout
-														.createSequentialGroup().addGroup(jPanel1Layout
-																.createParallelGroup(
-																		GroupLayout.Alignment.LEADING)
-																.addComponent(expiryLbl).addComponent(cardLbl))
-														.addGap(11, 11, 11)
-														.addGroup(jPanel1Layout.createParallelGroup(
-																GroupLayout.Alignment.LEADING).addComponent(
-																		cardFld,
-																		GroupLayout.PREFERRED_SIZE, 69,
-																		GroupLayout.PREFERRED_SIZE)
-																.addComponent(expiryFld,
-																		GroupLayout.PREFERRED_SIZE, 69,
-																		GroupLayout.PREFERRED_SIZE)))
-										.addGroup(GroupLayout.Alignment.LEADING,
-												jPanel1Layout.createSequentialGroup().addComponent(nameLbl)
-														.addGap(16, 16, 16).addComponent(nameFld)))
-										.addGap(64, 64, 64)
-										.addGroup(jPanel1Layout
-												.createParallelGroup(GroupLayout.Alignment.LEADING)
-												.addGroup(
-														jPanel1Layout.createSequentialGroup().addComponent(flightCdLbl)
-																.addGap(30, 30, 30).addComponent(flightCdFld))
-												.addGroup(jPanel1Layout.createSequentialGroup().addGroup(jPanel1Layout
-														.createParallelGroup(GroupLayout.Alignment.LEADING)
-														.addComponent(cvvLbl))
-														.addGap(18, 18, 18)
-														.addGroup(jPanel1Layout
-																.createParallelGroup(
-																		GroupLayout.Alignment.LEADING)
-																.addComponent(cvvFld,
-																		GroupLayout.PREFERRED_SIZE, 69,
-																		GroupLayout.PREFERRED_SIZE)
-																))))
-								.addGroup(jPanel1Layout.createSequentialGroup().addComponent(bookingCdLbl)
-										.addGap(31, 31, 31).addComponent(bookingRefFld))))
-						.addGroup(jPanel1Layout.createSequentialGroup().addGap(157, 157, 157).addComponent(submitBtn)))
-						.addGap(0, 29, Short.MAX_VALUE)));
-		jPanel1Layout.setVerticalGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-				.addGroup(jPanel1Layout.createSequentialGroup().addGap(21, 21, 21)
-						.addGroup(jPanel1Layout
-								.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(nameLbl)
-								.addComponent(nameFld).addComponent(flightCdLbl).addComponent(flightCdFld))
-						.addGap(18, 18, 18)
-						.addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-								.addComponent(bookingCdLbl).addComponent(bookingRefFld))
-						.addGap(26, 26, 26)
-						.addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-								.addComponent(cardLbl)
-								.addComponent(cardFld, GroupLayout.PREFERRED_SIZE,
-										GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(cvvLbl).addComponent(cvvFld, GroupLayout.PREFERRED_SIZE,
-										GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-						.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-						.addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-								.addComponent(expiryFld, GroupLayout.PREFERRED_SIZE,
-										GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(expiryLbl))
-						.addGap(35, 35, 35).addComponent(submitBtn)
-						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+	        expiryLbl.setFont(new java.awt.Font("Tahoma", 0, 18)); 
+	        expiryLbl.setText("Expiry Date:");
 
-		titleLabel.setFont(new java.awt.Font("Tahoma", 0, 16)); 
-		titleLabel.setText("Fees Payment");
+	        GroupLayout contentPanelLayout = new GroupLayout(contentPanel);
+	        contentPanel.setLayout(contentPanelLayout);
+	        contentPanelLayout.setHorizontalGroup(
+	            contentPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+	            .addGroup(contentPanelLayout.createSequentialGroup()
+	                .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+	                    .addGroup(contentPanelLayout.createSequentialGroup()
+	                        .addGap(98, 98, 98)
+	                        .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+	                            .addGroup(contentPanelLayout.createSequentialGroup()
+	                                .addGap(355, 355, 355)
+	                                .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+	                                    .addGroup(contentPanelLayout.createSequentialGroup()
+	                                        .addComponent(flightCdLbl)
+	                                        .addGap(33, 33, 33)
+	                                        .addComponent(flightCdFld))
+	                                    .addGroup(contentPanelLayout.createSequentialGroup()
+	                                        .addComponent(cvvLbl)
+	                                        .addGap(18, 18, 18)
+	                                        .addComponent(cvvFld, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE))))
+	                            .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+	                                .addGroup(contentPanelLayout.createSequentialGroup()
+	                                    .addComponent(expiryLbl)
+	                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+	                                    .addComponent(expiryFld, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE))
+	                                .addGroup(contentPanelLayout.createSequentialGroup()
+	                                    .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+	                                        .addComponent(bookingCdLbl)
+	                                        .addComponent(nameLbl)
+	                                        .addComponent(cardLbl))
+	                                    .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+	                                        .addGroup(contentPanelLayout.createSequentialGroup()
+	                                            .addGap(35, 35, 35)
+	                                            .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+	                                                .addComponent(bookingRefFld)
+	                                                .addComponent(nameFld)))
+	                                        .addGroup(contentPanelLayout.createSequentialGroup()
+	                                            .addGap(18, 18, 18)
+	                                            .addComponent(cardFld, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)))))))
+	                    .addGroup(contentPanelLayout.createSequentialGroup()
+	                        .addGap(276, 276, 276)
+	                        .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+	                            .addComponent(titleLbl)
+	                            .addGroup(GroupLayout.Alignment.TRAILING, contentPanelLayout.createSequentialGroup()
+	                                .addComponent(submitBtn, GroupLayout.PREFERRED_SIZE, 92, GroupLayout.PREFERRED_SIZE)
+	                                .addGap(101, 101, 101)))))
+	                .addContainerGap(134, Short.MAX_VALUE))
+	        );
+	        contentPanelLayout.setVerticalGroup(
+	            contentPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+	            .addGroup(contentPanelLayout.createSequentialGroup()
+	                .addGap(32, 32, 32)
+	                .addComponent(titleLbl)
+	                .addGap(33, 33, 33)
+	                .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+	                    .addComponent(nameLbl)
+	                    .addComponent(flightCdLbl)
+	                    .addComponent(nameFld)
+	                    .addComponent(flightCdFld))
+	                .addGap(43, 43, 43)
+	                .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+	                    .addComponent(bookingCdLbl)
+	                    .addComponent(bookingRefFld))
+	                .addGap(57, 57, 57)
+	                .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+	                    .addComponent(cardLbl)
+	                    .addComponent(cardFld, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
+	                    .addComponent(cvvLbl)
+	                    .addComponent(cvvFld, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE))
+	                .addGap(40, 40, 40)
+	                .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+	                    .addComponent(expiryLbl)
+	                    .addComponent(expiryFld, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE))
+	                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+	                .addComponent(submitBtn, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+	                .addGap(153, 153, 153))
+	        );
 
-		GroupLayout layout = new GroupLayout(getContentPane());
-		getContentPane().setLayout(layout);
-		layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(layout
-				.createSequentialGroup().addContainerGap()
-				.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-						.addComponent(jPanel1, GroupLayout.DEFAULT_SIZE,
-								GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addGroup(
-								layout.createSequentialGroup().addComponent(titleLabel).addGap(0, 0, Short.MAX_VALUE)))
-				.addContainerGap()));
-		layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(layout
-				.createSequentialGroup().addGap(9, 9, 9).addComponent(titleLabel)
-				.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED).addComponent(jPanel1,
-						GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-				.addGap(18, 18, 18)));
+	        GroupLayout layout = new GroupLayout(getContentPane());
+	        getContentPane().setLayout(layout);
+	        layout.setHorizontalGroup(
+	            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+	            .addComponent(contentPanel, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+	        );
+	        layout.setVerticalGroup(
+	            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+	            .addComponent(contentPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+	        );
 
-		pack();
+	        pack();
 	}
 
 	private void submitActionPerformed(ActionEvent evt) {
