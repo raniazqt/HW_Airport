@@ -5,6 +5,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.DirectoryNotEmptyException;
+import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -16,7 +20,7 @@ import com.hw.airport.model.Flight;
 import com.hw.airport.model.FlightExtrasAndCharges;
 import com.hw.airport.model.ReportData;
 
-public class ReportSvcImpl implements ReportSvc{
+public class ReportSvcImpl implements ReportSvc {
 	BookingSvc bookingSvc = new BookingSvcImpl();
 	FlightSvc flightSvc = new FlightSvcImpl();
 
@@ -29,12 +33,12 @@ public class ReportSvcImpl implements ReportSvc{
 		int psgrCnt = 0;
 
 		ReportData data = new ReportData();
-		FlightExtrasAndCharges xtraCharge = new FlightExtrasAndCharges() ;
+		FlightExtrasAndCharges xtraCharge = new FlightExtrasAndCharges();
 
 		Flight flight = flightSvc.getFlightByCode(flightCode);
 
 		if (null == flight) {
-			//do something
+			// do something
 		}
 
 		data.setFlightCode(flightCode);
@@ -50,18 +54,17 @@ public class ReportSvcImpl implements ReportSvc{
 		}
 		double totalVol = 0;
 		try {
-			totalVol= bagSvc.getTheTotalBagVolumesOnFlight(flightCode);
+			totalVol = bagSvc.getTheTotalBagVolumesOnFlight(flightCode);
 		} catch (HWAirportException e) {
 			// TODO Auto-generated catch block
 		}
 		double totalWgth = 0;
 
 		try {
-			totalWgth= bagSvc.getTheTotalBagWeightOnFlight(flightCode);
+			totalWgth = bagSvc.getTheTotalBagWeightOnFlight(flightCode);
 		} catch (HWAirportException e) {
 			// TODO Auto-generated catch block
 		}
-
 
 		data.setTotalPsgrCnt(psgrCnt);
 		data.setTotalVolume(totalVol);
@@ -87,12 +90,12 @@ public class ReportSvcImpl implements ReportSvc{
 	public void generateSummaryReportForAllFlights() throws FileNotFoundException, IOException {
 		Map<String, List<Booking>> bookingsByFlight = bookingSvc.groupBookingByFlightCode();
 		ReportData data;
-		List<ReportData> reportDataList= new ArrayList<ReportData>();
-		for (String b : bookingsByFlight.keySet() ) {
+		List<ReportData> reportDataList = new ArrayList<ReportData>();
+		for (String b : bookingsByFlight.keySet()) {
 			try {
 				data = this.generateSummaryReportPerFlight(b, bookingsByFlight.get(b));
 				reportDataList.add(data);
-			}catch (Exception ex){
+			} catch (Exception ex) {
 
 			}
 		}
@@ -100,10 +103,19 @@ public class ReportSvcImpl implements ReportSvc{
 	}
 
 	public void writToTxtFile(List<ReportData> data) throws FileNotFoundException, IOException {
-		File output = new File("./resources/files/FlightSummaryReport.txt"); 
-		//String newLine = System.getProperty("line.separator");
 
-		//File output = new File("BookingReport.txt"); 
+		try {
+			Files.deleteIfExists(Paths.get("./resources/files/FlightSummaryReport.txt"));
+
+		} catch (NoSuchFileException e) {
+			System.out.println("No such file/directory exists");
+		} catch (DirectoryNotEmptyException e) {
+			System.out.println("Directory is not empty.");
+		} catch (IOException e) {
+			System.out.println("Invalid permissions.");
+		}
+
+		File output = new File("./resources/files/FlightSummaryReport.txt");
 		FileWriter fr = null;
 		BufferedWriter br = null;
 
@@ -112,34 +124,26 @@ public class ReportSvcImpl implements ReportSvc{
 
 		String newLine = System.getProperty("line.separator");
 		try {
-			br.write(
-					String.format("%-20s", "Flight#") 
-					+ String.format("%-20s","Passengers Count")											
-					+ String.format("%-20s","Total Volume") 
-					+ String.format("%-20s","Total Weight")
-					+ String.format("%-20s","Extra Fees")
-					+ String.format("%-20s","Extra Pasgr") 
-					+ String.format("%-20s","Extra Weight")
-					+ String.format("%-20s","Extra Volume")
-					+ newLine);
+			br.write(String.format("%-20s", "Flight#") + String.format("%-20s", "Passengers Count")
+					+ String.format("%-20s", "Total Volume") + String.format("%-20s", "Total Weight")
+					+ String.format("%-20s", "Extra Fees") + String.format("%-20s", "Extra Pasgr")
+					+ String.format("%-20s", "Extra Weight") + String.format("%-20s", "Extra Volume") + newLine);
 
 			for (ReportData flight : data) {
-				br.write(
-						String.format("%-20s",flight.getFlightCode().toUpperCase())  
-						+ String.format("%-20s", flight.getTotalPsgrCnt()) 
-						+ String.format("%-20s",flight.getTotalVolume())
+				br.write(String.format("%-20s", flight.getFlightCode().toUpperCase())
+						+ String.format("%-20s", flight.getTotalPsgrCnt())
+						+ String.format("%-20s", flight.getTotalVolume())
 						+ String.format("%-20s", flight.getTotalWeight())
-						+ String.format("%-20s",flight.getXtraPaidFees())    						 
-						+ String.format("%-20s",(flight.isExceededPsngrCnt()==true?"Yes" : "N"))
-						+ String.format("%-20s",(flight.isExceededWeight()==true?"Yes" : "N")) 
-						+ String.format("%-20s",(flight.isExceededVolume()==true?"Yes" : "N"))
-						+ newLine);
+						+ String.format("%-20s", flight.getXtraPaidFees())
+						+ String.format("%-20s", (flight.isExceededPsngrCnt() == true ? "Yes" : "N"))
+						+ String.format("%-20s", (flight.isExceededWeight() == true ? "Yes" : "N"))
+						+ String.format("%-20s", (flight.isExceededVolume() == true ? "Yes" : "N")) + newLine);
 
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally{
+		} finally {
 			try {
 				br.close();
 				fr.close();
@@ -156,6 +160,5 @@ public class ReportSvcImpl implements ReportSvc{
 		// TODO Auto-generated method stub
 
 	}
-
 
 }
