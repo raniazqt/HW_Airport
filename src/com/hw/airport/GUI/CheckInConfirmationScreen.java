@@ -58,7 +58,7 @@ public class CheckInConfirmationScreen extends javax.swing.JFrame {
 		bookingCdLbl.setText("Booking Code:");
 
 		titleLbl.setFont(new java.awt.Font("Tahoma", 0, 24));
-		titleLbl.setText("Check in confirmation");
+		titleLbl.setText("           Check in");
 
 		flightCdLbl.setFont(new java.awt.Font("Tahoma", 0, 18));
 		flightCdLbl.setText("Flight Code:");
