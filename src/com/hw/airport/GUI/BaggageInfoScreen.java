@@ -225,7 +225,7 @@ public class BaggageInfoScreen extends javax.swing.JFrame {
 		} else if (heightFld.getText().isEmpty() || Integer.parseInt(heightFld.getText()) < 0) {
 			JOptionPane.showMessageDialog(null, "Please Correct Baggage Height (cm) ");
 		} else if (widthFld.getText().isEmpty() || Integer.parseInt(widthFld.getText()) < 0) {
-			JOptionPane.showMessageDialog(null, "Please Correct Baggage Weight (Kg) ");
+			JOptionPane.showMessageDialog(null, "Please Correct Baggage Width (cm) ");
 		} else if (weightFld.getText().isEmpty() || Integer.parseInt(weightFld.getText()) < 0) {
 			JOptionPane.showMessageDialog(null, "Please Correct Baggage Weight (Kg) ");
 		} else {

@@ -1,7 +1,7 @@
 Flight#             Passengers Count    Total Volume        Total Weight        Extra Fees          Extra Pasgr         Extra Weight        Extra Volume        
 GA123               0                   0.0                 0.0                 0.0                 N                   N                   N                   
-AA123               1                   48.0                0.0                 0.0                 N                   N                   N                   
+AA123               2                   17712.0             6000.0              60027.0             N                   Yes                 Yes                 
 AF999               0                   0.0                 0.0                 0.0                 N                   N                   N                   
 ME123               0                   0.0                 0.0                 0.0                 N                   N                   N                   
-MS123               0                   0.0                 0.0                 0.0                 N                   N                   N                   
-CA123               0                   0.0                 0.0                 0.0                 N                   N                   N                   
+MS123               1                   600.0               50.0                2897.0              N                   N                   N                   
+CA123               1                   1980.0              12.0                150.0               N                   N                   Yes                 
