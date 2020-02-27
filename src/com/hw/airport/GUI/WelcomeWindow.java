@@ -7,9 +7,13 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.LayoutStyle;
 import javax.swing.WindowConstants;
+import javax.swing.border.TitledBorder;
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
+
 import java.awt.Color;
 import java.awt.Font;
 
@@ -17,22 +21,24 @@ public class WelcomeWindow extends JFrame {
 
 	private JButton psngrBtn = new JButton();
 	
+	private JButton rptBtn = new JButton();
+	
 	private JLabel imgLbl;
 
 	private JPanel contentPanel;
 
 	public WelcomeWindow() {
 
-		 contentPanel = new javax.swing.JPanel();
-	        imgLbl = new javax.swing.JLabel();
-	        psngrBtn = new javax.swing.JButton();
+		 contentPanel = new JPanel();
+	        imgLbl = new JLabel();
+	        psngrBtn = new JButton();
 
-	        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+	        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
 	        contentPanel.setBackground(new java.awt.Color(240, 255, 255));
-	        contentPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Welcome to the Check In", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 16))); // NOI18N
+	        contentPanel.setBorder(BorderFactory.createTitledBorder(null, "Welcome to the Check In", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 16))); 
 
-	        imgLbl.setIcon(new javax.swing.ImageIcon("C:\\Users\\Bruce-Inspiron\\Documents\\MS\\SEM2\\AS\\F21AS_CW\\airport_pic.png")); // NOI18N
+	        imgLbl.setIcon(new ImageIcon("C:\\Users\\Bruce-Inspiron\\Documents\\MS\\SEM2\\AS\\F21AS_CW\\airport_pic.png")); 
 
 	        psngrBtn.setText("Check In");
 	    	psngrBtn.addActionListener(new ActionListener() {
@@ -41,42 +47,47 @@ public class WelcomeWindow extends JFrame {
 	    		}
 	    	});
 
-	        javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
-	        contentPanel.setLayout(contentPanelLayout);
-	        contentPanelLayout.setHorizontalGroup(
-	            contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-	            .addGroup(contentPanelLayout.createSequentialGroup()
-	                .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-	                    .addGroup(contentPanelLayout.createSequentialGroup()
-	                        .addGap(37, 37, 37)
-	                        .addComponent(imgLbl))
-	                    .addGroup(contentPanelLayout.createSequentialGroup()
-	                        .addGap(292, 292, 292)
-	                        .addComponent(psngrBtn)))
-	                .addContainerGap(42, Short.MAX_VALUE))
-	        );
-	        contentPanelLayout.setVerticalGroup(
-	            contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-	            .addGroup(contentPanelLayout.createSequentialGroup()
-	                .addGap(31, 31, 31)
-	                .addComponent(imgLbl)
-	                .addGap(18, 18, 18)
-	                .addComponent(psngrBtn)
-	                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-	        );
+	    	  rptBtn.setText("Cancel");
 
-	        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-	        getContentPane().setLayout(layout);
-	        layout.setHorizontalGroup(
-	            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-	            .addComponent(contentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-	        );
-	        layout.setVerticalGroup(
-	            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-	            .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-	        );
+	          GroupLayout contentPanelLayout = new GroupLayout(contentPanel);
+	          contentPanel.setLayout(contentPanelLayout);
+	          contentPanelLayout.setHorizontalGroup(
+	              contentPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+	              .addGroup(contentPanelLayout.createSequentialGroup()
+	                  .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+	                  .addComponent(psngrBtn)
+	                  .addGap(185, 185, 185)
+	                  .addComponent(rptBtn)
+	                  .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+	              .addGroup(contentPanelLayout.createSequentialGroup()
+	                  .addGap(18, 18, 18)
+	                  .addComponent(imgLbl)
+	                  .addContainerGap(20, Short.MAX_VALUE))
+	          );
+	          contentPanelLayout.setVerticalGroup(
+	              contentPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+	              .addGroup(contentPanelLayout.createSequentialGroup()
+	                  .addGap(31, 31, 31)
+	                  .addComponent(imgLbl)
+	                  .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+	                  .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+	                      .addComponent(psngrBtn)
+	                      .addComponent(rptBtn))
+	                  .addContainerGap())
+	          );
 
-	        pack();
+	          GroupLayout layout = new GroupLayout(getContentPane());
+	          getContentPane().setLayout(layout);
+	          layout.setHorizontalGroup(
+	              layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+	              .addComponent(contentPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+	          );
+	          layout.setVerticalGroup(
+	              layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+	              .addComponent(contentPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+	          );
+
+	          pack();
 	}
 	
 	private void psngrBtnActionPerformed(ActionEvent evt) {
