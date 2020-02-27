@@ -62,7 +62,7 @@ public class DataSvcImpl implements DataSvc {
 		for(String[] line : bookingData) {
 			String refCode = line[2].toLowerCase();
 			booking = new Booking(line[0].toLowerCase(), 
-					line[1].toLowerCase(), line[2].toLowerCase(), line[3].toLowerCase(), Boolean.getBoolean(line[4]));
+					line[1].toLowerCase(), line[2].toLowerCase(), line[3].toLowerCase(), Boolean.parseBoolean(line[4]));
 			bookingList.put(refCode, booking);
 		}
 		return bookingList;
