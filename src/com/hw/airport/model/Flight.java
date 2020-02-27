@@ -21,14 +21,8 @@ public class Flight {
 	//charge for extra weight per luggage 
 	private double xtraWghtChargePerKg;
 	private double xtraVolumeCharge;
-	
 	private double maxFlightVolume;
 	private double maxFlightWeight;
-	
-	
-	
-	
-	
 
 	public Flight(String code, String toAirport, String fromAirport, String carrier, int maxPasngrCnt,
 			int bagPerPsngrCnt, int maxBagWeight, double maxBagVolume, double xtraBagCharge, double xtraWghtChargePerKg,
@@ -49,7 +43,6 @@ public class Flight {
 		this.maxFlightWeight = maxFlightWeight;
 	}
 
-
 	public Flight(String code, String toAirport, String fromAirport, String carrier) {
 		super();
 		this.code = code;
@@ -57,7 +50,6 @@ public class Flight {
 		this.fromAirport = fromAirport;
 		this.carrier = carrier;
 	}
-	
 	
 	public String getCode() {
 		return code;
@@ -118,11 +110,9 @@ public class Flight {
 		return xtraWghtChargePerKg;
 	}
 
-
 	public void setXtraWghtChargePerKg(double xtraWghtChargePerKg) {
 		this.xtraWghtChargePerKg = xtraWghtChargePerKg;
 	}
-
 
 	public double getXtraVolumeCharge() {
 		return xtraVolumeCharge;

@@ -8,13 +8,11 @@ public class BookingCharge {
 	double length, width, depth, weight;
 	double weightCharge;
 	double volumeCharge;
-	
-	
+
 	public BookingCharge() {
 		super();
 	}
 
-	
 	public BookingCharge(String refCode, String lastName, int bagCnt, double length, double width, double depth,
 			double weight) {
 		super();
@@ -26,7 +24,6 @@ public class BookingCharge {
 		this.depth = depth;
 		this.weight = weight;
 	}
-
 
 	public BookingCharge(String refCode, String lastName, int bagCnt, double length, double width, double depth,
 			double weight, double weightCharge, double volumeCharge) {
@@ -114,9 +111,7 @@ public class BookingCharge {
 		this.volumeCharge = volumeCharge;
 	}
 
-
 	public double getTotalChg() {
 		return this.volumeCharge + this.weightCharge;
 	}
-	
 }
