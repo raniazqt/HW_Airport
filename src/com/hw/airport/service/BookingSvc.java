@@ -4,12 +4,13 @@ import java.util.List;
 import java.util.Map;
 
 import com.hw.airport.exception.HWAirportException;
+import com.hw.airport.exception.NullBookingException;
 import com.hw.airport.model.Booking;
 import com.hw.airport.model.FlightExtrasAndCharges;
 
 public interface BookingSvc {
 	
-	public Booking findBookingByLastNameAndRefCode(String lastName, String refCode);
+	public Booking findBookingByLastNameAndRefCode(String lastName, String refCode) throws HWAirportException;
 	
 	public boolean updateBookingStatus(String lastName, String refCode, boolean status) throws HWAirportException;
 	

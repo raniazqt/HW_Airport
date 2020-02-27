@@ -38,11 +38,11 @@ public class BaggageInfoScreen extends javax.swing.JFrame {
 	private JLabel flightCdLbl;
 	private JTextField heightFld;
 	private JLabel heightLbl;
-	private JPanel jPanel1;
+	private JPanel contentPanel;
 	private JLabel nameFld;
 	private JLabel nameLbl;
 	private JButton submitBtn;
-	private JLabel titleLabel;
+	private JLabel titleLbl;
 	private JTextField weightFld;
 	private JLabel weightLbl;
 	private JTextField widthFld;
@@ -51,44 +51,54 @@ public class BaggageInfoScreen extends javax.swing.JFrame {
 	public BaggageInfoScreen(Booking bookingObj) {
 
 		this.booking = bookingObj;
-		jPanel1 = new JPanel();
-		nameLbl = new JLabel();
-		bookingCdLbl = new JLabel();
-		nameFld = new JLabel();
-		flightCdLbl = new JLabel();
-		flightCdFld = new JLabel();
-		bookingRefFld = new JLabel();
-		weightLbl = new JLabel();
-		depthLbl = new JLabel();
-		weightFld = new JTextField();
-		depthFld = new JTextField();
-		heightLbl = new JLabel();
-		widthLbl = new JLabel();
-		heightFld = new JTextField();
-		widthFld = new JTextField();
-		submitBtn = new JButton();
-		titleLabel = new JLabel();
 
-		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		contentPanel = new javax.swing.JPanel();
+		submitBtn = new javax.swing.JButton();
+		nameLbl = new javax.swing.JLabel();
+		bookingCdLbl = new javax.swing.JLabel();
+		titleLbl = new javax.swing.JLabel();
+		flightCdLbl = new javax.swing.JLabel();
+		bookingRefFld = new javax.swing.JLabel();
+		nameFld = new javax.swing.JLabel();
+		weightLbl = new javax.swing.JLabel();
+		flightCdFld = new javax.swing.JLabel();
+		weightFld = new javax.swing.JTextField();
+		heightLbl = new javax.swing.JLabel();
+		depthLbl = new javax.swing.JLabel();
+		widthLbl = new javax.swing.JLabel();
+		depthFld = new javax.swing.JTextField();
+		heightFld = new javax.swing.JTextField();
+		widthFld = new javax.swing.JTextField();
 
-		jPanel1.setBackground(new java.awt.Color(240, 255, 255));
-		jPanel1.setBorder(
-				BorderFactory.createTitledBorder("Please complete the information about your baggage"));
+		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-		nameLbl.setText("Passenger Name:");
+		contentPanel.setBackground(new java.awt.Color(240, 255, 255));
+		contentPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(
+				javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED),
+				"Enter your baggage information", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION,
+				javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 16))); // NOI18N
 
+		submitBtn.setText("Submit");
+
+		nameLbl.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+		nameLbl.setText("Full Name:");
+
+		bookingCdLbl.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 		bookingCdLbl.setText("Booking Code:");
 
-		weightLbl.setText("Weight");
+		titleLbl.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+		titleLbl.setText("Baggage Details");
 
-		depthLbl.setText("Length");
-
-		heightLbl.setText("Height");
-
-		widthLbl.setText("Width");
-
+		flightCdLbl.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 		flightCdLbl.setText("Flight Code:");
-		
+
+		bookingRefFld.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+		bookingRefFld.setText("Code");
+
+		nameFld.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+		flightCdFld.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
 		nameFld.setText(booking.getFirstName() + " " + booking.getLastName());
 
 		flightCdFld.setText(booking.getFlightCode());
@@ -102,99 +112,109 @@ public class BaggageInfoScreen extends javax.swing.JFrame {
 			}
 		});
 
-		GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
-		jPanel1.setLayout(jPanel1Layout);
-		jPanel1Layout.setHorizontalGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-				.addGroup(jPanel1Layout.createSequentialGroup().addGroup(jPanel1Layout
-						.createParallelGroup(GroupLayout.Alignment.LEADING)
-						.addGroup(jPanel1Layout.createSequentialGroup().addGap(33, 33, 33).addGroup(jPanel1Layout
-								.createParallelGroup(GroupLayout.Alignment.LEADING)
-								.addGroup(jPanel1Layout.createSequentialGroup().addGroup(jPanel1Layout
-										.createParallelGroup(GroupLayout.Alignment.TRAILING)
-										.addGroup(
-												GroupLayout.Alignment.LEADING, jPanel1Layout
-														.createSequentialGroup().addGroup(jPanel1Layout
-																.createParallelGroup(
-																		GroupLayout.Alignment.LEADING)
-																.addComponent(depthLbl).addComponent(weightLbl))
-														.addGap(11, 11, 11)
-														.addGroup(jPanel1Layout.createParallelGroup(
-																GroupLayout.Alignment.LEADING).addComponent(
-																		weightFld,
-																		GroupLayout.PREFERRED_SIZE, 69,
-																		GroupLayout.PREFERRED_SIZE)
-																.addComponent(depthFld,
-																		GroupLayout.PREFERRED_SIZE, 69,
-																		GroupLayout.PREFERRED_SIZE)))
-										.addGroup(GroupLayout.Alignment.LEADING,
-												jPanel1Layout.createSequentialGroup().addComponent(nameLbl)
-														.addGap(16, 16, 16).addComponent(nameFld)))
-										.addGap(64, 64, 64)
-										.addGroup(jPanel1Layout
-												.createParallelGroup(GroupLayout.Alignment.LEADING)
-												.addGroup(
-														jPanel1Layout.createSequentialGroup().addComponent(flightCdLbl)
-																.addGap(30, 30, 30).addComponent(flightCdFld))
-												.addGroup(jPanel1Layout.createSequentialGroup().addGroup(jPanel1Layout
-														.createParallelGroup(GroupLayout.Alignment.LEADING)
-														.addComponent(heightLbl).addComponent(widthLbl))
-														.addGap(18, 18, 18)
-														.addGroup(jPanel1Layout
-																.createParallelGroup(
-																		GroupLayout.Alignment.LEADING)
-																.addComponent(heightFld,
-																		GroupLayout.PREFERRED_SIZE, 69,
-																		GroupLayout.PREFERRED_SIZE)
-																.addComponent(widthFld,
-																		GroupLayout.PREFERRED_SIZE, 69,
-																		GroupLayout.PREFERRED_SIZE)))))
-								.addGroup(jPanel1Layout.createSequentialGroup().addComponent(bookingCdLbl)
-										.addGap(31, 31, 31).addComponent(bookingRefFld))))
-						.addGroup(jPanel1Layout.createSequentialGroup().addGap(157, 157, 157).addComponent(submitBtn)))
-						.addGap(0, 29, Short.MAX_VALUE)));
-		jPanel1Layout.setVerticalGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-				.addGroup(jPanel1Layout.createSequentialGroup().addGap(21, 21, 21)
-						.addGroup(jPanel1Layout
-								.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(nameLbl)
-								.addComponent(nameFld).addComponent(flightCdLbl).addComponent(flightCdFld))
-						.addGap(18, 18, 18)
-						.addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+		heightLbl.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+		heightLbl.setText("Height:");
+
+		depthLbl.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+		depthLbl.setText("Length:");
+
+		widthLbl.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+		widthLbl.setText("Width:");
+
+		weightLbl.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+		weightLbl.setText("Weight:");
+
+		javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
+		contentPanel.setLayout(contentPanelLayout);
+		contentPanelLayout.setHorizontalGroup(contentPanelLayout
+				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(contentPanelLayout.createSequentialGroup().addGroup(contentPanelLayout
+						.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+						.addGroup(contentPanelLayout.createSequentialGroup().addGap(98, 98, 98)
+								.addGroup(contentPanelLayout
+										.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+										.addGroup(contentPanelLayout.createSequentialGroup()
+												.addGroup(contentPanelLayout
+														.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+														.addComponent(bookingCdLbl).addComponent(nameLbl).addComponent(
+																weightLbl))
+												.addGap(35, 35, 35)
+												.addGroup(contentPanelLayout
+														.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+														.addComponent(bookingRefFld).addComponent(nameFld)))
+										.addComponent(depthLbl)
+										.addGroup(contentPanelLayout.createSequentialGroup().addGap(90, 90, 90)
+												.addGroup(contentPanelLayout
+														.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+														.addComponent(weightFld, javax.swing.GroupLayout.PREFERRED_SIZE,
+																104, javax.swing.GroupLayout.PREFERRED_SIZE)
+														.addComponent(depthFld, javax.swing.GroupLayout.PREFERRED_SIZE,
+																104, javax.swing.GroupLayout.PREFERRED_SIZE))
+												.addGap(161, 161, 161)
+												.addGroup(contentPanelLayout
+														.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+														.addGroup(contentPanelLayout.createSequentialGroup()
+																.addComponent(flightCdLbl).addGap(33, 33, 33)
+																.addComponent(flightCdFld))
+														.addGroup(contentPanelLayout.createSequentialGroup()
+																.addGroup(contentPanelLayout.createParallelGroup(
+																		javax.swing.GroupLayout.Alignment.TRAILING)
+																		.addComponent(widthLbl).addComponent(heightLbl))
+																.addGap(18, 18, 18)
+																.addGroup(contentPanelLayout.createParallelGroup(
+																		javax.swing.GroupLayout.Alignment.LEADING)
+																		.addComponent(heightFld,
+																				javax.swing.GroupLayout.PREFERRED_SIZE,
+																				104,
+																				javax.swing.GroupLayout.PREFERRED_SIZE)
+																		.addComponent(widthFld,
+																				javax.swing.GroupLayout.PREFERRED_SIZE,
+																				104,
+																				javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+						.addGroup(contentPanelLayout.createSequentialGroup().addGap(276, 276, 276)
+								.addGroup(contentPanelLayout
+										.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+										.addComponent(submitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 92,
+												javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addComponent(titleLbl))))
+						.addContainerGap(134, Short.MAX_VALUE)));
+		contentPanelLayout.setVerticalGroup(contentPanelLayout
+				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(contentPanelLayout.createSequentialGroup().addGap(32, 32, 32).addComponent(titleLbl)
+						.addGap(33, 33, 33)
+						.addGroup(contentPanelLayout
+								.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(nameLbl)
+								.addComponent(flightCdLbl).addComponent(nameFld).addComponent(flightCdFld))
+						.addGap(43, 43, 43)
+						.addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
 								.addComponent(bookingCdLbl).addComponent(bookingRefFld))
-						.addGap(26, 26, 26)
-						.addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+						.addGap(57, 57, 57)
+						.addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
 								.addComponent(weightLbl)
-								.addComponent(weightFld, GroupLayout.PREFERRED_SIZE,
-										GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(heightLbl).addComponent(heightFld, GroupLayout.PREFERRED_SIZE,
-										GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-						.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-						.addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-								.addComponent(depthFld, GroupLayout.PREFERRED_SIZE,
-										GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(depthLbl).addComponent(widthLbl).addComponent(widthFld,
-										GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE))
-						.addGap(35, 35, 35).addComponent(submitBtn)
-						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+								.addComponent(weightFld, javax.swing.GroupLayout.PREFERRED_SIZE, 28,
+										javax.swing.GroupLayout.PREFERRED_SIZE)
+								.addComponent(heightLbl).addComponent(heightFld, javax.swing.GroupLayout.PREFERRED_SIZE,
+										28, javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addGap(40, 40, 40)
+						.addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+								.addComponent(depthLbl).addComponent(widthLbl)
+								.addComponent(depthFld, javax.swing.GroupLayout.PREFERRED_SIZE, 28,
+										javax.swing.GroupLayout.PREFERRED_SIZE)
+								.addComponent(widthFld, javax.swing.GroupLayout.PREFERRED_SIZE, 28,
+										javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+						.addComponent(submitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40,
+								javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addGap(155, 155, 155)));
 
-		titleLabel.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-		titleLabel.setText("Check in Baggage Information");
-
-		GroupLayout layout = new GroupLayout(getContentPane());
+		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 		getContentPane().setLayout(layout);
-		layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(layout
-				.createSequentialGroup().addContainerGap()
-				.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-						.addComponent(jPanel1, GroupLayout.DEFAULT_SIZE,
-								GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addGroup(
-								layout.createSequentialGroup().addComponent(titleLabel).addGap(0, 0, Short.MAX_VALUE)))
-				.addContainerGap()));
-		layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(layout
-				.createSequentialGroup().addGap(9, 9, 9).addComponent(titleLabel)
-				.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED).addComponent(jPanel1,
-						GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-				.addGap(18, 18, 18)));
+		layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(
+				contentPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE,
+				javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE));
+		layout.setVerticalGroup(
+				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(contentPanel,
+						javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
 
 		pack();
 	}
@@ -214,20 +234,20 @@ public class BaggageInfoScreen extends javax.swing.JFrame {
 			try {
 				bookingChg = checkInSvc.calculateXtraChargeForPasngr(bookingChg);
 				// TODO: Display the results
-				JOptionPane.showMessageDialog(null, "Volume Charge: " + bookingChg.getVolumeCharge() + " "
-						+ "Weight Charge: " + bookingChg.getWeightCharge());
+				//JOptionPane.showMessageDialog(null, "Volume Charge: " + bookingChg.getVolumeCharge() + " "
+						//+ "Weight Charge: " + bookingChg.getWeightCharge());
 				if (bookingChg.getVolumeCharge() <= 0 && bookingChg.getWeightCharge() <= 0) {
 					boolean status = checkInSvc.confirmCheckin(booking);
 					if (status) {
 						this.setVisible(false);
 						CheckInConfirmationScreen confirmationScrn = new CheckInConfirmationScreen(booking, bookingChg);
-
+						confirmationScrn.setVisible(true);
 					} else {
 						JOptionPane.showMessageDialog(null, "Failed to check in. Please try again");
 					}
 				} else {
 					this.setVisible(false);
-					
+
 					PaymentWindow paymentScrn = new PaymentWindow(booking, bookingChg);
 					paymentScrn.setVisible(true);
 				}
