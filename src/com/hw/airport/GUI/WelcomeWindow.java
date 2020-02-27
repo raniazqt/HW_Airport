@@ -47,7 +47,7 @@ public class WelcomeWindow extends JFrame {
 	    		}
 	    	});
 
-	    	  rptBtn.setText("Cancel");
+	    	  rptBtn.setText("Close");
 
 	          GroupLayout contentPanelLayout = new GroupLayout(contentPanel);
 	          contentPanel.setLayout(contentPanelLayout);
