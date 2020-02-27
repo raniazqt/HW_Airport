@@ -11,9 +11,6 @@ enum ApplicationState
 {
 	UNINITIALIZED,
 	INITIALIZED,
-	RUNNING,
-	PAUSED,
-	TERMINATED
 }
 
 public class ApplicationManager {
@@ -36,47 +33,23 @@ public class ApplicationManager {
 			appData.setFlightsInfo(dataSvc.loadFlightsData(flightsFileName));
 			appData.setBookingList(dataSvc.loadBookingData(bookingFileName));
 		} catch (HWAirportException e) {
-			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
-		
-
 		appState = ApplicationState.INITIALIZED;
 		gui.displayWelcomeScreen();
-
 	}
 
 	public void execute() {
 		try {
-
 			if(appState == ApplicationState.UNINITIALIZED) {
 				start();
 			}
-
-			run();
-
-			if(appState == ApplicationState.TERMINATED) {
-				terminate();
-			}
-
 		}
 		catch (Exception e) {
+			//do nothing.
+			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
-		finally {
-		}
-	}
-
-	private void run() throws HWAirportException {
-		do {
-			//run the whole simulation in steps.
-		} while (appState != ApplicationState.TERMINATED);
-	}
-
-	private void terminate() throws HWAirportException {
-		// cleans up the services & shuts down the executable.
-	}
-
-	public ApplicationState getAppState() {
-		return appState;
 	}
 }
