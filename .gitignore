@@ -29,3 +29,7 @@ src/module-info.java
 /target/
 .settings/org.eclipse.m2e.core.prefs
 /.classpath
+/nbproject/private/
+/build/
+.classpath
+manifest.mf

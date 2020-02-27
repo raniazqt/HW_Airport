@@ -36,7 +36,7 @@ public class SearchScreen extends JFrame {
 	private JTextField bookingRefFld;
 	private JTextField lastNameFld;
 	private JButton submitBtn;
-	
+
 	private JLabel lastNameLbl;
 	private JLabel titleLbl;
 	private JLabel jLabel1;
@@ -57,14 +57,14 @@ public class SearchScreen extends JFrame {
 		searchPnl = new JPanel();
 		mainPnl = new JPanel();
 		scndPnl = new JPanel();
-		
+
 
 		mainPnl.setLayout(null);
 		scndPnl.setLayout(null);
 		searchPnl.setLayout(null);
 
 
-		// Search fields last name & booking reference with a submit button		
+		// Search fields last name & booking reference with a submit button
 		lastNameLbl = new JLabel("Last Name");
 		lastNameFld = new JTextField(20);
 		submitBtn = new JButton("Submit");
@@ -86,14 +86,14 @@ public class SearchScreen extends JFrame {
 			}
 		});
 
-		//Search result panel components 
+		//Search result panel components
 		flightNmbrLbl.setText("Flight Number");
 		flightNmbrFld.setEditable(false);
 		/************ Search Form***************/
 		GroupLayout searchLayout = new GroupLayout(searchPnl);
 		searchPnl.setLayout(searchLayout);
 
-		searchLayout.setHorizontalGroup( 
+		searchLayout.setHorizontalGroup(
 				searchLayout.createSequentialGroup()
 				.addContainerGap(20,50)
 				.addGroup(searchLayout.createSequentialGroup())
@@ -112,7 +112,7 @@ public class SearchScreen extends JFrame {
 
 		// Vertically, we want to align each label with its textfield
 		// on the baseline of the components
-		searchLayout.setVerticalGroup( 
+		searchLayout.setVerticalGroup(
 				searchLayout.createSequentialGroup()
 				.addGroup( searchLayout.createParallelGroup( GroupLayout.Alignment.BASELINE )
 						.addComponent( bookingRefLabel )
@@ -135,11 +135,11 @@ public class SearchScreen extends JFrame {
 		titleLbl.setFont(new Font("Helvetica", 3, 16));
 		titleLbl.setText("Find Booking");
 		scndPnl.add(titleLbl);
-		titleLbl.setBounds(0, 10, 360, 60); 
+		titleLbl.setBounds(0, 10, 360, 60);
 		scndPnl.add(jLabel1);
 		jLabel1.setBounds(0, 0, 600, 0);
 
-		
+
 		mainPnl.add(scndPnl);
 		scndPnl.setBounds(0, 0, 810, 500);
 		mainPnl.setBackground(new java.awt.Color(240, 255, 255));
@@ -208,7 +208,7 @@ public class SearchScreen extends JFrame {
 		if (bookingRefFld.getText().isEmpty()) {
 			error = true;
 			msg.append("Booking reference can not be empty");
-		} 
+		}
 		if (error) {
 			JOptionPane.showMessageDialog(this,msg);
 		}else {
