@@ -20,10 +20,7 @@ import com.hw.airport.model.BookingCharge;
 import com.hw.airport.service.CheckInSvc;
 import com.hw.airport.service.CheckInSvcImpl;
 
-/**
- *
- * @author Bruce
- */
+
 public class BaggageInfoScreen extends javax.swing.JFrame {
 
 	private CheckInSvc checkInSvc = new CheckInSvcImpl();
