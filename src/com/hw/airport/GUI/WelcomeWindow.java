@@ -2,18 +2,26 @@ package com.hw.airport.GUI;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import com.hw.airport.service.ReportSvc;
+import com.hw.airport.service.ReportSvcImpl;
 
 public class WelcomeWindow extends JFrame{
 	private JButton staffBtn = new JButton();
 	private JButton psngrBtn = new JButton();
 	private JButton closeBtn = new JButton();
 	private JPanel contentPanel = GUIUtil.getContentPanel();
+	private ReportSvc reportSvc = new ReportSvcImpl();
 
 	public WelcomeWindow() {
 
@@ -70,15 +78,18 @@ public class WelcomeWindow extends JFrame{
 	}
 
 	private void openSerchWindow(ActionEvent evt) {
-		SearchScreen obj = new SearchScreen();		/*
-		 * try { reportSvc.generateSummaryReportForAllFlights(); } catch
-		 * (FileNotFoundException e) { // TODO Auto-generated catch block
-		 * JOptionPane.showMessageDialog(this,"Error generating report"); } catch
-		 * (IOException e) { // TODO Auto-generated catch block e.printStackTrace(); }
-		 */
-
+		SearchScreen obj = new SearchScreen();
 	}
 	private void closeActionPerformed(ActionEvent evt) {
+		try {
+			reportSvc.generateSummaryReportForAllFlights();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(this,"Error generating report");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		System.exit(0);
 	}
 
