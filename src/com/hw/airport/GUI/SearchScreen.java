@@ -123,7 +123,8 @@ public class SearchScreen extends javax.swing.JFrame {
 			try {
 				Booking booking = checkinSvc.retrieveBookingByCodeAndLastName(lastNameFld.getText(),
 						bookingRefFld.getText());
-				if (booking.isCheckedIn() == false) {
+
+				if (!booking.isCheckedIn()) {
 
 					BaggageInfoScreen obj = new BaggageInfoScreen(booking);
 					obj.setVisible(true);
@@ -133,12 +134,12 @@ public class SearchScreen extends javax.swing.JFrame {
 				}
 
 				else {
-					JOptionPane.showMessageDialog(null,"You've already checked in!");
-					
+					JOptionPane.showMessageDialog(null, "You've already checked in!");
+
 					WelcomeWindow obj = new WelcomeWindow();
 					obj.setVisible(true);
 					this.setVisible(false);
-					
+
 				}
 
 			} catch (HWAirportException e) {
