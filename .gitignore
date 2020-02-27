@@ -30,6 +30,3 @@ src/module-info.java
 .settings/org.eclipse.m2e.core.prefs
 /.classpath
 /nbproject/private/
-/build/
-.classpath
-manifest.mf
