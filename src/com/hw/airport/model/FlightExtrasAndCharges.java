@@ -6,13 +6,10 @@ public class FlightExtrasAndCharges {
 	private double xtraVolume;
 	private double xtraWeightCharge;
 	private double xtraVolumeCharge;
-	
 
 	public FlightExtrasAndCharges() {
 		super();
 	}
-	
-
 
 	public FlightExtrasAndCharges(String flightCode, double xtraWeight, double xtraVolume, double xtraWeightCharge,
 			double xtraVolumeCharge) {
@@ -24,27 +21,21 @@ public class FlightExtrasAndCharges {
 		this.xtraVolumeCharge = xtraVolumeCharge;
 	}
 
-
-
 	public double getXtraWeight() {
 		return xtraWeight;
 	}
-
 
 	public void setXtraWeight(double xtraWeight) {
 		this.xtraWeight = xtraWeight;
 	}
 
-
 	public double getXtraVolume() {
 		return xtraVolume;
 	}
 
-
 	public void setXtraVolume(double xtraVolume) {
 		this.xtraVolume = xtraVolume;
 	}
-
 
 	public String getFlightCode() {
 		return flightCode;
@@ -58,24 +49,15 @@ public class FlightExtrasAndCharges {
 		return xtraWeightCharge;
 	}
 
-
-
 	public void setXtraWeightCharge(double xtraWeightCharge) {
 		this.xtraWeightCharge = xtraWeightCharge;
 	}
-
-
 
 	public double getXtraVolumeCharge() {
 		return xtraVolumeCharge;
 	}
 
-
-
 	public void setXtraVolumeCharge(double xtraVolumeCharge) {
 		this.xtraVolumeCharge = xtraVolumeCharge;
 	}
-
-
-
 }

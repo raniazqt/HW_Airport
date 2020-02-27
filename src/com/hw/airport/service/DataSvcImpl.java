@@ -12,7 +12,12 @@ import com.hw.airport.util.FileHandler;
 
 public class DataSvcImpl implements DataSvc {
 
-	//reads the data from flights file then convert it into a hashmap
+	/**
+	 * loads file data from the flight file line by line.
+	 * @param flightsFileName the file name for flight details.
+	 * @return returns a hash map of (flight details, flight code).
+	 * @throws HWAirportException throws a ParsingFileError.
+	 */
 	@Override
 	public Map<String, Flight> loadFlightsData(String flightsFileName) throws HWAirportException {
 		List<String[]> flightsData;
@@ -37,13 +42,18 @@ public class DataSvcImpl implements DataSvc {
 				return flights;
 	}
 
+	/**
+	 * reads the data from the booking file into a hashmap.
+	 * @param bookingFileName the name of the file containing the booking details.
+	 * @return a hashmap of (booking reference, booking details) this data is stored in and accessed by all services.
+	 */
 	@Override
-	public Map<String, Booking> loadBookingData(String bookingFileName) {
+	public Map<String, Booking> loadBookingData(String bookingFileName)  {
 		List<String[]> bookingData = new ArrayList<String[]>();
 		try {
 			bookingData = FileHandler.parseFile(bookingFileName);
 		} catch (HWAirportException e) {
-			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
 		
