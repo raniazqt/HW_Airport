@@ -70,7 +70,13 @@ public class WelcomeWindow extends JFrame{
 	}
 
 	private void openSerchWindow(ActionEvent evt) {
-		SearchScreen obj = new SearchScreen();
+		SearchScreen obj = new SearchScreen();		/*
+		 * try { reportSvc.generateSummaryReportForAllFlights(); } catch
+		 * (FileNotFoundException e) { // TODO Auto-generated catch block
+		 * JOptionPane.showMessageDialog(this,"Error generating report"); } catch
+		 * (IOException e) { // TODO Auto-generated catch block e.printStackTrace(); }
+		 */
+
 	}
 	private void closeActionPerformed(ActionEvent evt) {
 		System.exit(0);
