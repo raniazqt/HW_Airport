@@ -1,6 +1,11 @@
 
 package com.hw.airport.GUI;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
@@ -44,35 +49,35 @@ public class CheckInConfirmationScreen extends javax.swing.JFrame {
 
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-		contentPanel.setBackground(new java.awt.Color(240, 255, 255));
+		contentPanel.setBackground(new Color(240, 255, 255));
 		contentPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED),
 				"Please review your details", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION,
-				new java.awt.Font("Tahoma", 0, 16)));
+				new Font("Tahoma", 0, 16)));
 
 		submitBtn.setText("Submit");
 
-		nameLbl.setFont(new java.awt.Font("Tahoma", 0, 18));
+		nameLbl.setFont(new Font("Tahoma", 0, 18));
 		nameLbl.setText("Full Name:");
 
-		bookingCdLbl.setFont(new java.awt.Font("Tahoma", 0, 18));
+		bookingCdLbl.setFont(new Font("Tahoma", 0, 18));
 		bookingCdLbl.setText("Booking Code:");
 
-		titleLbl.setFont(new java.awt.Font("Tahoma", 0, 24));
+		titleLbl.setFont(new Font("Tahoma", 0, 24));
 		titleLbl.setText("           Check in");
 
-		flightCdLbl.setFont(new java.awt.Font("Tahoma", 0, 18));
+		flightCdLbl.setFont(new Font("Tahoma", 0, 18));
 		flightCdLbl.setText("Flight Code:");
 
-		bookingRefFld.setFont(new java.awt.Font("Tahoma", 0, 18));
+		bookingRefFld.setFont(new Font("Tahoma", 0, 18));
 
-		nameFld.setFont(new java.awt.Font("Tahoma", 0, 18));
+		nameFld.setFont(new Font("Tahoma", 0, 18));
 
-		flightCdFld.setFont(new java.awt.Font("Tahoma", 0, 18));
+		flightCdFld.setFont(new Font("Tahoma", 0, 18));
 
-		feeFld.setFont(new java.awt.Font("Tahoma", 0, 18));
+		feeFld.setFont(new Font("Tahoma", 0, 18));
 		feeFld.setText(String.valueOf(bookingChrgObj.getTotalChg()));
 
-		feeLbl.setFont(new java.awt.Font("Tahoma", 0, 18));
+		feeLbl.setFont(new Font("Tahoma", 0, 18));
 		feeLbl.setText("Fee:");
 
 		nameFld.setText(booking.getFirstName() + " " + booking.getLastName());
@@ -82,8 +87,8 @@ public class CheckInConfirmationScreen extends javax.swing.JFrame {
 		bookingRefFld.setText(booking.getRefCode());
 
 		submitBtn.setText("Confirm");
-		submitBtn.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+		submitBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
 				submitBtnActionPerformed(evt);
 			}
 		});
@@ -135,7 +140,7 @@ public class CheckInConfirmationScreen extends javax.swing.JFrame {
 
 	}
 
-	private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {
+	private void submitBtnActionPerformed(ActionEvent evt) {
 
 		WelcomeWindow obj = new WelcomeWindow();
 		obj.setVisible(true);

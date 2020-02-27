@@ -1,6 +1,9 @@
 package com.hw.airport.GUI;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
@@ -11,6 +14,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 import javax.swing.WindowConstants;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.TitledBorder;
 
 import com.hw.airport.exception.HWAirportException;
 import com.hw.airport.model.Booking;
@@ -30,87 +35,87 @@ public class SearchScreen extends javax.swing.JFrame {
 
 	public SearchScreen() {
 
-		contentPanel = new javax.swing.JPanel();
-		submitBtn = new javax.swing.JButton();
-		lastNameLbl = new javax.swing.JLabel();
-		bookingLbl = new javax.swing.JLabel();
-		titleLbl = new javax.swing.JLabel();
-		bookingRefFld = new javax.swing.JTextField();
-		lastNameFld = new javax.swing.JTextField();
+		contentPanel = new JPanel();
+		submitBtn = new JButton();
+		lastNameLbl = new JLabel();
+		bookingLbl = new JLabel();
+		titleLbl = new JLabel();
+		bookingRefFld = new JTextField();
+		lastNameFld = new JTextField();
 
-		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-		contentPanel.setBackground(new java.awt.Color(240, 255, 255));
-		contentPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(
-				javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED),
-				"Welcome to ScotiaAir", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION,
-				javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 16))); // NOI18N
+		contentPanel.setBackground(new Color(240, 255, 255));
+		contentPanel.setBorder(BorderFactory.createTitledBorder(
+				BorderFactory.createBevelBorder(BevelBorder.RAISED),
+				"Welcome to ScotiaAir", TitledBorder.DEFAULT_JUSTIFICATION,
+				TitledBorder.DEFAULT_POSITION, new Font("Tahoma", 0, 16))); // NOI18N
 
 		submitBtn.setText("Submit");
 
-		lastNameLbl.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+		lastNameLbl.setFont(new Font("Tahoma", 0, 18)); // NOI18N
 		lastNameLbl.setText("Last Name:");
 
-		bookingLbl.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+		bookingLbl.setFont(new Font("Tahoma", 0, 18)); // NOI18N
 		bookingLbl.setText("Booking Code:");
 
-		titleLbl.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+		titleLbl.setFont(new Font("Tahoma", 0, 24)); // NOI18N
 		titleLbl.setText("Check In Here");
 
 		submitBtn.setText("Search");
-		submitBtn.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+		submitBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
 				performSearchAction(evt);
 			}
 		});
 
-		javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
+		GroupLayout contentPanelLayout = new GroupLayout(contentPanel);
 		contentPanel.setLayout(contentPanelLayout);
 		contentPanelLayout.setHorizontalGroup(contentPanelLayout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(contentPanelLayout.createSequentialGroup()
-						.addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+						.addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
 								.addGroup(contentPanelLayout.createSequentialGroup().addGap(171, 171, 171)
 										.addGroup(contentPanelLayout
-												.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+												.createParallelGroup(GroupLayout.Alignment.LEADING)
 												.addComponent(lastNameLbl).addComponent(bookingLbl))
 										.addGap(25, 25, 25)
 										.addGroup(contentPanelLayout
-												.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-												.addComponent(lastNameFld, javax.swing.GroupLayout.PREFERRED_SIZE, 241,
-														javax.swing.GroupLayout.PREFERRED_SIZE)
-												.addComponent(bookingRefFld, javax.swing.GroupLayout.PREFERRED_SIZE,
-														241, javax.swing.GroupLayout.PREFERRED_SIZE)
-												.addComponent(submitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 92,
-														javax.swing.GroupLayout.PREFERRED_SIZE)))
+												.createParallelGroup(GroupLayout.Alignment.LEADING)
+												.addComponent(lastNameFld, GroupLayout.PREFERRED_SIZE, 241,
+														GroupLayout.PREFERRED_SIZE)
+												.addComponent(bookingRefFld, GroupLayout.PREFERRED_SIZE,
+														241, GroupLayout.PREFERRED_SIZE)
+												.addComponent(submitBtn, GroupLayout.PREFERRED_SIZE, 92,
+														GroupLayout.PREFERRED_SIZE)))
 								.addGroup(contentPanelLayout.createSequentialGroup().addGap(276, 276, 276)
 										.addComponent(titleLbl)))
 						.addContainerGap(172, Short.MAX_VALUE)));
 		contentPanelLayout.setVerticalGroup(contentPanelLayout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(contentPanelLayout.createSequentialGroup().addGap(32, 32, 32).addComponent(titleLbl)
 						.addGap(54, 54, 54)
-						.addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+						.addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 								.addComponent(lastNameLbl).addComponent(lastNameFld,
-										javax.swing.GroupLayout.PREFERRED_SIZE, 35,
-										javax.swing.GroupLayout.PREFERRED_SIZE))
+										GroupLayout.PREFERRED_SIZE, 35,
+										GroupLayout.PREFERRED_SIZE))
 						.addGap(85, 85, 85)
-						.addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+						.addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 								.addComponent(bookingLbl).addComponent(bookingRefFld,
-										javax.swing.GroupLayout.PREFERRED_SIZE, 35,
-										javax.swing.GroupLayout.PREFERRED_SIZE))
-						.addGap(96, 96, 96).addComponent(submitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40,
-								javax.swing.GroupLayout.PREFERRED_SIZE)
+										GroupLayout.PREFERRED_SIZE, 35,
+										GroupLayout.PREFERRED_SIZE))
+						.addGap(96, 96, 96).addComponent(submitBtn, GroupLayout.PREFERRED_SIZE, 40,
+								GroupLayout.PREFERRED_SIZE)
 						.addContainerGap(157, Short.MAX_VALUE)));
 
-		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+		GroupLayout layout = new GroupLayout(getContentPane());
 		getContentPane().setLayout(layout);
-		layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(
-				contentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-				javax.swing.GroupLayout.PREFERRED_SIZE));
+		layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(
+				contentPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+				GroupLayout.PREFERRED_SIZE));
 		layout.setVerticalGroup(
-				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(contentPanel,
-						javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
+				layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(contentPanel,
+						GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
 
 		pack();
 	}

@@ -35,8 +35,8 @@ public class WelcomeWindow extends JFrame {
 
 	        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-	        contentPanel.setBackground(new java.awt.Color(240, 255, 255));
-	        contentPanel.setBorder(BorderFactory.createTitledBorder(null, "Welcome to the Check In", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 16))); 
+	        contentPanel.setBackground(new Color(240, 255, 255));
+	        contentPanel.setBorder(BorderFactory.createTitledBorder(null, "Welcome to the Check In", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, new Font("Tahoma", 0, 16))); 
 
 	        imgLbl.setIcon(new ImageIcon("resources\\images\\airport_pic.png")); 
 

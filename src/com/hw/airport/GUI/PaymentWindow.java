@@ -1,6 +1,8 @@
 
 package com.hw.airport.GUI;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -69,33 +71,33 @@ public class PaymentWindow extends javax.swing.JFrame {
 
 	        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-	        contentPanel.setBackground(new java.awt.Color(240, 255, 255));
-	        contentPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED), "Enter your Credit card details", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 16))); 
+	        contentPanel.setBackground(new Color(240, 255, 255));
+	        contentPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED), "Enter your Credit card details", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, new Font("Tahoma", 0, 16))); 
 
 	        submitBtn.setText("Submit");
 
-	        nameLbl.setFont(new java.awt.Font("Tahoma", 0, 18)); 
+	        nameLbl.setFont(new Font("Tahoma", 0, 18)); 
 	        nameLbl.setText("Full Name:");
 
-	        bookingCdLbl.setFont(new java.awt.Font("Tahoma", 0, 18)); 
+	        bookingCdLbl.setFont(new Font("Tahoma", 0, 18)); 
 	        bookingCdLbl.setText("Booking Code:");
 
-	        titleLbl.setFont(new java.awt.Font("Tahoma", 0, 24)); 
+	        titleLbl.setFont(new Font("Tahoma", 0, 24)); 
 	        titleLbl.setText("Excess Baggage Payment");
 
-	        flightCdLbl.setFont(new java.awt.Font("Tahoma", 0, 18)); 
+	        flightCdLbl.setFont(new Font("Tahoma", 0, 18)); 
 	        flightCdLbl.setText("Flight Code:");
 
-	        bookingRefFld.setFont(new java.awt.Font("Tahoma", 0, 18)); 
+	        bookingRefFld.setFont(new Font("Tahoma", 0, 18)); 
 	        
 
-	        nameFld.setFont(new java.awt.Font("Tahoma", 0, 18)); 
+	        nameFld.setFont(new Font("Tahoma", 0, 18)); 
 	       
 
-	        cardLbl.setFont(new java.awt.Font("Tahoma", 0, 18)); 
+	        cardLbl.setFont(new Font("Tahoma", 0, 18)); 
 	        cardLbl.setText("Card Number:");
 
-	        flightCdFld.setFont(new java.awt.Font("Tahoma", 0, 18)); 
+	        flightCdFld.setFont(new Font("Tahoma", 0, 18)); 
 
 
 			nameFld.setText(booking.getFirstName() + " " + booking.getLastName());
@@ -110,10 +112,10 @@ public class PaymentWindow extends javax.swing.JFrame {
 				}
 			});
 
-	        cvvLbl.setFont(new java.awt.Font("Tahoma", 0, 18)); 
+	        cvvLbl.setFont(new Font("Tahoma", 0, 18)); 
 	        cvvLbl.setText("CVV");
 
-	        expiryLbl.setFont(new java.awt.Font("Tahoma", 0, 18)); 
+	        expiryLbl.setFont(new Font("Tahoma", 0, 18)); 
 	        expiryLbl.setText("Expiry Date:");
 
 	        GroupLayout contentPanelLayout = new GroupLayout(contentPanel);
