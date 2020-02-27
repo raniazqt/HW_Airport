@@ -1,37 +1,61 @@
 package com.hw.airport.service;
+
 import static org.junit.jupiter.api.Assertions.*;
+
+
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+
+import com.hw.airport.model.AppData;
 
 class BookingSvcImplTest {
 
-    @org.junit.jupiter.api.BeforeEach
-    void setUp() {
-    }
+	@InjectMocks
+	FlightSvc flightSvc;
 
-    @org.junit.jupiter.api.AfterEach
-    void tearDown() {
-    }
+	@InjectMocks
+	AppData mockData;
 
-    @org.junit.jupiter.api.Test
-    void findBookingByLastNameAndRefCode() {
-    }
+	@Mock
+	BookingSvc bookingSvc;
 
-    @org.junit.jupiter.api.Test
-    void updateBookingStatus() {
-    }
+	@org.junit.jupiter.api.BeforeEach
+	void setUp() {
+		MockitoAnnotations.initMocks(this);
+		Mockito.doCallRealMethod().when(mockData);
+		AppData.getInstance();
+	}
 
-    @org.junit.jupiter.api.Test
-    void getCountOfCheckedInPassengersByFlight() {
-    }
+	@org.junit.jupiter.api.AfterEach
+	void tearDown() {
+		AppData.getInstance().setBookingList(null);
+		AppData.getInstance().setFlightsInfo(null);
+	}
 
-    @org.junit.jupiter.api.Test
-    void calculateExtraChargeForFlight() {
-    }
+	@org.junit.jupiter.api.Test
+	void findBookingByLastNameAndRefCode() {
+		
+	}
 
-    @org.junit.jupiter.api.Test
-    void findAllBookingForFlight() {
-    }
+	@org.junit.jupiter.api.Test
+	void updateBookingStatus() {
+	}
 
-    @org.junit.jupiter.api.Test
-    void groupBookingByFlightCode() {
-    }
+	@org.junit.jupiter.api.Test
+	void getCountOfCheckedInPassengersByFlight() {
+	}
+
+	@org.junit.jupiter.api.Test
+	void calculateExtraChargeForFlight() {
+	}
+
+	@org.junit.jupiter.api.Test
+	void findAllBookingForFlight() {
+	}
+
+	@org.junit.jupiter.api.Test
+	void groupBookingByFlightCode() {
+	}
 }
