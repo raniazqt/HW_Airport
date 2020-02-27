@@ -75,7 +75,7 @@ public class PaymentWindow extends javax.swing.JFrame {
 	        submitBtn.setText("Submit");
 
 	        nameLbl.setFont(new java.awt.Font("Tahoma", 0, 18)); 
-	        nameLbl.setText("Last Name:");
+	        nameLbl.setText("Full Name:");
 
 	        bookingCdLbl.setFont(new java.awt.Font("Tahoma", 0, 18)); 
 	        bookingCdLbl.setText("Booking Code:");

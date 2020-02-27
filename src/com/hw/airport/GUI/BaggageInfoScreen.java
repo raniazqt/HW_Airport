@@ -81,7 +81,7 @@ public class BaggageInfoScreen extends javax.swing.JFrame {
 		submitBtn.setText("Submit");
 
 		nameLbl.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-		nameLbl.setText("Last Name:");
+		nameLbl.setText("Full Name:");
 
 		bookingCdLbl.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 		bookingCdLbl.setText("Booking Code:");
@@ -234,8 +234,8 @@ public class BaggageInfoScreen extends javax.swing.JFrame {
 			try {
 				bookingChg = checkInSvc.calculateXtraChargeForPasngr(bookingChg);
 				// TODO: Display the results
-				JOptionPane.showMessageDialog(null, "Volume Charge: " + bookingChg.getVolumeCharge() + " "
-						+ "Weight Charge: " + bookingChg.getWeightCharge());
+				//JOptionPane.showMessageDialog(null, "Volume Charge: " + bookingChg.getVolumeCharge() + " "
+						//+ "Weight Charge: " + bookingChg.getWeightCharge());
 				if (bookingChg.getVolumeCharge() <= 0 && bookingChg.getWeightCharge() <= 0) {
 					boolean status = checkInSvc.confirmCheckin(booking);
 					if (status) {
