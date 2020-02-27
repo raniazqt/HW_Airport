@@ -2,20 +2,23 @@ package com.hw.airport.GUI;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
+import javax.swing.BorderFactory;
+import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.LayoutStyle;
 import javax.swing.WindowConstants;
 import javax.swing.border.TitledBorder;
-import javax.swing.BorderFactory;
-import javax.swing.GroupLayout;
-import javax.swing.ImageIcon;
 
-import java.awt.Color;
-import java.awt.Font;
+import com.hw.airport.service.ReportSvc;
+import com.hw.airport.service.ReportSvcImpl;
 
 public class WelcomeWindow extends JFrame {
 
@@ -48,6 +51,11 @@ public class WelcomeWindow extends JFrame {
 	    	});
 
 	    	  rptBtn.setText("Close");
+	    	  rptBtn.addActionListener(new ActionListener() {
+		    		public void actionPerformed(ActionEvent evt) {
+		    			rptBtnActionPerformed(evt);
+		    		}
+		    	});
 
 	          GroupLayout contentPanelLayout = new GroupLayout(contentPanel);
 	          contentPanel.setLayout(contentPanelLayout);
@@ -96,5 +104,16 @@ public class WelcomeWindow extends JFrame {
 		obj.setVisible(true);
 		this.setVisible(false);
 	}
+	
+	private void rptBtnActionPerformed(ActionEvent evt) {
+		ReportSvc reportSvc = new ReportSvcImpl();
+		try {
+			reportSvc.generateSummaryReportForAllFlights();
+		} catch (Exception ex) {
+			JOptionPane.showMessageDialog(null, "Error generating report");
+		}
+		System.exit(0);
+	}
+		
 
 }

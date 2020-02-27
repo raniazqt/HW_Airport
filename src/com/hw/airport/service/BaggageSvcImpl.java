@@ -56,7 +56,7 @@ public class BaggageSvcImpl implements BaggageSvc {
 
 		double totalBaggageWeight = 0.0;
 		for(Booking booking : appData.getBookingList().values()) {
-			boolean isBookingOnFlight = (booking.getFlightCode().equals(flight.getCode()));
+			boolean isBookingOnFlight = (booking.getFlightCode().equalsIgnoreCase(flight.getCode()));
 			if(isBookingOnFlight) {
 				totalBaggageWeight += booking.getTotalBaggageWeight();
 			}

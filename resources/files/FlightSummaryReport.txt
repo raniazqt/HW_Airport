@@ -1,1 +1,7 @@
-Flight#   Passengers Count              Total WeightTotal Volume   Extra Fess CollectedExceeded Total PassengersExceeded Total WeightExceeded Total Volume
+Flight#             Passengers Count    Total Weight        Total Volume        Extra Fees          Extra Pasgr         Extra Weight        Extra Volume        
+GA123               0                   0.0                 0.0                 0.0                 N                   N                   N                   
+AA123               1                   530707.0            600.0               6027.0              N                   N                   Yes                 
+AF999               0                   0.0                 0.0                 0.0                 N                   N                   N                   
+ME123               0                   0.0                 0.0                 0.0                 N                   N                   N                   
+MS123               0                   0.0                 0.0                 0.0                 N                   N                   N                   
+CA123               0                   0.0                 0.0                 0.0                 N                   N                   N                   
