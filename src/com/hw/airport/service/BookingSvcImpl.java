@@ -24,7 +24,7 @@ public class BookingSvcImpl implements BookingSvc {
 	 */
 	@Override
 	public Booking findBookingByLastNameAndRefCode(String lastName, String refCode) {
-		Booking booking = appData.getBookingList().get(refCode.toLowerCase());
+		Booking booking = appData.getBookingList().get(refCode);
 		if (null != booking && lastName.equalsIgnoreCase(booking.getLastName())) {
 			return booking;
 		}
