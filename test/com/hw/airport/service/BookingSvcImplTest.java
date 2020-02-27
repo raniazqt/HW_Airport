@@ -1,4 +1,5 @@
 package com.hw.airport.service;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.mockito.*;
@@ -21,14 +22,19 @@ class BookingSvcImplTest {
 	@org.junit.jupiter.api.BeforeEach
 	void setUp() {
 		MockitoAnnotations.initMocks(this);
+		Mockito.doCallRealMethod().when(mockData);
+		AppData.getInstance();
 	}
 
 	@org.junit.jupiter.api.AfterEach
 	void tearDown() {
+		AppData.getInstance().setBookingList(null);
+		AppData.getInstance().setFlightsInfo(null);
 	}
 
 	@org.junit.jupiter.api.Test
 	void findBookingByLastNameAndRefCode() {
+		
 	}
 
 	@org.junit.jupiter.api.Test
