@@ -211,10 +211,11 @@ public class PaymentWindow extends javax.swing.JFrame {
 	}
 
 	private void submitActionPerformed(ActionEvent evt) {
+		boolean status = checkInSvc.confirmCheckin(booking, bookingChg);
 		CheckInConfirmationScreen obj = new CheckInConfirmationScreen(booking, bookingChg);
 		obj.setVisible(true);
 		this.setVisible(false);
-			}
-		
 	}
+		
+}
 

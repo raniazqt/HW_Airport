@@ -8,6 +8,7 @@ import java.util.Map;
 import com.hw.airport.exception.*;
 import com.hw.airport.model.AppData;
 import com.hw.airport.model.Booking;
+import com.hw.airport.model.BookingCharge;
 import com.hw.airport.model.Flight;
 import com.hw.airport.model.FlightExtrasAndCharges;
 
@@ -45,13 +46,20 @@ public class BookingSvcImpl implements BookingSvc {
 	 * @throws HWAirportException
 	 */
 	@Override
-	public boolean updateBookingStatus(String lastName, String refCode, boolean status) throws HWAirportException {
-		Booking updatedBooking = findBookingByLastNameAndRefCode(lastName, refCode);
+	public boolean updateBookingStatus(Booking booking, BookingCharge bookingChg) throws HWAirportException {
+		Booking updatedBooking = findBookingByLastNameAndRefCode(booking.getLastName(), booking.getRefCode());
 		if (null == updatedBooking) {
 			throw new MissingBookingException();
 		}
-		updatedBooking.setCheckedIn(status);
-		appData.getBookingList().put(refCode, updatedBooking);
+		updatedBooking.setCheckedIn(true);
+		double volume = bookingChg.getDepth() * bookingChg.getLength() * bookingChg.getWidth();
+		updatedBooking.setTotalBaggageVolume(volume);
+		updatedBooking.setTotalBaggageWeight(bookingChg.getWeight());
+		updatedBooking.setXtraBagVolChrg(bookingChg.getVolumeCharge());
+		updatedBooking.setXtraBagWghtChrg(bookingChg.getWeightCharge());
+		appData.getBookingList().put(booking.getRefCode().toLowerCase(), updatedBooking);
+		System.out.println(updatedBooking.getTotalBaggageWeight());
+		System.out.println(updatedBooking.getTotalBaggageVolume());
 		return true;
 	}
 

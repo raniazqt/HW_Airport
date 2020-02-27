@@ -58,12 +58,12 @@ public class CheckInSvcImpl implements CheckInSvc {
 	 */
 	@Override
 	public void doCheckIn(String lastName, String bookingRef) throws HWAirportException {
-		Booking booking = bookingSvc.findBookingByLastNameAndRefCode(lastName, bookingRef);
-		if (null == booking) {
-			throw new MissingBookingException();
-		}else {
-			bookingSvc.updateBookingStatus(lastName, bookingRef, true);
-		}
+		/*
+		 * Booking booking = bookingSvc.findBookingByLastNameAndRefCode(lastName,
+		 * bookingRef); if (null == booking) { throw new MissingBookingException();
+		 * }else { bookingSvc.updateBookingStatus(booking.getLastName(), booking.,
+		 * true); }
+		 */
 	}
 
 	/**
@@ -71,10 +71,10 @@ public class CheckInSvcImpl implements CheckInSvc {
 	 * @return the check in status (true or false if sucessfully updated).
 	 */
 	@Override
-	public boolean confirmCheckin(Booking booking) {
+	public boolean confirmCheckin(Booking booking, BookingCharge bookingChg) {
 		boolean status = false;
 		try {
-			status = bookingSvc.updateBookingStatus(booking.getLastName(), booking.getRefCode(), true);
+			status = bookingSvc.updateBookingStatus(booking, bookingChg);
 		} catch (HWAirportException e) {
 			status = false;
 			System.out.println(e.getMessage());

@@ -6,14 +6,13 @@ import java.util.Map;
 import com.hw.airport.exception.HWAirportException;
 import com.hw.airport.exception.NullBookingException;
 import com.hw.airport.model.Booking;
+import com.hw.airport.model.BookingCharge;
 import com.hw.airport.model.FlightExtrasAndCharges;
 
 public interface BookingSvc {
 	
 	public Booking findBookingByLastNameAndRefCode(String lastName, String refCode) throws HWAirportException;
-	
-	public boolean updateBookingStatus(String lastName, String refCode, boolean status) throws HWAirportException;
-	
+		
 	public int getCountOfCheckedInPassengersByFlight(String flightCode) throws HWAirportException;
 	
 	public FlightExtrasAndCharges calculateExtraChargeForFlight(String flightCode) throws HWAirportException;
@@ -21,5 +20,7 @@ public interface BookingSvc {
 	public List<Booking> findAllBookingForFlight(String flightCode);
 
 	Map<String, List<Booking>> groupBookingByFlightCode();
+
+	boolean updateBookingStatus(Booking booking, BookingCharge bookingChg) throws HWAirportException;
 
 }

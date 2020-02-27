@@ -231,13 +231,14 @@ public class BaggageInfoScreen extends javax.swing.JFrame {
 			bookingChg = new BookingCharge(bookingRefFld.getText(), booking.getLastName(), 1,
 					Double.valueOf(heightFld.getText()), Double.valueOf(widthFld.getText()),
 					Double.valueOf(depthFld.getText()), Double.valueOf(weightFld.getText()));
+			
 			try {
 				bookingChg = checkInSvc.calculateXtraChargeForPasngr(bookingChg);
 				// TODO: Display the results
 				//JOptionPane.showMessageDialog(null, "Volume Charge: " + bookingChg.getVolumeCharge() + " "
 						//+ "Weight Charge: " + bookingChg.getWeightCharge());
 				if (bookingChg.getVolumeCharge() <= 0 && bookingChg.getWeightCharge() <= 0) {
-					boolean status = checkInSvc.confirmCheckin(booking);
+					boolean status = checkInSvc.confirmCheckin(booking, bookingChg);
 					if (status) {
 						this.setVisible(false);
 						CheckInConfirmationScreen confirmationScrn = new CheckInConfirmationScreen(booking, bookingChg);
