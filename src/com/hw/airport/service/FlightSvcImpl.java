@@ -3,11 +3,28 @@ package com.hw.airport.service;
 import com.hw.airport.exception.HWAirportException;
 import com.hw.airport.exception.MissingFlightException;
 import com.hw.airport.model.AppData;
+import com.hw.airport.model.Booking;
 import com.hw.airport.model.Flight;
 
 public class FlightSvcImpl implements FlightSvc {
 	AppData appData = AppData.getInstance();
+	
+	BaggageSvc baggageService = new BaggageSvcImpl();
+	// 1. check if flight is overloaded for volume / weight / passenger count
 
+	
+	@Override
+	public int getPassengerCountForFlight(String flightCode) throws HWAirportException {
+		int currentCheckedInPsngrCount = 0;
+		for(Booking booking : appData.getBookingList().values()) {
+			boolean isBookingOnFlightAndCheckedIn = (booking.getFlightCode().equals(flightCode)) && booking.isCheckedIn();
+			if(isBookingOnFlightAndCheckedIn) {
+				currentCheckedInPsngrCount += 1;
+			}
+		}
+		return currentCheckedInPsngrCount;
+	}
+	
 	/**
 	 * gets the maximum allowed volume per flight, this is important to know if we are over the volume limit.
 	 * @param flightCode the flight to find the max volume for.
@@ -22,7 +39,7 @@ public class FlightSvcImpl implements FlightSvc {
 		}
 		return flight.getMaxBagVolume();
 	}
-
+/** 
 	/**
 	 * gets the maximum allowed weight per bag for a given flight.
 	 * @param flightCode flight code to fetch the flight.
@@ -45,7 +62,7 @@ public class FlightSvcImpl implements FlightSvc {
 	 * @throws HWAirportException throws a missing flight exception if no flight is found given the flight code.
 	 */
 	@Override
-	public double getFlightMaxCapacity(String flightCode) throws HWAirportException {
+	public double getFlightMaxPassengerCount(String flightCode) throws HWAirportException {
 		Flight flight = appData.getFlightsInfo().get(flightCode);
 		if (null == flight) {
 			throw new MissingFlightException(flightCode, "flight service");
@@ -66,9 +83,29 @@ public class FlightSvcImpl implements FlightSvc {
 		if (null == flight) {
 			throw new MissingFlightException(flightCode, "flight service");
 		}
-		return flight.getMaxBagVolume() > totalVolume;
+		return totalVolume > flight.getMaxFlightVolume();
+	}
+	
+	@Override
+	public boolean isMaxWeightExceededForFlight(String flightCode, double totalWeight) throws HWAirportException {
+		Flight flight = appData.getFlightsInfo().get(flightCode);
+		if (null == flight) {
+			throw new MissingFlightException(flightCode, "flight service");
+		}
+		return totalWeight > flight.getMaxFlightWeight();
 	}
 
+	@Override
+	public boolean isMaxPassengerCountExceededForFlight(String flightCode, int totalPassenger)
+			throws HWAirportException {
+		Flight flight = appData.getFlightsInfo().get(flightCode);
+		if (null == flight) {
+			throw new MissingFlightException(flightCode, "flight service");
+		}
+		return totalPassenger > flight.getMaxPasngrCnt();
+	}
+	
+	
 	/**
 	 * fetches flight given a flight code
 	 */
@@ -77,4 +114,5 @@ public class FlightSvcImpl implements FlightSvc {
 		Flight flight = appData.getFlightsInfo().get(code);
 		return flight;
 	}
+
 }
