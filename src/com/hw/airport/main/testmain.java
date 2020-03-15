@@ -33,7 +33,7 @@ public class testmain {
 			e.printStackTrace();
 		}
 		appState = ApplicationState.INITIALIZED;
-		Queues.createQueue(appData.getBookingList(),0);		
+		Queues.createPassengerList(appData.getBookingList(),appData.getFlightsInfo());		
 		
 
 	}

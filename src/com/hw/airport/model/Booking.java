@@ -118,19 +118,19 @@ public class Booking {
 		return this.firstName + " " + this.lastName;
 	}
 
-	public void calcXtraWghtChrg(double weightLimit) {
+	public void calcXtraWghtChrg(double weightLimit,double weightRate) {
 
-		if (this.totalBaggageWeight != 0) {
+		if (this.totalBaggageWeight > 0) {
 
-			this.setXtraBagWghtChrg((this.totalBaggageWeight - weightLimit) * 2.5);
+			this.setXtraBagWghtChrg((this.totalBaggageWeight - weightLimit) * weightRate);
 		}
 
 	}
 
-	public void calcXtraVolChrg(double volumeLimit) {
-		if (this.totalBaggageVolume != 0) {
+	public void calcXtraVolChrg(double volumeLimit,double volumeRate) {
+		if (this.totalBaggageVolume > 0) {
 
-			this.setXtraBagVolChrg((this.totalBaggageVolume - volumeLimit) * 2.5);
+			this.setXtraBagVolChrg((this.totalBaggageVolume - volumeLimit) * volumeRate);
 		}
 	}
 
