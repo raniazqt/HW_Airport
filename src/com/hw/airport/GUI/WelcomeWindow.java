@@ -34,7 +34,7 @@ public class WelcomeWindow extends JFrame {
 
 	public WelcomeWindow() {
 
-		 contentPanel = new JPanel();
+		    contentPanel = new JPanel();
 	        imgLbl = new JLabel();
 	        psngrBtn = new JButton();
 

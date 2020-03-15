@@ -7,6 +7,7 @@ import java.util.Map;
 
 import com.hw.airport.exception.HWAirportException;
 import com.hw.airport.model.Booking;
+import com.hw.airport.model.Booking.CheckedIn;
 import com.hw.airport.model.Flight;
 import com.hw.airport.util.FileHandler;
 
@@ -62,7 +63,7 @@ public class DataSvcImpl implements DataSvc {
 		for(String[] line : bookingData) {
 			String refCode = line[2].toLowerCase();
 			booking = new Booking(line[0].toLowerCase(), 
-					line[1].toLowerCase(), line[2].toLowerCase(), line[3].toLowerCase(), Boolean.parseBoolean(line[4]));
+					line[1].toLowerCase(), line[2].toLowerCase(), line[3].toLowerCase(), CheckedIn.valueOf(line[4]));
 			bookingList.put(refCode, booking);
 		}
 		return bookingList;

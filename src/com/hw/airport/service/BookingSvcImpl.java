@@ -8,6 +8,7 @@ import java.util.Map;
 import com.hw.airport.exception.*;
 import com.hw.airport.model.AppData;
 import com.hw.airport.model.Booking;
+import com.hw.airport.model.Booking.CheckedIn;
 import com.hw.airport.model.BookingCharge;
 import com.hw.airport.model.Flight;
 import com.hw.airport.model.FlightExtrasAndCharges;
@@ -51,7 +52,7 @@ public class BookingSvcImpl implements BookingSvc {
 		if (null == updatedBooking) {
 			throw new MissingBookingException();
 		}
-		updatedBooking.setCheckedIn(true);
+		updatedBooking.setCheckedIn(CheckedIn.IN);
 		double volume = bookingChg.getDepth() * bookingChg.getLength() * bookingChg.getWidth();
 		updatedBooking.setTotalBaggageVolume(volume);
 		updatedBooking.setTotalBaggageWeight(bookingChg.getWeight());
@@ -78,7 +79,7 @@ public class BookingSvcImpl implements BookingSvc {
 		}
 		int checkedInFlightsCount = 0;
 		for (Booking booking : flightBookings) {
-			if(booking.isCheckedIn()) {
+			if(booking.isCheckedIn()==CheckedIn.IN) {
 				checkedInFlightsCount += 1;
 			}
 		}
@@ -105,7 +106,7 @@ public class BookingSvcImpl implements BookingSvc {
 
 		List<Booking> bookingsByFlight = this.findAllBookingForFlight(flightCode);
 		for (Booking booking : bookingsByFlight) {
-				if(booking.isCheckedIn()) {
+				if(booking.isCheckedIn()==CheckedIn.IN) {
 					totalExtraVol += booking.getTotalBaggageVolume();
 					totalExtraWght += booking.getTotalBaggageWeight();
 					totalExtraWghtChrg += booking.getXtraBagWghtChrg();
