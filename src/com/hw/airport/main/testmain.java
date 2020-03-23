@@ -1,9 +1,12 @@
 package com.hw.airport.main;
 
+import java.util.List;
+
 import com.hw.airport.GUI.AirportGUI;
 import com.hw.airport.GUI.AirportGUIImpl;
 import com.hw.airport.exception.HWAirportException;
 import com.hw.airport.model.AppData;
+import com.hw.airport.model.Booking;
 import com.hw.airport.service.DataSvc;
 import com.hw.airport.service.DataSvcImpl;
 import com.hw.airport.service.QueueSvc;
@@ -33,8 +36,9 @@ public class testmain {
 			e.printStackTrace();
 		}
 		appState = ApplicationState.INITIALIZED;
-		Queues.createPassengerList(appData.getBookingList(),appData.getFlightsInfo());		
-		
+		List <Booking> qList = Queues.createQueue(10);
+		Queues.addQueue(qList);
+		Queues.dropQueue(qList, appData.getBookingList());		
 
 	}
 }

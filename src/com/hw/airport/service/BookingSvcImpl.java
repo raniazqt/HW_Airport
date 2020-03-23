@@ -136,7 +136,7 @@ public class BookingSvcImpl implements BookingSvc {
 	 * for easier manipulation
 	 * @return Flat list of all bookings
 	 */
-	private List<Booking> extractBookingList() {
+	public List<Booking> extractBookingList() {
 		List<Booking> bookingList = new ArrayList<Booking>();
 
 		Map<String, Booking> bookingMap = appData.getBookingList();

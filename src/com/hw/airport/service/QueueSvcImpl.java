@@ -13,14 +13,18 @@ import com.hw.airport.model.Booking;
 import com.hw.airport.model.Booking.CheckedIn;
 import com.hw.airport.model.Flight;
 
+import com.hw.airport.service.BookingSvc;
+
 public class QueueSvcImpl implements QueueSvc {
 
-	public void addQueue(List<Booking> Queue, Map<String, Booking> bookingMap) throws HWAirportException {
+	BookingSvc BKsvc = new BookingSvcImpl();
+
+	public void addQueue(List<Booking> Queue) throws HWAirportException {
 
 		int size = Queue.size();
 
 		while (size < 10) {
-			Booking up = this.createQueue(Queue, 1).get(0);
+			Booking up = this.createQueue(1).get(0);
 			if (!(up.isCheckedIn() == CheckedIn.OUT || up.isCheckedIn() == CheckedIn.PROCESS)) {
 				Queue.add(up);
 				size++;
@@ -30,21 +34,19 @@ public class QueueSvcImpl implements QueueSvc {
 
 	}
 
-	public Booking dropQueue(List<Booking> Queue, Map<String, Booking> bookingMap) throws HWAirportException {
+	public void dropQueue(List<Booking> Queue, Map<String, Booking> bookingMap) throws HWAirportException {
 
 		bookingMap.get(Queue.remove(0).getRefCode()).setCheckedIn(CheckedIn.PROCESS);
-
-		return bookingMap.get(Queue.remove(0).getRefCode());
 
 	}
 
 	@Override
-	public List<Booking> createQueue(List<Booking> Queue, int qSize) throws HWAirportException {
+	public List<Booking> createQueue(int qSize) throws HWAirportException {
 
-		List<Booking> temp = Queue;
-		Collections.shuffle(temp);
-		temp = temp.subList(0, qSize - 1);
-		return temp;
+		List<Booking> Queue = BKsvc.extractBookingList().subList(0, qSize - 1);
+		Collections.shuffle(Queue);
+
+		return Queue;
 	}
 
 	@Override
@@ -66,6 +68,11 @@ public class QueueSvcImpl implements QueueSvc {
 		}
 
 		return tempList;
+	}
+
+	public List<Booking> queue() {
+
+		return BKsvc.extractBookingList();
 	}
 
 }

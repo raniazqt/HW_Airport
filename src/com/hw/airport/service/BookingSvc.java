@@ -18,6 +18,8 @@ public interface BookingSvc {
 	public FlightExtrasAndCharges calculateExtraChargeForFlight(String flightCode) throws HWAirportException;
 
 	public List<Booking> findAllBookingForFlight(String flightCode);
+	
+	public List<Booking> extractBookingList() ;
 
 	Map<String, List<Booking>> groupBookingByFlightCode();
 
