@@ -23,9 +23,18 @@ public class QueueSvcImpl implements QueueSvc {
 
 		int size = Queue.size();
 
+		boolean dupe = false;
+
 		while (size < 10) {
 			Booking up = this.createQueue(1).get(0);
+			for (Booking book : Queue) {
+				if (!dupe && up.getRefCode() == book.getRefCode()) {
+					dupe = true;
+				}
+			}
+
 			if (!(up.isCheckedIn() == CheckedIn.OUT || up.isCheckedIn() == CheckedIn.PROCESS)) {
+
 				Queue.add(up);
 				size++;
 			}
@@ -49,8 +58,7 @@ public class QueueSvcImpl implements QueueSvc {
 		return Queue;
 	}
 
-	@Override
-	public List<Booking> createPassengerList(Map<String, Booking> bookingMap, Map<String, Flight> flightMap)
+	public List<Booking> Deskloadexample(Map<String, Booking> bookingMap, Map<String, Flight> flightMap)
 			throws HWAirportException {
 		List<Booking> tempList = new ArrayList<>(bookingMap.values());
 

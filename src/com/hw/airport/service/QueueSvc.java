@@ -13,12 +13,8 @@ public interface QueueSvc {
 
 	public List<Booking> createQueue(int qSize) throws HWAirportException;
 
-	public List<Booking> createPassengerList(Map<String, Booking> bookingMap,Map<String, Flight> flightMap) throws HWAirportException;
-		
 	public void addQueue(List<Booking> Queue) throws HWAirportException;
-	
+
 	public void dropQueue(List<Booking> Queue, Map<String, Booking> bookingMap) throws HWAirportException;
 
-
-	
 }
