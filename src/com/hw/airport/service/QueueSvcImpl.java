@@ -21,11 +21,10 @@ public class QueueSvcImpl implements QueueSvc {
 
 	public void addQueue(List<Booking> Queue) throws HWAirportException {
 
-		int size = Queue.size();
-
+		int size = Queue.size();		
 		boolean dupe = false;
 
-		while (size < 10) {
+		while (size < 10 && size != 0) {
 			Booking up = this.createQueue(1).get(0);
 			for (Booking book : Queue) {
 				if (!dupe && up.getRefCode() == book.getRefCode()) {
@@ -52,7 +51,7 @@ public class QueueSvcImpl implements QueueSvc {
 	@Override
 	public List<Booking> createQueue(int qSize) throws HWAirportException {
 
-		List<Booking> Queue = BKsvc.extractBookingList().subList(0, qSize - 1);
+		List<Booking> Queue = BKsvc.extractBookingList().subList(0, qSize);
 		Collections.shuffle(Queue);
 
 		return Queue;
