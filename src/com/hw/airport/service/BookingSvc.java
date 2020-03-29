@@ -25,4 +25,6 @@ public interface BookingSvc {
 
 	boolean updateBookingStatus(Booking booking, BookingCharge bookingChg) throws HWAirportException;
 
+	public Booking extractRandBooking();
+
 }

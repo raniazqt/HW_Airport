@@ -7,6 +7,7 @@ import com.hw.airport.GUI.AirportGUIImpl;
 import com.hw.airport.exception.HWAirportException;
 import com.hw.airport.model.AppData;
 import com.hw.airport.model.Booking;
+import com.hw.airport.model.PassQueue;
 import com.hw.airport.service.DataSvc;
 import com.hw.airport.service.DataSvcImpl;
 import com.hw.airport.service.QueueSvc;
@@ -19,11 +20,13 @@ public class testmain {
 		ApplicationState appState;
 		DataSvc dataSvc;
 		QueueSvc Queues;
+		PassQueue PassQ;
 		String flightsFileName = "flights.csv";
 		String bookingFileName = "bookings.csv";
 		gui = new AirportGUIImpl();
 		dataSvc = new DataSvcImpl();
 		Queues = new QueueSvcImpl();
+		PassQ = new PassQueue();
 		appState = ApplicationState.UNINITIALIZED;
 
 		// any setup logic here.
@@ -39,6 +42,11 @@ public class testmain {
 		List <Booking> qList = Queues.createQueue(10);
 		Queues.addQueue(qList);
 		Queues.dropQueue(qList, appData.getBookingList());		
-
+		
+		
+		PassQ.setSize(10);
+		PassQ.setPassengerQ();
+		System.out.println(PassQ.dropQueue().getRefCode());
+		PassQ.addQueue();
 	}
 }
