@@ -39,14 +39,20 @@ public class testmain {
 			e.printStackTrace();
 		}
 		appState = ApplicationState.INITIALIZED;
-		List <Booking> qList = Queues.createQueue(10);
-		Queues.addQueue(qList);
-		Queues.dropQueue(qList, appData.getBookingList());		
-		
-		
+		// List <Booking> qList = Queues.createQueue(10);
+		// Queues.addQueue(qList);
+		// Queues.dropQueue(qList, appData.getBookingList());
+
 		PassQ.setSize(10);
 		PassQ.setPassengerQ();
-		System.out.println(PassQ.dropQueue().getRefCode());
+		System.out.println("Queue");
+		PassQ.printQ();
+		System.out.println("Drop"+"\n"+PassQ.dropQueue().getRefCode());
+		System.out.println("Queue");
+		PassQ.printQ();
 		PassQ.addQueue();
+		System.out.println("Queue");
+		PassQ.printQ();
+
 	}
 }

@@ -4,7 +4,6 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.hw.airport.model.Booking.CheckedIn;
 import com.hw.airport.service.BookingSvc;
 import com.hw.airport.service.BookingSvcImpl;
 
@@ -19,7 +18,12 @@ public class PassQueue {
 
 	public Booking dropQueue() {
 
-		return passengerQ.removeFirst();
+		Booking drop = passengerQ.removeFirst();
+		
+		
+		
+		
+		return drop;
 
 	}
 
@@ -47,20 +51,39 @@ public class PassQueue {
 
 	public void addQueue() {
 
-		boolean dupe = false;
+		boolean dupe = true;
+		Booking up = null;
+		int csize = passengerQ.size();
 
-		while (size < 10 && size != 0) {
-			Booking up = BKsvc.extractRandBooking();
+		while (csize != size && dupe) {
+			Booking add = BKsvc.extractRandBooking();
 			for (Booking book : passengerQ) {
-				if (!dupe && up.getRefCode() == book.getRefCode()) {
-					dupe = true;
+				if (add.getRefCode() == book.getRefCode()) {
+					dupe = false;
+					up = add;
+					break;
 				}
 			}
+		}
 
-			if (!(up.isCheckedIn() == CheckedIn.OUT || up.isCheckedIn() == CheckedIn.PROCESS)) {
+		passengerQ.add(up);
 
-				passengerQ.add(up);
-				size++;
+	}
+
+	public LinkedList<Booking> getQueue() {
+
+		return passengerQ;
+
+	}
+
+	public void printQ() {
+
+		for (Booking book : passengerQ) {
+
+			if (book == null) {
+				break;
+			} else {
+				System.out.println(book.getRefCode());
 			}
 
 		}
