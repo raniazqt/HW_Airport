@@ -41,6 +41,28 @@ public class BookingSvcImpl implements BookingSvc {
 		return booking;
 	}
 
+	public Booking findBookingByRefCode(String refCode) throws HWAirportException {
+		Booking booking = appData.getBookingList().get(refCode.toLowerCase());
+
+		if (booking == null) {
+			throw new NullBookingException();
+		}
+
+		return booking;
+	}
+
+	public void updateCheckin(String refCode, CheckedIn status) {
+
+		try {
+			Booking update = this.findBookingByRefCode(refCode);
+			update.setCheckedIn(status);
+			appData.getBookingList().put(update.getRefCode().toLowerCase(), update);
+		} catch (HWAirportException e) {
+			e.printStackTrace();
+		}
+
+	}
+
 	/**
 	 * Updates the check in status of a booking
 	 * 

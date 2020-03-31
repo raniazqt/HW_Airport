@@ -8,6 +8,7 @@ import com.hw.airport.exception.NullBookingException;
 import com.hw.airport.model.Booking;
 import com.hw.airport.model.BookingCharge;
 import com.hw.airport.model.FlightExtrasAndCharges;
+import com.hw.airport.model.Booking.CheckedIn;
 
 public interface BookingSvc {
 	
@@ -26,5 +27,9 @@ public interface BookingSvc {
 	boolean updateBookingStatus(Booking booking, BookingCharge bookingChg) throws HWAirportException;
 
 	public Booking extractRandBooking();
+	
+	public void updateCheckin(String refCode, CheckedIn status) ;
+	
+	public Booking findBookingByRefCode(String refCode) throws HWAirportException;
 
 }

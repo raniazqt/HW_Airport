@@ -25,8 +25,7 @@ public class testmain {
 		String bookingFileName = "bookings.csv";
 		gui = new AirportGUIImpl();
 		dataSvc = new DataSvcImpl();
-		Queues = new QueueSvcImpl();
-		PassQ = new PassQueue();
+		Queues = new QueueSvcImpl();		
 		appState = ApplicationState.UNINITIALIZED;
 
 		// any setup logic here.
@@ -42,15 +41,13 @@ public class testmain {
 		// List <Booking> qList = Queues.createQueue(10);
 		// Queues.addQueue(qList);
 		// Queues.dropQueue(qList, appData.getBookingList());
-
-		PassQ.setSize(10);
-		PassQ.setPassengerQ();
+		PassQ = new PassQueue(10);
 		System.out.println("Queue");
 		PassQ.printQ();
-		System.out.println("Drop"+"\n"+PassQ.dropQueue().getRefCode());
-		System.out.println("Queue");
-		PassQ.printQ();
-		PassQ.addQueue();
+		System.out.println("Drop"+"\n"+PassQ.dropQueue().getRefCode());		
+		//System.out.println("Queue");
+		//PassQ.printQ();
+		PassQ.fillQueue();
 		System.out.println("Queue");
 		PassQ.printQ();
 

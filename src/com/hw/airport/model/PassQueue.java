@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.hw.airport.model.Booking.CheckedIn;
 import com.hw.airport.service.BookingSvc;
 import com.hw.airport.service.BookingSvcImpl;
 
@@ -13,16 +14,14 @@ public class PassQueue {
 	private BookingSvc BKsvc = new BookingSvcImpl();
 	private int size;
 
-	public PassQueue() {
+	public PassQueue(int sz) {
+		this.size = sz;
+		this.setPassengerQ();
 	}
 
 	public Booking dropQueue() {
-
 		Booking drop = passengerQ.removeFirst();
-		
-		
-		
-		
+		BKsvc.updateCheckin(drop.getRefCode(), CheckedIn.PROCESS);
 		return drop;
 
 	}
@@ -49,24 +48,44 @@ public class PassQueue {
 		return size;
 	}
 
-	public void addQueue() {
-
-		boolean dupe = true;
-		Booking up = null;
+	public void fillQueue() {
 		int csize = passengerQ.size();
 
-		while (csize != size && dupe) {
-			Booking add = BKsvc.extractRandBooking();
-			for (Booking book : passengerQ) {
-				if (add.getRefCode() == book.getRefCode()) {
-					dupe = false;
-					up = add;
-					break;
-				}
-			}
+		while (csize < size) {
+			this.addQueue();
+			csize = passengerQ.size();
+
 		}
 
-		passengerQ.add(up);
+	}
+
+	private void addQueue() {
+
+		boolean dupe = true;
+
+		while (dupe) {
+			Booking add = BKsvc.extractRandBooking();
+			if (!this.isDupe(add.getRefCode()) && add.isCheckedIn()==CheckedIn.OUT) {
+
+				passengerQ.add(add);
+				dupe = false;
+
+			}
+
+		}
+	}
+
+	private boolean isDupe(String ref) {
+
+		boolean dupe = false;
+
+		for (Booking Book : passengerQ) {
+			if (Book.getRefCode().equals(ref)) {
+				dupe = true;
+
+			}
+		}
+		return dupe;
 
 	}
 
