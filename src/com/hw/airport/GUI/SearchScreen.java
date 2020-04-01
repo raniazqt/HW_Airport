@@ -19,8 +19,10 @@ import javax.swing.border.TitledBorder;
 
 import com.hw.airport.exception.HWAirportException;
 import com.hw.airport.model.Booking;
+import com.hw.airport.model.Booking.CheckedIn;
 import com.hw.airport.service.CheckInSvc;
 import com.hw.airport.service.CheckInSvcImpl;
+import com.hw.airport.service.QueueSvc;
 
 public class SearchScreen extends javax.swing.JFrame {
 
@@ -128,7 +130,7 @@ public class SearchScreen extends javax.swing.JFrame {
 			try {
 				Booking booking = checkinSvc.retrieveBookingByCodeAndLastName(lastNameFld.getText(),
 						bookingRefFld.getText());
-				if (!booking.isCheckedIn()) {
+				if (!(booking.getCheckInStatus()==CheckedIn.IN)) {
 
 					BaggageInfoScreen obj = new BaggageInfoScreen(booking);
 					obj.setVisible(true);
