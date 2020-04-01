@@ -130,7 +130,7 @@ public class SearchScreen extends javax.swing.JFrame {
 			try {
 				Booking booking = checkinSvc.retrieveBookingByCodeAndLastName(lastNameFld.getText(),
 						bookingRefFld.getText());
-				if (!(booking.isCheckedIn()==CheckedIn.IN)) {
+				if (!(booking.getCheckInStatus()==CheckedIn.IN)) {
 
 					BaggageInfoScreen obj = new BaggageInfoScreen(booking);
 					obj.setVisible(true);

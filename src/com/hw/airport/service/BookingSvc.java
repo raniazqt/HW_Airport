@@ -26,10 +26,14 @@ public interface BookingSvc {
 
 	boolean updateBookingStatus(Booking booking, BookingCharge bookingChg) throws HWAirportException;
 
-	public Booking extractRandBooking();
+	public Booking getFirstShuffledBooking();
 	
-	public void updateCheckin(String refCode, CheckedIn status) ;
+	public void updateCheckInStatus(String refCode, CheckedIn status) ;
 	
 	public Booking findBookingByRefCode(String refCode) throws HWAirportException;
+	
+	public Booking getRandomBooking() throws HWAirportException ;
+	
+	public void setRandomBaggageDimensions(Booking booking) ;
 
 }

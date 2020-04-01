@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import com.hw.airport.exception.*;
 import com.hw.airport.model.AppData;
@@ -51,11 +52,11 @@ public class BookingSvcImpl implements BookingSvc {
 		return booking;
 	}
 
-	public void updateCheckin(String refCode, CheckedIn status) {
+	public void updateCheckInStatus(String refCode, CheckedIn status) {
 
 		try {
 			Booking update = this.findBookingByRefCode(refCode);
-			update.setCheckedIn(status);
+			update.setCheckInStatus(status);
 			appData.getBookingList().put(update.getRefCode().toLowerCase(), update);
 		} catch (HWAirportException e) {
 			e.printStackTrace();
@@ -77,7 +78,7 @@ public class BookingSvcImpl implements BookingSvc {
 		if (null == updatedBooking) {
 			throw new MissingBookingException();
 		}
-		updatedBooking.setCheckedIn(CheckedIn.IN);
+		updatedBooking.setCheckInStatus(CheckedIn.IN);
 		double volume = bookingChg.getDepth() * bookingChg.getLength() * bookingChg.getWidth();
 		updatedBooking.setTotalBaggageVolume(volume);
 		updatedBooking.setTotalBaggageWeight(bookingChg.getWeight());
@@ -105,7 +106,7 @@ public class BookingSvcImpl implements BookingSvc {
 		}
 		int checkedInFlightsCount = 0;
 		for (Booking booking : flightBookings) {
-			if (booking.isCheckedIn() == CheckedIn.IN) {
+			if (booking.getCheckInStatus() == CheckedIn.IN) {
 				checkedInFlightsCount += 1;
 			}
 		}
@@ -134,7 +135,7 @@ public class BookingSvcImpl implements BookingSvc {
 
 		List<Booking> bookingsByFlight = this.findAllBookingForFlight(flightCode);
 		for (Booking booking : bookingsByFlight) {
-			if (booking.isCheckedIn() == CheckedIn.IN) {
+			if (booking.getCheckInStatus() == CheckedIn.IN) {
 				totalExtraVol += booking.getTotalBaggageVolume();
 				totalExtraWght += booking.getTotalBaggageWeight();
 				totalExtraWghtChrg += booking.getXtraBagWghtChrg();
@@ -178,16 +179,52 @@ public class BookingSvcImpl implements BookingSvc {
 		return bookingList;
 	}
 
-	public List<Booking> extractRandBookingList() {
+	public List<Booking> shuffleBookingList() {
 		List<Booking> bookingList = this.extractBookingList();
 		Collections.shuffle(bookingList);
 		return bookingList;
 	}
 
-	public Booking extractRandBooking() {
-		Booking booking = this.extractRandBookingList().get(0);
-
+	public Booking getFirstShuffledBooking() {
+		Booking booking = this.shuffleBookingList().get(0);
 		return booking;
+	}
+
+	public Booking getRandomBooking() throws HWAirportException {
+		Booking RandomBooking = null;
+		List<Booking> shuffledList = this.shuffleBookingList();
+		if (null == shuffledList || shuffledList.size() == 0) {
+			throw new HWAirportException("Empty Shuffled Booking List");
+		}
+		for (Booking book : shuffledList) {
+			if (book.getCheckInStatus().equals(CheckedIn.OUT)) {
+
+				RandomBooking = book;
+				break;
+			}
+
+		}
+		if (null == RandomBooking) {
+			throw new HWAirportException("No valid bookings");
+		}
+		return RandomBooking;
+
+	}
+
+	@Override
+	public void setRandomBaggageDimensions(Booking booking) {
+		Random r = new Random();
+		double baggageHeight = this.generateRandomeNumberInRange(10, 100);
+		double baggageLength = this.generateRandomeNumberInRange(10, 100);
+		double baggageWidth = this.generateRandomeNumberInRange(10, 100);
+		double totalBaggageWeight = this.generateRandomeNumberInRange(10, 100);
+
+		booking.setBaggageHeight(baggageHeight);
+		booking.setBaggageLength(baggageLength);
+		booking.setBaggageWidth(baggageWidth);
+		booking.setTotalBaggageVolume(baggageHeight * baggageLength * baggageWidth);
+		booking.setTotalBaggageWeight(totalBaggageWeight);
+
 	}
 
 	/**
@@ -210,6 +247,12 @@ public class BookingSvcImpl implements BookingSvc {
 			bookingByFlight.put(flightCd, flightBookingList);
 		}
 		return bookingByFlight;
+	}
+
+	public double generateRandomeNumberInRange(int low, int high) {
+		Random r = new Random();
+		int result = r.nextInt(high - low) + low;
+		return result;
 	}
 
 }

@@ -32,7 +32,7 @@ public class QueueSvcImpl implements QueueSvc {
 				}
 			}
 
-			if (!(up.isCheckedIn() == CheckedIn.OUT || up.isCheckedIn() == CheckedIn.PROCESS)) {
+			if (!(up.getCheckInStatus() == CheckedIn.OUT || up.getCheckInStatus() == CheckedIn.PROCESS)) {
 
 				Queue.add(up);
 				size++;
@@ -44,7 +44,7 @@ public class QueueSvcImpl implements QueueSvc {
 
 	public void dropQueue(List<Booking> Queue, Map<String, Booking> bookingMap) throws HWAirportException {
 
-		bookingMap.get(Queue.remove(0).getRefCode()).setCheckedIn(CheckedIn.PROCESS);
+		bookingMap.get(Queue.remove(0).getRefCode()).setCheckInStatus(CheckedIn.PROCESS);
 
 	}
 

@@ -14,9 +14,12 @@ public class Booking {
 	// booking reference code
 	private String refCode;
 	private String flightCode;
-	private CheckedIn isCheckedIn;
+	private CheckedIn checkInStatus;
 	private double totalBaggageWeight;
 	private double totalBaggageVolume;
+	private double baggageHeight;
+	private double baggageWidth;
+	private double baggageLength;
 	private double xtraBagVolChrg;
 	private double xtraBagWghtChrg;
 
@@ -31,7 +34,7 @@ public class Booking {
 		this.dob = dob;
 		this.refCode = refCode;
 		this.flightCode = flightCode;
-		this.isCheckedIn = isCheckedIn;
+		this.checkInStatus = isCheckedIn;
 	}
 
 	public String getFirstName() {
@@ -74,12 +77,12 @@ public class Booking {
 		this.flightCode = flightCode;
 	}
 
-	public CheckedIn isCheckedIn() {
-		return isCheckedIn;
+	public CheckedIn getCheckInStatus() {
+		return checkInStatus;
 	}
 
-	public void setCheckedIn(CheckedIn isCheckedIn) {
-		this.isCheckedIn = isCheckedIn;
+	public void setCheckInStatus(CheckedIn isCheckedIn) {
+		this.checkInStatus = isCheckedIn;
 	}
 
 	public double getTotalBaggageWeight() {
@@ -118,7 +121,31 @@ public class Booking {
 		return this.firstName + " " + this.lastName;
 	}
 
-	public void calcXtraWghtChrg(double weightLimit,double weightRate) {
+	public double getBaggageHeight() {
+		return baggageHeight;
+	}
+
+	public void setBaggageHeight(double baggageHeight) {
+		this.baggageHeight = baggageHeight;
+	}
+
+	public double getBaggageWidth() {
+		return baggageWidth;
+	}
+
+	public void setBaggageWidth(double baggageWidth) {
+		this.baggageWidth = baggageWidth;
+	}
+
+	public double getBaggageLength() {
+		return baggageLength;
+	}
+
+	public void setBaggageLength(double baggageLength) {
+		this.baggageLength = baggageLength;
+	}
+
+	public void calcXtraWghtChrg(double weightLimit, double weightRate) {
 
 		if (this.totalBaggageWeight > 0) {
 
@@ -127,7 +154,7 @@ public class Booking {
 
 	}
 
-	public void calcXtraVolChrg(double volumeLimit,double volumeRate) {
+	public void calcXtraVolChrg(double volumeLimit, double volumeRate) {
 		if (this.totalBaggageVolume > 0) {
 
 			this.setXtraBagVolChrg((this.totalBaggageVolume - volumeLimit) * volumeRate);

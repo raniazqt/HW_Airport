@@ -1,5 +1,6 @@
 package com.hw.airport.main;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import com.hw.airport.GUI.AirportGUI;
@@ -7,7 +8,7 @@ import com.hw.airport.GUI.AirportGUIImpl;
 import com.hw.airport.exception.HWAirportException;
 import com.hw.airport.model.AppData;
 import com.hw.airport.model.Booking;
-import com.hw.airport.model.PassQueue;
+import com.hw.airport.model.PassengerQueue;
 import com.hw.airport.service.DataSvc;
 import com.hw.airport.service.DataSvcImpl;
 import com.hw.airport.service.QueueSvc;
@@ -20,15 +21,17 @@ public class testmain {
 		ApplicationState appState;
 		DataSvc dataSvc;
 		QueueSvc Queues;
-		PassQueue PassQ;
+
+		LinkedList<Booking> passQList;
 		String flightsFileName = "flights.csv";
 		String bookingFileName = "bookings.csv";
 		gui = new AirportGUIImpl();
 		dataSvc = new DataSvcImpl();
-		Queues = new QueueSvcImpl();		
+		Queues = new QueueSvcImpl();
 		appState = ApplicationState.UNINITIALIZED;
 
 		// any setup logic here.
+		PassengerQueue passQ = PassengerQueue.getInstance();
 		AppData appData = AppData.getInstance();
 		try {
 			appData.setFlightsInfo(dataSvc.loadFlightsData(flightsFileName));
@@ -38,18 +41,26 @@ public class testmain {
 			e.printStackTrace();
 		}
 		appState = ApplicationState.INITIALIZED;
-		// List <Booking> qList = Queues.createQueue(10);
-		// Queues.addQueue(qList);
-		// Queues.dropQueue(qList, appData.getBookingList());
-		PassQ = new PassQueue(10);
-		System.out.println("Queue");
-		PassQ.printQ();
-		System.out.println("Drop"+"\n"+PassQ.dropQueue().getRefCode());		
-		//System.out.println("Queue");
-		//PassQ.printQ();
-		PassQ.fillQueue();
-		System.out.println("Queue");
-		PassQ.printQ();
+
+		passQList = passQ.getPassengerQ();
+		passQ.addPassengerToQueue();
+		passQ.addPassengerToQueue();
+
+		passQ.printQ();
+
+		passQ.removePassengerFromQueue();
+
+		passQ.printQ();
+
+		/*
+		 * List <Booking> qList = Queues.createQueue(10); Queues.addQueue(qList);
+		 * Queues.dropQueue(qList, appData.getBookingList()); passQ.getInstance();
+		 * System.out.println("Queue"); passQ.printQ();
+		 * System.out.println("Drop"+"\n"+passQ.removePassengerFromQueue().getRefCode())
+		 * ;
+		 * 
+		 * System.out.println("Queue"); passQ.printQ();
+		 */
 
 	}
 }
