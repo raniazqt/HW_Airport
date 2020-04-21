@@ -73,7 +73,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="9" language="java" name="com.hw.airport.GUI.AirportGUI" project="HWAirport" 
+  <interface id="9" language="java" name="com.hw.airport.GUI_S1.AirportGUI" project="HWAirport"
     file="/HWAirport/src/com/hw/airport/GUI/AirportGUI.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1746" y="1255"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -100,7 +100,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="12" language="java" name="com.hw.airport.GUI.AirportGUIImpl" project="HWAirport" 
+  <class id="12" language="java" name="com.hw.airport.GUI_S1.AirportGUIImpl" project="HWAirport"
     file="/HWAirport/src/com/hw/airport/GUI/AirportGUIImpl.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1746" y="1029"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 

@@ -1,11 +1,9 @@
-package com.hw.airport.GUI;
+package com.hw.airport.GUI_S1;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
