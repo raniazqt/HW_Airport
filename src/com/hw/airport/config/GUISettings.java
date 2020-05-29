@@ -2,19 +2,61 @@ package com.hw.airport.config;
 
 public class GUISettings {
 
-    private int mainScreenWidth;
-    private int mainScreenHeight;
-    private String mainScreenTitle;
+  private MasterFrameSettings mFrameSettings;
+  private PassengerPanelSettings psngrPnlSettings;
+  private CheckInDeskPanelSettings checkInDskPnlSettings;
+  private ActiveFlightPanelSettings activFlghtPnlSettings;
+  private SimToolBarSettings simToolBrSettings;
 
-    public GUISettings(int mainScrWidth, int mainScrHeight, String mainScrTitle) {
-        this.mainScreenWidth = mainScrWidth;
-        this.mainScreenHeight = mainScrHeight;
-        this.mainScreenTitle = mainScrTitle;
+  public GUISettings (MasterFrameSettings newMFrameSettings, PassengerPanelSettings newPsngrPnlSettings, CheckInDeskPanelSettings newCheckInDskPnlSettings,
+                      ActiveFlightPanelSettings newActiveFlghtPnlSettings, SimToolBarSettings newSimToolBrSettings) {
+
+      this.setMasterFrameSettings(newMFrameSettings);
+      this.setPsngrPnlSettings(newPsngrPnlSettings);
+      this.setCheckInDskPnlSettings(newCheckInDskPnlSettings);
+      this.setActivFlghtPnlSettings(newActiveFlghtPnlSettings);
+      this.setSimToolBrSettings(newSimToolBrSettings);
+  }
+
+    public MasterFrameSettings getMasterFrameSettings() {
+        return mFrameSettings;
     }
 
-    public String getMainScreenTitle() { return this.mainScreenTitle;}
+    public void setMasterFrameSettings(MasterFrameSettings mFrameSettings) {
+        this.mFrameSettings = mFrameSettings;
+    }
 
-    public int getMainScreenWidth() { return mainScreenWidth; }
+    public PassengerPanelSettings getPsngrPnlSettings() {
+        return psngrPnlSettings;
+    }
 
-    public int getMainScreenHeight() { return mainScreenHeight; }
+    public void setPsngrPnlSettings(PassengerPanelSettings psngrPnlSettings) {
+        this.psngrPnlSettings = psngrPnlSettings;
+    }
+
+    public CheckInDeskPanelSettings getCheckInDskPnlSettings() {
+        return checkInDskPnlSettings;
+    }
+
+    public void setCheckInDskPnlSettings(CheckInDeskPanelSettings checkInDskPnlSettings) {
+        this.checkInDskPnlSettings = checkInDskPnlSettings;
+    }
+
+    public ActiveFlightPanelSettings getActivFlghtPnlSettings() {
+        return activFlghtPnlSettings;
+    }
+
+    public void setActivFlghtPnlSettings(ActiveFlightPanelSettings activFlghtPnlSettings) {
+        this.activFlghtPnlSettings = activFlghtPnlSettings;
+    }
+
+    public SimToolBarSettings getSimToolBrSettings() {
+        return simToolBrSettings;
+    }
+
+    public void setSimToolBrSettings(SimToolBarSettings simToolBrSettings) {
+        this.simToolBrSettings = simToolBrSettings;
+    }
 }
+
+
