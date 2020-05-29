@@ -5,9 +5,9 @@ import com.hw.airport.config.GUISettings;
 
 import javax.swing.*;
 
-public class MasterScreen extends JFrame {
+public class MasterFrame extends JFrame {
 
-    public MasterScreen() {
+    public MasterFrame() {
         GUISettings settings = AppConfig.getInstance().getGuiSettings();
         InitMainFrame(settings);
     }
