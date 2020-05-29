@@ -8,8 +8,6 @@ import java.util.Scanner;
 
 import com.hw.airport.exception.HWAirportException;
 
-
-
 public class FileHandler {
 
 	//Reads the data from the file with the given name and load it in a list of string array.
