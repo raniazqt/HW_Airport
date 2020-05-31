@@ -8,6 +8,7 @@ import com.hw.airport.exception.NullBookingException;
 import com.hw.airport.model.Booking;
 import com.hw.airport.model.BookingCharge;
 import com.hw.airport.model.FlightExtrasAndCharges;
+import com.hw.airport.model.Booking.CheckedIn;
 
 public interface BookingSvc {
 	
@@ -18,9 +19,21 @@ public interface BookingSvc {
 	public FlightExtrasAndCharges calculateExtraChargeForFlight(String flightCode) throws HWAirportException;
 
 	public List<Booking> findAllBookingForFlight(String flightCode);
+	
+	public List<Booking> extractBookingList() ;
 
 	Map<String, List<Booking>> groupBookingByFlightCode();
 
 	boolean updateBookingStatus(Booking booking, BookingCharge bookingChg) throws HWAirportException;
+
+	public Booking getFirstShuffledBooking();
+	
+	public void updateCheckInStatus(String refCode, CheckedIn status) ;
+	
+	public Booking findBookingByRefCode(String refCode) throws HWAirportException;
+	
+	public Booking getRandomBooking() throws HWAirportException ;
+	
+	public void setRandomBaggageDimensions(Booking booking) ;
 
 }
