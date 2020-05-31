@@ -1,5 +1,7 @@
 package com.hw.airport.config;
 
+import javax.swing.*;
+
 public class AppConfig {
 
     private GUISettings guiSettings;
@@ -7,7 +9,9 @@ public class AppConfig {
     private AppConfig()
     {
         //TODO: temp until we use files for all settings.
-        guiSettings = new GUISettings(800, 600, "Airport Status Screen");
+        guiSettings = new GUISettings(new MasterFrameSettings(800, 600,
+                WindowConstants.EXIT_ON_CLOSE, "Airport Status Screen"),
+                null, null, null, null);
     }
 
     private static AppConfig appConfig;

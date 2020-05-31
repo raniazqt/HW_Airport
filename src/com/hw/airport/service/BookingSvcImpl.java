@@ -66,6 +66,7 @@ public class BookingSvcImpl implements BookingSvc {
 
 	/**
 	 * Updates the check in status of a booking
+
 	 * @param  booking current booking we're updating
 	 * @param  bookingChg current charges for our given booking
 	 * @return true when successfully update the record
@@ -118,7 +119,6 @@ public class BookingSvcImpl implements BookingSvc {
 	 *@param flightCode flight code the flight we're calculating the chargs for
 	 *@throws HWAirportException throws missing flight exception if flight is not found.
 	 */
-	
 	@Override
 	public FlightExtrasAndCharges calculateExtraChargeForFlight(String flightCode) throws HWAirportException {
 		Flight flight = flightSvc.getFlightByCode(flightCode);
