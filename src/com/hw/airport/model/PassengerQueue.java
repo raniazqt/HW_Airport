@@ -23,9 +23,7 @@ public class PassengerQueue {
 	public static PassengerQueue getInstance() {
 		if (passengerQueue == null) {
 			passengerQueue = new PassengerQueue();
-
 		}
-
 		return passengerQueue;
 	}
 
@@ -56,9 +54,7 @@ public class PassengerQueue {
 			bookingSvc.setRandomBaggageDimensions(passengerToAdd);
 			passengerQ.add(passengerToAdd);
 			bookingSvc.updateCheckInStatus(passengerToAdd.getRefCode(), BookingStatus.PROCESSING);
-
 		}
-
 	}
 
 	public Booking removePassengerFromQueue() {
