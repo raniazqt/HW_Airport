@@ -66,9 +66,9 @@ public class BookingSvcImpl implements BookingSvc {
 
 	/**
 	 * Updates the check in status of a booking
-	 * 
-	 * @param refCode  Booking reference number
-	 * @param lastName for the passenger
+
+	 * @param  booking current booking we're updating
+	 * @param  bookingChg current charges for our given booking
 	 * @return true when successfully update the record
 	 * @throws HWAirportException
 	 */
@@ -114,12 +114,10 @@ public class BookingSvcImpl implements BookingSvc {
 	}
 
 	/**
-	 * Calculate the extra charges for weight and volume for a giving flight. The
-	 * charges are summed up from the booking data for passenger who are checked in
-	 * the given flight.
-	 * 
-	 * @param flightCode
-	 * @throws HWAirportException
+	 *Calculate the extra charges for weight and volume for a giving flight. 
+	 *The charges are summed up from the booking data for passenger who are checked in the given flight. 
+	 *@param flightCode flight code the flight we're calculating the chargs for
+	 *@throws HWAirportException throws missing flight exception if flight is not found.
 	 */
 	@Override
 	public FlightExtrasAndCharges calculateExtraChargeForFlight(String flightCode) throws HWAirportException {

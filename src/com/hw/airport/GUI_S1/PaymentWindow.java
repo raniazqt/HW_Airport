@@ -1,5 +1,5 @@
 
-package com.hw.airport.GUI;
+package com.hw.airport.GUI_S1;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -10,7 +10,6 @@ import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
@@ -18,7 +17,6 @@ import javax.swing.WindowConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.TitledBorder;
 
-import com.hw.airport.exception.HWAirportException;
 import com.hw.airport.model.Booking;
 import com.hw.airport.model.BookingCharge;
 import com.hw.airport.service.CheckInSvc;

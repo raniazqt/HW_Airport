@@ -2,7 +2,6 @@ package com.hw.airport.model;
 
 import java.util.Map;
 
-
 public class AppData {
 
 	//Hashmap to hold the list of passengers booking loaded from the text file. 
@@ -10,7 +9,7 @@ public class AppData {
 	private  Map<String, Booking> bookingList;
 
 	//Hashmap to hold the list of flights loaded from the text file. The key is the flight code
-	private  Map<String, Flight> flightsInfo; 
+	private  Map<String, Flight> flightsInfo;
 
 	private AppData() { }
 
@@ -38,8 +37,5 @@ public class AppData {
 	public void setFlightsInfo(Map<String, Flight> flightsInfo) {
 		this.flightsInfo = flightsInfo;
 	}
-	
-	
-
 
 }

@@ -1,5 +1,5 @@
 
-package com.hw.airport.GUI;
+package com.hw.airport.GUI_S1;
 
 import java.awt.Color;
 import java.awt.Font;

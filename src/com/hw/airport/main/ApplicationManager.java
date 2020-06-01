@@ -1,7 +1,7 @@
 package com.hw.airport.main;
 
-import com.hw.airport.GUI.AirportGUI;
-import com.hw.airport.GUI.AirportGUIImpl;
+import com.hw.airport.GUI_S1.AirportGUI;
+import com.hw.airport.GUI_S1.AirportGUIImpl;
 import com.hw.airport.exception.HWAirportException;
 import com.hw.airport.model.AppData;
 import com.hw.airport.service.DataSvc;
@@ -37,7 +37,7 @@ public class ApplicationManager {
 			e.printStackTrace();
 		}
 		appState = ApplicationState.INITIALIZED;
-		gui.displayWelcomeScreen();
+		gui.displayAirportStatusScreen();
 	}
 
 	public void execute() {
