@@ -3,8 +3,8 @@ package com.hw.airport.main;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.hw.airport.GUI.AirportGUI;
-import com.hw.airport.GUI.AirportGUIImpl;
+import com.hw.airport.GUI_S1.AirportGUI;
+import com.hw.airport.GUI_S1.AirportGUIImpl;
 import com.hw.airport.exception.HWAirportException;
 import com.hw.airport.model.AppData;
 import com.hw.airport.model.Booking;
