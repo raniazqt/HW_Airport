@@ -1,7 +1,7 @@
 package com.hw.airport.model;
 
 import com.hw.airport.exception.HWAirportException;
-import com.hw.airport.service.QueueService;
+import com.hw.airport.service.QueueSvc;
 
 public class CheckInDesk {
 	
@@ -12,7 +12,7 @@ public class CheckInDesk {
 	private int id;
 	private String status;
 	
-	private QueueService queueSvc;
+	private QueueSvc queueSvc;
 	
 	
 	public int getId() {
@@ -35,7 +35,7 @@ public class CheckInDesk {
 		if (!this.status.equalsIgnoreCase("AVAILABLE")) {
 			throw new HWAirportException("Check-in Desk is current;y busy assisting other customers");
 		}
-		this.passenger = queueSvc.getPassengerFromQueue();
+		//this.passenger = queueSvc.getPassengerFromQueue();
 		this.status = "BUSY";
 		this.passenger = passenger;
 	}
