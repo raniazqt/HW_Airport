@@ -17,4 +17,6 @@ public interface QueueSvc {
 
 	public void dropQueue(List<Booking> Queue, Map<String, Booking> bookingMap) throws HWAirportException;
 
+	Booking getPassengerFromQueue();
+
 }

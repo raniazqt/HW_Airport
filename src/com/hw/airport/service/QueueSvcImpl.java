@@ -10,14 +10,22 @@ import java.util.Random;
 
 import com.hw.airport.exception.HWAirportException;
 import com.hw.airport.model.Booking;
-import com.hw.airport.model.Booking.CheckedIn;
+import com.hw.airport.model.Booking.BookingStatus;
 import com.hw.airport.model.Flight;
-
+import com.hw.airport.model.PassengerQueue;
 import com.hw.airport.service.BookingSvc;
 
 public class QueueSvcImpl implements QueueSvc {
 
 	BookingSvc BKsvc = new BookingSvcImpl();
+	private PassengerQueue passengerQ = PassengerQueue.getInstance();
+	
+	
+	@Override
+	public Booking getPassengerFromQueue() {
+		Booking qPassenger = passengerQ.removePassengerFromQueue();
+		return qPassenger; 
+	}
 
 	public void addQueue(List<Booking> Queue) throws HWAirportException {
 
@@ -32,7 +40,7 @@ public class QueueSvcImpl implements QueueSvc {
 				}
 			}
 
-			if (!(up.getCheckInStatus() == CheckedIn.OUT || up.getCheckInStatus() == CheckedIn.PROCESS)) {
+			if (!(up.getCheckInStatus() == BookingStatus.NOT_CHECKED_IN || up.getCheckInStatus() == BookingStatus.PROCESSING)) {
 
 				Queue.add(up);
 				size++;
@@ -44,7 +52,7 @@ public class QueueSvcImpl implements QueueSvc {
 
 	public void dropQueue(List<Booking> Queue, Map<String, Booking> bookingMap) throws HWAirportException {
 
-		bookingMap.get(Queue.remove(0).getRefCode()).setCheckInStatus(CheckedIn.PROCESS);
+		bookingMap.get(Queue.remove(0).getRefCode()).setCheckInStatus(BookingStatus.PROCESSING);
 
 	}
 

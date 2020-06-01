@@ -10,7 +10,7 @@ import java.util.Random;
 import com.hw.airport.exception.*;
 import com.hw.airport.model.AppData;
 import com.hw.airport.model.Booking;
-import com.hw.airport.model.Booking.CheckedIn;
+import com.hw.airport.model.Booking.BookingStatus;
 import com.hw.airport.model.BookingCharge;
 import com.hw.airport.model.Flight;
 import com.hw.airport.model.FlightExtrasAndCharges;
@@ -52,7 +52,7 @@ public class BookingSvcImpl implements BookingSvc {
 		return booking;
 	}
 
-	public void updateCheckInStatus(String refCode, CheckedIn status) {
+	public void updateCheckInStatus(String refCode, BookingStatus status) {
 
 		try {
 			Booking update = this.findBookingByRefCode(refCode);
@@ -78,7 +78,7 @@ public class BookingSvcImpl implements BookingSvc {
 		if (null == updatedBooking) {
 			throw new MissingBookingException();
 		}
-		updatedBooking.setCheckInStatus(CheckedIn.IN);
+		updatedBooking.setCheckInStatus(BookingStatus.CHECKED_IN);
 		double volume = bookingChg.getDepth() * bookingChg.getLength() * bookingChg.getWidth();
 		updatedBooking.setTotalBaggageVolume(volume);
 		updatedBooking.setTotalBaggageWeight(bookingChg.getWeight());
@@ -106,7 +106,7 @@ public class BookingSvcImpl implements BookingSvc {
 		}
 		int checkedInFlightsCount = 0;
 		for (Booking booking : flightBookings) {
-			if (booking.getCheckInStatus() == CheckedIn.IN) {
+			if (booking.getCheckInStatus() == BookingStatus.CHECKED_IN) {
 				checkedInFlightsCount += 1;
 			}
 		}
@@ -135,7 +135,7 @@ public class BookingSvcImpl implements BookingSvc {
 
 		List<Booking> bookingsByFlight = this.findAllBookingForFlight(flightCode);
 		for (Booking booking : bookingsByFlight) {
-			if (booking.getCheckInStatus() == CheckedIn.IN) {
+			if (booking.getCheckInStatus() == BookingStatus.CHECKED_IN) {
 				totalExtraVol += booking.getTotalBaggageVolume();
 				totalExtraWght += booking.getTotalBaggageWeight();
 				totalExtraWghtChrg += booking.getXtraBagWghtChrg();
@@ -197,7 +197,7 @@ public class BookingSvcImpl implements BookingSvc {
 			throw new HWAirportException("Empty Shuffled Booking List");
 		}
 		for (Booking book : shuffledList) {
-			if (book.getCheckInStatus().equals(CheckedIn.OUT)) {
+			if (book.getCheckInStatus().equals(BookingStatus.NOT_CHECKED_IN)) {
 
 				RandomBooking = book;
 				break;

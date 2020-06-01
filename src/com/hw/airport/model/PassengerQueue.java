@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.hw.airport.exception.HWAirportException;
-import com.hw.airport.model.Booking.CheckedIn;
+import com.hw.airport.model.Booking.BookingStatus;
 import com.hw.airport.service.BookingSvc;
 import com.hw.airport.service.BookingSvcImpl;
 
@@ -52,10 +52,10 @@ public class PassengerQueue {
 	public void addPassengerToQueue() throws HWAirportException {
 		Booking passengerToAdd = bookingSvc.getRandomBooking();
 		
-		if (passengerToAdd.getCheckInStatus().equals(CheckedIn.OUT)) {
+		if (passengerToAdd.getCheckInStatus().equals(BookingStatus.NOT_CHECKED_IN)) {
 			bookingSvc.setRandomBaggageDimensions(passengerToAdd);
 			passengerQ.add(passengerToAdd);
-			bookingSvc.updateCheckInStatus(passengerToAdd.getRefCode(), CheckedIn.PROCESS);
+			bookingSvc.updateCheckInStatus(passengerToAdd.getRefCode(), BookingStatus.PROCESSING);
 
 		}
 

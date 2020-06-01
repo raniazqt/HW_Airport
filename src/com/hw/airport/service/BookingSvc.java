@@ -8,7 +8,7 @@ import com.hw.airport.exception.NullBookingException;
 import com.hw.airport.model.Booking;
 import com.hw.airport.model.BookingCharge;
 import com.hw.airport.model.FlightExtrasAndCharges;
-import com.hw.airport.model.Booking.CheckedIn;
+import com.hw.airport.model.Booking.BookingStatus;
 
 public interface BookingSvc {
 	
@@ -28,7 +28,7 @@ public interface BookingSvc {
 
 	public Booking getFirstShuffledBooking();
 	
-	public void updateCheckInStatus(String refCode, CheckedIn status) ;
+	public void updateCheckInStatus(String refCode, BookingStatus status) ;
 	
 	public Booking findBookingByRefCode(String refCode) throws HWAirportException;
 	
