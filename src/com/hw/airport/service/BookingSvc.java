@@ -16,7 +16,7 @@ public interface BookingSvc {
 		
 	public int getCountOfCheckedInPassengersByFlight(String flightCode) throws HWAirportException;
 	
-	public FlightExtrasAndCharges calculateExtraChargeForFlight(String flightCode) throws HWAirportException;
+	//public FlightExtrasAndCharges calculateExtraChargeForFlight(String flightCode) throws HWAirportException;
 
 	public List<Booking> findAllBookingForFlight(String flightCode);
 	

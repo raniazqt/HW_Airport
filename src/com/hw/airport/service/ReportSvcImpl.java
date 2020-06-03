@@ -42,11 +42,11 @@ public class ReportSvcImpl implements ReportSvc {
 		}
 
 		data.setFlightCode(flightCode);
-		try {
+	/**	try {
 			xtraCharge = bookingSvc.calculateExtraChargeForFlight(flightCode);
 		} catch (HWAirportException e) {
 			// TODO Auto-generated catch block
-		}
+		}*/
 		try {
 			psgrCnt = bookingSvc.getCountOfCheckedInPassengersByFlight(flightCode);
 		} catch (HWAirportException e) {

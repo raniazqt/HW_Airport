@@ -17,7 +17,7 @@ import com.hw.airport.model.FlightExtrasAndCharges;
 
 public class BookingSvcImpl implements BookingSvc {
 	AppData appData = AppData.getInstance();
-	FlightSvc flightSvc = new FlightSvcImpl();
+	//FlightSvc flightSvc = new FlightSvcImpl();
 
 	/**
 	 * Search for passenger booking in the booking list. It is found if the booking
@@ -118,7 +118,7 @@ public class BookingSvcImpl implements BookingSvc {
 	 *The charges are summed up from the booking data for passenger who are checked in the given flight. 
 	 *@param flightCode flight code the flight we're calculating the chargs for
 	 *@throws HWAirportException throws missing flight exception if flight is not found.
-	 */
+	
 	@Override
 	public FlightExtrasAndCharges calculateExtraChargeForFlight(String flightCode) throws HWAirportException {
 		Flight flight = flightSvc.getFlightByCode(flightCode);
@@ -143,7 +143,7 @@ public class BookingSvcImpl implements BookingSvc {
 
 		return new FlightExtrasAndCharges(flightCode, totalExtraWght, totalExtraVol, totalExtraWghtChrg,
 				totalExtraVolChrg);
-	}
+	} */
 
 	/**
 	 * Retrieves the list of booking for a fiven flight
