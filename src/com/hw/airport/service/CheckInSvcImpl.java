@@ -52,30 +52,35 @@ public class CheckInSvcImpl implements CheckInSvc {
 		}
 		return charge;
 	}
-	
-	
-	
+
+	/**
+	 * @param lastName last name of passenger requesting a checkin.
+	 * @param bookingRef bookingRef of passenger requesting a checkin.
+	 * @return a boolean indicating if it's possible to checkin the pending passenger, this is true ONLY if all the following conditions are true (maxVolume of flight not exceeded,
+	 * maxWeight of flight not exceeded, maxPassengers per flight not exceeded, pending passenger has not previously checked in)
+	 * @throws HWAirportException missing booking exception if a booking is not found per the bookingRef and last name.
+	 */
 	@Override
 	public boolean canCheckIn(String lastName, String bookingRef) throws HWAirportException {
-		// current baggage vol <= flight volume capacity
-		// Current Baggage Weight <= flight weight capacity
-		// Current passenger number <= total  passenger number
-		
-		String flightCode = AppData.getInstance().getBookingList().get(bookingRef).getFlightCode();
-		
-				
-		double currentFlightBagVolume = baggageSvc.getTheTotalBagVolumesOnFlight(flightCode);
-		double currentFlightBagWeight = baggageSvc.getTheTotalBagWeightOnFlight(flightCode);
-		int currentFlightPassengerCount = flightSvc.getPassengerCountForFlight(flightCode);
-		boolean isMaxVolumeExceeded = flightSvc.isMaxVolumeExceededForFlight(flightCode, currentFlightBagVolume);
-		boolean isMaxWeightExceeded = flightSvc.isMaxWeightExceededForFlight(flightCode, currentFlightBagWeight);
-		boolean isMaxPassengerCountExceeded = flightSvc.isMaxPassengerCountExceededForFlight(flightCode, currentFlightPassengerCount);
+		Booking pendingBooking = bookingSvc.findBookingByLastNameAndRefCode(lastName, bookingRef);
+
+		if(pendingBooking == null)
+		{
+			throw new MissingBookingException();
+		}
+
+		double currentFlightBagVolume = baggageSvc.getTheTotalBagVolumesOnFlight(pendingBooking.getFlightCode());
+		double currentFlightBagWeight = baggageSvc.getTheTotalBagWeightOnFlight(pendingBooking.getFlightCode());
+		int currentFlightPassengerCount = flightSvc.getPassengerCountForFlight(pendingBooking.getFlightCode());
+
+		boolean isMaxVolumeExceeded = flightSvc.isMaxVolumeExceededForFlight(pendingBooking.getFlightCode(), currentFlightBagVolume);
+		boolean isMaxWeightExceeded = flightSvc.isMaxWeightExceededForFlight(pendingBooking.getFlightCode(), currentFlightBagWeight);
+		boolean isMaxPassengerCountExceeded = flightSvc.isMaxPassengerCountExceededForFlight(pendingBooking.getFlightCode(), currentFlightPassengerCount);
+		boolean isNotCheckedIn = !pendingBooking.isCheckedIn();
 			
-		return !isMaxVolumeExceeded && !isMaxWeightExceeded && !isMaxPassengerCountExceeded;
+		return !isMaxVolumeExceeded && !isMaxWeightExceeded && !isMaxPassengerCountExceeded && isNotCheckedIn;
 	
 	}
-	
-	
 	
 	/**
 	 * @param lastName last name of the passenger.
@@ -84,12 +89,6 @@ public class CheckInSvcImpl implements CheckInSvc {
 	 */
 	@Override
 	public void doCheckIn(String lastName, String bookingRef) throws HWAirportException {
-		/*
-		 * Booking booking = bookingSvc.findBookingByLastNameAndRefCode(lastName,
-		 * bookingRef); if (null == booking) { throw new MissingBookingException();
-		 * }else { bookingSvc.updateBookingStatus(booking.getLastName(), booking.,
-		 * true); }
-		 */
 	}
 
 	/**
