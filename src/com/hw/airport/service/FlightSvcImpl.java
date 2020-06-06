@@ -14,7 +14,7 @@ import java.util.function.Consumer;
 
 public class FlightSvcImpl implements FlightSvc {
 	AppData appData = AppData.getInstance();
-	BookingSvc bookingSvc = new BookingSvcImpl();
+	BookingSvc bookingSvc = appData.getBookingSvc();
 
 	/**
 	 * @param flightCode the flight code to check

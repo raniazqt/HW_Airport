@@ -21,11 +21,12 @@ import com.hw.airport.model.FlightExtrasAndCharges;
 import com.hw.airport.model.ReportData;
 
 public class ReportSvcImpl implements ReportSvc {
-	BookingSvc bookingSvc = new BookingSvcImpl();
-	FlightSvc flightSvc = new FlightSvcImpl();
-
+	
 	AppData appData = AppData.getInstance();
-	private BaggageSvc bagSvc = new BaggageSvcImpl();
+	
+	private BookingSvc bookingSvc = appData.getBookingSvc();
+	private FlightSvc flightSvc = appData.getFlightSvc();
+	private BaggageSvc baggageSvc = appData.getBaggageSvc();
 
 	@Override
 	public ReportData generateSummaryReportPerFlight(String flightCode, List<Booking> bookings) {
@@ -54,14 +55,14 @@ public class ReportSvcImpl implements ReportSvc {
 		}
 		double totalVol = 0;
 		try {
-			totalVol = bagSvc.getTheTotalBagVolumesOnFlight(flightCode);
+			totalVol = baggageSvc.getTheTotalBagVolumesOnFlight(flightCode);
 		} catch (HWAirportException e) {
 			// TODO Auto-generated catch block
 		}
 		double totalWgth = 0;
 
 		try {
-			totalWgth = bagSvc.getTheTotalBagWeightOnFlight(flightCode);
+			totalWgth = baggageSvc.getTheTotalBagWeightOnFlight(flightCode);
 		} catch (HWAirportException e) {
 			// TODO Auto-generated catch block
 		}

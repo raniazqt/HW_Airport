@@ -11,7 +11,7 @@ import com.hw.airport.model.Flight;
 public class BaggageSvcImpl implements BaggageSvc {
 	
 	private AppData appData = AppData.getInstance();
-	private FlightSvc flightSvc = new FlightSvcImpl();
+	private FlightSvc flightSvc =  appData.getFlightSvc();
 
 	/**
 	 * gets total volume on a flight.
