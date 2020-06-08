@@ -61,6 +61,12 @@ public class PassengerQueue {
 		return removedPassenger;
 
 	}
+	
+	public Booking firstPassengerFromQueue() {
+		Booking firstPassenger = passengerQ.getFirst();
+		return firstPassenger;
+
+	}
 
 	public void fillQueue() throws HWAirportException {
 		int csize = passengerQ.size();

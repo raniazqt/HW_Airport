@@ -11,6 +11,8 @@ import com.hw.airport.model.Booking;
 import com.hw.airport.model.PassengerQueue;
 import com.hw.airport.service.DataSvc;
 import com.hw.airport.service.DataSvcImpl;
+import com.hw.airport.service.DeskSvc;
+import com.hw.airport.service.DeskSvcImpl;
 import com.hw.airport.service.QueueSvc;
 import com.hw.airport.service.QueueSvcImpl;
 
@@ -36,6 +38,8 @@ public class testmain {
 		AppData appData = AppData.getInstance();
 
 		PassengerQueue passQ = appData.getPassengerQueue();
+		
+		DeskSvc checkDesk = new DeskSvcImpl();
 
 		try {
 			appData.setFlightsInfo(dataSvc.loadFlightsData(flightsFileName));
@@ -65,6 +69,22 @@ public class testmain {
 		
 		System.out.println("Appdata Ref Queue");
 		appData.getPassengerQueue().printQ();
+		 
+		System.out.println(appData.getBookingList().get(passQ.firstPassengerFromQueue().getRefCode()).getCheckInStatus());
+		
+		System.out.println("Check In Desk");
+		checkDesk.loadDesk();
+		System.out.println(checkDesk.getPassenger().getRefCode());	
+		Booking check = checkDesk.getPassenger();
+		
+		System.out.println(appData.getBookingList().get(check.getRefCode()).getCheckInStatus());
+		
+		checkDesk.clearDesk();
+		
+		System.out.println("Passenger");
+		System.out.println(appData.getBookingList().get(check.getRefCode()).getCheckInStatus());
+		
+		
 		/*
 		 * List <Booking> qList = Queues.createQueue(10); Queues.addQueue(qList);
 		 * Queues.dropQueue(qList, appData.getBookingList()); passQ.getInstance();

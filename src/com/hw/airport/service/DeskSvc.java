@@ -1,5 +1,13 @@
 package com.hw.airport.service;
 
-public class DeskSvc {
+import com.hw.airport.model.Booking;
+import com.hw.airport.model.Booking.CheckedIn;
 
+public interface DeskSvc {
+
+	public void loadDesk();
+
+	public void clearDesk();
+
+	public Booking getPassenger();
 }
