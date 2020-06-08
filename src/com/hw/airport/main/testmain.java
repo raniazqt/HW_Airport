@@ -46,22 +46,25 @@ public class testmain {
 		}
 		appState = ApplicationState.INITIALIZED;
 
-		passQList = passQ.getPassengerQ();
+		passQList = passQ.getPassengerQ();			
 
-		passQ.addPassengerToQueue();
-		passQ.addPassengerToQueue();
-		passQ.addPassengerToQueue();
-
+		passQ.setMaxSize(10);
+		//BIG ERROR IF QUEUE EXCEEDS BOOKINGS NEEDS BREAK POINT
+		passQ.fillQueue();
+		
+		System.out.println("Filled Queue");
 		passQ.printQ();
-
+		
+		passQ.addPassengerToQueue();
+		System.out.println("Added Passenger");		
+		passQ.printQ();
+		
 		passQ.removePassengerFromQueue();
-
-		System.out.println("++++++++++++++");
-
+		System.out.println("Removed Passenger");	
 		passQ.printQ();
-		System.out.println("++++++++++++++");
+		
+		System.out.println("Appdata Ref Queue");
 		appData.getPassengerQueue().printQ();
-
 		/*
 		 * List <Booking> qList = Queues.createQueue(10); Queues.addQueue(qList);
 		 * Queues.dropQueue(qList, appData.getBookingList()); passQ.getInstance();
@@ -74,8 +77,4 @@ public class testmain {
 
 	}
 
-	private static PassengerQueue PassengerQueue() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
