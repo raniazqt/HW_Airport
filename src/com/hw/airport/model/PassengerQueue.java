@@ -7,27 +7,22 @@ import java.util.List;
 import com.hw.airport.exception.HWAirportException;
 import com.hw.airport.model.Booking.CheckedIn;
 import com.hw.airport.service.BookingSvc;
-import com.hw.airport.service.BookingSvcImpl;
+
 
 public class PassengerQueue {
 
 	private LinkedList<Booking> passengerQ = new LinkedList<Booking>();
-	private BookingSvc bookingSvc = new BookingSvcImpl();
+	private AppData appData = AppData.getInstance();
+	private BookingSvc bookingSvc = appData.getBookingSvc();
+	
+	
+	
 	private int maxSize;
 
-	private PassengerQueue() {
+	public PassengerQueue() {
 	}
 
-	private static PassengerQueue passengerQueue;
-
-	public static PassengerQueue getInstance() {
-		if (passengerQueue == null) {
-			passengerQueue = new PassengerQueue();
-
-		}
-
-		return passengerQueue;
-	}
+	
 
 	public void setMaxSize(int sz) {
 		this.maxSize = sz;

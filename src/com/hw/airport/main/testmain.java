@@ -31,8 +31,12 @@ public class testmain {
 		appState = ApplicationState.UNINITIALIZED;
 
 		// any setup logic here.
-		PassengerQueue passQ = PassengerQueue.getInstance();
+		// PassengerQueue passQ = new PassengerQueue();
+
 		AppData appData = AppData.getInstance();
+
+		PassengerQueue passQ = appData.getPassengerQueue();
+
 		try {
 			appData.setFlightsInfo(dataSvc.loadFlightsData(flightsFileName));
 			appData.setBookingList(dataSvc.loadBookingData(bookingFileName));
@@ -43,6 +47,8 @@ public class testmain {
 		appState = ApplicationState.INITIALIZED;
 
 		passQList = passQ.getPassengerQ();
+
+		passQ.addPassengerToQueue();
 		passQ.addPassengerToQueue();
 		passQ.addPassengerToQueue();
 
@@ -50,7 +56,11 @@ public class testmain {
 
 		passQ.removePassengerFromQueue();
 
+		System.out.println("++++++++++++++");
+
 		passQ.printQ();
+		System.out.println("++++++++++++++");
+		appData.getPassengerQueue().printQ();
 
 		/*
 		 * List <Booking> qList = Queues.createQueue(10); Queues.addQueue(qList);
@@ -62,5 +72,10 @@ public class testmain {
 		 * System.out.println("Queue"); passQ.printQ();
 		 */
 
+	}
+
+	private static PassengerQueue PassengerQueue() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

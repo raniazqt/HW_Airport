@@ -2,6 +2,7 @@ package com.hw.airport.model;
 
 import java.util.Map;
 
+import com.hw.airport.exception.HWAirportException;
 import com.hw.airport.service.BaggageSvc;
 import com.hw.airport.service.BaggageSvcImpl;
 import com.hw.airport.service.BookingSvc;
@@ -18,7 +19,10 @@ public class AppData {
 	// Hashmap to hold the list of flights loaded from the text file. The key is the
 	// flight code
 	private Map<String, Flight> flightsInfo;
+	
+	private static PassengerQueue checkInQueue;	
 
+	
 	private static BookingSvc bookingSvc;
 	private static FlightSvc flightSvc;
 	private static BaggageSvc baggageSvc;
@@ -31,6 +35,8 @@ public class AppData {
 			AppData.setBookingSvc();
 			AppData.setFlightSvc();
 			AppData.setBaggageSvc();
+			AppData.setQueue();
+			
 		}
 
 		return appData;
@@ -47,6 +53,14 @@ public class AppData {
 	public static AppData setFlightSvc() {
 		if (flightSvc == null) {
 			flightSvc = new FlightSvcImpl();
+		}
+
+		return appData;
+	}
+	
+	public static AppData setQueue() {
+		if (checkInQueue == null) {
+			checkInQueue = new PassengerQueue();
 		}
 
 		return appData;
@@ -89,6 +103,25 @@ public class AppData {
 
 	public void setFlightsInfo(Map<String, Flight> flightsInfo) {
 		this.flightsInfo = flightsInfo;
+	}
+
+	public void setPassengerQueue(int qSize) {
+		checkInQueue = new PassengerQueue();
+		
+		int i=0;
+		try {
+			while(i<qSize) {
+			checkInQueue.addPassengerToQueue();
+			i++;
+			}
+		} catch (HWAirportException e) {
+			
+			e.printStackTrace();
+		}
+	}
+
+	public  PassengerQueue getPassengerQueue() {
+		return checkInQueue;
 	}
 
 }
