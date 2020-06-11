@@ -45,7 +45,7 @@ public class DeskSvcImpl implements DeskSvc {
 
 		if (valid == null) {
 
-			// desk clear
+			this.clearDesk();
 
 		}
 
@@ -53,15 +53,25 @@ public class DeskSvcImpl implements DeskSvc {
 
 	public void flightCapacity() {
 
-		int filled;
+		int passFilled = 0;
+		int passMax = this.plane.getMaxPasngrCnt();
+		double volFilled = 0;
+		double volMax = this.plane.getMaxBagVolume();
+		double weightFilled = 0;
+		double weightMax = this.plane.getMaxFlightWeight();
 
 		try {
-			filled = appData.getBookingSvc().getCountOfCheckedInPassengersByFlight(this.plane.getCode());
-			int capacity = this.plane.getMaxPasngrCnt() - filled;
+			passFilled = appData.getBookingSvc().getCountOfCheckedInPassengersByFlight(this.plane.getCode());
+			volFilled = appData.getBaggageSvc().getTheTotalBagVolumesOnFlight(this.plane.getCode());
+			weightFilled = appData.getBaggageSvc().getTheTotalBagWeightOnFlight(this.plane.getCode());
+
+			int passCapacity = passMax - passFilled;
+			double bagCapacity = (volMax - volFilled) + (weightMax - weightFilled);
+			double capacity = passCapacity + bagCapacity;
 
 			if (capacity == 0) {
 
-				// desk clear
+				this.clearDesk();
 
 			}
 
@@ -81,6 +91,12 @@ public class DeskSvcImpl implements DeskSvc {
 	}
 
 	public void clearDesk() {
+		passenger.setCheckInStatus(CheckedIn.OUT);
+		appData.getBookingList().replace(passenger.getRefCode(), passenger);
+
+	}
+	
+	public void checkinDesk() {
 		passenger.setCheckInStatus(CheckedIn.IN);
 		appData.getBookingList().replace(passenger.getRefCode(), passenger);
 
