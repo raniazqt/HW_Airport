@@ -78,13 +78,14 @@ public class testmain {
 		Booking check = checkDesk.getPassenger();
 		
 		System.out.println(appData.getBookingList().get(check.getRefCode()).getCheckInStatus());
-		
-		checkDesk.clearDesk();
+		checkDesk.validate();
+		checkDesk.calcCharges();
+		checkDesk.checkinDesk();
 		
 		System.out.println("Passenger");
 		System.out.println(appData.getBookingList().get(check.getRefCode()).getCheckInStatus());
 		
-		
+
 		/*
 		 * List <Booking> qList = Queues.createQueue(10); Queues.addQueue(qList);
 		 * Queues.dropQueue(qList, appData.getBookingList()); passQ.getInstance();

@@ -31,7 +31,7 @@ public class DeskSvcImpl implements DeskSvc {
 
 			passenger = appData.getPassengerQueue().removePassengerFromQueue();
 			this.id = passenger.getRefCode();
-			this.deskStatus = deskAvailabilty.Busy;
+			this.setDeskStatus(deskAvailabilty.Busy);
 			this.plane = appData.getFlightsInfo().get(passenger.getFlightCode());
 		}
 
@@ -41,7 +41,7 @@ public class DeskSvcImpl implements DeskSvc {
 
 		Booking valid = appData.getBookingList().get(this.id);
 
-		this.checkinProgress = deskProgress.BOOKING_VALIDATION;
+		this.setCheckinProgress(deskProgress.BOOKING_VALIDATION);
 
 		if (valid == null) {
 
@@ -96,7 +96,7 @@ public class DeskSvcImpl implements DeskSvc {
 
 		this.passenger.calcXtraVolChrg(this.plane.getMaxBagVolume(), this.plane.getXtraVolumeCharge());
 		this.passenger.calcXtraWghtChrg(this.plane.getMaxFlightWeight(), this.plane.getXtraWghtChargePerKg());
-		this.checkinProgress = deskProgress.EXTRA_FEE_CALCULATION;
+		this.setCheckinProgress(deskProgress.EXTRA_FEE_CALCULATION);
 
 	}
 
@@ -116,6 +116,22 @@ public class DeskSvcImpl implements DeskSvc {
 
 		return passenger;
 
+	}
+
+	public deskProgress getCheckinProgress() {
+		return checkinProgress;
+	}
+
+	public void setCheckinProgress(deskProgress checkinProgress) {
+		this.checkinProgress = checkinProgress;
+	}
+
+	public deskAvailabilty getDeskStatus() {
+		return deskStatus;
+	}
+
+	public void setDeskStatus(deskAvailabilty deskStatus) {
+		this.deskStatus = deskStatus;
 	}
 
 }
