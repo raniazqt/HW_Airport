@@ -11,6 +11,8 @@ import com.hw.airport.model.Booking;
 import com.hw.airport.model.PassengerQueue;
 import com.hw.airport.service.DataSvc;
 import com.hw.airport.service.DataSvcImpl;
+import com.hw.airport.service.DeskSvc;
+import com.hw.airport.service.DeskSvcImpl;
 import com.hw.airport.service.QueueSvc;
 import com.hw.airport.service.QueueSvcImpl;
 
@@ -31,8 +33,14 @@ public class testmain {
 		appState = ApplicationState.UNINITIALIZED;
 
 		// any setup logic here.
-		PassengerQueue passQ = PassengerQueue.getInstance();
+		// PassengerQueue passQ = new PassengerQueue();
+
 		AppData appData = AppData.getInstance();
+
+		PassengerQueue passQ = appData.getPassengerQueue();
+		
+		DeskSvc checkDesk = new DeskSvcImpl();
+
 		try {
 			appData.setFlightsInfo(dataSvc.loadFlightsData(flightsFileName));
 			appData.setBookingList(dataSvc.loadBookingData(bookingFileName));
@@ -42,15 +50,41 @@ public class testmain {
 		}
 		appState = ApplicationState.INITIALIZED;
 
-		passQList = passQ.getPassengerQ();
-		passQ.addPassengerToQueue();
-		passQ.addPassengerToQueue();
+		passQList = passQ.getPassengerQ();			
 
+		passQ.setMaxSize(10);
+		//BIG ERROR IF QUEUE EXCEEDS BOOKINGS NEEDS BREAK POINT
+		passQ.fillQueue();
+		
+		System.out.println("Filled Queue");
 		passQ.printQ();
-
+		
+		passQ.addPassengerToQueue();
+		System.out.println("Added Passenger");		
+		passQ.printQ();
+		
 		passQ.removePassengerFromQueue();
-
+		System.out.println("Removed Passenger");	
 		passQ.printQ();
+		
+		System.out.println("Appdata Ref Queue");
+		appData.getPassengerQueue().printQ();
+		 
+		System.out.println(appData.getBookingList().get(passQ.firstPassengerFromQueue().getRefCode()).getCheckInStatus());
+		
+		System.out.println("Check In Desk");
+		checkDesk.loadDesk();
+		System.out.println(checkDesk.getPassenger().getRefCode());	
+		Booking check = checkDesk.getPassenger();
+		
+		System.out.println(appData.getBookingList().get(check.getRefCode()).getCheckInStatus());
+		checkDesk.validate();
+		checkDesk.calcCharges();
+		checkDesk.checkinDesk();
+		
+		System.out.println("Passenger");
+		System.out.println(appData.getBookingList().get(check.getRefCode()).getCheckInStatus());
+		
 
 		/*
 		 * List <Booking> qList = Queues.createQueue(10); Queues.addQueue(qList);
@@ -63,4 +97,5 @@ public class testmain {
 		 */
 
 	}
+
 }
