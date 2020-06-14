@@ -16,7 +16,7 @@ public class DeskSvcImpl implements DeskSvc {
 
 	// More stages
 	public enum deskProgress {
-		WAITING, BOOKING_VALIDATION, EXTRA_FEE_CALCULATION
+		WAITING, BOOKING_VALIDATION, FLIGHT_STATUS, EXTRA_FEE_CALCULATION
 	}
 
 	private Booking passenger;
@@ -50,6 +50,16 @@ public class DeskSvcImpl implements DeskSvc {
 		}
 
 	}
+	
+	public void flightStatus() {
+		
+	//	flightStatus = appData.getFlightsInfo().get(this.plane.getCode()).
+	//Is there a flight status variable?	
+		
+		
+	}
+	
+	public void boardingTimeCheck() {} 
 
 	public void flightCapacity() {
 
