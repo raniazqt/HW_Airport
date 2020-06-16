@@ -8,21 +8,16 @@ import com.hw.airport.exception.HWAirportException;
 import com.hw.airport.model.Booking.CheckedIn;
 import com.hw.airport.service.BookingSvc;
 
-
 public class PassengerQueue {
 
 	private LinkedList<Booking> passengerQ = new LinkedList<Booking>();
 	private AppData appData = AppData.getInstance();
 	private BookingSvc bookingSvc = appData.getBookingSvc();
-	
-	
-	
+
 	private int maxSize;
 
 	public PassengerQueue() {
 	}
-
-	
 
 	public void setMaxSize(int sz) {
 		this.maxSize = sz;
@@ -46,7 +41,7 @@ public class PassengerQueue {
 
 	public void addPassengerToQueue() throws HWAirportException {
 		Booking passengerToAdd = bookingSvc.getRandomBooking();
-		
+
 		if (passengerToAdd.getCheckInStatus().equals(CheckedIn.OUT)) {
 			bookingSvc.setRandomBaggageDimensions(passengerToAdd);
 			passengerQ.add(passengerToAdd);
@@ -61,7 +56,7 @@ public class PassengerQueue {
 		return removedPassenger;
 
 	}
-	
+
 	public Booking firstPassengerFromQueue() {
 		Booking firstPassenger = passengerQ.getFirst();
 		return firstPassenger;
