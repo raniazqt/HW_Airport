@@ -10,7 +10,7 @@ import com.hw.airport.service.BookingSvc;
 
 public class PassengerQueue {
 
-	private LinkedList<Booking> passengerQ = new LinkedList<Booking>();
+	private LinkedList<Booking> passengerQList = new LinkedList<Booking>();
 	private AppData appData = AppData.getInstance();
 	private BookingSvc bookingSvc = appData.getBookingSvc();
 
@@ -28,55 +28,55 @@ public class PassengerQueue {
 		return maxSize;
 	}
 
-	public LinkedList<Booking> getPassengerQ() {
-		return passengerQ;
+	public LinkedList<Booking> getPassengerQList() {
+		return passengerQList;
 	}
 
-	public void setPassengerQ() {
+	public void setPassengerQList() {
 		List<Booking> temp = bookingSvc.extractBookingList();
 		Collections.shuffle(temp);
 		temp = temp.subList(0, maxSize);
-		passengerQ = new LinkedList<Booking>(temp);
+		passengerQList = new LinkedList<Booking>(temp);
 	}
 
-	public void addPassengerToQueue() throws HWAirportException {
+	public void addPassengerToQList() throws HWAirportException {
 		Booking passengerToAdd = bookingSvc.getRandomBooking();
 
 		if (passengerToAdd.getCheckInStatus().equals(CheckedIn.OUT)) {
 			bookingSvc.setRandomBaggageDimensions(passengerToAdd);
-			passengerQ.add(passengerToAdd);
+			passengerQList.add(passengerToAdd);
 			bookingSvc.updateCheckInStatus(passengerToAdd.getRefCode(), CheckedIn.PROCESS);
 
 		}
 
 	}
 
-	public Booking removePassengerFromQueue() {
-		Booking removedPassenger = passengerQ.removeFirst();
+	public Booking removePassengerFromQList() {
+		Booking removedPassenger = passengerQList.removeFirst();
 		return removedPassenger;
 
 	}
 
-	public Booking firstPassengerFromQueue() {
-		Booking firstPassenger = passengerQ.getFirst();
+	public Booking firstPassengerFromQList() {
+		Booking firstPassenger = passengerQList.getFirst();
 		return firstPassenger;
 
 	}
 
-	public void fillQueue() throws HWAirportException {
-		int csize = passengerQ.size();
+	public void fillQList() throws HWAirportException {
+		int csize = passengerQList.size();
 
 		while (csize < maxSize) {
-			this.addPassengerToQueue();
-			csize = passengerQ.size();
+			this.addPassengerToQList();
+			csize = passengerQList.size();
 
 		}
 
 	}
 
-	public void printQ() {
+	public void printQList() {
 
-		for (Booking book : passengerQ) {
+		for (Booking book : passengerQList) {
 
 			if (book == null) {
 				break;
