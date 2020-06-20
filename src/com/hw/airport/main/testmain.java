@@ -80,7 +80,7 @@ public class testmain {
 		System.out.println(appData.getBookingList().get(check.getRefCode()).getCheckInStatus());
 		checkDesk.validate();
 		checkDesk.calcCharges();
-		checkDesk.checkinDesk();
+		checkDesk.checkinPassenger();
 		
 		System.out.println("Passenger");
 		System.out.println(appData.getBookingList().get(check.getRefCode()).getCheckInStatus());

@@ -106,7 +106,7 @@ public class DeskSvcImpl implements DeskSvc {
 
 	}
 	
-	public void checkinDesk() {
+	public void checkinPassenger() {
 		passenger.setCheckInStatus(CheckedIn.IN);
 		appData.getBookingList().replace(passenger.getRefCode(), passenger);
 

@@ -24,7 +24,7 @@ public interface DeskSvc {
 
 	public void calcCharges();
 
-	public void checkinDesk();
+	public void checkinPassenger();
 
 
 }
