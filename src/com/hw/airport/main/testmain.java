@@ -50,27 +50,27 @@ public class testmain {
 		}
 		appState = ApplicationState.INITIALIZED;
 
-		passQList = passQ.getPassengerQ();			
+		passQList = passQ.getPassengerQList();			
 
 		passQ.setMaxSize(10);
 		//BIG ERROR IF QUEUE EXCEEDS BOOKINGS NEEDS BREAK POINT
-		passQ.fillQueue();
+		passQ.fillQList();
 		
 		System.out.println("Filled Queue");
-		passQ.printQ();
+		passQ.printQList();
 		
-		passQ.addPassengerToQueue();
+		passQ.addPassengerToQList();
 		System.out.println("Added Passenger");		
-		passQ.printQ();
+		passQ.printQList();
 		
-		passQ.removePassengerFromQueue();
+		passQ.removePassengerFromQList();
 		System.out.println("Removed Passenger");	
-		passQ.printQ();
+		passQ.printQList();
 		
 		System.out.println("Appdata Ref Queue");
-		appData.getPassengerQueue().printQ();
+		appData.getPassengerQueue().printQList();
 		 
-		System.out.println(appData.getBookingList().get(passQ.firstPassengerFromQueue().getRefCode()).getCheckInStatus());
+		System.out.println(appData.getBookingList().get(passQ.firstPassengerFromQList().getRefCode()).getCheckInStatus());
 		
 		System.out.println("Check In Desk");
 		checkDesk.loadDesk();
@@ -80,7 +80,7 @@ public class testmain {
 		System.out.println(appData.getBookingList().get(check.getRefCode()).getCheckInStatus());
 		checkDesk.validate();
 		checkDesk.calcCharges();
-		checkDesk.checkinDesk();
+		checkDesk.checkinPassenger();
 		
 		System.out.println("Passenger");
 		System.out.println(appData.getBookingList().get(check.getRefCode()).getCheckInStatus());

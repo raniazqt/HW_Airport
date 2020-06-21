@@ -29,7 +29,7 @@ public class DeskSvcImpl implements DeskSvc {
 
 		if (passenger == null) {
 
-			passenger = appData.getPassengerQueue().removePassengerFromQueue();
+			passenger = appData.getPassengerQueue().removePassengerFromQList();
 			this.id = passenger.getRefCode();
 			this.setDeskStatus(deskAvailabilty.Busy);
 			this.plane = appData.getFlightsInfo().get(passenger.getFlightCode());
@@ -106,7 +106,7 @@ public class DeskSvcImpl implements DeskSvc {
 
 	}
 	
-	public void checkinDesk() {
+	public void checkinPassenger() {
 		passenger.setCheckInStatus(CheckedIn.IN);
 		appData.getBookingList().replace(passenger.getRefCode(), passenger);
 

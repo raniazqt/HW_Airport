@@ -19,10 +19,11 @@ public class AppData {
 	// Hashmap to hold the list of flights loaded from the text file. The key is the
 	// flight code
 	private Map<String, Flight> flightsInfo;
-	
-	private static PassengerQueue checkInQueue;	
 
-	
+	// PassengerQueue object to hold a single queue object for the program will need
+	// to be managed for threading
+	private static PassengerQueue checkInQueue;
+
 	private static BookingSvc bookingSvc;
 	private static FlightSvc flightSvc;
 	private static BaggageSvc baggageSvc;
@@ -36,7 +37,7 @@ public class AppData {
 			AppData.setFlightSvc();
 			AppData.setBaggageSvc();
 			AppData.setQueue();
-			
+
 		}
 
 		return appData;
@@ -57,7 +58,7 @@ public class AppData {
 
 		return appData;
 	}
-	
+
 	public static AppData setQueue() {
 		if (checkInQueue == null) {
 			checkInQueue = new PassengerQueue();
@@ -65,7 +66,7 @@ public class AppData {
 
 		return appData;
 	}
-	
+
 	public static AppData setBaggageSvc() {
 		if (baggageSvc == null) {
 			baggageSvc = new BaggageSvcImpl();
@@ -78,12 +79,12 @@ public class AppData {
 
 		return AppData.bookingSvc;
 	}
-	
+
 	public FlightSvc getFlightSvc() {
 
 		return AppData.flightSvc;
 	}
-	
+
 	public BaggageSvc getBaggageSvc() {
 
 		return AppData.baggageSvc;
@@ -105,22 +106,7 @@ public class AppData {
 		this.flightsInfo = flightsInfo;
 	}
 
-	public void setPassengerQueue(int qSize) {
-		checkInQueue = new PassengerQueue();
-		
-		int i=0;
-		try {
-			while(i<qSize) {
-			checkInQueue.addPassengerToQueue();
-			i++;
-			}
-		} catch (HWAirportException e) {
-			
-			e.printStackTrace();
-		}
-	}
-
-	public  PassengerQueue getPassengerQueue() {
+	public PassengerQueue getPassengerQueue() {
 		return checkInQueue;
 	}
 
