@@ -5,9 +5,9 @@ import com.hw.airport.exception.MissingBookingException;
 import com.hw.airport.exception.MissingFlightException;
 import com.hw.airport.model.AppData;
 import com.hw.airport.model.Booking;
+import com.hw.airport.model.Booking.BookingStatus;
 import com.hw.airport.model.BookingCharge;
 import com.hw.airport.model.Flight;
-import com.hw.airport.model.Booking.CheckedIn;
 
 public class CheckInSvcImpl implements CheckInSvc {
 
@@ -77,7 +77,7 @@ public class CheckInSvcImpl implements CheckInSvc {
 		boolean isMaxVolumeExceeded = flightSvc.isMaxVolumeExceededForFlight(pendingBooking.getFlightCode(), currentFlightBagVolume);
 		boolean isMaxWeightExceeded = flightSvc.isMaxWeightExceededForFlight(pendingBooking.getFlightCode(), currentFlightBagWeight);
 		boolean isMaxPassengerCountExceeded = flightSvc.isMaxPassengerCountExceededForFlight(pendingBooking.getFlightCode(), currentFlightPassengerCount);
-		boolean isNotCheckedIn = (pendingBooking.getCheckInStatus()==CheckedIn.OUT);
+		boolean isNotCheckedIn = (pendingBooking.getCheckInStatus()==BookingStatus.NOT_CHECKED_IN);
 			
 		return !isMaxVolumeExceeded && !isMaxWeightExceeded && !isMaxPassengerCountExceeded && isNotCheckedIn;
 	

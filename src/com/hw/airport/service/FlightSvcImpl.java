@@ -5,8 +5,9 @@ import com.hw.airport.exception.InvalidFlightCodeException;
 import com.hw.airport.exception.MissingFlightException;
 import com.hw.airport.model.AppData;
 import com.hw.airport.model.Booking;
-import com.hw.airport.model.Booking.CheckedIn;
+import com.hw.airport.model.Booking.BookingStatus;
 import com.hw.airport.model.Flight;
+import com.hw.airport.model.Passenger.CheckInProgress;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -14,7 +15,7 @@ import java.util.function.Consumer;
 
 public class FlightSvcImpl implements FlightSvc {
 	AppData appData = AppData.getInstance();
-	BookingSvc bookingSvc = new BookingSvcImpl();
+//	BookingSvc bookingSvc = new BookingSvcImpl();
 
 	/**
 	 * @param flightCode the flight code to check
@@ -30,9 +31,9 @@ public class FlightSvcImpl implements FlightSvc {
 			throw new InvalidFlightCodeException();
 		}
 
-		List<Booking> bookingsForFlight = bookingSvc.findAllBookingForFlight(flightCode);
+		List<Booking> bookingsForFlight = null;// bookingSvc.findAllBookingForFlight(flightCode);
 		for (Booking booking : bookingsForFlight) {
-			if (booking.getCheckInStatus() == CheckedIn.IN) {
+			if (booking.getCheckInStatus() == BookingStatus.CHECKED_IN) {
 				currentCheckedInPsngrCount++;
 			}
 		}

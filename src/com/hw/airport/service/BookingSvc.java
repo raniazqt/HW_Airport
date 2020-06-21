@@ -26,7 +26,7 @@ public interface BookingSvc {
 
 	boolean updateBookingStatus(Booking booking, BookingCharge bookingChg) throws HWAirportException;
 
-	public Booking getFirstShuffledBooking();
+	public Booking getFirstShuffledBooking() throws HWAirportException;
 	
 	public void updateCheckInStatus(String refCode, BookingStatus status) ;
 	

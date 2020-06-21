@@ -17,7 +17,8 @@ public class PassengerQueue {
 
 	private PassengerQueue() {
 	}
-
+	
+	
 	private static PassengerQueue passengerQueue;
 
 	public static PassengerQueue getInstance() {
@@ -50,7 +51,7 @@ public class PassengerQueue {
 	public void addPassengerToQueue() throws HWAirportException {
 		Booking passengerToAdd = bookingSvc.getRandomBooking();
 		
-		if (passengerToAdd.getCheckInStatus().equals(BookingStatus.NOT_CHECKED_IN)) {
+		if (null != passengerToAdd && passengerToAdd.getCheckInStatus().equals(BookingStatus.NOT_CHECKED_IN)) {
 			bookingSvc.setRandomBaggageDimensions(passengerToAdd);
 			passengerQ.add(passengerToAdd);
 			bookingSvc.updateCheckInStatus(passengerToAdd.getRefCode(), BookingStatus.PROCESSING);
@@ -72,6 +73,10 @@ public class PassengerQueue {
 
 		}
 
+	}
+	
+	public int getQueueSize() {
+		return this.passengerQ.size();
 	}
 
 	public void printQ() {

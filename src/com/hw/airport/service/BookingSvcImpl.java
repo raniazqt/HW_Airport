@@ -177,33 +177,46 @@ public class BookingSvcImpl implements BookingSvc {
 		return bookingList;
 	}
 
-	public List<Booking> shuffleBookingList() {
+	public List<Booking> shuffleBookingList() throws HWAirportException {
+		
 		List<Booking> bookingList = this.extractBookingList();
+		if (bookingList == null || bookingList.size() == 0) {
+			//throw new HWAirportException("Booling list is empty");
+			//TODO:LOGGER
+			System.out.println("Booking list is empty");
+		}
 		Collections.shuffle(bookingList);
 		return bookingList;
 	}
 
-	public Booking getFirstShuffledBooking() {
-		Booking booking = this.shuffleBookingList().get(0);
-		return booking;
+	public Booking getFirstShuffledBooking() throws HWAirportException {
+		List<Booking> bookingList = this.shuffleBookingList();
+		if (bookingList == null || bookingList.size() == 0) {
+			//throw new HWAirportException("Booling list is empty");
+			//TODO:LOGGER
+			System.out.println("Booking list is empty");
+		}
+		return bookingList.get(0);
 	}
 
 	public Booking getRandomBooking() throws HWAirportException {
 		Booking RandomBooking = null;
 		List<Booking> shuffledList = this.shuffleBookingList();
 		if (null == shuffledList || shuffledList.size() == 0) {
-			throw new HWAirportException("Empty Shuffled Booking List");
+			//throw new HWAirportException("Empty Shuffled Booking List");
+			//TODO:LOGGER
+			System.out.println("Booking list is empty");
 		}
 		for (Booking book : shuffledList) {
 			if (book.getCheckInStatus().equals(BookingStatus.NOT_CHECKED_IN)) {
-
 				RandomBooking = book;
 				break;
 			}
-
 		}
 		if (null == RandomBooking) {
-			throw new HWAirportException("No valid bookings");
+			//throw new HWAirportException("No valid bookings");
+			//TODO:LOGGER
+			System.out.println("No passengers are available");
 		}
 		return RandomBooking;
 
