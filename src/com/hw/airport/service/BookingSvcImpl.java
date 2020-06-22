@@ -7,7 +7,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import com.hw.airport.exception.*;
+import com.hw.airport.config.AppContainer;
+import com.hw.airport.exception.BookingLastNameMismatchException;
+import com.hw.airport.exception.HWAirportException;
+import com.hw.airport.exception.MissingBookingException;
+import com.hw.airport.exception.MissingFlightException;
+import com.hw.airport.exception.NullBookingException;
 import com.hw.airport.model.AppData;
 import com.hw.airport.model.Booking;
 import com.hw.airport.model.Booking.BookingStatus;
@@ -17,7 +22,7 @@ import com.hw.airport.model.FlightExtrasAndCharges;
 
 public class BookingSvcImpl implements BookingSvc {
 	AppData appData = AppData.getInstance();
-	FlightSvc flightSvc = new FlightSvcImpl();
+	FlightSvc flightSvc = AppContainer.getFlightSvc();
 
 	/**
 	 * Search for passenger booking in the booking list. It is found if the booking
@@ -118,7 +123,7 @@ public class BookingSvcImpl implements BookingSvc {
 	 *The charges are summed up from the booking data for passenger who are checked in the given flight. 
 	 *@param flightCode flight code the flight we're calculating the chargs for
 	 *@throws HWAirportException throws missing flight exception if flight is not found.
-	 */
+	*/
 	@Override
 	public FlightExtrasAndCharges calculateExtraChargeForFlight(String flightCode) throws HWAirportException {
 		Flight flight = flightSvc.getFlightByCode(flightCode);
@@ -143,7 +148,7 @@ public class BookingSvcImpl implements BookingSvc {
 
 		return new FlightExtrasAndCharges(flightCode, totalExtraWght, totalExtraVol, totalExtraWghtChrg,
 				totalExtraVolChrg);
-	}
+	} 
 
 	/**
 	 * Retrieves the list of booking for a fiven flight

@@ -7,12 +7,12 @@ import com.hw.airport.config.AirportSimulator;
 import com.hw.airport.config.AppContainer;
 import com.hw.airport.exception.HWAirportException;
 import com.hw.airport.model.PassengerQueue;
+import com.hw.airport.service.QueueSvc;
 
 public class QueueTimer extends TimerTask{
 
-	AppContainer appContainer = AppContainer.getInstance();
-
 	AirportSimulator simulator = AirportSimulator.getInstnce();
+	QueueSvc queueSvc = AppContainer.getQueueSvc();
 	@Override
 	public void run() {
 		//TODO:logger
@@ -20,9 +20,9 @@ public class QueueTimer extends TimerTask{
 		System.out.println("passenger was added");
 	}
 	private void populateQueueTask() {
-		PassengerQueue queue = appContainer.getCheckInQueue();
+		PassengerQueue queue = AppContainer.getCheckInQueue();
 		try {
-			queue.addPassengerToQueue();
+			queueSvc.addPassengerToQueue();
 		} catch (HWAirportException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

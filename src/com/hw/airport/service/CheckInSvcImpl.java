@@ -1,9 +1,9 @@
 package com.hw.airport.service;
 
+import com.hw.airport.config.AppContainer;
 import com.hw.airport.exception.HWAirportException;
 import com.hw.airport.exception.MissingBookingException;
 import com.hw.airport.exception.MissingFlightException;
-import com.hw.airport.model.AppData;
 import com.hw.airport.model.Booking;
 import com.hw.airport.model.Booking.BookingStatus;
 import com.hw.airport.model.BookingCharge;
@@ -11,9 +11,9 @@ import com.hw.airport.model.Flight;
 
 public class CheckInSvcImpl implements CheckInSvc {
 
-	private BookingSvc bookingSvc = new BookingSvcImpl();
-	private FlightSvc flightSvc = new FlightSvcImpl();
-	private BaggageSvc baggageSvc = new BaggageSvcImpl();
+	private BookingSvc bookingSvc = AppContainer.getBookingSvc();
+	private FlightSvc flightSvc = AppContainer.getFlightSvc();
+	private BaggageSvc baggageSvc = AppContainer.getBaggageSvc();
 
 	/**
 	 * @param lastName last name of the passenger.

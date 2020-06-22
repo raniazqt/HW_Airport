@@ -9,7 +9,11 @@ public class Desk {
 	
 	//passenger being checked in 
 	private Booking passenger;
-	private int id;
+	
+	//Desk ID
+	private Integer id;
+	
+	//Desk status from ENUM
 	private String status;
 	
 	/*
@@ -18,12 +22,12 @@ public class Desk {
 	 * which uses the thread safe AtomicInteger type. 
 	 * When first creating a desk its status is available and ready to take passengers  
 	 */
-	public Desk(int id) {
+	public Desk(Integer id) {
 		super();
 		this.id = id;
 		this.status = status;
 	}
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 	public Booking getPassenger() {
@@ -37,7 +41,7 @@ public class Desk {
 	public void setPassenger(Booking passenger) {
 		this.passenger = passenger;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public void setStatus(String status) {

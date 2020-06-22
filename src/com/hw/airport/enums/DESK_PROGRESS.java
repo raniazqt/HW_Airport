@@ -1,0 +1,7 @@
+package com.hw.airport.enums;
+
+public enum DESK_PROGRESS {
+
+	WAITING, BOOKING_VALIDATION, FLIGHT_STATUS, EXTRA_FEE_CALCULATION
+	
+}

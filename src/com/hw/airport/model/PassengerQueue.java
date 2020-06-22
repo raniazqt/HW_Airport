@@ -1,26 +1,21 @@
 package com.hw.airport.model;
 
-import java.util.Collections;
 import java.util.LinkedList;
-import java.util.List;
 
-import com.hw.airport.exception.HWAirportException;
-import com.hw.airport.model.Booking.BookingStatus;
-import com.hw.airport.service.BookingSvc;
-import com.hw.airport.service.BookingSvcImpl;
 
 public class PassengerQueue {
 
-	private LinkedList<Booking> passengerQ = new LinkedList<Booking>();
-	private BookingSvc bookingSvc = new BookingSvcImpl();
-	private int maxSize;
+	private LinkedList<Booking> passengerList = new LinkedList<Booking>();
+	
+	private int queueMaxSize;
 
-	private PassengerQueue() {
-	}
-	
-	
 	private static PassengerQueue passengerQueue;
 
+	
+	private PassengerQueue() {
+		
+	}
+	
 	public static PassengerQueue getInstance() {
 		if (passengerQueue == null) {
 			passengerQueue = new PassengerQueue();
@@ -28,60 +23,36 @@ public class PassengerQueue {
 		return passengerQueue;
 	}
 
-	public void setMaxSize(int sz) {
-		this.maxSize = sz;
-
+	
+	
+	public LinkedList<Booking> getPassengerList() {
+		return passengerList;
 	}
 
-	public int getMaxSize() {
-		return maxSize;
+	public int getQueueMaxSize() {
+		return queueMaxSize;
 	}
 
-	public LinkedList<Booking> getPassengerQ() {
-		return passengerQ;
+	public void setPassengerList(LinkedList<Booking> passengerList) {
+		this.passengerList = passengerList;
 	}
 
-	public void setPassengerQ() {
-		List<Booking> temp = bookingSvc.extractBookingList();
-		Collections.shuffle(temp);
-		temp = temp.subList(0, maxSize);
-		passengerQ = new LinkedList<Booking>(temp);
-	}
-
-	public void addPassengerToQueue() throws HWAirportException {
-		Booking passengerToAdd = bookingSvc.getRandomBooking();
-		
-		if (null != passengerToAdd && passengerToAdd.getCheckInStatus().equals(BookingStatus.NOT_CHECKED_IN)) {
-			bookingSvc.setRandomBaggageDimensions(passengerToAdd);
-			passengerQ.add(passengerToAdd);
-			bookingSvc.updateCheckInStatus(passengerToAdd.getRefCode(), BookingStatus.PROCESSING);
-		}
+	public void setQueueMaxSize(int queueMaxSize) {
+		this.queueMaxSize = queueMaxSize;
 	}
 
 	public Booking removePassengerFromQueue() {
-		Booking removedPassenger = passengerQ.removeFirst();
+		Booking removedPassenger = passengerList.removeFirst();
 		return removedPassenger;
-
-	}
-
-	public void fillQueue() throws HWAirportException {
-		int csize = passengerQ.size();
-
-		while (csize < maxSize) {
-			this.addPassengerToQueue();
-			csize = passengerQ.size();
-
-		}
-
 	}
 	
-	public int getQueueSize() {
-		return this.passengerQ.size();
+	public void addPassengerToQueue(Booking passenger) {
+		this.passengerList.add(passenger);
 	}
 
-	public void printQ() {
+	public void printPassegerQueue() {
 
-		for (Booking book : passengerQ) {
+		for (Booking book : passengerList) {
 
 			if (book == null) {
 				break;
@@ -91,6 +62,10 @@ public class PassengerQueue {
 
 		}
 
+	}
+	
+	public int getQueueSize() {
+		return passengerList.size();
 	}
 
 }

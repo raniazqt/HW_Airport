@@ -5,9 +5,9 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Queue;
 import java.util.Random;
 
+import com.hw.airport.config.AppContainer;
 import com.hw.airport.exception.HWAirportException;
 import com.hw.airport.model.Booking;
 import com.hw.airport.model.Booking.BookingStatus;
@@ -17,21 +17,20 @@ import com.hw.airport.service.BookingSvc;
 
 public class QueueSvcImpl implements QueueSvc {
 
-	BookingSvc BKsvc = new BookingSvcImpl();
+	BookingSvc bookingSvc = AppContainer.getBookingSvc();
+	
 	private PassengerQueue passengerQ = PassengerQueue.getInstance();
 	
 	
 	@Override
 	public Booking getPassengerFromQueue() {
-		Booking qPassenger = passengerQ.removePassengerFromQueue();
-		return qPassenger; 
+		return passengerQ.removePassengerFromQueue();
 	}
 
+	@Override
 	public void addQueue(List<Booking> Queue) throws HWAirportException {
-
 		int size = Queue.size();		
 		boolean dupe = false;
-
 		while (size < 10 && size != 0) {
 			Booking up = this.createQueue(1).get(0);
 			for (Booking book : Queue) {
@@ -49,7 +48,8 @@ public class QueueSvcImpl implements QueueSvc {
 		}
 
 	}
-
+//TODO:WHAT IS THIS?
+	@Override
 	public void dropQueue(List<Booking> Queue, Map<String, Booking> bookingMap) throws HWAirportException {
 
 		bookingMap.get(Queue.remove(0).getRefCode()).setCheckInStatus(BookingStatus.PROCESSING);
@@ -59,12 +59,13 @@ public class QueueSvcImpl implements QueueSvc {
 	@Override
 	public List<Booking> createQueue(int qSize) throws HWAirportException {
 
-		List<Booking> Queue = BKsvc.extractBookingList().subList(0, qSize);
+		List<Booking> Queue = bookingSvc.extractBookingList().subList(0, qSize);
 		Collections.shuffle(Queue);
 
 		return Queue;
 	}
-
+	
+	@Override
 	public List<Booking> Deskloadexample(Map<String, Booking> bookingMap, Map<String, Flight> flightMap)
 			throws HWAirportException {
 		List<Booking> tempList = new ArrayList<>(bookingMap.values());
@@ -85,9 +86,51 @@ public class QueueSvcImpl implements QueueSvc {
 		return tempList;
 	}
 
+	@Override
 	public List<Booking> queue() {
 
-		return BKsvc.extractBookingList();
+		return bookingSvc.extractBookingList();
 	}
+	
+
+	@Override
+	public void setPassengerQ() {
+		List<Booking> temp = bookingSvc.extractBookingList();
+		Collections.shuffle(temp);
+		temp = temp.subList(0, passengerQ.getQueueMaxSize());
+		passengerQ.setPassengerList(new LinkedList<Booking>(temp));
+	}
+
+	@Override
+	public void addPassengerToQueue() throws HWAirportException {
+		Booking passengerToAdd = bookingSvc.getRandomBooking();
+		
+		if (null != passengerToAdd && passengerToAdd.getCheckInStatus().equals(BookingStatus.NOT_CHECKED_IN)) {
+			bookingSvc.setRandomBaggageDimensions(passengerToAdd);
+			passengerQ.addPassengerToQueue(passengerToAdd);
+			bookingSvc.updateCheckInStatus(passengerToAdd.getRefCode(), BookingStatus.PROCESSING);
+		}
+	}
+
+	
+	@Override
+	public Booking firstPassengerFromQueue() {
+		Booking firstPassenger = passengerQ.removePassengerFromQueue();
+		return firstPassenger;
+
+	}
+	
+	@Override
+	public void fillQueue() throws HWAirportException {
+		int csize = passengerQ.getQueueMaxSize();
+
+		while (csize < passengerQ.getQueueMaxSize()) {
+			this.addPassengerToQueue();
+			csize = passengerQ.getQueueMaxSize();
+
+		}
+
+	}
+
 
 }

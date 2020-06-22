@@ -16,6 +16,8 @@ import com.hw.airport.service.DataSvc;
 import com.hw.airport.service.DataSvcImpl;
 import com.hw.airport.service.FlightSvc;
 import com.hw.airport.service.FlightSvcImpl;
+import com.hw.airport.service.QueueSvc;
+import com.hw.airport.service.QueueSvcImpl;
 
 public class AppContainer {
 
@@ -42,6 +44,8 @@ public class AppContainer {
 	private static AirportGUI gui;
 	
 	private static DataSvc dataSvc;
+	
+	private static QueueSvc queueSvc ;
 
 	public static AppContainer getInstance() {
 		if (appContainer == null) {
@@ -53,6 +57,7 @@ public class AppContainer {
 			appData = AppData.getInstance();
 			gui = new AirportGUIImpl();
 			dataSvc = new DataSvcImpl();
+			queueSvc= new QueueSvcImpl();
 		}
 
 		return appContainer;
@@ -93,6 +98,12 @@ public class AppContainer {
 	public static DataSvc getDataSvc() {
 		return dataSvc;
 	}
+
+	public static QueueSvc getQueueSvc() {
+		return queueSvc;
+	}
+	
+	
 
 
 }

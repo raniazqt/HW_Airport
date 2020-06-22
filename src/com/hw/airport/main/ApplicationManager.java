@@ -24,26 +24,43 @@ public class ApplicationManager {
 	private ApplicationState appState;
 	private AirportSimulator simulator;
 	private DataSvc dataSvc;
-	private AppContainer appContainer;
-	private PassengerQueue queue ;
 	String flightsFileName = "flights.csv"; 
 	String bookingFileName = "bookings.csv";
 
-	public ApplicationManager() {
-
-		simulator = AirportSimulator.getInstnce();
-		appContainer = AppContainer.getInstance();
+	public void InitializeApplication() {
+		AppContainer.getInstance();
+		AppData.getInstance();
+		dataSvc = AppContainer.getDataSvc();
+		gui = AppContainer.getGui();
+		/*
+		 * if (null == appContainer) { throw new RuntimeErrorException(null,
+		 * "Application did not start correctly. Notify adminstrator "); }
+		 */
 		
-
-		if (null == appContainer) {
-			throw new RuntimeErrorException(null, "Application did not start correctly. Notify adminstrator ");
+		
+		//load flights and booking data from files
+		try {
+			AppData.setFlightsInfo(dataSvc.loadFlightsData(flightsFileName));
+		} catch (HWAirportException e) {
+			e.printStackTrace();
 		}
-		gui = appContainer.getGui();
-		dataSvc = appContainer.getDataSvc();
+		AppData.setBookingList(dataSvc.loadBookingData(bookingFileName));
+
+		appState = ApplicationState.INITIALIZED;
+
+	}
+
+	public ApplicationManager() {
+		simulator = AirportSimulator.getInstnce();
+		
+		gui = AppContainer.getGui();
+
 		appState = ApplicationState.UNINITIALIZED;
 	}
 
 	private void start() {
+		
+		this.InitializeApplication();
 
 		/* 1. Load data from files
 		 * 2. Read simulator settings from user:
@@ -58,22 +75,11 @@ public class ApplicationManager {
 		 */	
 
 		// any setup logic here.
-		AppData appData = appContainer.getAppData(); 
-		//load flights and booking data from files
-		try {
-			appData.setFlightsInfo(dataSvc.loadFlightsData(flightsFileName));
-		} catch (HWAirportException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		appData.setBookingList(dataSvc.loadBookingData(bookingFileName));
 
 		//Initialize app simulator
 		simulator = AirportSimulator.getInstnce();
 		long rate = simulator.getQueuePopulatingRate();
 		long appRate = rate / 6;
-
-		appState = ApplicationState.INITIALIZED;
 
 		TimerTask timerTask = new QueueTimer();
 		//running timer task as daemon thread

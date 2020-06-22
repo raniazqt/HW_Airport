@@ -7,10 +7,11 @@ public interface DeskSvc {
 
 	Desk openDesk();
 
-	void closeDesk();
-
-	void addPassengerToDesk(Desk desk) throws HWAirportException;
+	void loadDesk(Desk desk) throws HWAirportException;
 
 	Desk getDeskDetails();
+
+	void closeDesk(Desk desk);
+
 
 }
