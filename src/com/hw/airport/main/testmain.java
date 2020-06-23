@@ -22,8 +22,6 @@ public class testmain {
 	public static void main(String[] args) throws HWAirportException {
 		ApplicationManager manager = new ApplicationManager();
 		
-		manager.InitializeApplication();
-		
 		AirportGUI gui;
 		DataSvc dataSvc;
 		QueueSvc queueSvc;
@@ -42,7 +40,7 @@ public class testmain {
 
 		PassengerQueue passQ = AppContainer.getCheckInQueue();
 		
-		
+		manager.InitializeApplication();
 		
 	//	DeskSvc checkDesk = new DeskSvcImpl();
 		

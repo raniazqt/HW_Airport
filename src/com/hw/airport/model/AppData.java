@@ -31,24 +31,6 @@ public class AppData {
 		}
 		return appData;
 	}
-
-	public static Map<String, Booking> getBookingList() {
-		return bookingList;
-	}
-
-	public static Map<String, Flight> getFlightsInfo() {
-		return flightsInfo;
-	}
-
-	public static void setBookingList(Map<String, Booking> bookingList) {
-		AppData.bookingList = bookingList;
-	}
-
-	public static void setFlightsInfo(Map<String, Flight> flightsInfo) {
-		AppData.flightsInfo = flightsInfo;
-	}
-	
-	
 	
 	
 

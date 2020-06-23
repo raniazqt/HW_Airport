@@ -7,6 +7,8 @@ import com.hw.airport.enums.DESK_STATUS;
 import com.hw.airport.exception.HWAirportException;
 import com.hw.airport.model.Booking;
 import com.hw.airport.model.Desk;
+import com.hw.airport.model.AppData;
+import com.hw.airport.model.Flight;
 
 public class DeskSvcImpl implements DeskSvc{
 
