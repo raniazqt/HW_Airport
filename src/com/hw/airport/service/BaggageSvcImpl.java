@@ -1,5 +1,8 @@
 package com.hw.airport.service;
 
+import java.util.Map;
+
+import com.hw.airport.config.AppContainer;
 import com.hw.airport.exception.HWAirportException;
 import com.hw.airport.exception.MissingFlightException;
 import com.hw.airport.exception.NegativeBaggageVolumeException;
@@ -10,8 +13,8 @@ import com.hw.airport.model.Flight;
 
 public class BaggageSvcImpl implements BaggageSvc {
 	
-	private AppData appData = AppData.getInstance();
-	private FlightSvc flightSvc =  appData.getFlightSvc();
+	private FlightSvc flightSvc =  AppContainer.getFlightSvc();
+	private Map<String, Booking> bookingList = AppData.getBookingList();
 
 	/**
 	 * gets total volume on a flight.
@@ -27,7 +30,7 @@ public class BaggageSvcImpl implements BaggageSvc {
 		}
 
 		double totalVolume = 0.0;
-		for(Booking booking : appData.getBookingList().values()) {
+		for(Booking booking : bookingList.values()) {
 			boolean isBookingOnFlight = (booking.getFlightCode().equals(flight.getCode()));
 			if(isBookingOnFlight) {
 				totalVolume += booking.getTotalBaggageVolume();
@@ -55,7 +58,7 @@ public class BaggageSvcImpl implements BaggageSvc {
 		}
 
 		double totalBaggageWeight = 0.0;
-		for(Booking booking : appData.getBookingList().values()) {
+		for(Booking booking : bookingList.values()) {
 			boolean isBookingOnFlight = (booking.getFlightCode().equalsIgnoreCase(flight.getCode()));
 			if(isBookingOnFlight) {
 				totalBaggageWeight += booking.getTotalBaggageWeight();

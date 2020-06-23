@@ -2,9 +2,15 @@ package com.hw.airport.model;
 
 import java.util.Date;
 
-public class Booking {	
-	public enum BookingStatus {
-		CHECKED_IN, NOT_CHECKED_IN, PROCESSING
+/*
+ * A class to hold the passenger information during the check in process.
+ * In addition to the booking information, the baggage diminsioons and weight is added.
+ * The status is for indictation the check in progress (IN_QUEUE, AT_DESK, PAYING_FEE,..) 
+ */
+public class Passenger {
+
+	public enum CheckInProgress {
+		IN_QUEUE, AT_DESK, PAYING_FEE
 	}
 
 	private String firstName;
@@ -12,26 +18,14 @@ public class Booking {
 	private Date dob;
 	private String refCode;
 	private String flightCode;
-	private BookingStatus checkInStatus;
-	private double totalBaggageWeight;
-	private double totalBaggageVolume;
 	private double baggageHeight;
 	private double baggageWidth;
 	private double baggageLength;
 	private double xtraBagVolChrg;
 	private double xtraBagWghtChrg;
-
-	public Booking() {
-		super();
-	}
-
-	public Booking(String firstName, String lastName, String refCode, String flightCode, BookingStatus isCheckedIn) {
-		super();
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.refCode = refCode;
-		this.flightCode = flightCode;
-		this.checkInStatus = isCheckedIn;
+	private CheckInProgress checkInStatus;
+	
+	public Passenger() {
 	}
 
 	public String getFirstName() {
@@ -74,30 +68,7 @@ public class Booking {
 		this.flightCode = flightCode;
 	}
 
-	public BookingStatus getCheckInStatus() {
-		return checkInStatus;
-	}
-
-	public void setCheckInStatus(BookingStatus isCheckedIn) {
-		this.checkInStatus = isCheckedIn;
-	}
-
-	public double getTotalBaggageWeight() {
-		return totalBaggageWeight;
-	}
-
-	public void setTotalBaggageWeight(double totalBaggageWeight) {
-		this.totalBaggageWeight = totalBaggageWeight;
-	}
-
-	public double getTotalBaggageVolume() {
-		return totalBaggageVolume;
-	}
-
-	public void setTotalBaggageVolume(double totalBaggageVolume) {
-		this.totalBaggageVolume = totalBaggageVolume;
-	}
-
+	
 	public double getXtraBagVolChrg() {
 		return xtraBagVolChrg;
 	}
@@ -142,20 +113,17 @@ public class Booking {
 		this.baggageLength = baggageLength;
 	}
 
-	public void calcXtraWghtChrg(double weightLimit, double weightRate) {
-
-		if (this.totalBaggageWeight > 0) {
-
-			this.setXtraBagWghtChrg((this.totalBaggageWeight - weightLimit) * weightRate);
-		}
-
+	public CheckInProgress getCheckInStatus() {
+		return checkInStatus;
 	}
 
-	public void calcXtraVolChrg(double volumeLimit, double volumeRate) {
-		if (this.totalBaggageVolume > 0) {
-
-			this.setXtraBagVolChrg((this.totalBaggageVolume - volumeLimit) * volumeRate);
-		}
+	public void setCheckInStatus(CheckInProgress checkInStatus) {
+		this.checkInStatus = checkInStatus;
 	}
-
+	
+	public void copyBookingToPassenger(Booking passenger) {
+		
+		
+	}
+	
 }

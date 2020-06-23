@@ -17,4 +17,19 @@ public interface QueueSvc {
 
 	public void dropQueue(List<Booking> Queue, Map<String, Booking> bookingMap) throws HWAirportException;
 
+	Booking getPassengerFromQueue();
+
+	List<Booking> Deskloadexample(Map<String, Booking> bookingMap, Map<String, Flight> flightMap)
+			throws HWAirportException;
+
+	List<Booking> queue();
+
+	void setPassengerQ();
+
+	void addPassengerToQueue() throws HWAirportException;
+
+	Booking firstPassengerFromQueue();
+
+	void fillQueue() throws HWAirportException;
+
 }

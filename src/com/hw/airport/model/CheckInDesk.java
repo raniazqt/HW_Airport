@@ -12,7 +12,7 @@ public class CheckInDesk {
 	private int id;
 	private String status;
 	
-	private QueueSvc queueSvc;
+	
 	
 	
 	public int getId() {
@@ -27,19 +27,7 @@ public class CheckInDesk {
 		return passenger;
 	}
 
-	/*
-	 * Request passenger (booking) from the queue to be processed
-	 * After assigning the selected booking from the queue, the desk status should be set to busy
-	 */
-	public void setPassenger(Booking passenger) throws HWAirportException {
-		if (!this.status.equalsIgnoreCase("AVAILABLE")) {
-			throw new HWAirportException("Check-in Desk is current;y busy assisting other customers");
-		}
-		//this.passenger = queueSvc.getPassengerFromQueue();
-		this.status = "BUSY";
-		this.passenger = passenger;
-	}
-
+	
 	public String getStatus() {
 		return status;
 	}

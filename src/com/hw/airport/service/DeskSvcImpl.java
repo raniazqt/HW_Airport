@@ -1,137 +1,69 @@
 package com.hw.airport.service;
 
+import java.util.Random;
+
+import com.hw.airport.config.AppContainer;
+import com.hw.airport.enums.DESK_STATUS;
 import com.hw.airport.exception.HWAirportException;
-import com.hw.airport.model.AppData;
 import com.hw.airport.model.Booking;
-import com.hw.airport.model.Booking.CheckedIn;
+import com.hw.airport.model.Desk;
+import com.hw.airport.model.AppData;
 import com.hw.airport.model.Flight;
 
-public class DeskSvcImpl implements DeskSvc {
+public class DeskSvcImpl implements DeskSvc{
 
-	AppData appData = AppData.getInstance();
-
-	public enum deskAvailabilty {
-		Available, Busy
-	}
-
-	// More stages
-	public enum deskProgress {
-		WAITING, BOOKING_VALIDATION, FLIGHT_STATUS, EXTRA_FEE_CALCULATION
-	}
-
-	private Booking passenger;
-	private Flight plane;
-	private String id;
-	private deskAvailabilty deskStatus = deskAvailabilty.Available;
-	private deskProgress checkinProgress = deskProgress.WAITING;
-
-	public void loadDesk() {
-
-		if (passenger == null) {
-
-			passenger = appData.getPassengerQueue().removePassengerFromQList();
-			this.id = passenger.getRefCode();
-			this.setDeskStatus(deskAvailabilty.Busy);
-			this.plane = appData.getFlightsInfo().get(passenger.getFlightCode());
-		}
-
-	}
-
-	public void validate() {
-
-		Booking valid = appData.getBookingList().get(this.id);
-
-		this.setCheckinProgress(deskProgress.BOOKING_VALIDATION);
-
-		if (valid == null) {
-
-			this.clearDesk();
-
-		}
-
+	
+	private QueueSvc queueSvc = AppContainer.getQueueSvc();
+	
+	@Override
+	public Desk openDesk() {
+		return new Desk(new Random(0).nextInt());
 	}
 	
-	public void flightStatus() {
-		
-	//	flightStatus = appData.getFlightsInfo().get(this.plane.getCode()).
-	//Is there a flight status variable?	
-		
-		
+	@Override
+	public void closeDesk(Desk desk) {
+		desk.setId(null);
+		desk.setPassenger(null);
+		desk.setStatus(DESK_STATUS.CLOSED.toString());
 	}
 	
-	public void boardingTimeCheck() {} 
-
-	public void flightCapacity() {
-
-		int passFilled = 0;
-		int passMax = this.plane.getMaxPasngrCnt();
-		double volFilled = 0;
-		double volMax = this.plane.getMaxBagVolume();
-		double weightFilled = 0;
-		double weightMax = this.plane.getMaxFlightWeight();
-
-		try {
-			passFilled = appData.getBookingSvc().getCountOfCheckedInPassengersByFlight(this.plane.getCode());
-			volFilled = appData.getBaggageSvc().getTheTotalBagVolumesOnFlight(this.plane.getCode());
-			weightFilled = appData.getBaggageSvc().getTheTotalBagWeightOnFlight(this.plane.getCode());
-
-			int passCapacity = passMax - passFilled;
-			double bagCapacity = (volMax - volFilled) + (weightMax - weightFilled);
-			double capacity = passCapacity + bagCapacity;
-
-			if (capacity == 0) {
-
-				this.clearDesk();
-
-			}
-
-		} catch (HWAirportException e) {
-
-			e.printStackTrace();
+	/*
+	 * Request passenger (booking) from the queue to be processed
+	 * After assigning the selected booking from the queue, the desk status is set to busy
+	 */
+	@Override
+	public void loadDesk(Desk desk) throws HWAirportException {
+		if (!desk.getStatus().equalsIgnoreCase(DESK_STATUS.AVAILABLE.toString())) {
+			throw new HWAirportException("Check-in Desk is currently busy assisting other customers");
 		}
-
-	}
-
-	public void calcCharges() {
-
-		this.passenger.calcXtraVolChrg(this.plane.getMaxBagVolume(), this.plane.getXtraVolumeCharge());
-		this.passenger.calcXtraWghtChrg(this.plane.getMaxFlightWeight(), this.plane.getXtraWghtChargePerKg());
-		this.setCheckinProgress(deskProgress.EXTRA_FEE_CALCULATION);
-
-	}
-
-	public void clearDesk() {
-		passenger.setCheckInStatus(CheckedIn.OUT);
-		appData.getBookingList().replace(passenger.getRefCode(), passenger);
-
+		Booking passenger = queueSvc.getPassengerFromQueue();
+		//TODO: Handle the case where passeneger is empty
+		if (null == passenger) {
+			desk.setStatus(DESK_STATUS.AVAILABLE.toString());
+			desk.setPassenger(null);
+		}else {
+			desk.setStatus(DESK_STATUS.BUSY.toString());
+			desk.setPassenger(passenger);
+		}
 	}
 	
-	public void checkinPassenger() {
-		passenger.setCheckInStatus(CheckedIn.IN);
-		appData.getBookingList().replace(passenger.getRefCode(), passenger);
-
+	@Override
+	public Desk getDeskDetails() {
+		return null;
 	}
 
-	public Booking getPassenger() {
+	
+	/*
+	 * public void calcCharges() {
+	 * 
+	 * this.passenger.calcXtraVolChrg(this.plane.getMaxBagVolume(),
+	 * this.plane.getXtraVolumeCharge());
+	 * this.passenger.calcXtraWghtChrg(this.plane.getMaxFlightWeight(),
+	 * this.plane.getXtraWghtChargePerKg());
+	 * this.setCheckinProgress(deskProgress.EXTRA_FEE_CALCULATION);
+	 * 
+	 * }
+	 */
 
-		return passenger;
-
-	}
-
-	public deskProgress getCheckinProgress() {
-		return checkinProgress;
-	}
-
-	public void setCheckinProgress(deskProgress checkinProgress) {
-		this.checkinProgress = checkinProgress;
-	}
-
-	public deskAvailabilty getDeskStatus() {
-		return deskStatus;
-	}
-
-	public void setDeskStatus(deskAvailabilty deskStatus) {
-		this.deskStatus = deskStatus;
-	}
-
+	
 }

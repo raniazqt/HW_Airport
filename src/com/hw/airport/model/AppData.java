@@ -1,5 +1,6 @@
 package com.hw.airport.model;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import com.hw.airport.exception.HWAirportException;
@@ -14,100 +15,41 @@ public class AppData {
 
 	// Hashmap to hold the list of passengers booking loaded from the text file.
 	// The key is the reference code
-	private Map<String, Booking> bookingList;
+	private static Map<String, Booking> bookingList;
 
 	// Hashmap to hold the list of flights loaded from the text file. The key is the
 	// flight code
-	private Map<String, Flight> flightsInfo;
-
-	// PassengerQueue object to hold a single queue object for the program will need
-	// to be managed for threading
-	private static PassengerQueue checkInQueue;
-
-	private static BookingSvc bookingSvc;
-	private static FlightSvc flightSvc;
-	private static BaggageSvc baggageSvc;
-
+	private static Map<String, Flight> flightsInfo;
+	
 	private static AppData appData;
 
 	public static AppData getInstance() {
 		if (appData == null) {
 			appData = new AppData();
-			AppData.setBookingSvc();
-			AppData.setFlightSvc();
-			AppData.setBaggageSvc();
-			AppData.setQueue();
-
+			bookingList = new HashMap<String, Booking>();
+			flightsInfo = new HashMap<String, Flight>();
 		}
-
 		return appData;
 	}
 
-	public static AppData setBookingSvc() {
-		if (bookingSvc == null) {
-			bookingSvc = new BookingSvcImpl();
-		}
-
-		return appData;
-	}
-
-	public static AppData setFlightSvc() {
-		if (flightSvc == null) {
-			flightSvc = new FlightSvcImpl();
-		}
-
-		return appData;
-	}
-
-	public static AppData setQueue() {
-		if (checkInQueue == null) {
-			checkInQueue = new PassengerQueue();
-		}
-
-		return appData;
-	}
-
-	public static AppData setBaggageSvc() {
-		if (baggageSvc == null) {
-			baggageSvc = new BaggageSvcImpl();
-		}
-
-		return appData;
-	}
-
-	public BookingSvc getBookingSvc() {
-
-		return AppData.bookingSvc;
-	}
-
-	public FlightSvc getFlightSvc() {
-
-		return AppData.flightSvc;
-	}
-
-	public BaggageSvc getBaggageSvc() {
-
-		return AppData.baggageSvc;
-	}
-
-	public Map<String, Booking> getBookingList() {
+	public static Map<String, Booking> getBookingList() {
 		return bookingList;
 	}
 
-	public void setBookingList(Map<String, Booking> bookingList) {
-		this.bookingList = bookingList;
-	}
-
-	public Map<String, Flight> getFlightsInfo() {
+	public static Map<String, Flight> getFlightsInfo() {
 		return flightsInfo;
 	}
 
-	public void setFlightsInfo(Map<String, Flight> flightsInfo) {
-		this.flightsInfo = flightsInfo;
+	public static void setBookingList(Map<String, Booking> bookingList) {
+		AppData.bookingList = bookingList;
 	}
 
-	public PassengerQueue getPassengerQueue() {
-		return checkInQueue;
+	public static void setFlightsInfo(Map<String, Flight> flightsInfo) {
+		AppData.flightsInfo = flightsInfo;
 	}
+	
+	
+	
+	
 
 }

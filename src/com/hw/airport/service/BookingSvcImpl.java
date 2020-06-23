@@ -7,17 +7,22 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import com.hw.airport.exception.*;
+import com.hw.airport.config.AppContainer;
+import com.hw.airport.exception.BookingLastNameMismatchException;
+import com.hw.airport.exception.HWAirportException;
+import com.hw.airport.exception.MissingBookingException;
+import com.hw.airport.exception.MissingFlightException;
+import com.hw.airport.exception.NullBookingException;
 import com.hw.airport.model.AppData;
 import com.hw.airport.model.Booking;
-import com.hw.airport.model.Booking.CheckedIn;
+import com.hw.airport.model.Booking.BookingStatus;
 import com.hw.airport.model.BookingCharge;
 import com.hw.airport.model.Flight;
 import com.hw.airport.model.FlightExtrasAndCharges;
 
 public class BookingSvcImpl implements BookingSvc {
 	AppData appData = AppData.getInstance();
-	FlightSvc flightSvc = appData.getFlightSvc();
+	FlightSvc flightSvc = AppContainer.getFlightSvc();
 
 	/**
 	 * Search for passenger booking in the booking list. It is found if the booking
@@ -52,7 +57,7 @@ public class BookingSvcImpl implements BookingSvc {
 		return booking;
 	}
 
-	public void updateCheckInStatus(String refCode, CheckedIn status) {
+	public void updateCheckInStatus(String refCode, BookingStatus status) {
 
 		try {
 			Booking update = this.findBookingByRefCode(refCode);
@@ -78,7 +83,7 @@ public class BookingSvcImpl implements BookingSvc {
 		if (null == updatedBooking) {
 			throw new MissingBookingException();
 		}
-		updatedBooking.setCheckInStatus(CheckedIn.IN);
+		updatedBooking.setCheckInStatus(BookingStatus.CHECKED_IN);
 		double volume = bookingChg.getDepth() * bookingChg.getLength() * bookingChg.getWidth();
 		updatedBooking.setTotalBaggageVolume(volume);
 		updatedBooking.setTotalBaggageWeight(bookingChg.getWeight());
@@ -106,7 +111,7 @@ public class BookingSvcImpl implements BookingSvc {
 		}
 		int checkedInFlightsCount = 0;
 		for (Booking booking : flightBookings) {
-			if (booking.getCheckInStatus() == CheckedIn.IN) {
+			if (booking.getCheckInStatus() == BookingStatus.CHECKED_IN) {
 				checkedInFlightsCount += 1;
 			}
 		}
@@ -133,7 +138,7 @@ public class BookingSvcImpl implements BookingSvc {
 
 		List<Booking> bookingsByFlight = this.findAllBookingForFlight(flightCode);
 		for (Booking booking : bookingsByFlight) {
-			if (booking.getCheckInStatus() == CheckedIn.IN) {
+			if (booking.getCheckInStatus() == BookingStatus.CHECKED_IN) {
 				totalExtraVol += booking.getTotalBaggageVolume();
 				totalExtraWght += booking.getTotalBaggageWeight();
 				totalExtraWghtChrg += booking.getXtraBagWghtChrg();
@@ -177,33 +182,46 @@ public class BookingSvcImpl implements BookingSvc {
 		return bookingList;
 	}
 
-	public List<Booking> shuffleBookingList() {
+	public List<Booking> shuffleBookingList() throws HWAirportException {
+		
 		List<Booking> bookingList = this.extractBookingList();
+		if (bookingList == null || bookingList.size() == 0) {
+			//throw new HWAirportException("Booling list is empty");
+			//TODO:LOGGER
+			System.out.println("Booking list is empty");
+		}
 		Collections.shuffle(bookingList);
 		return bookingList;
 	}
 
-	public Booking getFirstShuffledBooking() {
-		Booking booking = this.shuffleBookingList().get(0);
-		return booking;
+	public Booking getFirstShuffledBooking() throws HWAirportException {
+		List<Booking> bookingList = this.shuffleBookingList();
+		if (bookingList == null || bookingList.size() == 0) {
+			//throw new HWAirportException("Booling list is empty");
+			//TODO:LOGGER
+			System.out.println("Booking list is empty");
+		}
+		return bookingList.get(0);
 	}
 
 	public Booking getRandomBooking() throws HWAirportException {
 		Booking RandomBooking = null;
 		List<Booking> shuffledList = this.shuffleBookingList();
 		if (null == shuffledList || shuffledList.size() == 0) {
-			throw new HWAirportException("Empty Shuffled Booking List");
+			//throw new HWAirportException("Empty Shuffled Booking List");
+			//TODO:LOGGER
+			System.out.println("Booking list is empty");
 		}
 		for (Booking book : shuffledList) {
-			if (book.getCheckInStatus().equals(CheckedIn.OUT)) {
-
+			if (book.getCheckInStatus().equals(BookingStatus.NOT_CHECKED_IN)) {
 				RandomBooking = book;
 				break;
 			}
-
 		}
 		if (null == RandomBooking) {
-			throw new HWAirportException("No valid bookings");
+			//throw new HWAirportException("No valid bookings");
+			//TODO:LOGGER
+			System.out.println("No passengers are available");
 		}
 		return RandomBooking;
 
