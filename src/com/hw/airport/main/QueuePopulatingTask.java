@@ -9,7 +9,7 @@ import com.hw.airport.exception.HWAirportException;
 import com.hw.airport.model.PassengerQueue;
 import com.hw.airport.service.QueueSvc;
 
-public class QueueTimer extends TimerTask{
+public class QueuePopulatingTask extends TimerTask{
 
 	AirportSimulator simulator = AirportSimulator.getInstnce();
 	QueueSvc queueSvc = AppContainer.getQueueSvc();

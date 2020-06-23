@@ -6,6 +6,7 @@ import com.hw.airport.GUI_S1.AirportGUI;
 import com.hw.airport.GUI_S1.AirportGUIImpl;
 import com.hw.airport.model.AppData;
 import com.hw.airport.model.Booking;
+import com.hw.airport.model.DeskManager;
 import com.hw.airport.model.Flight;
 import com.hw.airport.model.PassengerQueue;
 import com.hw.airport.service.BaggageSvc;
@@ -46,6 +47,8 @@ public class AppContainer {
 	private static DataSvc dataSvc;
 	
 	private static QueueSvc queueSvc ;
+	
+	private static DeskManager deskManager;
 
 	public static AppContainer getInstance() {
 		if (appContainer == null) {
@@ -58,6 +61,7 @@ public class AppContainer {
 			gui = new AirportGUIImpl();
 			dataSvc = new DataSvcImpl();
 			queueSvc= new QueueSvcImpl();
+			deskManager = new DeskManager();
 		}
 
 		return appContainer;
@@ -101,6 +105,10 @@ public class AppContainer {
 
 	public static QueueSvc getQueueSvc() {
 		return queueSvc;
+	}
+
+	public static DeskManager getDeskManager() {
+		return deskManager;
 	}
 	
 	

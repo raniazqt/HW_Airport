@@ -1,36 +1,20 @@
 package com.hw.airport.main;
 
-import java.util.LinkedList;
-import java.util.List;
-
-import com.hw.airport.GUI_S1.AirportGUI;
 import com.hw.airport.GUI_S1.AirportGUIImpl;
 import com.hw.airport.config.AppContainer;
-import com.hw.airport.exception.HWAirportException;
 import com.hw.airport.model.AppData;
-import com.hw.airport.model.Booking;
 import com.hw.airport.model.PassengerQueue;
-import com.hw.airport.service.DataSvc;
-import com.hw.airport.service.DataSvcImpl;
-import com.hw.airport.service.DeskSvc;
-import com.hw.airport.service.DeskSvcImpl;
 import com.hw.airport.service.QueueSvc;
-import com.hw.airport.service.QueueSvcImpl;
 
 public class testmain {
 
-	public static void main(String[] args) throws HWAirportException {
+	public static void main(String[] args) throws Exception {
 		ApplicationManager manager = new ApplicationManager();
 		
-		AirportGUI gui;
-		DataSvc dataSvc;
 		QueueSvc queueSvc;
 
-		LinkedList<Booking> passQList;
-		String flightsFileName = "flights.csv";
-		String bookingFileName = "bookings.csv";
-		gui = new AirportGUIImpl();
-		dataSvc = AppContainer.getDataSvc();
+		new AirportGUIImpl();
+		AppContainer.getDataSvc();
 		queueSvc = AppContainer.getQueueSvc();
 
 		// any setup logic here.
@@ -46,7 +30,7 @@ public class testmain {
 		
 		
 
-		passQList = passQ.getPassengerList();			
+		passQ.getPassengerList();			
 
 		passQ.setQueueMaxSize(10);
 		//BIG ERROR IF QUEUE EXCEEDS BOOKINGS NEEDS BREAK POINT

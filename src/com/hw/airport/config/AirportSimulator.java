@@ -47,7 +47,7 @@ public class AirportSimulator {
 		return passToDeskRatio;
 	}
 
-	public long getQueuePopulatingRate() {
+	public static long getQueuePopulatingRate() {
 		return queuePopulatingRate;
 	}
 
