@@ -24,20 +24,20 @@ public class ApplicationManager {
 	private ApplicationState appState;
 	private AirportSimulator simulator;
 	private DataSvc dataSvc;
+	private PassengerQueue queue ;
 	String flightsFileName = "flights.csv"; 
 	String bookingFileName = "bookings.csv";
 
 	public void InitializeApplication() {
 		AppContainer.getInstance();
 		AppData.getInstance();
-		dataSvc = AppContainer.getDataSvc();
-		gui = AppContainer.getGui();
+		
 		/*
 		 * if (null == appContainer) { throw new RuntimeErrorException(null,
 		 * "Application did not start correctly. Notify adminstrator "); }
 		 */
 		
-		
+		dataSvc = AppContainer.getDataSvc();
 		//load flights and booking data from files
 		try {
 			AppData.setFlightsInfo(dataSvc.loadFlightsData(flightsFileName));

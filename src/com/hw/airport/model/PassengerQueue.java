@@ -63,5 +63,9 @@ public class PassengerQueue {
 		}
 
 	}
+	
+	public int getQueueSize() {
+		return passengerList.size();
+	}
 
 }
