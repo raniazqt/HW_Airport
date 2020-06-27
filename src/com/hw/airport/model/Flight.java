@@ -14,7 +14,7 @@ public class Flight {
 	private int bagPerPsngrCnt;
 	//maximum weight of each baggage
 	private int maxBagWeight;
-	//maximum volume allowed for each bag. Calculated based on the lugg luggage dimensions
+	//maximum volume allowed for each bag. Calculated based on the luggage dimensions
 	private double maxBagVolume;
 	//charge for each extra luggage
 	private double xtraBagCharge;

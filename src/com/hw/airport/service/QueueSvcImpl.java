@@ -140,5 +140,10 @@ public class QueueSvcImpl extends Observable implements QueueSvc {
 
 	}
 
+	@Override
+	public int getQueueSize() {
+		return passengerQ.getQueueSize();
+	}
+
 
 }

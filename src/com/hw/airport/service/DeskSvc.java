@@ -13,5 +13,7 @@ public interface DeskSvc {
 
 	void closeDesk(Desk desk);
 
+	void processPassengersQueue(Desk desk);
+
 
 }

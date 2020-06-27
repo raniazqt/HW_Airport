@@ -13,8 +13,12 @@ import com.hw.airport.service.BaggageSvc;
 import com.hw.airport.service.BaggageSvcImpl;
 import com.hw.airport.service.BookingSvc;
 import com.hw.airport.service.BookingSvcImpl;
+import com.hw.airport.service.CheckInSvc;
+import com.hw.airport.service.CheckInSvcImpl;
 import com.hw.airport.service.DataSvc;
 import com.hw.airport.service.DataSvcImpl;
+import com.hw.airport.service.DeskSvc;
+import com.hw.airport.service.DeskSvcImpl;
 import com.hw.airport.service.FlightSvc;
 import com.hw.airport.service.FlightSvcImpl;
 import com.hw.airport.service.QueueSvc;
@@ -49,7 +53,11 @@ public class AppContainer {
 	private static QueueSvc queueSvc ;
 	
 	private static DeskManager deskManager;
+	
+	private static DeskSvc deskSvc;
 
+	private static CheckInSvc checkinSvc;
+	
 	public static AppContainer getInstance() {
 		if (appContainer == null) {
 			appContainer = new AppContainer();
@@ -62,6 +70,8 @@ public class AppContainer {
 			dataSvc = new DataSvcImpl();
 			queueSvc= new QueueSvcImpl();
 			deskManager = new DeskManager();
+			deskSvc = new DeskSvcImpl();
+			checkinSvc = new CheckInSvcImpl();
 		}
 
 		return appContainer;
@@ -109,6 +119,14 @@ public class AppContainer {
 
 	public static DeskManager getDeskManager() {
 		return deskManager;
+	}
+
+	public static DeskSvc getDeskSvc() {
+		return deskSvc;
+	}
+
+	public static CheckInSvc getCheckinSvc() {
+		return checkinSvc;
 	}
 	
 	
