@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Observable;
 import java.util.Random;
 
 import com.hw.airport.config.AppContainer;
@@ -15,16 +16,19 @@ import com.hw.airport.model.Flight;
 import com.hw.airport.model.PassengerQueue;
 import com.hw.airport.service.BookingSvc;
 
-public class QueueSvcImpl implements QueueSvc {
+public class QueueSvcImpl extends Observable implements QueueSvc {
 
 	BookingSvc bookingSvc = AppContainer.getBookingSvc();
-	
+
 	private PassengerQueue passengerQ = PassengerQueue.getInstance();
-	
-	
+
+
 	@Override
 	public Booking getPassengerFromQueue() {
-		return passengerQ.removePassengerFromQueue();
+		Booking passenger = passengerQ.removePassengerFromQueue();
+		setChanged();
+		notifyObservers();
+		return passenger ;
 	}
 
 	@Override
@@ -48,7 +52,7 @@ public class QueueSvcImpl implements QueueSvc {
 		}
 
 	}
-//TODO:WHAT IS THIS?
+	//TODO:WHAT IS THIS?
 	@Override
 	public void dropQueue(List<Booking> Queue, Map<String, Booking> bookingMap) throws HWAirportException {
 
@@ -64,7 +68,7 @@ public class QueueSvcImpl implements QueueSvc {
 
 		return Queue;
 	}
-	
+
 	@Override
 	public List<Booking> Deskloadexample(Map<String, Booking> bookingMap, Map<String, Flight> flightMap)
 			throws HWAirportException {
@@ -91,7 +95,7 @@ public class QueueSvcImpl implements QueueSvc {
 
 		return bookingSvc.extractBookingList();
 	}
-	
+
 
 	@Override
 	public void setPassengerQ() {
@@ -104,22 +108,26 @@ public class QueueSvcImpl implements QueueSvc {
 	@Override
 	public void addPassengerToQueue() throws HWAirportException {
 		Booking passengerToAdd = bookingSvc.getRandomBooking();
-		
+
 		if (null != passengerToAdd && passengerToAdd.getCheckInStatus().equals(BookingStatus.NOT_CHECKED_IN)) {
 			bookingSvc.setRandomBaggageDimensions(passengerToAdd);
 			passengerQ.addPassengerToQueue(passengerToAdd);
 			bookingSvc.updateCheckInStatus(passengerToAdd.getRefCode(), BookingStatus.PROCESSING);
+
+			//notify observer - DeskManager - with the change
+			setChanged();
+			notifyObservers();
 		}
 	}
 
-	
+
 	@Override
 	public Booking firstPassengerFromQueue() {
 		Booking firstPassenger = passengerQ.removePassengerFromQueue();
 		return firstPassenger;
 
 	}
-	
+
 	@Override
 	public void fillQueue() throws HWAirportException {
 		int csize = passengerQ.getQueueMaxSize();
@@ -130,6 +138,11 @@ public class QueueSvcImpl implements QueueSvc {
 
 		}
 
+	}
+
+	@Override
+	public int getQueueSize() {
+		return passengerQ.getQueueSize();
 	}
 
 

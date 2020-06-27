@@ -2,6 +2,7 @@ package com.hw.airport.service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Observer;
 import java.util.Queue;
 
 import com.hw.airport.exception.HWAirportException;
@@ -31,5 +32,7 @@ public interface QueueSvc {
 	Booking firstPassengerFromQueue();
 
 	void fillQueue() throws HWAirportException;
+
+	public int getQueueSize();
 
 }

@@ -34,6 +34,8 @@ public class AirportSimulator {
 			activeFlights.add(new FlightSettings("ABC123", 10));
 			activeFlights.add(new FlightSettings("XYZ123", 10));
 			queuePopulatingRate = 600;
+			maxOpndCheckinDesk = 2;
+			passToDeskRatio = 5;
 
 		}
 		return simulator;
@@ -47,15 +49,15 @@ public class AirportSimulator {
 		return passToDeskRatio;
 	}
 
-	public long getQueuePopulatingRate() {
+	public static long getQueuePopulatingRate() {
 		return queuePopulatingRate;
 	}
 
-	public int getMaxOpndCheckinDesk() {
+	public static int getMaxOpndCheckinDesk() {
 		return maxOpndCheckinDesk;
 	}
 
-	public long getSimExcRate() {
+	public static long getSimExcRate() {
 		return simExcRate;
 	}
 
@@ -78,6 +80,8 @@ public class AirportSimulator {
 	public void setSimExcRate(long simExcRate) {
 		this.simExcRate = simExcRate;
 	}
+	
+	
 	
 	
 	

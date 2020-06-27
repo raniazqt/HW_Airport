@@ -3,63 +3,46 @@ package com.hw.airport.main;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import javax.management.RuntimeErrorException;
-
 import com.hw.airport.GUI_S1.AirportGUI;
 import com.hw.airport.config.AirportSimulator;
 import com.hw.airport.config.AppContainer;
 import com.hw.airport.exception.HWAirportException;
 import com.hw.airport.model.AppData;
-import com.hw.airport.model.PassengerQueue;
 import com.hw.airport.service.DataSvc;
+import com.hw.airport.service.QueueSvcImpl;
 
-enum ApplicationState
-{
-	UNINITIALIZED,
-	INITIALIZED,
-}
 
 public class ApplicationManager {
 	private AirportGUI gui;
-	private ApplicationState appState;
-	private AirportSimulator simulator;
 	private DataSvc dataSvc;
-	private PassengerQueue queue ;
 	String flightsFileName = "flights.csv"; 
 	String bookingFileName = "bookings.csv";
 
-	public void InitializeApplication() {
+	public void InitializeApplication() throws Exception {
 		AppContainer.getInstance();
 		AppData.getInstance();
-		
+		AirportSimulator.getInstnce();
+
+		gui = AppContainer.getGui();
+		//register the DeskManager as an observer to the QueueSvs
+		QueueSvcImpl queueSvc = (QueueSvcImpl) AppContainer.getQueueSvc();
+		queueSvc.addObserver(AppContainer.getDeskManager());
 		/*
 		 * if (null == appContainer) { throw new RuntimeErrorException(null,
 		 * "Application did not start correctly. Notify adminstrator "); }
 		 */
-		
+
 		dataSvc = AppContainer.getDataSvc();
 		//load flights and booking data from files
 		try {
 			AppData.setFlightsInfo(dataSvc.loadFlightsData(flightsFileName));
+			AppData.setBookingList(dataSvc.loadBookingData(bookingFileName));
 		} catch (HWAirportException e) {
-			e.printStackTrace();
+			throw new Exception("Application failed to load data. Contact adminstrator");
 		}
-		AppData.setBookingList(dataSvc.loadBookingData(bookingFileName));
-
-		appState = ApplicationState.INITIALIZED;
-
 	}
+	private void start() throws Exception {
 
-	public ApplicationManager() {
-		simulator = AirportSimulator.getInstnce();
-		
-		gui = AppContainer.getGui();
-
-		appState = ApplicationState.UNINITIALIZED;
-	}
-
-	private void start() {
-		
 		this.InitializeApplication();
 
 		/* 1. Load data from files
@@ -77,29 +60,22 @@ public class ApplicationManager {
 		// any setup logic here.
 
 		//Initialize app simulator
-		simulator = AirportSimulator.getInstnce();
-		long rate = simulator.getQueuePopulatingRate();
+		long rate = AirportSimulator.getQueuePopulatingRate();
 		long appRate = rate / 6;
 
-		TimerTask timerTask = new QueueTimer();
+		TimerTask queuePopulatingTask = new QueuePopulatingTask();
 		//running timer task as daemon thread
 		Timer timer = new Timer(true);
-		timer.scheduleAtFixedRate(timerTask, 0, appRate);
+		timer.scheduleAtFixedRate(queuePopulatingTask, 0, appRate);
 		System.out.println("TimerTask started");
 
 		gui.displayAirportStatusScreen();
 	}
 
-	public void execute() {
-		try {
-			if(appState == ApplicationState.UNINITIALIZED) {
-				start();
-			}
-		}
-		catch (Exception e) {
-			//do nothing.
-			System.out.println(e.getMessage());
-			e.printStackTrace();
-		}
+
+
+	public static void main(String[] args) throws Exception {
+		ApplicationManager appManager = new ApplicationManager();
+		appManager.start();
 	}
 }

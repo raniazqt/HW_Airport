@@ -22,7 +22,7 @@ public class Desk {
 	 * which uses the thread safe AtomicInteger type. 
 	 * When first creating a desk its status is available and ready to take passengers  
 	 */
-	public Desk(Integer id) {
+	public Desk(Integer id, String status) {
 		super();
 		this.id = id;
 		this.status = status;

@@ -1,5 +1,8 @@
 package com.hw.airport.service;
 
+import java.util.List;
+
+import com.hw.airport.config.AirportSimulator;
 import com.hw.airport.config.AppContainer;
 import com.hw.airport.exception.HWAirportException;
 import com.hw.airport.exception.MissingBookingException;
@@ -8,6 +11,7 @@ import com.hw.airport.model.Booking;
 import com.hw.airport.model.Booking.BookingStatus;
 import com.hw.airport.model.BookingCharge;
 import com.hw.airport.model.Flight;
+import com.hw.airport.model.FlightSettings;
 
 public class CheckInSvcImpl implements CheckInSvc {
 
@@ -65,31 +69,70 @@ public class CheckInSvcImpl implements CheckInSvc {
 	public boolean canCheckIn(String lastName, String bookingRef) throws HWAirportException {
 		Booking pendingBooking = bookingSvc.findBookingByLastNameAndRefCode(lastName, bookingRef);
 
-		if(pendingBooking == null)
-		{
+		if(pendingBooking == null){
 			throw new MissingBookingException();
 		}
-
-		double currentFlightBagVolume = baggageSvc.getTheTotalBagVolumesOnFlight(pendingBooking.getFlightCode());
-		double currentFlightBagWeight = baggageSvc.getTheTotalBagWeightOnFlight(pendingBooking.getFlightCode());
-		int currentFlightPassengerCount = flightSvc.getPassengerCountForFlight(pendingBooking.getFlightCode());
-
-		boolean isMaxVolumeExceeded = flightSvc.isMaxVolumeExceededForFlight(pendingBooking.getFlightCode(), currentFlightBagVolume);
-		boolean isMaxWeightExceeded = flightSvc.isMaxWeightExceededForFlight(pendingBooking.getFlightCode(), currentFlightBagWeight);
-		boolean isMaxPassengerCountExceeded = flightSvc.isMaxPassengerCountExceededForFlight(pendingBooking.getFlightCode(), currentFlightPassengerCount);
 		boolean isNotCheckedIn = (pendingBooking.getCheckInStatus()==BookingStatus.NOT_CHECKED_IN);
-			
-		return !isMaxVolumeExceeded && !isMaxWeightExceeded && !isMaxPassengerCountExceeded && isNotCheckedIn;
-	
+
+		boolean flightSatus = this.isMaxFltCpctyVolWghtStsExceeded(pendingBooking.getFlightCode());
+		return !flightSatus && isNotCheckedIn;	
 	}
-	
+
+	public boolean isMaxFltCpctyVolWghtStsExceeded(String flightCd) {
+		double currentFlightBagVolume;
+		boolean isMaxVolumeExceeded = false;
+		boolean isMaxWeightExceeded = false;
+		boolean isMaxPassengerCountExceeded = false;
+		try {
+			currentFlightBagVolume = baggageSvc.getTheTotalBagVolumesOnFlight(flightCd);
+
+			double currentFlightBagWeight = baggageSvc.getTheTotalBagWeightOnFlight(flightCd);
+			int currentFlightPassengerCount = flightSvc.getPassengerCountForFlight(flightCd);
+
+			isMaxVolumeExceeded = flightSvc.isMaxVolumeExceededForFlight(flightCd, currentFlightBagVolume);
+			isMaxWeightExceeded = flightSvc.isMaxWeightExceededForFlight(flightCd, currentFlightBagWeight);
+			isMaxPassengerCountExceeded = flightSvc.isMaxPassengerCountExceededForFlight(flightCd, currentFlightPassengerCount);
+		} catch (HWAirportException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return !isMaxVolumeExceeded && !isMaxWeightExceeded && !isMaxPassengerCountExceeded;	
+
+	}
+
 	/**
 	 * @param lastName last name of the passenger.
 	 * @param bookingRef the provided booking reference. this is checked with the bookings file.
-	 * @throws HWAirportException throws missing booking exception if no booking was found.
 	 */
 	@Override
-	public void doCheckIn(String lastName, String bookingRef) throws HWAirportException {
+	public boolean doCheckIn(Booking passenger) {
+		List<FlightSettings> activeFlights = AirportSimulator.getActiveFlights();
+		String flightCd = passenger.getFlightCode();
+		if (isFlightBoarding(flightCd)) {
+			
+		}
+			return false;
+		//check if the flight is in the active flight list
+		//check if the crnt time is within the flight boarding time 
+		//check if the flight capacity, volume, passenger count were not exceeded
+		//check the passenger details
+		//check passenger baggages
+		//calculate any extra charges
+
+
+
+	}
+
+	private boolean isFlightBoarding(String flightCd) {
+		List<FlightSettings> activeFlights = AirportSimulator.getActiveFlights();
+		boolean  found = false;
+
+		for(FlightSettings flight : activeFlights){
+			if (flight.getFlightCd().equalsIgnoreCase(flightCd)) {
+				found = true;
+			}
+		}
+		return found;
 	}
 
 	/**
