@@ -5,7 +5,6 @@ import com.hw.airport.config.GUISettings;
 import javax.swing.*;
 
 public class PassengerPanel extends JPanel {
-
     public PassengerPanel(GUISettings guiSettings) {
 
     }

@@ -5,7 +5,7 @@ import com.hw.airport.config.GUISettings;
 import javax.swing.*;
 
 public class CheckInDeskPanel extends JPanel {
+    public CheckInDeskPanel(GUISettings guiSettings) {
 
-    public CheckInDeskPanel (GUISettings guiSettings) {
     }
 }

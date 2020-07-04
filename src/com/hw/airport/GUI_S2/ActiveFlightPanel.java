@@ -9,4 +9,6 @@ public class ActiveFlightPanel extends JPanel {
     public ActiveFlightPanel(GUISettings guiSettings) {
 
     }
+
+
 }

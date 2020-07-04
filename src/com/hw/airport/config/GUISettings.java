@@ -1,62 +1,40 @@
 package com.hw.airport.config;
 
+import javax.swing.*;
+import java.awt.*;
+import java.util.List;
+
 public class GUISettings {
 
-  private MasterFrameSettings mFrameSettings;
-  private PassengerPanelSettings psngrPnlSettings;
-  private CheckInDeskPanelSettings checkInDskPnlSettings;
-  private ActiveFlightPanelSettings activFlghtPnlSettings;
-  private SimToolBarSettings simToolBrSettings;
+    private int mainScreenWidth;
+    private int mainScreenHeight;
+    private String mainScreenTitle;
 
-  public GUISettings (MasterFrameSettings newMFrameSettings, PassengerPanelSettings newPsngrPnlSettings, CheckInDeskPanelSettings newCheckInDskPnlSettings,
-                      ActiveFlightPanelSettings newActiveFlghtPnlSettings, SimToolBarSettings newSimToolBrSettings) {
+    //Sim tool bar.
+    private List<JButton> simToolBarButtons;
+    private List<JLabel> settingsToolBarLabels;
+    private FlowLayout toolBarsLayout;
 
-      this.setMasterFrameSettings(newMFrameSettings);
-      this.setPsngrPnlSettings(newPsngrPnlSettings);
-      this.setCheckInDskPnlSettings(newCheckInDskPnlSettings);
-      this.setActivFlghtPnlSettings(newActiveFlghtPnlSettings);
-      this.setSimToolBrSettings(newSimToolBrSettings);
-  }
+    public GUISettings(int mainScrWidth, int mainScrHeight, String mainScrTitle,
+                       List<JButton> simToolBarButtons, List<JLabel> settingsToolBarLabels, FlowLayout toolBarsLayout) {
 
-    public MasterFrameSettings getMasterFrameSettings() {
-        return mFrameSettings;
+        this.mainScreenWidth = mainScrWidth;
+        this.mainScreenHeight = mainScrHeight;
+        this.mainScreenTitle = mainScrTitle;
+        this.simToolBarButtons = simToolBarButtons;
+        this.settingsToolBarLabels = settingsToolBarLabels;
+        this.toolBarsLayout = toolBarsLayout;
     }
 
-    public void setMasterFrameSettings(MasterFrameSettings mFrameSettings) {
-        this.mFrameSettings = mFrameSettings;
-    }
+    public String getMainScreenTitle() { return this.mainScreenTitle;}
 
-    public PassengerPanelSettings getPsngrPnlSettings() {
-        return psngrPnlSettings;
-    }
+    public int getMainScreenWidth() { return mainScreenWidth; }
 
-    public void setPsngrPnlSettings(PassengerPanelSettings psngrPnlSettings) {
-        this.psngrPnlSettings = psngrPnlSettings;
-    }
+    public int getMainScreenHeight() { return mainScreenHeight; }
 
-    public CheckInDeskPanelSettings getCheckInDskPnlSettings() {
-        return checkInDskPnlSettings;
-    }
+    public List<JButton> getSimToolBarButtons() { return simToolBarButtons; }
 
-    public void setCheckInDskPnlSettings(CheckInDeskPanelSettings checkInDskPnlSettings) {
-        this.checkInDskPnlSettings = checkInDskPnlSettings;
-    }
+    public List<JLabel> getSettingsToolBarLabels() { return settingsToolBarLabels; }
 
-    public ActiveFlightPanelSettings getActivFlghtPnlSettings() {
-        return activFlghtPnlSettings;
-    }
-
-    public void setActivFlghtPnlSettings(ActiveFlightPanelSettings activFlghtPnlSettings) {
-        this.activFlghtPnlSettings = activFlghtPnlSettings;
-    }
-
-    public SimToolBarSettings getSimToolBrSettings() {
-        return simToolBrSettings;
-    }
-
-    public void setSimToolBrSettings(SimToolBarSettings simToolBrSettings) {
-        this.simToolBrSettings = simToolBrSettings;
-    }
+    public FlowLayout getToolBarsLayout() { return toolBarsLayout; }
 }
-
-
