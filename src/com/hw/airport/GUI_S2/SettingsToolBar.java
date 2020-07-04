@@ -10,11 +10,12 @@ import java.util.List;
 public class SettingsToolBar extends JToolBar {
     public SettingsToolBar(GUISettings guiSettings) {
         setLayout(guiSettings.getToolBarsLayout());
+        setPreferredSize(new Dimension(40,40));
 
         List<JLabel> labelsToAdd = guiSettings.getSettingsToolBarLabels();
 
         for (JLabel label: labelsToAdd) {
-            add(label);
+            add(label, guiSettings.getToolBarsLayout());
         }
     }
 }

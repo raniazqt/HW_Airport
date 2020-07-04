@@ -15,8 +15,11 @@ public class GUISettings {
     private List<JLabel> settingsToolBarLabels;
     private FlowLayout toolBarsLayout;
 
+    //Passenger Queue
+    private JList psngrQueueDisplay;
+
     public GUISettings(int mainScrWidth, int mainScrHeight, String mainScrTitle,
-                       List<JButton> simToolBarButtons, List<JLabel> settingsToolBarLabels, FlowLayout toolBarsLayout) {
+                       List<JButton> simToolBarButtons, List<JLabel> settingsToolBarLabels, FlowLayout toolBarsLayout, JList psngrQueue) {
 
         this.mainScreenWidth = mainScrWidth;
         this.mainScreenHeight = mainScrHeight;
@@ -24,6 +27,7 @@ public class GUISettings {
         this.simToolBarButtons = simToolBarButtons;
         this.settingsToolBarLabels = settingsToolBarLabels;
         this.toolBarsLayout = toolBarsLayout;
+        this.psngrQueueDisplay = psngrQueue;
     }
 
     public String getMainScreenTitle() { return this.mainScreenTitle;}
@@ -37,4 +41,6 @@ public class GUISettings {
     public List<JLabel> getSettingsToolBarLabels() { return settingsToolBarLabels; }
 
     public FlowLayout getToolBarsLayout() { return toolBarsLayout; }
+
+    public JList getPsngrQueueDisplay() { return psngrQueueDisplay; }
 }

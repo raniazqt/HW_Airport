@@ -37,9 +37,30 @@ public class MasterFrame extends JFrame {
     }
 
     private void addSubPanels() {
-        add(settingsToolBar, BorderLayout.NORTH);
-        add(simToolBar, BorderLayout.NORTH);
-        //add(passengerPanel);
+        setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.anchor = GridBagConstraints.PAGE_START;
+        c.gridx = 0;
+        c.gridy = 0;
+        c.weightx = 1;
+        c.weighty = 1;
+
+        add(settingsToolBar, c);
+
+        c.weightx = 0.5;
+        c.gridx = 1;
+        c.gridy = 0;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        add(simToolBar, c);
+
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.ipady = 0;
+        c.weightx = 0.0;
+        c.gridwidth = 3;
+        c.gridx = 0;
+        c.gridy = 1;
+        add(passengerPanel, c);
         //add(checkInDeskPanel);
         //add(flightsPanel);
     }
