@@ -1,5 +1,6 @@
 package com.hw.airport.service;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Observer;
@@ -33,6 +34,13 @@ public interface QueueSvc {
 
 	void fillQueue() throws HWAirportException;
 
-	public int getQueueSize();
+	public int getCountOfPassangerInQueue();
+
+
+	LinkedList<Booking> getAllPassengersFromQueue();
+
+
+
 
 }
+

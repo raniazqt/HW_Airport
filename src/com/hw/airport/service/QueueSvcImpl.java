@@ -141,9 +141,17 @@ public class QueueSvcImpl extends Observable implements QueueSvc {
 	}
 
 	@Override
-	public int getQueueSize() {
+	public int getCountOfPassangerInQueue() {
 		return passengerQ.getQueueSize();
 	}
-
-
+	
+	@Override
+	public LinkedList<Booking> getAllPassengersFromQueue() {
+		return passengerQ.getPassengerList();
+	}
+	 {
+		
 }
+}
+
+
