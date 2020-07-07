@@ -54,7 +54,7 @@ public class DeskSvcImpl implements DeskSvc{
 	@Override
 	public void processPassengersQueue(Desk desk) {
 		while (!desk.getStatus().equalsIgnoreCase(DESK_STATUS.CLOSED.toString())) {
-			if (queueSvc.getQueueSize() == 0) {
+			if (queueSvc.getCountOfPassangerInQueue() == 0) {
 				//close desk & stop thread
 			}else {
 				try {

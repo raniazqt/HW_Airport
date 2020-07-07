@@ -80,6 +80,10 @@ public class AirportSimulator {
 	public void setSimExcRate(long simExcRate) {
 		this.simExcRate = simExcRate;
 	}
+
+	public static AirportSimulator getSimulator() {
+		return simulator;
+	}
 	
 	
 	

@@ -48,6 +48,16 @@ public class DeskManager implements Observer{
 		
 		return null;
 	}
-	
+	public int getOpenedDeskCount() {
+		return openedDeskList.size();
+		
+	}
+	public List<Desk> getOpenedDeskList() {
+		return openedDeskList;
+	}
+
+	public void setOpenedDeskList(List<Desk> openedDeskList) {
+		this.openedDeskList = openedDeskList;
+	}	
 
 }
