@@ -11,7 +11,7 @@ public class AppConfig {
         //TODO: temp until we use files for all settings.
         guiSettings = new GUISettings(new MasterFrameSettings(800, 600,
                 WindowConstants.EXIT_ON_CLOSE, "Airport Status Screen"),
-                null, null, null, null);
+                null, null, null, null,);
     }
 
     private static AppConfig appConfig;
