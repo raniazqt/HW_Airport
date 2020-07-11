@@ -61,17 +61,17 @@ public class AppContainer {
 	public static AppContainer getInstance() {
 		if (appContainer == null) {
 			appContainer = new AppContainer();
+			appData = AppData.getInstance();
 			bookingSvc = new BookingSvcImpl();
 			flightSvc = new FlightSvcImpl();
 			checkInQueue = PassengerQueue.getInstance();
 			baggageSvc = new BaggageSvcImpl();
-			appData = AppData.getInstance();
 			gui = new AirportGUIImpl();
 			dataSvc = new DataSvcImpl();
-			queueSvc= new QueueSvcImpl();
-			deskManager = new DeskManager();
-			deskSvc = new DeskSvcImpl();
+			queueSvc= new QueueSvcImpl();			
 			checkinSvc = new CheckInSvcImpl();
+			deskSvc = new DeskSvcImpl();
+			deskManager = new DeskManager();
 		}
 
 		return appContainer;

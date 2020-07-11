@@ -9,5 +9,5 @@ public interface CheckInSvc {
 	BookingCharge calculateXtraChargeForPasngr(BookingCharge charge) throws HWAirportException;
 	Booking retrieveBookingByCodeAndLastName(String lastName, String bookingRef) throws HWAirportException;
 	boolean confirmCheckin(Booking booking, BookingCharge bookingChg);
-	public boolean doCheckIn(Booking passenger);
+	public boolean doCheckIn(Booking passenger) throws HWAirportException;
 }

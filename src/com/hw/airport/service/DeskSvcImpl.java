@@ -33,7 +33,7 @@ public class DeskSvcImpl implements DeskSvc{
 	@Override
 	public void loadDesk(Desk desk) throws HWAirportException {
 		if (!desk.getStatus().equalsIgnoreCase(DESK_STATUS.AVAILABLE.toString())) {
-			throw new HWAirportException("Check-in Desk is currently busy assisting other customers");
+			throw new HWAirportException("Desk - " + desk.getThreadName() + " - is currently busy assisting other customers");
 		}
 		Booking passenger = queueSvc.getPassengerFromQueue();
 		//TODO: Handle the case where passeneger is empty
@@ -59,8 +59,16 @@ public class DeskSvcImpl implements DeskSvc{
 			}else {
 				try {
 					this.loadDesk(desk);
-					boolean checkinStatus = checkinSvc.doCheckIn(desk.getPassenger());
-					
+					System.out.println("Desk - " + desk.getThreadName() + " - processing passenger " 
+							+ desk.getPassenger().getFullName());
+			//		boolean checkinStatus = checkinSvc.doCheckIn(desk.getPassenger());
+					try {
+						this.wait(15000);
+						desk.setStatus(DESK_STATUS.AVAILABLE.toString());
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				} catch (HWAirportException e) {
 					e.printStackTrace();
 				}
