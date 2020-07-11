@@ -3,7 +3,7 @@ package com.hw.airport.main;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import com.hw.airport.GUI_S1.AirportGUI;
+import com.hw.airport.GUI_S2.AirportGUI;
 import com.hw.airport.config.AirportSimulator;
 import com.hw.airport.config.AppContainer;
 import com.hw.airport.exception.HWAirportException;
@@ -60,16 +60,26 @@ public class ApplicationManager {
 		// any setup logic here.
 
 		//Initialize app simulator
-		long rate = AirportSimulator.getQueuePopulatingRate();
+		long rate = (long) AirportSimulator.getQueuePopulatingRate();
 		long appRate = rate / 6;
 
 		TimerTask queuePopulatingTask = new QueuePopulatingTask();
 		//running timer task as daemon thread
+
 		Timer timer = new Timer(true);
 		timer.scheduleAtFixedRate(queuePopulatingTask, 0, appRate);
 		System.out.println("TimerTask started");
+		gui.display();
 
-		gui.displayAirportStatusScreen();
+		// STARTING POINT: POPULATE THE QUEUE USING THE POPULATE TASK - MS
+		// ONCE QUEUE IS FILLED (12/12) NOTIFY DESK MANAGER THAT QUEUE IS READY.
+		// THE DESK MANAGER ALLOCATED A WORKER THREAD PER DESK, EACH WORKER DESK THREAD
+		// IN ORDER READ FROM THE QUEUE.
+		// BACK TO THE MAIN THREAD: DISPATCH UPDATES FOR THE GUI.
+		// EACH CHECK IN DESK IS A THREAD: IT RUNS THE CHECKIN-PROCESS PER PASSENGER.
+		// EACH CHECK IN DESK THREAD WILL WRITE ITS PASSENGER UPDATES UPON COMPLETION.
+		// 1) FLIGHTS ARE UPDATED WITH: CHECKIN COUNT.
+		// 2)
 	}
 
 

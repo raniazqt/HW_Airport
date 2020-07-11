@@ -7,15 +7,18 @@ import com.hw.airport.config.AirportSimulator;
 import com.hw.airport.model.Booking;
 import com.hw.airport.model.Desk;
 import com.hw.airport.model.FlightSettings;
+import javafx.util.Pair;
+
+import javax.swing.*;
 
 public interface GUISvc {
 
-	AirportSimulator retriveSimulatorSettings();
+	List<Pair<String, Double>> retrieveSimulatorSettings();
 
 	//retrieve Current Passenger Count in Queue 
 	int getCrnCntOfPsngrInQueue();
 
-	LinkedList<Booking> getQueuePassengersList();
+	DefaultListModel<Booking> getQueuePassengersList();
 
 	List<Desk> getOpenedDeskList();
 

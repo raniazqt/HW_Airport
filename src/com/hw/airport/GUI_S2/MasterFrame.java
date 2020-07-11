@@ -4,16 +4,19 @@ import com.hw.airport.config.GUISettings;
 
 import javax.swing.*;
 import java.awt.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
-public class MasterFrame extends JFrame {
-
+public class MasterFrame extends JFrame implements GUIElement<JFrame>
+{
     private GUISettings guiSettings;
-    private ActiveFlightPanel flightsPanel;
-    private CheckInDeskPanel checkInDeskPanel;
-    private PassengerPanel passengerPanel;
-    private SimToolBar simToolBar;
+    private GUIElement<JPanel> flightsPanel;
+    private GUIElement<JPanel> checkInDeskPanel;
+    private GUIElement<JPanel> passengerPanel;
+    private GUIElement<JToolBar> simToolBar;
 
-    public MasterFrame(GUISettings guiSettings) {
+    public MasterFrame(GUISettings guiSettings)
+    {
         this.guiSettings = guiSettings;
 
         initMasterFrame();
@@ -21,20 +24,24 @@ public class MasterFrame extends JFrame {
         addSubPanels();
     }
 
-    private void initMasterFrame() {
+    private void initMasterFrame()
+    {
         setTitle (guiSettings.MasterFrameSettings.getMainScreenTitle());
-        setSize (guiSettings.MasterFrameSettings.getMainScreenWidth(), guiSettings.MasterFrameSettings.getMainScreenHeight());
+        setSize (guiSettings.MasterFrameSettings.getMainScreenWidth(),
+                guiSettings.MasterFrameSettings.getMainScreenHeight());
         setDefaultCloseOperation (EXIT_ON_CLOSE);
     }
 
-    private void initSubPanels() {
-        simToolBar = new SimToolBar(guiSettings);
-        flightsPanel = new ActiveFlightPanel(guiSettings);
-        checkInDeskPanel = new CheckInDeskPanel(guiSettings);
-        passengerPanel = new PassengerPanel(guiSettings);
+    private void initSubPanels()
+    {
+        simToolBar = new SimToolBar(guiSettings.SimToolBarSettings);
+        flightsPanel = new ActiveFlightPanel(guiSettings.ActiveFlightPanelSettings);
+        checkInDeskPanel = new CheckInDeskPanel(guiSettings.CheckInDeskPanelSettings);
+        passengerPanel = new PassengerPanel(guiSettings.PassengerPanelSettings);
     }
 
-    private void addSubPanels() {
+    private void addSubPanels()
+    {
         setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -43,17 +50,30 @@ public class MasterFrame extends JFrame {
         c.gridy = 0;
         c.weightx = 1;
         c.weighty = 1;
-        add(simToolBar, c);
-
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.ipady = 0;
-        c.weightx = 0.0;
-        c.gridwidth = 3;
-        c.gridx = 0;
-        c.gridy = 1;
-        add(passengerPanel, c);
-        //add(checkInDeskPanel);
-        //add(flightsPanel);
+        add(simToolBar.getSelf(), c);
     }
 
+    @Override
+    public JFrame getSelf()
+    {
+        return this;
+    }
+
+    @Override
+    public void draw()
+    {
+        simToolBar.draw();
+        checkInDeskPanel.draw();
+        passengerPanel.draw();
+        flightsPanel.draw();
+    }
+
+    @Override
+    public void update()
+    {
+        simToolBar.update();
+        checkInDeskPanel.update();
+        passengerPanel.update();
+        flightsPanel.update();
+    }
 }

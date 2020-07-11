@@ -18,7 +18,7 @@ public class DeskManager implements Observer{
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
 		int passToDeskRatio = sim.getPassToDeskRatio();
-		int maxOpnDsk = sim.getMaxOpndCheckinDesk();
+		int maxOpnDsk = (int) sim.getMaxOpndCheckinDesk();
 		int openedDeskCnt = openedDeskList.size();
 		
 		PassengerQueue queue = PassengerQueue.getInstance();
