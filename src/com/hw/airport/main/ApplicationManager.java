@@ -7,8 +7,10 @@ import com.hw.airport.GUI_S1.AirportGUI;
 import com.hw.airport.config.AirportSimulator;
 import com.hw.airport.config.AppContainer;
 import com.hw.airport.exception.HWAirportException;
+import com.hw.airport.model.ActiveFlight;
 import com.hw.airport.model.AppData;
 import com.hw.airport.service.DataSvc;
+import com.hw.airport.service.FlightSvc;
 import com.hw.airport.service.QueueSvcImpl;
 
 
@@ -40,6 +42,17 @@ public class ApplicationManager {
 		} catch (HWAirportException e) {
 			throw new Exception("Application failed to load data. Contact adminstrator");
 		}
+		
+		//create list of flights being boarding based on user entry
+		AppData.getActiveFlights().add(new ActiveFlight("AF999", 10));
+		AppData.getActiveFlights().add(new ActiveFlight("AA123", 10));
+		
+		FlightSvc flightSvc = AppContainer.getFlightSvc();
+		flightSvc.setFlights(AppData.getFlightsInfo());
+		
+	
+		
+		
 	}
 	private void start() throws Exception {
 
@@ -65,7 +78,7 @@ public class ApplicationManager {
 
 		TimerTask queuePopulatingTask = new QueuePopulatingTask();
 		//running timer task as daemon thread
-		Timer timer = new Timer(true);
+		Timer timer = new Timer();
 		timer.scheduleAtFixedRate(queuePopulatingTask, 0, appRate);
 		System.out.println("TimerTask started");
 

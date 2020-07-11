@@ -1,5 +1,7 @@
 package com.hw.airport.service;
 
+import java.util.Map;
+
 import com.hw.airport.exception.HWAirportException;
 import com.hw.airport.model.Flight;
 
@@ -18,5 +20,7 @@ public interface FlightSvc {
 	public boolean isMaxPassengerCountExceededForFlight(String flightCode, int totalPassenger) throws HWAirportException;
 	
 	public Flight getFlightByCode(String code);
+	void setFlights(Map<String, Flight> flights);
+	Map<String, Flight> getFlights();
 	
 }

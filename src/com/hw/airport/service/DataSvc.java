@@ -11,4 +11,7 @@ public interface DataSvc {
 
 	public Map<String, Booking> loadBookingData(String bookingFileName) ;
 
+
+	void updateActiveFlight(String flightCd, int psngrCnt, double weight, double volume, double totalChg);
+
 }

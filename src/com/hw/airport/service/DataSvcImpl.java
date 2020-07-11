@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.hw.airport.exception.HWAirportException;
+import com.hw.airport.model.ActiveFlight;
+import com.hw.airport.model.AppData;
 import com.hw.airport.model.Booking;
 import com.hw.airport.model.Booking.BookingStatus;
 import com.hw.airport.model.Flight;
@@ -67,6 +69,19 @@ public class DataSvcImpl implements DataSvc {
 			bookingList.put(refCode, booking);
 		}
 		return bookingList;
+	}
+
+	@Override
+	public void updateActiveFlight(String flightCd, int psngrCnt, double weight, double volume, double totalChg) {
+		List<ActiveFlight> flights = AppData.getActiveFlights();
+		for (ActiveFlight flight : flights) {
+			if (flight.getFlightCd().equalsIgnoreCase(flightCd)) {
+				flight.setTotalVolume(volume);
+				flight.setTotalWeight(weight);
+				flight.setXtraChargeCollected(totalChg);
+				flight.setBoardedPsngrCnt(flight.getBoardedPsngrCnt()+1);
+			}
+		}
 	}
 
 }

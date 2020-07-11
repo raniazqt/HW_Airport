@@ -114,4 +114,9 @@ public class BookingCharge {
 	public double getTotalChg() {
 		return this.volumeCharge + this.weightCharge;
 	}
+	
+	public double getVolume() {
+		
+		return depth * width * length;
+	}
 }

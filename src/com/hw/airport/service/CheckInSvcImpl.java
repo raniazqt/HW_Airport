@@ -11,14 +11,15 @@ import com.hw.airport.model.Booking;
 import com.hw.airport.model.Booking.BookingStatus;
 import com.hw.airport.model.BookingCharge;
 import com.hw.airport.model.Flight;
-import com.hw.airport.model.FlightSettings;
+import com.hw.airport.model.ActiveFlight;
+import com.hw.airport.model.AppData;
 
 public class CheckInSvcImpl implements CheckInSvc {
 
 	private BookingSvc bookingSvc = AppContainer.getBookingSvc();
 	private FlightSvc flightSvc = AppContainer.getFlightSvc();
 	private BaggageSvc baggageSvc = AppContainer.getBaggageSvc();
-
+	private DataSvc dataSvc = AppContainer.getDataSvc();
 	/**
 	 * @param lastName last name of the passenger.
 	 * @param bookingRef the provided booking reference. this is checked with the bookings file.
@@ -53,7 +54,7 @@ public class CheckInSvcImpl implements CheckInSvc {
 		}
 		if (charge.getWeight() > flight.getMaxBagWeight()) {
 			charge.setWeightCharge(flight.getXtraWghtChargePerKg() * 
-					charge.getWeight() - flight.getMaxBagWeight());
+					(charge.getWeight() - flight.getMaxBagWeight()));
 		}
 		return charge;
 	}
@@ -78,7 +79,7 @@ public class CheckInSvcImpl implements CheckInSvc {
 		return !flightSatus && isNotCheckedIn;	
 	}
 
-	public boolean isMaxFltCpctyVolWghtStsExceeded(String flightCd) {
+	/*public boolean isMaxFltCpctyVolWghtStsExceeded(String flightCd) {
 		double currentFlightBagVolume;
 		boolean isMaxVolumeExceeded = false;
 		boolean isMaxWeightExceeded = false;
@@ -98,23 +99,97 @@ public class CheckInSvcImpl implements CheckInSvc {
 		}
 		return !isMaxVolumeExceeded && !isMaxWeightExceeded && !isMaxPassengerCountExceeded;	
 
+	}*/
+
+	public boolean isMaxFltCpctyVolWghtStsExceeded(String flightCd) {
+		double currentFlightBagVolume;
+		boolean isMaxVolumeExceeded = false;
+		boolean isMaxWeightExceeded = false;
+		boolean isMaxPassengerCountExceeded = false;
+
+		ActiveFlight flight = this.getActiveFlight(flightCd);
+		currentFlightBagVolume = flight.getTotalVolume();
+
+		double currentFlightBagWeight = flight.getTotalWeight();
+		int currentFlightPassengerCount = flight.getBoardedPsngrCnt();
+
+		try {
+			isMaxVolumeExceeded = flightSvc.isMaxVolumeExceededForFlight(flightCd, currentFlightBagVolume);
+			isMaxWeightExceeded = flightSvc.isMaxWeightExceededForFlight(flightCd, currentFlightBagWeight);
+			isMaxPassengerCountExceeded = flightSvc.isMaxPassengerCountExceededForFlight(flightCd, currentFlightPassengerCount);
+		} catch (HWAirportException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return isMaxVolumeExceeded && isMaxWeightExceeded && isMaxPassengerCountExceeded;	
 	}
 
 	/**
 	 * @param lastName last name of the passenger.
 	 * @param bookingRef the provided booking reference. this is checked with the bookings file.
+	 * @throws HWAirportException 
 	 */
 	@Override
-	public boolean doCheckIn(Booking passenger) {
-		List<FlightSettings> activeFlights = AirportSimulator.getActiveFlights();
+	public boolean doCheckIn(Booking passenger) throws HWAirportException {
+		//List<ActiveFlight> activeFlights = AppData.getActiveFlights();
+
 		String flightCd = passenger.getFlightCode();
-		if (isFlightBoarding(flightCd)) {
-			
-		}
-			return false;
-		//check if the flight is in the active flight list
-		//check if the crnt time is within the flight boarding time 
-		//check if the flight capacity, volume, passenger count were not exceeded
+		ActiveFlight flight = this.getActiveFlight(flightCd);
+		String passengerName = passenger.getFullName();
+		boolean isCheckInComplete = false;
+
+
+		//check if the passenger has already checked in
+		if (passenger.getCheckInStatus() == BookingStatus.CHECKED_IN) {
+			System.out.println("Check in progress for Passenger - " + passengerName 
+					+ ": Passenger has already checked in");
+			//	throw new HWAirportException("passenger " + passengerName + " has already checked in!");
+		}else 
+
+			//check if the flight is in the active flight list
+			if (null == flight) {
+				//flight not boarding, remove passenger 
+				System.out.println("Passenger " + passengerName 
+						+ " is booked on a flight " + flightCd + " Which is not boarding now ");
+				//	throw new HWAirportException("Flight # " + flightCd + " is not boarding now!");
+			}else 
+				//check if the crnt time is within the flight boarding time
+				//TODO: Not sure how to simulate it
+
+				//check if the flight capacity, volume, passenger count were not exceeded
+				if (this.isMaxFltCpctyVolWghtStsExceeded(flightCd)) {
+					System.out.println("Check in progress for Passenger - " + passengerName 
+							+ ": Check in failed The flight " + flightCd + " exceeded its capacity.");
+					//	throw new HWAirportException("Flight # " + flightCd + " has exceeded its capacity");
+				} else {
+
+					//The passenger is good to go. Start the checkin process
+					//Check for extra baggage weight or size 
+					//to reuse the existing code to calculate the extra charge, create BookingCharge object
+					BookingCharge bookingCharge = createBookingChargeObjForPassenger(passenger);
+					try {
+						bookingCharge = calculateXtraChargeForPasngr(bookingCharge);
+						if (bookingCharge.getVolumeCharge() != 0 || bookingCharge.getWeightCharge() !=0 ) {
+							//passenger needs to pay extra baggage charge
+							//TODO: Not sure what to do in this case
+						}
+
+					} catch (HWAirportException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+					//done checking in passenger. update data
+					//update activeFlight object with the new charges, volume, weight and passenger count
+					dataSvc.updateActiveFlight(flightCd, 1, bookingCharge.getWeight(), bookingCharge.getVolume(), bookingCharge.getTotalChg());
+
+
+					isCheckInComplete = true;
+				}
+		return isCheckInComplete;
+
+
+
 		//check the passenger details
 		//check passenger baggages
 		//calculate any extra charges
@@ -123,16 +198,27 @@ public class CheckInSvcImpl implements CheckInSvc {
 
 	}
 
-	private boolean isFlightBoarding(String flightCd) {
-		List<FlightSettings> activeFlights = AirportSimulator.getActiveFlights();
-		boolean  found = false;
+	private BookingCharge createBookingChargeObjForPassenger(Booking passenger) {
+		BookingCharge charge = new BookingCharge();
+		charge.setRefCode(passenger.getRefCode());
+		charge.setDepth(passenger.getBaggageHeight());
+		charge.setLastName(passenger.getLastName());
+		charge.setLength(passenger.getBaggageLength());
+		charge.setWeight(passenger.getTotalBaggageWeight());
+		charge.setWidth(passenger.getBaggageWidth());
+		//	charge.setBagCnt(passenger.);
+		return charge;
+	}
 
-		for(FlightSettings flight : activeFlights){
+	private ActiveFlight getActiveFlight(String flightCd) {
+		List<ActiveFlight> activeFlights = AppData.getActiveFlights();
+
+		for(ActiveFlight flight : activeFlights){
 			if (flight.getFlightCd().equalsIgnoreCase(flightCd)) {
-				found = true;
+				return flight;
 			}
 		}
-		return found;
+		return null;
 	}
 
 	/**
