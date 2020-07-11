@@ -2,14 +2,27 @@ package com.hw.airport.config;
 
 import java.util.Map;
 
-import com.hw.airport.GUI_S2.AirportGUI;
-import com.hw.airport.GUI_S2.AirportGUIImpl;
+import com.hw.airport.GUI_S1.AirportGUI;
+import com.hw.airport.GUI_S1.AirportGUIImpl;
 import com.hw.airport.model.AppData;
 import com.hw.airport.model.Booking;
 import com.hw.airport.model.DeskManager;
 import com.hw.airport.model.Flight;
 import com.hw.airport.model.PassengerQueue;
-import com.hw.airport.service.*;
+import com.hw.airport.service.BaggageSvc;
+import com.hw.airport.service.BaggageSvcImpl;
+import com.hw.airport.service.BookingSvc;
+import com.hw.airport.service.BookingSvcImpl;
+import com.hw.airport.service.CheckInSvc;
+import com.hw.airport.service.CheckInSvcImpl;
+import com.hw.airport.service.DataSvc;
+import com.hw.airport.service.DataSvcImpl;
+import com.hw.airport.service.DeskSvc;
+import com.hw.airport.service.DeskSvcImpl;
+import com.hw.airport.service.FlightSvc;
+import com.hw.airport.service.FlightSvcImpl;
+import com.hw.airport.service.QueueSvc;
+import com.hw.airport.service.QueueSvcImpl;
 
 public class AppContainer {
 
@@ -34,8 +47,6 @@ public class AppContainer {
 	private static AppContainer appContainer;
 	
 	private static AirportGUI gui;
-
-	private static GUISvc guiSvc;
 	
 	private static DataSvc dataSvc;
 	
@@ -50,18 +61,17 @@ public class AppContainer {
 	public static AppContainer getInstance() {
 		if (appContainer == null) {
 			appContainer = new AppContainer();
+			appData = AppData.getInstance();
 			bookingSvc = new BookingSvcImpl();
 			flightSvc = new FlightSvcImpl();
 			checkInQueue = PassengerQueue.getInstance();
 			baggageSvc = new BaggageSvcImpl();
-			appData = AppData.getInstance();
 			gui = new AirportGUIImpl();
 			dataSvc = new DataSvcImpl();
-			queueSvc= new QueueSvcImpl();
-			deskManager = new DeskManager();
-			deskSvc = new DeskSvcImpl();
+			queueSvc= new QueueSvcImpl();			
 			checkinSvc = new CheckInSvcImpl();
-			guiSvc = new GUISvcImpl();
+			deskSvc = new DeskSvcImpl();
+			deskManager = new DeskManager();
 		}
 
 		return appContainer;
@@ -95,9 +105,9 @@ public class AppContainer {
 		return appData;
 	}
 
-	public static AirportGUI getGui() { return gui; }
-
-	public static GUISvc getGuiSvc() { return guiSvc; }
+	public static AirportGUI getGui() {
+		return gui;
+	}
 
 	public static DataSvc getDataSvc() {
 		return dataSvc;

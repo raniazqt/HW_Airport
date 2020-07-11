@@ -21,6 +21,7 @@ public class FlightSvcImpl implements FlightSvc {
 //	BookingSvc bookingSvc = AppContainer.getBookingSvc();
 
 	private Map<String, Flight> flights = AppData.getFlightsInfo();
+private BookingSvc bookingSvc = AppContainer.getBookingSvc();
 
 	/**
 	 * @param flightCode the flight code to check
@@ -29,6 +30,8 @@ public class FlightSvcImpl implements FlightSvc {
 	 * @throws HWAirportException throws an invalid flight code exception if no
 	 *                            flight is found.
 	 */
+	
+	
 	@Override
 	public int getPassengerCountForFlight(String flightCode) throws HWAirportException {
 		int currentCheckedInPsngrCount = 0;
@@ -36,7 +39,7 @@ public class FlightSvcImpl implements FlightSvc {
 			throw new InvalidFlightCodeException();
 		}
 
-		List<Booking> bookingsForFlight = null;// bookingSvc.findAllBookingForFlight(flightCode);
+		List<Booking> bookingsForFlight = bookingSvc .findAllBookingForFlight(flightCode);
 		for (Booking booking : bookingsForFlight) {
 			if (booking.getCheckInStatus() == BookingStatus.CHECKED_IN) {
 				currentCheckedInPsngrCount++;
@@ -156,8 +159,18 @@ public class FlightSvcImpl implements FlightSvc {
 	 */
 	@Override
 	public Flight getFlightByCode(String code) {
-		Flight flight = flights.get(code);
+		Flight flight = flights.get(code.toLowerCase());
 		return flight;
+	}
+
+	@Override
+	public Map<String, Flight> getFlights() {
+		return flights;
+	}
+
+	@Override
+	public void setFlights(Map<String, Flight> flights) {
+		this.flights = flights;
 	}
 	
 	/*
@@ -191,5 +204,7 @@ public class FlightSvcImpl implements FlightSvc {
 	 * }
 	 * 
 	 */
+	
+	
 
 }

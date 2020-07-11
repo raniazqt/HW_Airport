@@ -1,15 +1,9 @@
 package com.hw.airport.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-
-import com.hw.airport.exception.HWAirportException;
-import com.hw.airport.service.BaggageSvc;
-import com.hw.airport.service.BaggageSvcImpl;
-import com.hw.airport.service.BookingSvc;
-import com.hw.airport.service.BookingSvcImpl;
-import com.hw.airport.service.FlightSvc;
-import com.hw.airport.service.FlightSvcImpl;
 
 public class AppData {
 
@@ -21,6 +15,8 @@ public class AppData {
 	// flight code
 	private static Map<String, Flight> flightsInfo;
 	
+	private static List<ActiveFlight> activeFlights;
+	
 	private static AppData appData;
 
 	public static AppData getInstance() {
@@ -28,6 +24,7 @@ public class AppData {
 			appData = new AppData();
 			bookingList = new HashMap<String, Booking>();
 			flightsInfo = new HashMap<String, Flight>();
+			activeFlights = new ArrayList<ActiveFlight>();
 		}
 		return appData;
 	}
@@ -47,9 +44,13 @@ public class AppData {
 	public static void setFlightsInfo(Map<String, Flight> flightsInfo) {
 		AppData.flightsInfo = flightsInfo;
 	}
-	
-	
-	
-	
 
+	public static List<ActiveFlight> getActiveFlights() {
+		return activeFlights;
+	}
+
+	public static void setActiveFlights(List<ActiveFlight> activeFlights) {
+		AppData.activeFlights = activeFlights;
+	}
+	
 }

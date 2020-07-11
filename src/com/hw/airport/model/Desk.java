@@ -16,6 +16,8 @@ public class Desk {
 	//Desk status from ENUM
 	private String status;
 	
+	private String threadName;
+	
 	/*
 	 * Constructor to create new Desk instance. To insure ID is uniuque, 
 	 * ID generator code is used when construction the Desk object 
@@ -47,8 +49,11 @@ public class Desk {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	public String getThreadName() {
+		return threadName;
+	}
+	public void setThreadName(String threadName) {
+		this.threadName = threadName;
+	}
 	
-	 
-	
-
 }
