@@ -43,8 +43,8 @@ public class GUISvcImpl implements GUISvc {
 	}
 	
 	@Override
-	public List<FlightSettings> getActiveFlightsInformation() {
-		return AirportSimulator.getActiveFlights();
+	public List<ActiveFlight> getActiveFlightsInformation() {
+		return AppData.getActiveFlights();
 	}
 	
 	

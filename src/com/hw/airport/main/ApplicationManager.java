@@ -3,7 +3,7 @@ package com.hw.airport.main;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import com.hw.airport.GUI_S1.AirportGUI;
+import com.hw.airport.GUI_S2.AirportGUI;
 import com.hw.airport.config.AirportSimulator;
 import com.hw.airport.config.AppContainer;
 import com.hw.airport.exception.HWAirportException;
@@ -73,7 +73,7 @@ public class ApplicationManager {
 		// any setup logic here.
 
 		//Initialize app simulator
-		long rate = AirportSimulator.getQueuePopulatingRate();
+		long rate = (long) AirportSimulator.getQueuePopulatingRate();
 		long appRate = rate / 6;
 
 		TimerTask queuePopulatingTask = new QueuePopulatingTask();
@@ -82,7 +82,7 @@ public class ApplicationManager {
 		timer.scheduleAtFixedRate(queuePopulatingTask, 0, appRate);
 		System.out.println("TimerTask started");
 
-		gui.displayAirportStatusScreen();
+		gui.display();
 	}
 
 

@@ -14,6 +14,13 @@ import com.hw.airport.model.Flight;
 import com.hw.airport.model.ActiveFlight;
 import com.hw.airport.model.AppData;
 
+/**
+ * 1. save startTime in a variable.
+ * 2. for each flight, define a variable called "duration"
+ * 3. startTime - currentTime >= duration = flightIsDone.
+ * 4. executionRate is the simulated time.
+ */
+
 public class CheckInSvcImpl implements CheckInSvc {
 
 	private BookingSvc bookingSvc = AppContainer.getBookingSvc();

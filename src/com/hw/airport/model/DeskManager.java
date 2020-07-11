@@ -23,7 +23,7 @@ public class DeskManager implements Observer{
 
 	public DeskManager() {
 		super();
-		this.executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(sim.getMaxOpndCheckinDesk());
+		this.executor = (ThreadPoolExecutor) Executors.newFixedThreadPool((int) sim.getMaxOpndCheckinDesk());
 	}
 
 	@Override
