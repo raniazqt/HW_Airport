@@ -7,11 +7,6 @@ import java.awt.*;
 
 public class PassengerPanel extends JPanel {
     public PassengerPanel(GUISettings guiSettings) {
-        JScrollPane scrollPane = new JScrollPane(guiSettings.getPsngrQueueDisplay());
 
-        scrollPane.setMinimumSize(new Dimension(200, 100));
-        add(new JScrollPane(guiSettings.getPsngrQueueDisplay()));
-
-        setPreferredSize(new Dimension(500, 500));
     }
 }

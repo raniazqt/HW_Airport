@@ -6,41 +6,20 @@ import java.util.List;
 
 public class GUISettings {
 
-    private int mainScreenWidth;
-    private int mainScreenHeight;
-    private String mainScreenTitle;
+    public MasterFrameSettings MasterFrameSettings;
+    public SimToolBarSettings SimToolBarSettings;
+    public CheckInDeskPanelSettings CheckInDeskPanelSettings;
+    public PassengerPanelSettings PassengerPanelSettings;
+    public ActiveFlightPanelSettings ActiveFlightPanelSettings;
 
-    //Sim tool bar.
-    private List<JButton> simToolBarButtons;
-    private List<JLabel> settingsToolBarLabels;
-    private FlowLayout toolBarsLayout;
+    public GUISettings(MasterFrameSettings masterFrameSettings, SimToolBarSettings simToolBarSettings,
+                       CheckInDeskPanelSettings checkInDeskPanelSettings, PassengerPanelSettings passengerPanelSettings,
+                       ActiveFlightPanelSettings activeFlightPanelSettings) {
 
-    //Passenger Queue
-    private JList psngrQueueDisplay;
-
-    public GUISettings(int mainScrWidth, int mainScrHeight, String mainScrTitle,
-                       List<JButton> simToolBarButtons, List<JLabel> settingsToolBarLabels, FlowLayout toolBarsLayout, JList psngrQueue) {
-
-        this.mainScreenWidth = mainScrWidth;
-        this.mainScreenHeight = mainScrHeight;
-        this.mainScreenTitle = mainScrTitle;
-        this.simToolBarButtons = simToolBarButtons;
-        this.settingsToolBarLabels = settingsToolBarLabels;
-        this.toolBarsLayout = toolBarsLayout;
-        this.psngrQueueDisplay = psngrQueue;
+        this.MasterFrameSettings = masterFrameSettings;
+        this.SimToolBarSettings = simToolBarSettings;
+        this.CheckInDeskPanelSettings = checkInDeskPanelSettings;
+        this.PassengerPanelSettings = passengerPanelSettings;
+        this.ActiveFlightPanelSettings = activeFlightPanelSettings;
     }
-
-    public String getMainScreenTitle() { return this.mainScreenTitle;}
-
-    public int getMainScreenWidth() { return mainScreenWidth; }
-
-    public int getMainScreenHeight() { return mainScreenHeight; }
-
-    public List<JButton> getSimToolBarButtons() { return simToolBarButtons; }
-
-    public List<JLabel> getSettingsToolBarLabels() { return settingsToolBarLabels; }
-
-    public FlowLayout getToolBarsLayout() { return toolBarsLayout; }
-
-    public JList getPsngrQueueDisplay() { return psngrQueueDisplay; }
 }

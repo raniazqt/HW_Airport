@@ -1,6 +1,5 @@
 package com.hw.airport.GUI_S2;
 
-import com.hw.airport.config.AppConfig;
 import com.hw.airport.config.GUISettings;
 
 import javax.swing.*;
@@ -13,23 +12,22 @@ public class MasterFrame extends JFrame {
     private CheckInDeskPanel checkInDeskPanel;
     private PassengerPanel passengerPanel;
     private SimToolBar simToolBar;
-    private SettingsToolBar settingsToolBar;
 
-    public MasterFrame() {
-        guiSettings = AppConfig.getInstance().getGuiSettings();
+    public MasterFrame(GUISettings guiSettings) {
+        this.guiSettings = guiSettings;
+
         initMasterFrame();
         initSubPanels();
         addSubPanels();
     }
 
     private void initMasterFrame() {
-        setTitle (guiSettings.getMainScreenTitle());
-        setSize (guiSettings.getMainScreenWidth(), guiSettings.getMainScreenHeight());
+        setTitle (guiSettings.MasterFrameSettings.getMainScreenTitle());
+        setSize (guiSettings.MasterFrameSettings.getMainScreenWidth(), guiSettings.MasterFrameSettings.getMainScreenHeight());
         setDefaultCloseOperation (EXIT_ON_CLOSE);
     }
 
     private void initSubPanels() {
-        settingsToolBar = new SettingsToolBar(guiSettings);
         simToolBar = new SimToolBar(guiSettings);
         flightsPanel = new ActiveFlightPanel(guiSettings);
         checkInDeskPanel = new CheckInDeskPanel(guiSettings);
@@ -45,13 +43,6 @@ public class MasterFrame extends JFrame {
         c.gridy = 0;
         c.weightx = 1;
         c.weighty = 1;
-
-        add(settingsToolBar, c);
-
-        c.weightx = 0.5;
-        c.gridx = 1;
-        c.gridy = 0;
-        c.fill = GridBagConstraints.HORIZONTAL;
         add(simToolBar, c);
 
         c.fill = GridBagConstraints.HORIZONTAL;
