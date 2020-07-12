@@ -84,4 +84,21 @@ public class DataSvcImpl implements DataSvc {
 		}
 	}
 
+	@Override
+	public List<ActiveFlight> getFlightsActivelyBoarding() {
+		return AppData.getActiveFlights();
+	}
+
+	@Override
+	public void addPsgrToCheckedInList(Booking passenger) {
+		AppData.addPsngrToCheckedInList(passenger.getFlightCode(), passenger);
+		
+	}
+
+	@Override
+	public void addPsgrToFailedToCheckedList(Booking passenger) {
+		AppData.addPsngrToFailedToCheckInList(passenger.getFlightCode(), passenger);
+		
+	}
+
 }
