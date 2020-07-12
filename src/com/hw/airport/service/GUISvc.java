@@ -4,9 +4,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.hw.airport.config.AirportSimulator;
+import com.hw.airport.model.ActiveFlight;
 import com.hw.airport.model.Booking;
 import com.hw.airport.model.Desk;
-import com.hw.airport.model.FlightSettings;
 
 public interface GUISvc {
 
@@ -19,6 +19,6 @@ public interface GUISvc {
 
 	List<Desk> getOpenedDeskList();
 
-	List<FlightSettings> getActiveFlightsInformation();
+	List<ActiveFlight> getActiveFlightsInformation();
 
 }

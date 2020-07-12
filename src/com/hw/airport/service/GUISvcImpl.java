@@ -5,10 +5,11 @@ import java.util.List;
 
 import com.hw.airport.config.AirportSimulator;
 import com.hw.airport.config.AppContainer;
+import com.hw.airport.model.ActiveFlight;
+import com.hw.airport.model.AppData;
 import com.hw.airport.model.Booking;
 import com.hw.airport.model.Desk;
 import com.hw.airport.model.DeskManager;
-import com.hw.airport.model.FlightSettings;
 
 public class GUISvcImpl implements GUISvc {
 	private QueueSvc queueSvc = AppContainer.getQueueSvc();
@@ -37,8 +38,8 @@ public class GUISvcImpl implements GUISvc {
 	}
 	
 	@Override
-	public List<FlightSettings> getActiveFlightsInformation() {
-		return AirportSimulator.getActiveFlights();
+	public List<ActiveFlight> getActiveFlightsInformation() {
+		return AppData.getActiveFlights();
 	}
 	
 	

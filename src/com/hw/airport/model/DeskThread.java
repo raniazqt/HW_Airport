@@ -44,7 +44,7 @@ public class DeskThread extends Thread implements Runnable{
 		System.out.println("Desk - " + this.deskThreadName + " - Start processing passengers from queue");
 		//deskSvc.processPassengersQueue(desk);
 		while (!desk.getStatus().equalsIgnoreCase(DESK_STATUS.CLOSED.toString())) {
-			if (queueSvc.getQueueSize() == 0) {
+			if (queueSvc.getCountOfPassangerInQueue() == 0) {
 				//close desk & stop thread
 			}else {
 				try {
