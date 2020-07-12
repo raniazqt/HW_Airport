@@ -1,13 +1,12 @@
 package com.hw.airport.service;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 import com.hw.airport.config.AirportSimulator;
 import com.hw.airport.config.AppContainer;
 import com.hw.airport.model.*;
 import javafx.util.Pair;
+import java.util.Random;
 
 import javax.swing.*;
 
@@ -30,21 +29,35 @@ public class GUISvcImpl implements GUISvc {
 	}
 	
 	@Override
-	public DefaultListModel<Booking> getQueuePassengersList()
+	public List<Booking> getQueuePassengersList()
 	{
-		DefaultListModel<Booking> queuePsngrListModel = new DefaultListModel<Booking>();
-		queuePsngrListModel.addAll(PassengerQueue.getInstance().getPassengerList());
-		return queuePsngrListModel;
+		Booking dummyBooking = new Booking("Spider", "Man", "AX234", "F214",Booking.BookingStatus.NOT_CHECKED_IN);
+		dummyBooking.setTotalBaggageVolume(27.5);
+		dummyBooking.setTotalBaggageWeight(122.2);
+		List<Booking> dummyQueue = new ArrayList<>(Arrays.asList(dummyBooking, dummyBooking,
+				dummyBooking, dummyBooking, dummyBooking, dummyBooking, dummyBooking, dummyBooking));
+		return dummyQueue;
 	}
 	
 	@Override
 	public List<Desk> getOpenedDeskList() {
-		return deskManager.getOpenedDeskList();
+		Desk dummyDesk = new Desk(0, "OPEN");
+		dummyDesk.setPassenger(new Booking("Bat", "Man", "AX234", "F214",Booking.BookingStatus.NOT_CHECKED_IN));
+
+		List<Desk> dummyDeskList = new ArrayList<>(Arrays.asList(dummyDesk, dummyDesk, dummyDesk, dummyDesk));
+		return dummyDeskList;
 	}
 	
 	@Override
 	public List<ActiveFlight> getActiveFlightsInformation() {
-		return AppData.getActiveFlights();
+		ActiveFlight dummyFlight = new ActiveFlight("VX_123", 1);
+		dummyFlight.setBoardedPsngrCnt(44);
+		dummyFlight.setTotalVolume(40.256);
+		dummyFlight.setTotalWeight(14.22);
+		dummyFlight.setXtraChargeCollected(89.67);
+
+		List<ActiveFlight> dummyFlights = new ArrayList<>(Arrays.asList(dummyFlight, dummyFlight, dummyFlight));
+		return dummyFlights;
 	}
 	
 	

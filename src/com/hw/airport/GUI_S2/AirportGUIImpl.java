@@ -15,6 +15,7 @@ public class AirportGUIImpl implements AirportGUI {
 		guiSvc = AppContainer.getGuiSvc();
 		masterFrame = new MasterFrame(getGuiSettings());
 
+		masterFrame.update(guiSvc);
 		masterFrame.draw();
 	}
 
@@ -37,9 +38,15 @@ public class AirportGUIImpl implements AirportGUI {
 		SimToolBarSettings simToolBarSettings = new SimToolBarSettings(new FlowLayout(), new Color(0x090909), new Color(0x31E92D),
 				new Font("Dialog", Font.ITALIC, 12), BorderFactory.createBevelBorder(2));
 
-		CheckInDeskPanelSettings checkInDeskPanelSettings = new CheckInDeskPanelSettings();
-		PassengerPanelSettings passengerPanelSettings = new PassengerPanelSettings();
-		ActiveFlightPanelSettings activeFlightPanelSettings = new ActiveFlightPanelSettings();
+		CheckInDeskPanelSettings checkInDeskPanelSettings = new CheckInDeskPanelSettings(new FlowLayout(), new Color(0x090909), new Color(0xE9BA00),
+				new Font("Dialog", Font.PLAIN, 12), BorderFactory.createBevelBorder(3), new Dimension(180, 100));
+
+		ActiveFlightPanelSettings activeFlightPanelSettings = new ActiveFlightPanelSettings(new FlowLayout(), new Color(0x090909), new Color(0x11DBE9),
+				new Font("Dialog", Font.BOLD, 12), BorderFactory.createBevelBorder(1), new Dimension(300, 200));
+
+		PassengerPanelSettings passengerPanelSettings = new PassengerPanelSettings(new FlowLayout(), new Color(0x090909), new Color(0xE92ECE),
+				new Font("Dialog", Font.ITALIC, 12), BorderFactory.createBevelBorder(1));
+
 
 		return new GUISettings(masterFrameSettings, simToolBarSettings,
 				checkInDeskPanelSettings, passengerPanelSettings, activeFlightPanelSettings);

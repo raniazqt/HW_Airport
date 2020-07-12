@@ -1,6 +1,8 @@
 package com.hw.airport.GUI_S2;
 
 import com.hw.airport.config.SimToolBarSettings;
+import com.hw.airport.service.GUISvc;
+import javafx.util.Pair;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,6 +18,7 @@ public class SimToolBar extends JToolBar implements GUIElement<JToolBar>
 
     private SimToolBarSettings simToolBarSettings;
     private List<JLabel> simulationSettings;
+    private boolean isInit;
 
     public SimToolBar(SimToolBarSettings guiSettings)
     {
@@ -26,6 +29,7 @@ public class SimToolBar extends JToolBar implements GUIElement<JToolBar>
         this.setBackground(guiSettings.BackGroundColor);
         this.setBorder(guiSettings.BorderType);
         this.setFloatable(false);
+        this.isInit = false;
     }
 
     @Override
@@ -34,21 +38,27 @@ public class SimToolBar extends JToolBar implements GUIElement<JToolBar>
         return this;
     }
 
+    //TODO: Refactor later either draw or update for the tool bar.
     @Override
     public void draw()
     {
-        for(int i = 0; i < 4; i++)
+    }
+
+    @Override
+    public void update(GUISvc guiDataSvc)
+    {
+        if(isInit)
+            return;
+
+        List<Pair<String, Double>> simSettings = guiDataSvc.retrieveSimulatorSettings();
+        for(int i = 0; i < simSettings.size(); i++)
         {
-            JLabel settingsLabel = new JLabel("Test_"+i);
+            String dataValue = simSettings.get(i).toString();
+            JLabel settingsLabel = new JLabel(dataValue);
             settingsLabel.setFont(simToolBarSettings.LabelFont);
             settingsLabel.setForeground(simToolBarSettings.LabelColor);
             add(settingsLabel);
             simulationSettings.add(settingsLabel);
         }
-    }
-
-    @Override
-    public void update()
-    {
     }
 }

@@ -1,8 +1,6 @@
 package com.hw.airport.service;
 
-import java.util.LinkedList;
 import java.util.List;
-
 import com.hw.airport.model.ActiveFlight;
 import com.hw.airport.model.Booking;
 import com.hw.airport.model.Desk;
@@ -17,7 +15,7 @@ public interface GUISvc {
 	//retrieve Current Passenger Count in Queue 
 	int getCrnCntOfPsngrInQueue();
 
-	DefaultListModel<Booking> getQueuePassengersList();
+	List<Booking> getQueuePassengersList();
 
 	List<Desk> getOpenedDeskList();
 

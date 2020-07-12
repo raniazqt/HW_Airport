@@ -55,13 +55,13 @@ public class AppContainer {
 			flightSvc = new FlightSvcImpl();
 			checkInQueue = PassengerQueue.getInstance();
 			baggageSvc = new BaggageSvcImpl();
-			gui = new AirportGUIImpl();
 			dataSvc = new DataSvcImpl();
 			queueSvc= new QueueSvcImpl();			
 			checkinSvc = new CheckInSvcImpl();
 			deskSvc = new DeskSvcImpl();
 			deskManager = new DeskManager();
 			guiSvc = new GUISvcImpl();
+			gui = new AirportGUIImpl();
 		}
 
 		return appContainer;
