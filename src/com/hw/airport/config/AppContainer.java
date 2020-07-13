@@ -69,8 +69,8 @@ public class AppContainer {
 			gui = new AirportGUIImpl();
 			dataSvc = new DataSvcImpl();
 			queueSvc= new QueueSvcImpl();			
-			checkinSvc = new CheckInSvcImpl();
 			deskSvc = new DeskSvcImpl();
+			checkinSvc = new CheckInSvcImpl();
 			deskManager = new DeskManager();
 		}
 
