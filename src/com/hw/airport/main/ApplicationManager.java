@@ -1,9 +1,7 @@
 package com.hw.airport.main;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 import com.hw.airport.GUI_S2.AirportGUI;
+import com.hw.airport.GUI_S2.AirportGUIImpl;
 import com.hw.airport.config.AirportSimulator;
 import com.hw.airport.config.AppContainer;
 import com.hw.airport.exception.HWAirportException;
@@ -12,6 +10,10 @@ import com.hw.airport.model.AppData;
 import com.hw.airport.service.DataSvc;
 import com.hw.airport.service.FlightSvc;
 import com.hw.airport.service.QueueSvcImpl;
+import com.hw.airport.util.XmlHandler;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class ApplicationManager {
@@ -90,5 +92,8 @@ public class ApplicationManager {
 	public static void main(String[] args) throws Exception {
 		ApplicationManager appManager = new ApplicationManager();
 		appManager.start();
+
+		var guiSettings = ((AirportGUIImpl)appManager.gui).getGuiSettings();
+		XmlHandler.getInstance().loadToXml("./resources/files/GuiConfig.xml", guiSettings);
 	}
 }

@@ -5,17 +5,11 @@ import com.hw.airport.service.GUISvc;
 import javafx.util.Pair;
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class SimToolBar extends JToolBar implements GUIElement<JToolBar>
 {
-    //TODO: draw method called once.
-    //TODO: update method fetches data directly from GUISvc + updates values in GUI elements.
-    //TODO: draw out each panel, then after drawing test updates, then refactor the common code
-    //TODO: for the front end.
-
     private SimToolBarSettings simToolBarSettings;
     private List<JLabel> simulationSettings;
     private boolean isInit;

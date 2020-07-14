@@ -5,8 +5,8 @@ import com.hw.airport.service.GUISvc;
 import javax.swing.*;
 import java.awt.*;
 
-public class AirportGUIImpl implements AirportGUI {
-
+public class AirportGUIImpl implements AirportGUI
+{
 	private GUISvc guiSvc;
 	private GUIElement<JFrame> masterFrame;
 
@@ -30,7 +30,7 @@ public class AirportGUIImpl implements AirportGUI {
 		masterFrame.getSelf().setVisible(false);
 	}
 
-	private GUISettings getGuiSettings()
+	public GUISettings getGuiSettings()
 	{
 		MasterFrameSettings masterFrameSettings = new MasterFrameSettings(800,600,
 				WindowConstants.EXIT_ON_CLOSE, "Airport Status Screen");
@@ -52,3 +52,4 @@ public class AirportGUIImpl implements AirportGUI {
 				checkInDeskPanelSettings, passengerPanelSettings, activeFlightPanelSettings);
 	}
 }
+

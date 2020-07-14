@@ -1,14 +1,16 @@
 package com.hw.airport.service;
 
-import java.util.*;
-
 import com.hw.airport.config.AirportSimulator;
 import com.hw.airport.config.AppContainer;
-import com.hw.airport.model.*;
+import com.hw.airport.model.ActiveFlight;
+import com.hw.airport.model.Booking;
+import com.hw.airport.model.Desk;
+import com.hw.airport.model.DeskManager;
 import javafx.util.Pair;
-import java.util.Random;
 
-import javax.swing.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class GUISvcImpl implements GUISvc {
 	private QueueSvc queueSvc = AppContainer.getQueueSvc();
@@ -22,7 +24,7 @@ public class GUISvcImpl implements GUISvc {
 				new Pair<>("Queue Population Rate: ", AirportSimulator.getQueuePopulatingRate()));
 	}
 
-		//retrieve Current Passenger Count in Queue
+	//retrieve Current Passenger Count in Queue
 	@Override
 	public int getCrnCntOfPsngrInQueue() {
 		return queueSvc.getCountOfPassangerInQueue();
@@ -35,7 +37,8 @@ public class GUISvcImpl implements GUISvc {
 		dummyBooking.setTotalBaggageVolume(27.5);
 		dummyBooking.setTotalBaggageWeight(122.2);
 		List<Booking> dummyQueue = new ArrayList<>(Arrays.asList(dummyBooking, dummyBooking,
-				dummyBooking, dummyBooking, dummyBooking, dummyBooking, dummyBooking, dummyBooking));
+				dummyBooking, dummyBooking, dummyBooking, dummyBooking, dummyBooking, dummyBooking, dummyBooking, dummyBooking, dummyBooking,
+				dummyBooking, dummyBooking, dummyBooking, dummyBooking, dummyBooking, dummyBooking, dummyBooking, dummyBooking, dummyBooking));
 		return dummyQueue;
 	}
 	
