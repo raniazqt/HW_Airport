@@ -23,14 +23,14 @@ public class DeskManager implements Observer{
 
 	public DeskManager() {
 		super();
-		this.executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(sim.getMaxOpndCheckinDesk());
+		this.executor = (ThreadPoolExecutor) Executors.newFixedThreadPool((int) sim.getMaxOpndCheckinDesk());
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
 		int passToDeskRatio = sim.getPassToDeskRatio();
-		int maxOpnDsk = sim.getMaxOpndCheckinDesk();
+		int maxOpnDsk = (int) sim.getMaxOpndCheckinDesk();
 		int openedDeskCnt = openedDeskList.size();
 
 		PassengerQueue queue = PassengerQueue.getInstance();

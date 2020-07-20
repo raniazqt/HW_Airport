@@ -45,15 +45,15 @@ public class AirportSimulator {
 		return passToDeskRatio;
 	}
 
-	public static long getQueuePopulatingRate() {
+	public static double getQueuePopulatingRate() {
 		return queuePopulatingRate;
 	}
 
-	public static int getMaxOpndCheckinDesk() {
+	public static double getMaxOpndCheckinDesk() {
 		return maxOpndCheckinDesk;
 	}
 
-	public static long getSimExcRate() {
+	public static double getSimExcRate() {
 		return simExcRate;
 	}
 
