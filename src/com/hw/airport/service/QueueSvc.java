@@ -28,7 +28,7 @@ public interface QueueSvc {
 
 	void setPassengerQ();
 
-	void addPassengerToQueue() throws HWAirportException;
+	Booking addPassengerToQueue() throws HWAirportException;
 
 	Booking firstPassengerFromQueue();
 

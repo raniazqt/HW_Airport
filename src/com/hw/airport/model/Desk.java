@@ -1,11 +1,8 @@
 package com.hw.airport.model;
 
-import com.hw.airport.exception.HWAirportException;
-import com.hw.airport.service.QueueSvc;
+import com.hw.airport.enums.DESK_STATUS;
 
 public class Desk {
-	
-	public enum deskStatus{AVAILABLE, BUSY}
 	
 	//passenger being checked in 
 	private Booking passenger;
@@ -14,7 +11,7 @@ public class Desk {
 	private Integer id;
 	
 	//Desk status from ENUM
-	private String status;
+	private DESK_STATUS status;
 	
 	private String threadName;
 	
@@ -24,7 +21,7 @@ public class Desk {
 	 * which uses the thread safe AtomicInteger type. 
 	 * When first creating a desk its status is available and ready to take passengers  
 	 */
-	public Desk(Integer id, String status) {
+	public Desk(Integer id, DESK_STATUS status) {
 		super();
 		this.id = id;
 		this.status = status;
@@ -36,7 +33,7 @@ public class Desk {
 		return passenger;
 	}
 
-	public String getStatus() {
+	public DESK_STATUS getStatus() {
 		return status;
 	}
 
@@ -46,7 +43,7 @@ public class Desk {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public void setStatus(String status) {
+	public void setStatus(DESK_STATUS status) {
 		this.status = status;
 	}
 	public String getThreadName() {

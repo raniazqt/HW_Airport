@@ -54,6 +54,7 @@ public class DeskManager implements Observer{
 		DeskThread deskThread = new DeskThread(desk, threadName );
 		deskThreadList.add(deskThread);
 		executor.execute(deskThread);
+		
 
 		return desk;
 	}
@@ -68,6 +69,13 @@ public class DeskManager implements Observer{
 
 	public void setOpenedDeskList(List<Desk> openedDeskList) {
 		this.openedDeskList = openedDeskList;
+	}
+
+	public void closeDesk(DeskThread deskThread) {
+		deskSvc.closeDesk(deskThread.getDesk());
+		deskThread.stop();
+		System.out.println("Thread stopped");
+		
 	}	
 
 

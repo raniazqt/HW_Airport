@@ -1,25 +1,25 @@
 package com.hw.airport.service;
 
-import java.util.List;
-
-import com.hw.airport.config.AirportSimulator;
 import com.hw.airport.config.AppContainer;
+import com.hw.airport.enums.DESK_STATUS;
 import com.hw.airport.exception.HWAirportException;
 import com.hw.airport.exception.MissingBookingException;
 import com.hw.airport.exception.MissingFlightException;
 import com.hw.airport.model.Booking;
 import com.hw.airport.model.Booking.BookingStatus;
 import com.hw.airport.model.BookingCharge;
+import com.hw.airport.model.Desk;
 import com.hw.airport.model.Flight;
 import com.hw.airport.model.ActiveFlight;
-import com.hw.airport.model.AppData;
 
 public class CheckInSvcImpl implements CheckInSvc {
 
 	private BookingSvc bookingSvc = AppContainer.getBookingSvc();
 	private FlightSvc flightSvc = AppContainer.getFlightSvc();
-	private BaggageSvc baggageSvc = AppContainer.getBaggageSvc();
+	private DeskSvc deskSvc = AppContainer.getDeskSvc();
 	private DataSvc dataSvc = AppContainer.getDataSvc();
+	private QueueSvc queueSvc = AppContainer.getQueueSvc();
+	
 	/**
 	 * @param lastName last name of the passenger.
 	 * @param bookingRef the provided booking reference. this is checked with the bookings file.
@@ -107,7 +107,7 @@ public class CheckInSvcImpl implements CheckInSvc {
 		boolean isMaxWeightExceeded = false;
 		boolean isMaxPassengerCountExceeded = false;
 
-		ActiveFlight flight = this.getActiveFlight(flightCd);
+		ActiveFlight flight = this.dataSvc.getActiveFlight(flightCd);
 		currentFlightBagVolume = flight.getTotalVolume();
 
 		double currentFlightBagWeight = flight.getTotalWeight();
@@ -124,80 +124,93 @@ public class CheckInSvcImpl implements CheckInSvc {
 		return isMaxVolumeExceeded && isMaxWeightExceeded && isMaxPassengerCountExceeded;	
 	}
 
-	/**
-	 * @param lastName last name of the passenger.
-	 * @param bookingRef the provided booking reference. this is checked with the bookings file.
-	 * @throws HWAirportException 
-	 */
+	
+	// Check in - Step # 1
 	@Override
-	public boolean doCheckIn(Booking passenger) throws HWAirportException {
-		//List<ActiveFlight> activeFlights = AppData.getActiveFlights();
-
-		String flightCd = passenger.getFlightCode();
-		ActiveFlight flight = this.getActiveFlight(flightCd);
-		String passengerName = passenger.getFullName();
-		boolean isCheckInComplete = false;
-
-
-		//check if the passenger has already checked in
-		if (passenger.getCheckInStatus() == BookingStatus.CHECKED_IN) {
-			System.out.println("Check in progress for Passenger - " + passengerName 
-					+ ": Passenger has already checked in");
-			//	throw new HWAirportException("passenger " + passengerName + " has already checked in!");
-		}else 
-
-			//check if the flight is in the active flight list
-			if (null == flight) {
-				//flight not boarding, remove passenger 
-				System.out.println("Passenger " + passengerName 
-						+ " is booked on a flight " + flightCd + " Which is not boarding now ");
-				//	throw new HWAirportException("Flight # " + flightCd + " is not boarding now!");
-			}else 
-				//check if the crnt time is within the flight boarding time
-				//TODO: Not sure how to simulate it
-
-				//check if the flight capacity, volume, passenger count were not exceeded
-				if (this.isMaxFltCpctyVolWghtStsExceeded(flightCd)) {
-					System.out.println("Check in progress for Passenger - " + passengerName 
-							+ ": Check in failed The flight " + flightCd + " exceeded its capacity.");
-					//	throw new HWAirportException("Flight # " + flightCd + " has exceeded its capacity");
-				} else {
-
-					//The passenger is good to go. Start the checkin process
-					//Check for extra baggage weight or size 
-					//to reuse the existing code to calculate the extra charge, create BookingCharge object
-					BookingCharge bookingCharge = createBookingChargeObjForPassenger(passenger);
-					try {
-						bookingCharge = calculateXtraChargeForPasngr(bookingCharge);
-						if (bookingCharge.getVolumeCharge() != 0 || bookingCharge.getWeightCharge() !=0 ) {
-							//passenger needs to pay extra baggage charge
-							//TODO: Not sure what to do in this case
-						}
-
-					} catch (HWAirportException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-
-					//done checking in passenger. update data
-					//update activeFlight object with the new charges, volume, weight and passenger count
-					dataSvc.updateActiveFlight(flightCd, 1, bookingCharge.getWeight(), bookingCharge.getVolume(), bookingCharge.getTotalChg());
-
-
-					isCheckInComplete = true;
-				}
-		return isCheckInComplete;
-
-
-
-		//check the passenger details
-		//check passenger baggages
-		//calculate any extra charges
-
-
-
+	public void addPassengerToDesk(Desk desk) throws HWAirportException {
+		deskSvc.loadDesk(desk);
+		
 	}
 
+	// Check in - Step # 2
+	@Override
+	public void validatePassengerData(Booking passenger) throws HWAirportException {
+		//check if the passenger has already checked in
+		if (passenger.getCheckInStatus() == BookingStatus.CHECKED_IN) {
+			System.out.println("Check in progress for Passenger - " + passenger.getFullName() 
+			+ ": Passenger has already checked in");
+			throw new HWAirportException("passenger " + passenger.getFullName() + " has already checked in!");
+		}
+	}
+
+	// Check in - Step # 3
+	@Override
+	public void checkFlightStatus(Booking passenger) throws HWAirportException {
+		String passengerName = passenger.getFirstName();
+		String flightCd = passenger.getFlightCode();
+		ActiveFlight flight = this.dataSvc.getActiveFlight(flightCd);
+		//check if the flight is in the active flight list
+		if (null == flight) {
+			//flight not boarding, remove passenger 
+			System.out.println("Passenger " + passengerName 
+					+ " is booked on a flight " + flightCd + " Which is not boarding now ");
+			throw new HWAirportException("Flight # " + flightCd + " is not boarding now!");
+		}else 
+			//check if the crnt time is within the flight boarding time
+			//TODO: Not sure how to simulate it
+
+			//check if the flight capacity, volume, passenger count were not exceeded
+			if (this.isMaxFltCpctyVolWghtStsExceeded(flightCd)) {
+				System.out.println("Check in progress for Passenger - " + passengerName 
+						+ ": Check in failed The flight " + flightCd + " exceeded its capacity.");
+				throw new HWAirportException("Flight # " + flightCd + " has exceeded its capacity");
+			}
+	}
+
+	// Check in - Step # 4
+	@Override
+	public Booking calculateBaggageXtraCharge(Booking passenger) throws HWAirportException {
+		boolean hasXtraCharge = false;
+		//The passenger is good to go. Start the checkin process
+		//Check for extra baggage weight or size 
+		//to reuse the existing code to calculate the extra charge, create BookingCharge object
+		BookingCharge bookingCharge = createBookingChargeObjForPassenger(passenger);
+
+		bookingCharge = calculateXtraChargeForPasngr(bookingCharge);
+		passenger.setTotalBaggageVolume(bookingCharge.getVolume());
+		passenger.setXtraBagWghtChrg(bookingCharge.getWeightCharge());
+		passenger.setXtraBagVolChrg(bookingCharge.getVolumeCharge());
+		return passenger;
+	}
+
+	// Check in - Step # 5
+	@Override
+	public boolean processPayment(Booking passenger) {
+		return true;
+	}
+
+	// Check in - Step # 6
+	@Override
+	public boolean saveFlightAndPassengerData(boolean checkInStatus, Booking passenger) {
+		//done checking in passenger. update data
+		// 1- update activeFlight object with the new charges, volume, weight and passenger count
+		//2. add passenger to the list of checkedIn or failed checked depending on the check in status
+		if (checkInStatus) {
+			dataSvc.updateActiveFlight(passenger.getFlightCode(), 1, passenger.getTotalBaggageWeight(),
+					passenger.getTotalBaggageVolume(), passenger.getXtraBagVolChrg() + passenger.getXtraBagWghtChrg());
+			dataSvc.addPsgrToCheckedInList(passenger);
+		}else {
+			dataSvc.addPsgrToFailedToCheckedList(passenger);
+		}
+		return true;
+	}
+	
+	@Override
+	public void clearDesk(Desk desk) {
+		deskSvc.clearDesk(desk);
+	}
+
+	
 	private BookingCharge createBookingChargeObjForPassenger(Booking passenger) {
 		BookingCharge charge = new BookingCharge();
 		charge.setRefCode(passenger.getRefCode());
@@ -208,17 +221,6 @@ public class CheckInSvcImpl implements CheckInSvc {
 		charge.setWidth(passenger.getBaggageWidth());
 		//	charge.setBagCnt(passenger.);
 		return charge;
-	}
-
-	private ActiveFlight getActiveFlight(String flightCd) {
-		List<ActiveFlight> activeFlights = AppData.getActiveFlights();
-
-		for(ActiveFlight flight : activeFlights){
-			if (flight.getFlightCd().equalsIgnoreCase(flightCd)) {
-				return flight;
-			}
-		}
-		return null;
 	}
 
 	/**
@@ -237,5 +239,24 @@ public class CheckInSvcImpl implements CheckInSvc {
 		}
 		return status;
 	}
+
+	@Override
+	public void updateDeskStatus(Desk desk, DESK_STATUS status) {
+		deskSvc.updateStatus(desk, status);
+		
+	}
+
+	@Override
+	public boolean isQueueEmpty() {
+		return (queueSvc.getCountOfPassangerInQueue() == 0);
+	}
+
+	@Override
+	public void closeDesk(Desk desk) {
+		deskSvc.closeDesk(desk);
+		
+	}
+
+	
 
 }
