@@ -1,5 +1,8 @@
 package com.hw.airport.service;
 
+import java.util.List;
+import java.util.Observable;
+
 import com.hw.airport.config.AppContainer;
 import com.hw.airport.enums.DESK_STATUS;
 import com.hw.airport.exception.HWAirportException;
@@ -19,7 +22,7 @@ import com.hw.airport.model.ActiveFlight;
  * 4. executionRate is the simulated time.
  */
 
-public class CheckInSvcImpl implements CheckInSvc {
+public class CheckInSvcImpl extends Observable implements CheckInSvc {
 
 	private BookingSvc bookingSvc = AppContainer.getBookingSvc();
 	private FlightSvc flightSvc = AppContainer.getFlightSvc();
@@ -250,7 +253,8 @@ public class CheckInSvcImpl implements CheckInSvc {
 	@Override
 	public void updateDeskStatus(Desk desk, DESK_STATUS status) {
 		deskSvc.updateStatus(desk, status);
-		
+		setChanged();
+		notifyObservers(desk);
 	}
 
 	@Override

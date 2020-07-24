@@ -4,6 +4,8 @@ import com.hw.airport.service.GUISvc;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Observable;
+import java.util.Observer;
 
 public class AirportGUIImpl implements AirportGUI
 {
@@ -15,7 +17,7 @@ public class AirportGUIImpl implements AirportGUI
 		guiSvc = AppContainer.getGuiSvc();
 		masterFrame = new MasterFrame(getGuiSettings());
 
-		masterFrame.update(guiSvc);
+		masterFrame.update(null);
 		masterFrame.draw();
 	}
 
@@ -50,6 +52,11 @@ public class AirportGUIImpl implements AirportGUI
 
 		return new GUISettings(masterFrameSettings, simToolBarSettings,
 				checkInDeskPanelSettings, passengerPanelSettings, activeFlightPanelSettings);
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		this.masterFrame.refreshGUI(arg);
 	}
 }
 
