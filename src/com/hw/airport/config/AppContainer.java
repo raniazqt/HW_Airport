@@ -2,27 +2,14 @@ package com.hw.airport.config;
 
 import java.util.Map;
 
-import com.hw.airport.GUI_S1.AirportGUI;
-import com.hw.airport.GUI_S1.AirportGUIImpl;
+import com.hw.airport.GUI_S2.AirportGUI;
+import com.hw.airport.GUI_S2.AirportGUIImpl;
 import com.hw.airport.model.AppData;
 import com.hw.airport.model.Booking;
 import com.hw.airport.model.DeskManager;
 import com.hw.airport.model.Flight;
 import com.hw.airport.model.PassengerQueue;
-import com.hw.airport.service.BaggageSvc;
-import com.hw.airport.service.BaggageSvcImpl;
-import com.hw.airport.service.BookingSvc;
-import com.hw.airport.service.BookingSvcImpl;
-import com.hw.airport.service.CheckInSvc;
-import com.hw.airport.service.CheckInSvcImpl;
-import com.hw.airport.service.DataSvc;
-import com.hw.airport.service.DataSvcImpl;
-import com.hw.airport.service.DeskSvc;
-import com.hw.airport.service.DeskSvcImpl;
-import com.hw.airport.service.FlightSvc;
-import com.hw.airport.service.FlightSvcImpl;
-import com.hw.airport.service.QueueSvc;
-import com.hw.airport.service.QueueSvcImpl;
+import com.hw.airport.service.*;
 
 public class AppContainer {
 
@@ -57,6 +44,8 @@ public class AppContainer {
 	private static DeskSvc deskSvc;
 
 	private static CheckInSvc checkinSvc;
+
+	private static GUISvc guiSvc;
 	
 	public static AppContainer getInstance() {
 		if (appContainer == null) {
@@ -66,12 +55,13 @@ public class AppContainer {
 			flightSvc = new FlightSvcImpl();
 			checkInQueue = PassengerQueue.getInstance();
 			baggageSvc = new BaggageSvcImpl();
-			gui = new AirportGUIImpl();
 			dataSvc = new DataSvcImpl();
 			queueSvc= new QueueSvcImpl();			
 			deskSvc = new DeskSvcImpl();
 			checkinSvc = new CheckInSvcImpl();
 			deskManager = new DeskManager();
+			guiSvc = new GUISvcImpl();
+			gui = new AirportGUIImpl();
 		}
 
 		return appContainer;
@@ -128,8 +118,8 @@ public class AppContainer {
 	public static CheckInSvc getCheckinSvc() {
 		return checkinSvc;
 	}
-	
-	
+
+	public static GUISvc getGuiSvc() { return guiSvc; }
 
 
 }

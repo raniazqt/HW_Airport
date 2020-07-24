@@ -11,9 +11,9 @@ import com.hw.airport.config.AirportSimulator;
 import com.hw.airport.config.AppContainer;
 import com.hw.airport.service.DeskSvc;
 
-public class DeskManager implements Observer{
+public class DeskManager extends Observable implements Observer{
 	//	LOG = LoggerManager.
-	private List<Desk> openedDeskList = new ArrayList<Desk>();
+	private volatile List<Desk> openedDeskList = new ArrayList<Desk>();
 	private AirportSimulator sim = AirportSimulator.getInstnce();
 	private DeskSvc deskSvc = AppContainer.getDeskSvc();
 	private ThreadPoolExecutor executor;
@@ -23,14 +23,14 @@ public class DeskManager implements Observer{
 
 	public DeskManager() {
 		super();
-		this.executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(sim.getMaxOpndCheckinDesk());
+		this.executor = (ThreadPoolExecutor) Executors.newFixedThreadPool((int) sim.getMaxOpndCheckinDesk());
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
 		int passToDeskRatio = sim.getPassToDeskRatio();
-		int maxOpnDsk = sim.getMaxOpndCheckinDesk();
+		int maxOpnDsk = (int) sim.getMaxOpndCheckinDesk();
 		int openedDeskCnt = openedDeskList.size();
 
 		PassengerQueue queue = PassengerQueue.getInstance();
@@ -39,6 +39,9 @@ public class DeskManager implements Observer{
 			Desk desk = this.openAndRunDesk();
 			openedDeskList.add(desk);
 			System.out.println("Desk opened");
+			setChanged();
+			notifyObservers(desk);
+			
 		}
 	}
 
@@ -55,7 +58,6 @@ public class DeskManager implements Observer{
 		deskThreadList.add(deskThread);
 		executor.execute(deskThread);
 		
-
 		return desk;
 	}
 

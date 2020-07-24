@@ -1,6 +1,6 @@
 package com.hw.airport.main;
 
-import com.hw.airport.GUI_S1.AirportGUIImpl;
+import com.hw.airport.GUI_S2.AirportGUIImpl;
 import com.hw.airport.config.AppContainer;
 import com.hw.airport.model.AppData;
 import com.hw.airport.model.PassengerQueue;

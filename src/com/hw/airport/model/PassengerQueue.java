@@ -5,7 +5,7 @@ import java.util.LinkedList;
 
 public class PassengerQueue {
 
-	private LinkedList<Booking> passengerList = new LinkedList<Booking>();
+	private volatile LinkedList<Booking> passengerList = new LinkedList<Booking>();
 	
 	private int queueMaxSize;
 

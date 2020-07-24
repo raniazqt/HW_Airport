@@ -33,7 +33,7 @@ public class AirportSimulator {
 			//TODO: Ask user about the flights to check in and the time, max size of the queue, how often to fill the queue 
 			
 			queuePopulatingRate = 6000;
-			maxOpndCheckinDesk = 2;
+			maxOpndCheckinDesk = 1;
 			passToDeskRatio = 5;
 
 		}
@@ -45,15 +45,15 @@ public class AirportSimulator {
 		return passToDeskRatio;
 	}
 
-	public static long getQueuePopulatingRate() {
+	public static double getQueuePopulatingRate() {
 		return queuePopulatingRate;
 	}
 
-	public static int getMaxOpndCheckinDesk() {
+	public static double getMaxOpndCheckinDesk() {
 		return maxOpndCheckinDesk;
 	}
 
-	public static long getSimExcRate() {
+	public static double getSimExcRate() {
 		return simExcRate;
 	}
 

@@ -1,17 +1,24 @@
 package com.hw.airport.main;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
-import com.hw.airport.GUI_S1.AirportGUI;
+import com.hw.airport.GUI_S2.AirportGUI;
+import com.hw.airport.GUI_S2.AirportGUIImpl;
+import com.hw.airport.GUI_S2.GUIElement;
+import com.hw.airport.GUI_S2.PassengerPanel;
 import com.hw.airport.config.AirportSimulator;
 import com.hw.airport.config.AppContainer;
 import com.hw.airport.exception.HWAirportException;
 import com.hw.airport.model.ActiveFlight;
 import com.hw.airport.model.AppData;
+import com.hw.airport.model.DeskManager;
+import com.hw.airport.service.CheckInSvc;
+import com.hw.airport.service.CheckInSvcImpl;
 import com.hw.airport.service.DataSvc;
 import com.hw.airport.service.FlightSvc;
 import com.hw.airport.service.QueueSvcImpl;
+import com.hw.airport.util.XmlHandler;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class ApplicationManager {
@@ -29,6 +36,13 @@ public class ApplicationManager {
 		//register the DeskManager as an observer to the QueueSvs
 		QueueSvcImpl queueSvc = (QueueSvcImpl) AppContainer.getQueueSvc();
 		queueSvc.addObserver(AppContainer.getDeskManager());
+		queueSvc.addObserver(gui);
+		
+		DeskManager deskManager = AppContainer.getDeskManager();
+		deskManager.addObserver(gui);
+		
+		CheckInSvcImpl checkInSvc = (CheckInSvcImpl) AppContainer.getCheckinSvc();
+		checkInSvc.addObserver(gui);
 		/*
 		 * if (null == appContainer) { throw new RuntimeErrorException(null,
 		 * "Application did not start correctly. Notify adminstrator "); }
@@ -73,7 +87,7 @@ public class ApplicationManager {
 		// any setup logic here.
 
 		//Initialize app simulator
-		long rate = AirportSimulator.getQueuePopulatingRate();
+		long rate = (long) AirportSimulator.getQueuePopulatingRate();
 		long appRate = rate / 6;
 
 		TimerTask queuePopulatingTask = new QueuePopulatingTask();
@@ -82,7 +96,7 @@ public class ApplicationManager {
 		timer.scheduleAtFixedRate(queuePopulatingTask, 0, appRate);
 		System.out.println("TimerTask started");
 
-		gui.displayAirportStatusScreen();
+		gui.display();
 	}
 
 
@@ -90,5 +104,8 @@ public class ApplicationManager {
 	public static void main(String[] args) throws Exception {
 		ApplicationManager appManager = new ApplicationManager();
 		appManager.start();
+
+		var guiSettings = ((AirportGUIImpl)appManager.gui).getGuiSettings();
+		XmlHandler.getInstance().loadToXml("./resources/files/GuiConfig.xml", guiSettings);
 	}
 }
