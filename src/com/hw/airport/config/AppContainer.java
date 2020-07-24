@@ -57,8 +57,8 @@ public class AppContainer {
 			baggageSvc = new BaggageSvcImpl();
 			dataSvc = new DataSvcImpl();
 			queueSvc= new QueueSvcImpl();			
-			checkinSvc = new CheckInSvcImpl();
 			deskSvc = new DeskSvcImpl();
+			checkinSvc = new CheckInSvcImpl();
 			deskManager = new DeskManager();
 			guiSvc = new GUISvcImpl();
 			gui = new AirportGUIImpl();

@@ -106,7 +106,7 @@ public class QueueSvcImpl extends Observable implements QueueSvc {
 	}
 
 	@Override
-	public void addPassengerToQueue() throws HWAirportException {
+	public Booking addPassengerToQueue() throws HWAirportException {
 		Booking passengerToAdd = bookingSvc.getRandomBooking();
 
 		if (null != passengerToAdd && passengerToAdd.getCheckInStatus().equals(BookingStatus.NOT_CHECKED_IN)) {
@@ -118,6 +118,7 @@ public class QueueSvcImpl extends Observable implements QueueSvc {
 			setChanged();
 			notifyObservers();
 		}
+		return passengerToAdd;
 	}
 
 
