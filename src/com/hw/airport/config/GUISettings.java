@@ -1,23 +1,19 @@
 package com.hw.airport.config;
 
-import javax.swing.*;
-import java.awt.*;
-import java.util.List;
-
 public class GUISettings {
 
-    public MasterFrameSettings MasterFrameSettings;
-    public SimToolBarSettings SimToolBarSettings;
+    public FrameSettings FrameSettings;
+    public GUIComponentSettings GUIComponentSettings;
     public CheckInDeskPanelSettings CheckInDeskPanelSettings;
     public PassengerPanelSettings PassengerPanelSettings;
     public ActiveFlightPanelSettings ActiveFlightPanelSettings;
 
-    public GUISettings(MasterFrameSettings masterFrameSettings, SimToolBarSettings simToolBarSettings,
+    public GUISettings(FrameSettings masterFrameSettings, GUIComponentSettings simToolBarSettings,
                        CheckInDeskPanelSettings checkInDeskPanelSettings, PassengerPanelSettings passengerPanelSettings,
                        ActiveFlightPanelSettings activeFlightPanelSettings) {
 
-        this.MasterFrameSettings = masterFrameSettings;
-        this.SimToolBarSettings = simToolBarSettings;
+        this.FrameSettings = masterFrameSettings;
+        this.GUIComponentSettings = simToolBarSettings;
         this.CheckInDeskPanelSettings = checkInDeskPanelSettings;
         this.PassengerPanelSettings = passengerPanelSettings;
         this.ActiveFlightPanelSettings = activeFlightPanelSettings;

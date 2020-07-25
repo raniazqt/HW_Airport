@@ -1,26 +1,23 @@
 package com.hw.airport.GUI_S2;
 
+import com.hw.airport.config.AppContainer;
+import com.hw.airport.config.GUIComponentSettings;
+import com.hw.airport.service.GUISvc;
+
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Observable;
 
-import javax.swing.JLabel;
-import javax.swing.JToolBar;
-
-import com.hw.airport.config.AppContainer;
-import com.hw.airport.config.SimToolBarSettings;
-import com.hw.airport.service.GUISvc;
-
-public class SimToolBar extends JToolBar implements GUIElement<JToolBar>
+public class SimToolBar extends JToolBar implements GUIElement
 {
-    private SimToolBarSettings simToolBarSettings;
+    private GUIComponentSettings simToolBarSettings;
     private List<JLabel> simulationSettings;
     private boolean isInit;
     
     private GUISvc guiDataSvc = AppContainer.getGuiSvc();
 
-    public SimToolBar(SimToolBarSettings guiSettings)
+    public SimToolBar(GUIComponentSettings guiSettings)
     {
         this.simToolBarSettings = guiSettings;
         this.simulationSettings = new ArrayList<>();
@@ -45,7 +42,7 @@ public class SimToolBar extends JToolBar implements GUIElement<JToolBar>
     }
 
     @Override
-    public void update(Object targetObj)
+    public void init(Object targetObj)
     {
         if(isInit)
             return;
@@ -65,7 +62,7 @@ public class SimToolBar extends JToolBar implements GUIElement<JToolBar>
 	
 
 	@Override
-	public void refreshGUI(Object targetObj) {
+	public void refresh(Object targetObj) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -1,61 +1,65 @@
 package com.hw.airport.GUI_S2;
 
-import java.util.List;
-import javax.swing.BoxLayout;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-
 import com.hw.airport.config.AppContainer;
 import com.hw.airport.config.PassengerPanelSettings;
 import com.hw.airport.model.Booking;
 import com.hw.airport.service.GUISvc;
 
-public class PassengerPanel extends JPanel implements GUIElement<JPanel>
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.util.List;
+
+import static java.util.Collections.unmodifiableList;
+
+public class PassengerPanel extends JPanel implements GUIElement
 {
 	private PassengerPanelSettings guiSettings;
-	private JTable passengerJTable = new JTable();
+	private JTable passengerJTable;
 	private List<Booking> passengersList;
-	private GUISvc guiSvc = AppContainer.getGuiSvc();
-
-	final Class[] columnClass = new Class[] {
-			String.class, String.class, String.class, Double.class, Double.class
-	};
-	String[] columnNames = {"Name",
-			"Booking#",
-			"Flight# ",
-			"Bag Weight",
-	"Bag Volume"};
-
-	DefaultTableModel model = new DefaultTableModel();
+	private GUISvc guiSvc;
+	private String[] columnNames;
+	private DefaultTableModel model;
 		
 	public PassengerPanel(PassengerPanelSettings guiSettings)
 	{
+		this.guiSvc = AppContainer.getGuiSvc();
+		this.passengerJTable = new JTable();
+		this.model = new DefaultTableModel();
 		this.guiSettings = guiSettings;
-		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		this.columnNames = new String[] {"Name #, Booking #", "Weight #", "Volume #", "What#"};
 	}
 
 	@Override
-	public JPanel getSelf(){
+	public JPanel getSelf()
+	{
 		return this;
 	}
 
 	@Override
 	public void draw()
 	{
-	//	getDataModel();
-
 		JScrollPane scrollPane = new JScrollPane(passengerJTable);
 		scrollPane.setBorder(guiSettings.BorderType);
 		scrollPane.setBackground(guiSettings.LabelColor);
-		this.add(scrollPane);
 
+		this.add(scrollPane);
 	}
 
-	private void getDataModel() {
+	@Override
+	public void init(Object targetObj)
+	{
+		fetchUpdatedPassengerData();
+
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		this.passengerJTable.setBorder(guiSettings.BorderType);
+		this.passengerJTable.setBackground(guiSettings.BackGroundColor);
+		this.passengerJTable.setFont(guiSettings.LabelFont);
+		this.passengerJTable.setForeground(guiSettings.LabelColor);
+	}
+
+	private void fetchUpdatedPassengerData() {
 		passengersList = guiSvc.getQueuePassengersList();
-		synchronized (passengersList) {
+		synchronized (unmodifiableList(passengersList)) {
 			Object[][] data = new Object[passengersList.size()][5];
 			int i = 0;
 			for(Booking booking : passengersList){
@@ -67,27 +71,14 @@ public class PassengerPanel extends JPanel implements GUIElement<JPanel>
 				i++;
 			}
 			model.setDataVector(data, columnNames);
-			
 		}
+
 		passengerJTable.setModel(model);
-
-		this.passengerJTable.setBorder(guiSettings.BorderType);
-		this.passengerJTable.setBackground(guiSettings.BackGroundColor);
-		this.passengerJTable.setFont(guiSettings.LabelFont);
-		this.passengerJTable.setForeground(guiSettings.LabelColor);
-
 	}
 
 	@Override
-	public void update(Object targetObj){		
-		this.getDataModel();
+	public void refresh(Object targetObj) {
+		fetchUpdatedPassengerData();
 	}
-
-	@Override
-	public void refreshGUI(Object targetObj) {
-		// TODO Auto-generated method stub
-
-	}
-
 }
 

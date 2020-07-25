@@ -5,43 +5,52 @@ import com.hw.airport.service.GUISvc;
 import javax.swing.*;
 import java.awt.*;
 import java.util.Observable;
-import java.util.Observer;
 
 public class AirportGUIImpl implements AirportGUI
 {
 	private GUISvc guiSvc;
-	private GUIElement<JFrame> masterFrame;
+	private GUIElement masterFrame;
+	private UserConfigFrame configFrame;
 
 	public AirportGUIImpl()
 	{
 		guiSvc = AppContainer.getGuiSvc();
-		masterFrame = new MasterFrame(getGuiSettings());
 
-		masterFrame.update(null);
-		masterFrame.draw();
+		FrameSettings userConfigFrameSettings = new FrameSettings(800,600,
+				WindowConstants.EXIT_ON_CLOSE, "Simulation Configuration Screen");
+		GUIComponentSettings userConfigPanelSettings = new GUIComponentSettings(new GridLayout(0,2), new Color(0xFFFFFFFF, true),
+				new Color(0x090909), new Font("Dialog", Font.BOLD, 12), BorderFactory.createBevelBorder(1));
+
+		configFrame = new UserConfigFrame(userConfigFrameSettings, userConfigPanelSettings);
+		masterFrame = new AirportMonitorFrame(getGuiSettings());
+
+		configFrame.init();
 	}
 
 	@Override
-	public void display()
+	public void displayConfigScreen()
 	{
-		masterFrame.getSelf().setVisible(true);
+		configFrame.getSelf().setVisible(true);
 	}
 
-	public void hide()
-	{
-		masterFrame.getSelf().setVisible(false);
+	@Override
+	public void displayAirportMonitorScreen() {
+		configFrame.setVisible(false);
+		masterFrame.init(null);
+		masterFrame.draw();
+		masterFrame.getSelf().setVisible(true);
 	}
 
 	public GUISettings getGuiSettings()
 	{
-		MasterFrameSettings masterFrameSettings = new MasterFrameSettings(800,600,
+		FrameSettings masterFrameSettings = new FrameSettings(1440,1280,
 				WindowConstants.EXIT_ON_CLOSE, "Airport Status Screen");
 
-		SimToolBarSettings simToolBarSettings = new SimToolBarSettings(new FlowLayout(), new Color(0x090909), new Color(0x31E92D),
+		GUIComponentSettings simToolBarSettings = new GUIComponentSettings(new FlowLayout(), new Color(0x090909), new Color(0x31E92D),
 				new Font("Dialog", Font.ITALIC, 12), BorderFactory.createBevelBorder(2));
 
 		CheckInDeskPanelSettings checkInDeskPanelSettings = new CheckInDeskPanelSettings(new FlowLayout(), new Color(0x090909), new Color(0xE9BA00),
-				new Font("Dialog", Font.PLAIN, 12), BorderFactory.createBevelBorder(3), new Dimension(180, 100));
+				new Font("Dialog", Font.PLAIN, 12), BorderFactory.createBevelBorder(3));
 
 		ActiveFlightPanelSettings activeFlightPanelSettings = new ActiveFlightPanelSettings(new FlowLayout(), new Color(0x090909), new Color(0x11DBE9),
 				new Font("Dialog", Font.BOLD, 12), BorderFactory.createBevelBorder(1), new Dimension(300, 200));
@@ -56,7 +65,7 @@ public class AirportGUIImpl implements AirportGUI
 
 	@Override
 	public void update(Observable o, Object arg) {
-		this.masterFrame.refreshGUI(arg);
+		this.masterFrame.refresh(arg);
 	}
 }
 

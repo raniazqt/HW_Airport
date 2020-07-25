@@ -8,9 +8,8 @@ import com.hw.airport.service.GUISvc;
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
 
-public class ActiveFlightPanel extends JPanel implements GUIElement<JPanel>
+public class ActiveFlightPanel extends JPanel implements GUIElement
 {
     private final ActiveFlightPanelSettings guiSettings;
     private List<FlightPanel> flightPanels;
@@ -44,7 +43,7 @@ public class ActiveFlightPanel extends JPanel implements GUIElement<JPanel>
     }
 
     @Override
-    public void update(Object targetObj)
+    public void init(Object targetObj)
     {
         List<ActiveFlight> openFlightList = guiDataSvc.getActiveFlightsInformation();
         currentFlightCount = openFlightList.size();
@@ -61,7 +60,7 @@ public class ActiveFlightPanel extends JPanel implements GUIElement<JPanel>
 
 
 	@Override
-	public void refreshGUI(Object targetObj) {
+	public void refresh(Object targetObj) {
 		// TODO Auto-generated method stub
 		
 	}

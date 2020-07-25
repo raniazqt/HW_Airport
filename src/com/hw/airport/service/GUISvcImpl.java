@@ -1,19 +1,12 @@
 package com.hw.airport.service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import com.hw.airport.config.AirportSimulator;
+import com.hw.airport.config.AppContainer;
+import com.hw.airport.model.*;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import com.hw.airport.config.AirportSimulator;
-import com.hw.airport.config.AppContainer;
-import com.hw.airport.enums.DESK_STATUS;
-import com.hw.airport.model.ActiveFlight;
-import com.hw.airport.model.AppData;
-import com.hw.airport.model.Booking;
-import com.hw.airport.model.Desk;
-import com.hw.airport.model.DeskManager;
 
 
 public class GUISvcImpl implements GUISvc {
@@ -40,17 +33,6 @@ public class GUISvcImpl implements GUISvc {
 	@Override
 	public List<Booking> getQueuePassengersList()
 	{
-		/*
-		 * Booking dummyBooking = new Booking("Spider", "Man", "AX234",
-		 * "F214",Booking.BookingStatus.NOT_CHECKED_IN);
-		 * dummyBooking.setTotalBaggageVolume(27.5);
-		 * dummyBooking.setTotalBaggageWeight(122.2); List<Booking> dummyQueue = new
-		 * ArrayList<>(Arrays.asList(dummyBooking, dummyBooking, dummyBooking,
-		 * dummyBooking, dummyBooking, dummyBooking, dummyBooking, dummyBooking,
-		 * dummyBooking, dummyBooking, dummyBooking, dummyBooking, dummyBooking,
-		 * dummyBooking, dummyBooking, dummyBooking, dummyBooking, dummyBooking,
-		 * dummyBooking, dummyBooking)); return dummyQueue;
-		 */
 		return queueSvc.getAllPassengersFromQueue();
 	}
 	

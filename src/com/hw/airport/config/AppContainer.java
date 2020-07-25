@@ -1,15 +1,11 @@
 package com.hw.airport.config;
 
-import java.util.Map;
-
 import com.hw.airport.GUI_S2.AirportGUI;
 import com.hw.airport.GUI_S2.AirportGUIImpl;
-import com.hw.airport.model.AppData;
-import com.hw.airport.model.Booking;
-import com.hw.airport.model.DeskManager;
-import com.hw.airport.model.Flight;
-import com.hw.airport.model.PassengerQueue;
+import com.hw.airport.model.*;
 import com.hw.airport.service.*;
+
+import java.util.Map;
 
 public class AppContainer {
 

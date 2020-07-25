@@ -2,15 +2,12 @@ package com.hw.airport.main;
 
 import com.hw.airport.GUI_S2.AirportGUI;
 import com.hw.airport.GUI_S2.AirportGUIImpl;
-import com.hw.airport.GUI_S2.GUIElement;
-import com.hw.airport.GUI_S2.PassengerPanel;
 import com.hw.airport.config.AirportSimulator;
 import com.hw.airport.config.AppContainer;
 import com.hw.airport.exception.HWAirportException;
 import com.hw.airport.model.ActiveFlight;
 import com.hw.airport.model.AppData;
 import com.hw.airport.model.DeskManager;
-import com.hw.airport.service.CheckInSvc;
 import com.hw.airport.service.CheckInSvcImpl;
 import com.hw.airport.service.DataSvc;
 import com.hw.airport.service.FlightSvc;
@@ -63,30 +60,12 @@ public class ApplicationManager {
 		
 		FlightSvc flightSvc = AppContainer.getFlightSvc();
 		flightSvc.setFlights(AppData.getFlightsInfo());
-		
-	
-		
-		
+
+		gui.displayConfigScreen();
 	}
-	private void start() throws Exception {
 
-		this.InitializeApplication();
-
-		/* 1. Load data from files
-		 * 2. Read simulator settings from user:
-		 * 		- rate for adding passengers to queue in seconds
-		 * 		- ratio of number of passengers in queue to number of opened checkin desks
-		 * 		- maximum number of allowed check-in desks
-		 * 		- simulator running rate in seconds
-		 * 		- flights to check in ( flight code , check in period in seconds)
-		 * 3. instantiate the queue
-		 * 4. create the timer to populate the queue
-		 * 
-		 */	
-
-		// any setup logic here.
-
-		//Initialize app simulator
+	//TODO: MUST BE CALLED FROM THE CONFIG FRAME TO START THE SIMULATION. 
+	public void start() throws Exception {
 		long rate = (long) AirportSimulator.getQueuePopulatingRate();
 		long appRate = rate / 6;
 
@@ -95,15 +74,11 @@ public class ApplicationManager {
 		Timer timer = new Timer();
 		timer.scheduleAtFixedRate(queuePopulatingTask, 0, appRate);
 		System.out.println("TimerTask started");
-
-		gui.display();
 	}
-
-
 
 	public static void main(String[] args) throws Exception {
 		ApplicationManager appManager = new ApplicationManager();
-		appManager.start();
+		appManager.InitializeApplication();
 
 		var guiSettings = ((AirportGUIImpl)appManager.gui).getGuiSettings();
 		XmlHandler.getInstance().loadToXml("./resources/files/GuiConfig.xml", guiSettings);

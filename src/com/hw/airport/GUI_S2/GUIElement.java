@@ -1,14 +1,12 @@
 package com.hw.airport.GUI_S2;
-import java.util.Observer;
 
-import com.hw.airport.model.Desk;
-import com.hw.airport.service.GUISvc;
+import java.awt.*;
 
-public interface GUIElement<T>{
-    T getSelf();
+public interface GUIElement
+{
+    Component getSelf();
 
     void draw();
-    void update(Object targetObj);
-
-	void refreshGUI(Object arg);
+    void init(Object targetObj);
+	void refresh(Object arg);
 }
