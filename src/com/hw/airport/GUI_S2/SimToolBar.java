@@ -1,18 +1,24 @@
 package com.hw.airport.GUI_S2;
 
-import com.hw.airport.config.SimToolBarSettings;
-import com.hw.airport.service.GUISvc;
-import javafx.util.Pair;
-
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Observable;
+
+import javax.swing.JLabel;
+import javax.swing.JToolBar;
+
+import com.hw.airport.config.AppContainer;
+import com.hw.airport.config.SimToolBarSettings;
+import com.hw.airport.service.GUISvc;
 
 public class SimToolBar extends JToolBar implements GUIElement<JToolBar>
 {
     private SimToolBarSettings simToolBarSettings;
     private List<JLabel> simulationSettings;
     private boolean isInit;
+    
+    private GUISvc guiDataSvc = AppContainer.getGuiSvc();
 
     public SimToolBar(SimToolBarSettings guiSettings)
     {
@@ -39,20 +45,28 @@ public class SimToolBar extends JToolBar implements GUIElement<JToolBar>
     }
 
     @Override
-    public void update(GUISvc guiDataSvc)
+    public void update(Object targetObj)
     {
         if(isInit)
             return;
-
-        List<Pair<String, Double>> simSettings = guiDataSvc.retrieveSimulatorSettings();
-        for(int i = 0; i < simSettings.size(); i++)
-        {
-            String dataValue = simSettings.get(i).toString();
-            JLabel settingsLabel = new JLabel(dataValue);
+        JLabel settingsLabel;
+        String dataValue;
+        Map<String, Double> simSettings = guiDataSvc.retrieveSimulatorSettings();
+        for(Map.Entry<String,Double> entry : simSettings.entrySet()){
+            dataValue = entry.getKey().toString().concat(entry.getValue().toString());
+            settingsLabel = new JLabel(dataValue);
             settingsLabel.setFont(simToolBarSettings.LabelFont);
             settingsLabel.setForeground(simToolBarSettings.LabelColor);
             add(settingsLabel);
             simulationSettings.add(settingsLabel);
         }
     }
+
+	
+
+	@Override
+	public void refreshGUI(Object targetObj) {
+		// TODO Auto-generated method stub
+		
+	}
 }

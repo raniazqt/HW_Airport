@@ -1,19 +1,22 @@
 package com.hw.airport.GUI_S2;
 
 import com.hw.airport.config.ActiveFlightPanelSettings;
+import com.hw.airport.config.AppContainer;
 import com.hw.airport.model.ActiveFlight;
-import com.hw.airport.model.Desk;
 import com.hw.airport.service.GUISvc;
 
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
 public class ActiveFlightPanel extends JPanel implements GUIElement<JPanel>
 {
     private final ActiveFlightPanelSettings guiSettings;
     private List<FlightPanel> flightPanels;
     private int currentFlightCount;
+    
+    private GUISvc guiDataSvc = AppContainer.getGuiSvc();
 
     public ActiveFlightPanel(ActiveFlightPanelSettings guiSettings)
     {
@@ -41,7 +44,7 @@ public class ActiveFlightPanel extends JPanel implements GUIElement<JPanel>
     }
 
     @Override
-    public void update(GUISvc guiDataSvc)
+    public void update(Object targetObj)
     {
         List<ActiveFlight> openFlightList = guiDataSvc.getActiveFlightsInformation();
         currentFlightCount = openFlightList.size();
@@ -54,4 +57,12 @@ public class ActiveFlightPanel extends JPanel implements GUIElement<JPanel>
             flightPanels.add(flightPanel);
         }
     }
+
+
+
+	@Override
+	public void refreshGUI(Object targetObj) {
+		// TODO Auto-generated method stub
+		
+	}
 }

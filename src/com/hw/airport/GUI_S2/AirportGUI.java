@@ -1,6 +1,8 @@
 package com.hw.airport.GUI_S2;
 
-public interface AirportGUI
+import java.util.Observer;
+
+public interface AirportGUI extends Observer
 {
 	void display();
 }
