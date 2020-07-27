@@ -63,8 +63,6 @@ public class CheckInDeskPanel extends JPanel implements GUIElement
 	{
 		if (null != args) {
 			Desk updatedDesk = (Desk) args;
-			System.out.println("CURRENT DESK ID TO UPDATE: " + updatedDesk.getId());
-
 			DeskPanel crntDeskTable = findDeskPanel(updatedDesk);
 			if (null == crntDeskTable) {
 				crntDeskTable= new DeskPanel(guiSettings, updatedDesk);

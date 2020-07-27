@@ -24,7 +24,11 @@ public class AirportGUIImpl implements AirportGUI
 		configFrame = new UserConfigFrame(userConfigFrameSettings, userConfigPanelSettings);
 		masterFrame = new AirportMonitorFrame(getGuiSettings());
 
-		configFrame.init();
+		//configFrame.init();
+
+		masterFrame.init(null);
+		masterFrame.draw();
+		masterFrame.getSelf().setVisible(true);
 	}
 
 	@Override
@@ -53,7 +57,7 @@ public class AirportGUIImpl implements AirportGUI
 				new Font("Dialog", Font.PLAIN, 12), BorderFactory.createBevelBorder(3));
 
 		ActiveFlightPanelSettings activeFlightPanelSettings = new ActiveFlightPanelSettings(new FlowLayout(), new Color(0x090909), new Color(0x11DBE9),
-				new Font("Dialog", Font.BOLD, 12), BorderFactory.createBevelBorder(1), new Dimension(300, 200));
+				new Font("Dialog", Font.BOLD, 12), BorderFactory.createBevelBorder(1));
 
 		PassengerPanelSettings passengerPanelSettings = new PassengerPanelSettings(new FlowLayout(), new Color(0x090909), new Color(0xE92ECE),
 				new Font("Dialog", Font.ITALIC, 12), BorderFactory.createBevelBorder(1));

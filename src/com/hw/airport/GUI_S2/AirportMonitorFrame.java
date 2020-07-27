@@ -1,7 +1,6 @@
 package com.hw.airport.GUI_S2;
 
 import com.hw.airport.config.GUISettings;
-import com.hw.airport.model.Desk;
 
 import javax.swing.*;
 
@@ -72,14 +71,10 @@ public class AirportMonitorFrame extends JFrame implements GUIElement
 	}
 
 	@Override
-	public void refresh(Object args) {
-		repaint();
-
-		if (args instanceof Desk) {
-			System.out.println("DESK ARGUMENT -- ID:" + ((Desk) args).getId());
-			checkInDeskPanel.refresh(args);
-		}else {
-			passengerPanel.refresh(null);
-		}
+	public void refresh(Object args)
+	{
+		checkInDeskPanel.refresh(args);
+		flightsPanel.refresh(args);
+		passengerPanel.refresh(args);
 	}
 }

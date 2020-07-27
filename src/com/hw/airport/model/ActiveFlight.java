@@ -1,9 +1,9 @@
 package com.hw.airport.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ActiveFlight {
+
+	//TODO: must be set correctly, used to track flight panels.
+	String flightCode;
 	String flightCd;
 	int timer;
 	int boardedPsngrCnt;
@@ -56,5 +56,7 @@ public class ActiveFlight {
 	public void setTotalWeight(double totalWeight) {
 		this.totalWeight = totalWeight;
 	}
+	public void setFlightCode(String flightCode) {this.flightCode = flightCode;}
+	public String getFlightCode() {return this.flightCode;}
 	
 }

@@ -1,10 +1,8 @@
 package com.hw.airport.GUI_S2;
 
-import com.hw.airport.config.AppContainer;
 import com.hw.airport.config.CheckInDeskPanelSettings;
 import com.hw.airport.model.Booking;
 import com.hw.airport.model.Desk;
-import com.hw.airport.service.GUISvc;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -15,9 +13,7 @@ public class DeskPanel implements GUIElement
 
 	private JTable deskTable;
 	private DefaultTableModel model;
-	private GUISvc guiSvc;
 	private Desk desk;
-	private int assignedDeskId;
 
 	public DeskPanel(CheckInDeskPanelSettings guiSettings, Desk desk)
 	{
@@ -25,8 +21,6 @@ public class DeskPanel implements GUIElement
 		this.guiSettings = guiSettings;
 		this.deskTable = new JTable();
 		this.model = new DefaultTableModel();
-		this.guiSvc = AppContainer.getGuiSvc();
-		this.assignedDeskId = assignedDeskId;
 	}
 
 	public JScrollPane getSelf()
