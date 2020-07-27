@@ -64,6 +64,8 @@ public class ApplicationManager {
 
 	//TODO: MUST BE CALLED FROM THE CONFIG FRAME TO START THE SIMULATION. 
 	public void start() throws Exception {
+		InitializeApplication();
+
 		long rate = (long) AirportSimulator.getQueuePopulatingRate();
 		long appRate = rate / 6;
 
@@ -76,7 +78,6 @@ public class ApplicationManager {
 
 	public static void main(String[] args) throws Exception {
 		ApplicationManager appManager = new ApplicationManager();
-		appManager.InitializeApplication();
 		appManager.start();
 	}
 }

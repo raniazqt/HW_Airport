@@ -53,11 +53,11 @@ public class ActiveFlightPanel extends JPanel implements GUIElement
 
 	@Override
 	public void refresh(Object targetObj) {
-		ActiveFlight activeFlightToUpdate = (ActiveFlight) targetObj;
-		if (activeFlightToUpdate == null)
-		    return;
+        if(!(targetObj instanceof ActiveFlight))
+            return;
 
-		FlightPanel panelToUpdate = findFlightPanel(activeFlightToUpdate);
+		ActiveFlight activeFlightToUpdate = (ActiveFlight) targetObj;
+        FlightPanel panelToUpdate = findFlightPanel(activeFlightToUpdate);
 		if(panelToUpdate != null) {
 		    panelToUpdate.refresh(activeFlightToUpdate);
         }

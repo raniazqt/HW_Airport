@@ -72,8 +72,10 @@ public class DeskPanel implements GUIElement
 			data[0][1] = updatedDesk.getStatus().getValue();
 			data[1][0] = "Passenger";
 			Booking passenger = updatedDesk.getPassenger();
-			data[1][1] = passenger.getFullName();
-
+			if(passenger != null)
+			{
+				data[1][1] = passenger.getFullName();
+			}
 
 			model.setDataVector(data, new String[] {"Hello","Hello"});
 		}
