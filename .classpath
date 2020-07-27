@@ -22,5 +22,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
 	<classpathentry kind="lib" path="C:/Users/Bruce-Inspiron/Documents/MS/SEM2/AS/F21AS_CW/HW_Airport/resources/Libs/mockito-core-3.2.4.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Bruce-Inspiron/Documents/MS/SEM2/AS/F21AS_CW/HW_Airport/resources/Libs/xstream-1.4.12.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Bruce-Inspiron/Documents/MS/SEM2/AS/F21AS_CW/HW_Airport/resources/Libs/commons-lang3-3.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Bruce-Inspiron/Documents/MS/SEM2/AS/F21AS_CW/HW_Airport/resources/Libs/commons-text-1.9.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
