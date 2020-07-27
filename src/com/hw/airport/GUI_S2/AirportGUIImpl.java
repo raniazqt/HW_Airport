@@ -24,6 +24,7 @@ public class AirportGUIImpl implements AirportGUI
 		configFrame = new UserConfigFrame(userConfigFrameSettings, userConfigPanelSettings);
 		masterFrame = new AirportMonitorFrame(getGuiSettings());
 
+		configFrame.init();
 		masterFrame.init(null);
 		masterFrame.draw();
 	}
@@ -31,7 +32,7 @@ public class AirportGUIImpl implements AirportGUI
 	@Override
 	public void displayConfigScreen()
 	{
-		masterFrame.getSelf().setVisible(true);
+		configFrame.getSelf().setVisible(true);
 	}
 
 	@Override

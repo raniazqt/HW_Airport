@@ -6,8 +6,6 @@ import com.hw.airport.config.FrameSettings;
 import com.hw.airport.config.GUIComponentSettings;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class UserConfigFrame extends JFrame
 {
@@ -53,15 +51,12 @@ public class UserConfigFrame extends JFrame
         add(maxOpenDeskVal);
 
         JButton applySettingsBtn = new JButton("Start");
-        applySettingsBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                AirportSimulator.getInstnce().setMaxOpndCheckinDesk(Integer.parseInt(maxOpenDeskVal.getText()));
-                AirportSimulator.getInstnce().setSimExcRate(Long.parseLong(simRateVal.getText()));
-                AirportSimulator.getInstnce().setQueuePopulatingRate(Long.parseLong(quePopulationRateVal.getText()));
-
-                AppContainer.getGui().displayAirportMonitorScreen();
-            }
+        applySettingsBtn.addActionListener(actionEvent -> {
+            AirportSimulator.getInstnce().setMaxOpndCheckinDesk(Integer.parseInt(maxOpenDeskVal.getText()));
+            AirportSimulator.getInstnce().setSimExcRate(Long.parseLong(simRateVal.getText()));
+            AirportSimulator.getInstnce().setQueuePopulatingRate(Long.parseLong(quePopulationRateVal.getText()));
+            //start
+            AppContainer.getGui().displayAirportMonitorScreen();
         });
 
         add(applySettingsBtn);
