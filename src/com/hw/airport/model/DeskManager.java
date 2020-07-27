@@ -23,7 +23,7 @@ public class DeskManager extends Observable implements Observer{
 
 	public DeskManager() {
 		super();
-		this.executor = (ThreadPoolExecutor) Executors.newFixedThreadPool((int) sim.getMaxOpndCheckinDesk());
+		this.executor = (ThreadPoolExecutor) Executors.newCachedThreadPool();//newFixedThreadPool((int) sim.getMaxOpndCheckinDesk());
 	}
 
 	@Override

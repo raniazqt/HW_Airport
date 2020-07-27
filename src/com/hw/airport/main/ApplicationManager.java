@@ -17,17 +17,18 @@ import java.util.TimerTask;
 
 
 public class ApplicationManager {
-	private AirportGUI gui;
+	
+	private static AirportGUI gui= AppContainer.getInstance().getGui();
 	private DataSvc dataSvc;
 	String flightsFileName = "flights.csv"; 
 	String bookingFileName = "bookings.csv";
 
 	public void InitializeApplication() throws Exception {
-		AppContainer.getInstance();
+		
 		AppData.getInstance();
 		AirportSimulator.getInstnce();
 
-		gui = AppContainer.getGui();
+		//gui = AppContainer.getGui();
 		//register the DeskManager as an observer to the QueueSvs
 		QueueSvcImpl queueSvc = (QueueSvcImpl) AppContainer.getQueueSvc();
 		queueSvc.addObserver(AppContainer.getDeskManager());
@@ -59,7 +60,7 @@ public class ApplicationManager {
 		FlightSvc flightSvc = AppContainer.getFlightSvc();
 		flightSvc.setFlights(AppData.getFlightsInfo());
 
-		gui.displayConfigScreen();
+		
 	}
 
 	//TODO: MUST BE CALLED FROM THE CONFIG FRAME TO START THE SIMULATION. 
@@ -74,10 +75,13 @@ public class ApplicationManager {
 		Timer timer = new Timer();
 		timer.scheduleAtFixedRate(queuePopulatingTask, 0, appRate);
 		System.out.println("TimerTask started");
+		AppContainer.getGui().displayAirportMonitorScreen();
+	
 	}
 
-	public static void main(String[] args) throws Exception {
-		ApplicationManager appManager = new ApplicationManager();
-		appManager.start();
-	}
+	/*
+	 * public static void main(String[] args) throws Exception { ApplicationManager
+	 * appManager = new ApplicationManager(); gui.displayConfigScreen();
+	 * //appManager.start(); }
+	 */
 }

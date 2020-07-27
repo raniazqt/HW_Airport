@@ -31,9 +31,9 @@ public class AirportSimulator {
 			//TODO:launch user interface to read the simulator settings		
 			//TODO: Ask user about the flights to check in and the time, max size of the queue, how often to fill the queue 
 			
-			queuePopulatingRate = 6000;
-			maxOpndCheckinDesk = 2;
-			passToDeskRatio = 5;
+	//		queuePopulatingRate = 6000;
+	//		maxOpndCheckinDesk = 2;
+	//		passToDeskRatio = 5;
 
 		}
 		return simulator;
