@@ -1,5 +1,6 @@
 package com.hw.airport.model;
 
+import com.hw.airport.config.AirportSimulator;
 import com.hw.airport.config.AppContainer;
 import com.hw.airport.enums.DESK_STATUS;
 import com.hw.airport.exception.HWAirportException;
@@ -42,6 +43,7 @@ public class DeskThread extends Thread implements Runnable{
 	@Override
 	public void run() {
 		System.out.println("Desk - " + this.deskThreadName + " - Start processing passengers from queue");
+		int simRate = AirportSimulator.getSimExcRate();
 		boolean checkinStatus = false;
 		Booking passenger = null;
 		while (!desk.getStatus().equals(DESK_STATUS.CLOSED)) {
@@ -76,29 +78,29 @@ public class DeskThread extends Thread implements Runnable{
 					 */
 					//Step# 1								
 					checkinSvc.addPassengerToDesk(desk);
-					Thread.sleep(1000);
+					Thread.sleep(simRate);
 					checkinSvc.updateDeskStatus(desk, DESK_STATUS.GET_PASSENGER_FROM_QUEUE);
 					System.out.println("Desk - " + desk.getThreadName() + " - processing passenger " 
 							+ desk.getPassenger().getFullName());
 					passenger = desk.getPassenger();
 
 					//Step# 2
-					Thread.sleep(1000);
+					Thread.sleep(simRate);
 					checkinSvc.updateDeskStatus(desk, DESK_STATUS.VALIDATE_PASSENGER_DATA);
 					checkinSvc.validatePassengerData(passenger);
 
 					//Step# 3
-					Thread.sleep(1000);
+					Thread.sleep(simRate);
 					checkinSvc.updateDeskStatus(desk, DESK_STATUS.CHECK_FLIGHT_STATUS);
 					checkinSvc.checkFlightStatus(passenger);
 
 					//Step# 4
-					Thread.sleep(1000);
+					Thread.sleep(simRate);
 					checkinSvc.updateDeskStatus(desk, DESK_STATUS.CALCULATE_XTRA_CHARGES);
 					passenger = checkinSvc.calculateBaggageXtraCharge(passenger);
 
 					//Step# 5
-					Thread.sleep(1000);
+					Thread.sleep(simRate);
 					if (passenger.getXtraBagVolChrg() != 0 || passenger.getXtraBagVolChrg() !=0 ) {
 						//passenger needs to pay extra baggage charge
 						//TODO: Not sure what to do in this case
@@ -107,7 +109,7 @@ public class DeskThread extends Thread implements Runnable{
 					}
 
 					//Step# 6
-					Thread.sleep(1000);
+					Thread.sleep(simRate);
 					checkinStatus = true;
 				} catch (HWAirportException | InterruptedException e) {
 						System.out.println("Exception :" + e.getMessage());

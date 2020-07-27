@@ -277,7 +277,7 @@ public class BookingSvcImpl implements BookingSvc {
 		List<Booking> bookings = this.extractBookingList();
 		for (Booking booking : bookings) {
 			if (!flightCodes.contains(booking.getFlightCode())) {
-				flightCodes.add(booking.getFlightCode());
+				flightCodes.add(booking.getFlightCode().toUpperCase());
 			}
 		}
 		return flightCodes;

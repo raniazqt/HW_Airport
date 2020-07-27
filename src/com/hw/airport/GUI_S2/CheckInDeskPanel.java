@@ -59,7 +59,7 @@ public class CheckInDeskPanel extends JPanel implements GUIElement
 
 
 	@Override
-	public void refresh(Object args)
+	public  void refresh(Object args)
 	{
 		if(!(args instanceof Desk))
 			return;

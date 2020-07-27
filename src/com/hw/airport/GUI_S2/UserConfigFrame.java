@@ -58,12 +58,9 @@ public class UserConfigFrame extends JFrame
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
 				AirportSimulator.getInstnce().setMaxOpndCheckinDesk(Integer.parseInt(maxOpenDeskVal.getText()));
-				AirportSimulator.getInstnce().setSimExcRate(Long.parseLong(simRateVal.getText()));
-				AirportSimulator.getInstnce().setQueuePopulatingRate(Long.parseLong(quePopulationRateVal.getText()));
-
-				//AppContainer.getGui().displayAirportMonitorScreen();
+				AirportSimulator.getInstnce().setSimExcRate(Integer.parseInt(simRateVal.getText()));
+				AirportSimulator.getInstnce().setQueuePopulatingRate(Integer.parseInt(quePopulationRateVal.getText()));
 				ApplicationManager appManager = new ApplicationManager();
-				//gui.displayConfigScreen();
 				try {
 					appManager.start();
 				} catch (Exception e) {
