@@ -48,8 +48,8 @@ public class SimToolBar extends JToolBar implements GUIElement
             return;
         JLabel settingsLabel;
         String dataValue;
-        Map<String, Double> simSettings = guiDataSvc.retrieveSimulatorSettings();
-        for(Map.Entry<String,Double> entry : simSettings.entrySet()){
+        Map<String, Integer> simSettings = guiDataSvc.retrieveSimulatorSettings();
+        for(Map.Entry<String,Integer> entry : simSettings.entrySet()){
             dataValue = entry.getKey().toString().concat(entry.getValue().toString());
             settingsLabel = new JLabel(dataValue);
             settingsLabel.setFont(simToolBarSettings.LabelFont);

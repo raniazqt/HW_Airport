@@ -21,8 +21,8 @@ public class DeskSvcImpl implements DeskSvc{
 
 	@Override
 	public void closeDesk(Desk desk) {
-		//desk.setId(null);
-		//desk.setPassenger(null);
+		desk.setId(null);
+		desk.setPassenger(null);
 		desk.setStatus(DESK_STATUS.CLOSED);
 		
 	}

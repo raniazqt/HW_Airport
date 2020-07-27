@@ -16,6 +16,8 @@ import com.hw.airport.service.QueueSvcImpl;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javax.swing.SwingUtilities;
+
 
 public class ApplicationManager {
 	
@@ -79,7 +81,12 @@ public class ApplicationManager {
 		timer.scheduleAtFixedRate(queuePopulatingTask, 0, appRate);
 		System.out.println("TimerTask started");
 		
-		AppContainer.getGui().displayAirportMonitorScreen();
+		SwingUtilities.invokeLater(new Runnable() {
+		    public void run() {
+		    	AppContainer.getGui().displayAirportMonitorScreen();
+		    }
+		});
+		
 	
 	}
 
