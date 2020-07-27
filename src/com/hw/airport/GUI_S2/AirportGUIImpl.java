@@ -24,17 +24,14 @@ public class AirportGUIImpl implements AirportGUI
 		configFrame = new UserConfigFrame(userConfigFrameSettings, userConfigPanelSettings);
 		masterFrame = new AirportMonitorFrame(getGuiSettings());
 
-		//configFrame.init();
-
 		masterFrame.init(null);
 		masterFrame.draw();
-		masterFrame.getSelf().setVisible(true);
 	}
 
 	@Override
 	public void displayConfigScreen()
 	{
-		configFrame.getSelf().setVisible(true);
+		masterFrame.getSelf().setVisible(true);
 	}
 
 	@Override

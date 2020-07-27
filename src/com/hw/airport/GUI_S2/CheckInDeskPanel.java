@@ -61,23 +61,24 @@ public class CheckInDeskPanel extends JPanel implements GUIElement
 	@Override
 	public void refresh(Object args)
 	{
-		if (null != args) {
-			Desk updatedDesk = (Desk) args;
-			DeskPanel crntDeskTable = findDeskPanel(updatedDesk);
-			if (null == crntDeskTable) {
-				crntDeskTable= new DeskPanel(guiSettings, updatedDesk);
-				crntDeskTable.init(args);
-				crntDeskTable.draw();
-				deskPanels.add(crntDeskTable);
+		if(!(args instanceof Desk))
+			return;
 
-				JScrollPane crntDeskScrollPane = crntDeskTable.getSelf();
-				crntDeskScrollPane.setBorder(BorderFactory.createTitledBorder("DESK #" + currentTableIndex));
-				add(crntDeskScrollPane);
-				currentTableIndex++;
-			}
-			else {
-				crntDeskTable.refresh(updatedDesk);
-			}
+		Desk updatedDesk = (Desk) args;
+		DeskPanel crntDeskPanel = findDeskPanel(updatedDesk);
+		if (null == crntDeskPanel) {
+			crntDeskPanel= new DeskPanel(guiSettings, updatedDesk);
+			crntDeskPanel.init(updatedDesk);
+			crntDeskPanel.draw();
+			deskPanels.add(crntDeskPanel);
+
+			JScrollPane crntDeskScrollPane = crntDeskPanel.getSelf();
+			crntDeskScrollPane.setBorder(BorderFactory.createTitledBorder("DESK #" + currentTableIndex));
+			add(crntDeskScrollPane);
+			currentTableIndex++;
+		}
+		else {
+			crntDeskPanel.refresh(updatedDesk);
 		}
 	}
 }

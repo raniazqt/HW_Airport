@@ -1,6 +1,7 @@
 package com.hw.airport.GUI_S2;
 
 import com.hw.airport.config.GUISettings;
+import com.hw.airport.model.Desk;
 
 import javax.swing.*;
 
@@ -75,6 +76,14 @@ public class AirportMonitorFrame extends JFrame implements GUIElement
 	{
 		checkInDeskPanel.refresh(args);
 		flightsPanel.refresh(args);
-		passengerPanel.refresh(args);
+		passengerPanel.refresh(null);
+
+		// TODO: UPDATE ORDER NEEDS SORTING.
+		if (args instanceof Desk) {
+			checkInDeskPanel.refresh(args);
+		}
+		else {
+			passengerPanel.refresh(null);
+		}
 	}
 }

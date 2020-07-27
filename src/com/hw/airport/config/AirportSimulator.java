@@ -32,7 +32,7 @@ public class AirportSimulator {
 			//TODO: Ask user about the flights to check in and the time, max size of the queue, how often to fill the queue 
 			
 			queuePopulatingRate = 6000;
-			maxOpndCheckinDesk = 5;
+			maxOpndCheckinDesk = 2;
 			passToDeskRatio = 5;
 
 		}
