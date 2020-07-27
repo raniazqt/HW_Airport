@@ -47,7 +47,7 @@ public class CheckInDeskPanel extends JPanel implements GUIElement
 	private DeskPanel findDeskPanel(Desk desk) {
 		if (null != desk) {
 			for (DeskPanel panel : deskPanels) {
-				if (null != panel.getDesk()) {
+				if (null != panel.getDesk() && panel.getDesk().getId() != null) {
 					if (panel.getDesk().getId().equals(desk.getId())) {
 						return panel;
 					}
