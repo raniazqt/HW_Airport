@@ -137,7 +137,7 @@ public class CheckInSvcImpl extends Observable implements CheckInSvc {
 	
 	// Check in - Step # 1
 	@Override
-	public void addPassengerToDesk(Desk desk) throws HWAirportException {
+	public synchronized void addPassengerToDesk(Desk desk) throws HWAirportException {
 		deskSvc.loadDesk(desk);
 		
 	}
@@ -201,7 +201,7 @@ public class CheckInSvcImpl extends Observable implements CheckInSvc {
 
 	// Check in - Step # 6
 	@Override
-	public boolean saveFlightAndPassengerData(boolean checkInStatus, Booking passenger) {
+	public synchronized boolean saveFlightAndPassengerData(boolean checkInStatus, Booking passenger) {
 		//done checking in passenger. update data
 		// 1- update activeFlight object with the new charges, volume, weight and passenger count
 		//2. add passenger to the list of checkedIn or failed checked depending on the check in status

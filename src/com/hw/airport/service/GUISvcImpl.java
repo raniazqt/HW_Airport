@@ -14,9 +14,9 @@ public class GUISvcImpl implements GUISvc {
 	private DeskManager deskManager = AppContainer.getDeskManager();
 	
 	@Override
-	public Map<String, Double> retrieveSimulatorSettings()
+	public Map<String, Integer> retrieveSimulatorSettings()
 	{
-		HashMap<String, Double> map = new HashMap<String,Double>();
+		HashMap<String, Integer> map = new HashMap<String,Integer>();
 		map.put("Simulation Rate: ", AirportSimulator.getSimExcRate());
 		map.put("Max Open Desks: ", AirportSimulator.getMaxOpndCheckinDesk());
 		map.put("Queue Population Rate: ", AirportSimulator.getQueuePopulatingRate());

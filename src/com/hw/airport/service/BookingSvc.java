@@ -36,4 +36,6 @@ public interface BookingSvc {
 	
 	public void setRandomBaggageDimensions(Booking booking) ;
 
+	List<String> getAllFlightsCodeWithBooking();
+
 }

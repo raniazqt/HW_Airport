@@ -12,7 +12,7 @@ import com.hw.airport.model.Desk;
 
 public interface GUISvc {
 
-	Map<String, Double> retrieveSimulatorSettings();
+	Map<String, Integer> retrieveSimulatorSettings();
 
 	//retrieve Current Passenger Count in Queue 
 	int getCrnCntOfPsngrInQueue();

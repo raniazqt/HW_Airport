@@ -24,10 +24,10 @@ public class QueueSvcImpl extends Observable implements QueueSvc {
 
 
 	@Override
-	public Booking getPassengerFromQueue() {
+	public synchronized Booking getPassengerFromQueue() {
 		Booking passenger = passengerQ.removePassengerFromQueue();
 		setChanged();
-		notifyObservers();
+		notifyObservers(passenger);
 		return passenger ;
 	}
 
@@ -106,7 +106,8 @@ public class QueueSvcImpl extends Observable implements QueueSvc {
 	}
 
 	@Override
-	public Booking addPassengerToQueue() throws HWAirportException {
+	public synchronized Booking addPassengerToQueue() throws HWAirportException {
+		
 		Booking passengerToAdd = bookingSvc.getRandomBooking();
 
 		if (null != passengerToAdd && passengerToAdd.getCheckInStatus().equals(BookingStatus.NOT_CHECKED_IN)) {
@@ -116,7 +117,7 @@ public class QueueSvcImpl extends Observable implements QueueSvc {
 
 			//notify observer - DeskManager - with the change
 			setChanged();
-			notifyObservers();
+			notifyObservers(passengerToAdd);
 		}
 		return passengerToAdd;
 	}

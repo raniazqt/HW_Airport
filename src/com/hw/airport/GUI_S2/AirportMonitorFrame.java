@@ -1,7 +1,10 @@
 package com.hw.airport.GUI_S2;
 
 import com.hw.airport.config.GUISettings;
+import com.hw.airport.model.ActiveFlight;
+import com.hw.airport.model.Booking;
 import com.hw.airport.model.Desk;
+import com.hw.airport.model.Passenger;
 
 import javax.swing.*;
 
@@ -74,16 +77,14 @@ public class AirportMonitorFrame extends JFrame implements GUIElement
 	@Override
 	public void refresh(Object args)
 	{
-		checkInDeskPanel.refresh(args);
-		flightsPanel.refresh(args);
-		passengerPanel.refresh(null);
-
 		// TODO: UPDATE ORDER NEEDS SORTING.
 		if (args instanceof Desk) {
 			checkInDeskPanel.refresh(args);
 		}
-		else {
+		else if (args instanceof Booking) {
 			passengerPanel.refresh(null);
+		}else if (args instanceof ActiveFlight) {
+			flightsPanel.refresh(args);
 		}
 	}
 }

@@ -24,6 +24,7 @@ public class DeskSvcImpl implements DeskSvc{
 		desk.setId(null);
 		desk.setPassenger(null);
 		desk.setStatus(DESK_STATUS.CLOSED);
+		
 	}
 
 	/*

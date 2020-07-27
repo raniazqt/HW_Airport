@@ -123,7 +123,7 @@ public class BookingSvcImpl implements BookingSvc {
 	 *The charges are summed up from the booking data for passenger who are checked in the given flight. 
 	 *@param flightCode flight code the flight we're calculating the chargs for
 	 *@throws HWAirportException throws missing flight exception if flight is not found.
-	*/
+	 */
 	@Override
 	public FlightExtrasAndCharges calculateExtraChargeForFlight(String flightCode) throws HWAirportException {
 		Flight flight = flightSvc.getFlightByCode(flightCode);
@@ -183,7 +183,7 @@ public class BookingSvcImpl implements BookingSvc {
 	}
 
 	public List<Booking> shuffleBookingList() throws HWAirportException {
-		
+
 		List<Booking> bookingList = this.extractBookingList();
 		if (bookingList == null || bookingList.size() == 0) {
 			//throw new HWAirportException("Booling list is empty");
@@ -269,6 +269,18 @@ public class BookingSvcImpl implements BookingSvc {
 		Random r = new Random();
 		int result = r.nextInt(high - low) + low;
 		return result;
+	}
+
+	@Override
+	public List<String> getAllFlightsCodeWithBooking(){
+		List<String> flightCodes = new ArrayList<String>(); 
+		List<Booking> bookings = this.extractBookingList();
+		for (Booking booking : bookings) {
+			if (!flightCodes.contains(booking.getFlightCode())) {
+				flightCodes.add(booking.getFlightCode().toUpperCase());
+			}
+		}
+		return flightCodes;
 	}
 
 }
