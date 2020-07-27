@@ -10,26 +10,21 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class UserConfigFrame extends JFrame
-{
+public class UserConfigFrame extends JFrame {
 	private GUIComponentSettings configPanelSettings;
 
-	public UserConfigFrame(FrameSettings guiSettings, GUIComponentSettings panelSettings)
-	{
-		setTitle (guiSettings.getMainScreenTitle());
-		setSize (guiSettings.getMainScreenWidth(),
-				guiSettings.getMainScreenHeight());
-		setDefaultCloseOperation (EXIT_ON_CLOSE);
+	public UserConfigFrame(FrameSettings guiSettings, GUIComponentSettings panelSettings) {
+		setTitle(guiSettings.getMainScreenTitle());
+		setSize(guiSettings.getMainScreenWidth(), guiSettings.getMainScreenHeight());
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		configPanelSettings = panelSettings;
 	}
 
-	public JFrame getSelf()
-	{
+	public JFrame getSelf() {
 		return this;
 	}
 
-	public void init()
-	{
+	public void init() {
 		setLayout(configPanelSettings.Layout);
 		setFont(configPanelSettings.LabelFont);
 		setBackground(configPanelSettings.BackGroundColor);
@@ -55,55 +50,44 @@ public class UserConfigFrame extends JFrame
 
 		JButton applySettingsBtn = new JButton("Start");
 		JButton applyDefaultBtn = new JButton("Default");
-		
+
 		applySettingsBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
-				
-				
+
 				String openDeskVal = maxOpenDeskVal.getText();
 				String simExRateVal = simRateVal.getText();
 				String queuPopval = quePopulationRateVal.getText();
 
-				if (openDeskVal.matches("[0-9]+") & simExRateVal.matches("[0-9]+") & queuPopval.matches("[0-9]+")) {
+				if (openDeskVal.matches("[1-9]+") & simExRateVal.matches("[1-9]+") & queuPopval.matches(".*\\d.*")) {
 
-					boolean deskInputStat = openDeskVal.equals("0") || openDeskVal.isBlank()
-							|| (Integer.parseInt(openDeskVal) > 6);
-					boolean simInputStat = simExRateVal.equals("0") || simExRateVal.isBlank()
-							|| (Long.parseLong(simExRateVal) > 6);
-					boolean popuInputStat = queuPopval.equals("0") || queuPopval.isBlank()
-							|| (Integer.parseInt(queuPopval) > 1000);
+					boolean deskInputStat = openDeskVal.isBlank();
+					boolean simInputStat = simExRateVal.isBlank();
+					boolean popuInputStat = queuPopval.isBlank() || (Integer.parseInt(queuPopval) > 1000);
 
 					if (!(deskInputStat & simInputStat & popuInputStat)) {
 						AirportSimulator.getInstnce().setMaxOpndCheckinDesk(Integer.parseInt(openDeskVal));
 						AirportSimulator.getInstnce().setSimExcRate(Long.parseLong(simExRateVal));
 						AirportSimulator.getInstnce().setQueuePopulatingRate(Long.parseLong(queuPopval));
 						AppContainer.getGui().displayAirportMonitorScreen();
-						
 
-						//AppContainer.getGui().displayAirportMonitorScreen();
+						// AppContainer.getGui().displayAirportMonitorScreen();
 						ApplicationManager appManager = new ApplicationManager();
-						//gui.displayConfigScreen();
+						// gui.displayConfigScreen();
 						try {
 							appManager.start();
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-						
 
 					} else {// msg for in valid values
 					}
-				} else {// msg for no text
 				}
+			}
 
-
-				
-				
-			}					
-			
 		});
-		
+
 		applyDefaultBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
@@ -111,9 +95,9 @@ public class UserConfigFrame extends JFrame
 				AirportSimulator.getInstnce().setSimExcRate(1);
 				AirportSimulator.getInstnce().setQueuePopulatingRate(1000);
 
-				//AppContainer.getGui().displayAirportMonitorScreen();
+				// AppContainer.getGui().displayAirportMonitorScreen();
 				ApplicationManager appManager = new ApplicationManager();
-				//gui.displayConfigScreen();
+				// gui.displayConfigScreen();
 				try {
 					appManager.start();
 				} catch (Exception e) {
@@ -122,8 +106,6 @@ public class UserConfigFrame extends JFrame
 				}
 			}
 		});
-		
-		
 
 		add(applySettingsBtn);
 		add(applyDefaultBtn);
