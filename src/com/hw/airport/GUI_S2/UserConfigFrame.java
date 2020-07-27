@@ -54,12 +54,62 @@ public class UserConfigFrame extends JFrame
 		add(maxOpenDeskVal);
 
 		JButton applySettingsBtn = new JButton("Start");
+		JButton applyDefaultBtn = new JButton("Default");
+		
 		applySettingsBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
-				AirportSimulator.getInstnce().setMaxOpndCheckinDesk(Integer.parseInt(maxOpenDeskVal.getText()));
-				AirportSimulator.getInstnce().setSimExcRate(Long.parseLong(simRateVal.getText()));
-				AirportSimulator.getInstnce().setQueuePopulatingRate(Long.parseLong(quePopulationRateVal.getText()));
+				
+				
+				String openDeskVal = maxOpenDeskVal.getText();
+				String simExRateVal = simRateVal.getText();
+				String queuPopval = quePopulationRateVal.getText();
+
+				if (openDeskVal.matches("[0-9]+") & simExRateVal.matches("[0-9]+") & queuPopval.matches("[0-9]+")) {
+
+					boolean deskInputStat = openDeskVal.equals("0") || openDeskVal.isBlank()
+							|| (Integer.parseInt(openDeskVal) > 6);
+					boolean simInputStat = simExRateVal.equals("0") || simExRateVal.isBlank()
+							|| (Long.parseLong(simExRateVal) > 6);
+					boolean popuInputStat = queuPopval.equals("0") || queuPopval.isBlank()
+							|| (Integer.parseInt(queuPopval) > 1000);
+
+					if (!(deskInputStat & simInputStat & popuInputStat)) {
+						AirportSimulator.getInstnce().setMaxOpndCheckinDesk(Integer.parseInt(openDeskVal));
+						AirportSimulator.getInstnce().setSimExcRate(Long.parseLong(simExRateVal));
+						AirportSimulator.getInstnce().setQueuePopulatingRate(Long.parseLong(queuPopval));
+						AppContainer.getGui().displayAirportMonitorScreen();
+						
+
+						//AppContainer.getGui().displayAirportMonitorScreen();
+						ApplicationManager appManager = new ApplicationManager();
+						//gui.displayConfigScreen();
+						try {
+							appManager.start();
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						
+
+					} else {// msg for in valid values
+					}
+				} else {// msg for no text
+				}
+
+
+				
+				
+			}					
+			
+		});
+		
+		applyDefaultBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent actionEvent) {
+				AirportSimulator.getInstnce().setMaxOpndCheckinDesk(2);
+				AirportSimulator.getInstnce().setSimExcRate(1);
+				AirportSimulator.getInstnce().setQueuePopulatingRate(1000);
 
 				//AppContainer.getGui().displayAirportMonitorScreen();
 				ApplicationManager appManager = new ApplicationManager();
@@ -72,7 +122,10 @@ public class UserConfigFrame extends JFrame
 				}
 			}
 		});
+		
+		
 
 		add(applySettingsBtn);
+		add(applyDefaultBtn);
 	}
 }
