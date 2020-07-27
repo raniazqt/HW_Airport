@@ -9,6 +9,7 @@ import com.hw.airport.model.AppData;
 import com.hw.airport.model.DeskManager;
 import com.hw.airport.service.CheckInSvcImpl;
 import com.hw.airport.service.DataSvc;
+import com.hw.airport.service.DataSvcImpl;
 import com.hw.airport.service.FlightSvc;
 import com.hw.airport.service.QueueSvcImpl;
 
@@ -39,12 +40,14 @@ public class ApplicationManager {
 		
 		CheckInSvcImpl checkInSvc = (CheckInSvcImpl) AppContainer.getCheckinSvc();
 		checkInSvc.addObserver(gui);
+		
+		DataSvcImpl dataSvc = (DataSvcImpl) AppContainer.getDataSvc();
+		dataSvc.addObserver(gui);
 		/*
 		 * if (null == appContainer) { throw new RuntimeErrorException(null,
 		 * "Application did not start correctly. Notify adminstrator "); }
 		 */
 
-		dataSvc = AppContainer.getDataSvc();
 		//load flights and booking data from files
 		try {
 			AppData.setFlightsInfo(dataSvc.loadFlightsData(flightsFileName));
@@ -75,6 +78,7 @@ public class ApplicationManager {
 		Timer timer = new Timer();
 		timer.scheduleAtFixedRate(queuePopulatingTask, 0, appRate);
 		System.out.println("TimerTask started");
+		
 		AppContainer.getGui().displayAirportMonitorScreen();
 	
 	}

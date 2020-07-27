@@ -9,7 +9,11 @@ import java.util.List;
 
 public class ActiveFlightPanel extends JPanel implements GUIElement
 {
-    private final ActiveFlightPanelSettings guiSettings;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private final ActiveFlightPanelSettings guiSettings;
     private List<FlightPanel> flightPanels;
 
     public ActiveFlightPanel(ActiveFlightPanelSettings guiSettings)
@@ -35,7 +39,7 @@ public class ActiveFlightPanel extends JPanel implements GUIElement
     private FlightPanel findFlightPanel(ActiveFlight activeFlight) {
         if (null != activeFlight) {
             for (FlightPanel panel : flightPanels) {
-                if (!"".equals(panel.getActiveFlightCode())) {
+                if (null != panel.getActiveFlightCode()) {
                     if (panel.getActiveFlightCode().equals(activeFlight.getFlightCode())) {
                         return panel;
                     }

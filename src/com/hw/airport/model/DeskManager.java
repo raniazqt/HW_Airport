@@ -77,8 +77,11 @@ public class DeskManager extends Observable implements Observer{
 
 	public void closeDesk(DeskThread deskThread) {
 		deskSvc.closeDesk(deskThread.getDesk());
-		deskThread.stop();
+		setChanged();
+		notifyObservers(deskThread.getDesk());
+	//	deskThread.stop();
 		System.out.println("Thread stopped");
+		
 		
 	}	
 
