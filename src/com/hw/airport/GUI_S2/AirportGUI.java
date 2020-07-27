@@ -4,5 +4,6 @@ import java.util.Observer;
 
 public interface AirportGUI extends Observer
 {
-	void display();
+	void displayConfigScreen();
+	void displayAirportMonitorScreen();
 }

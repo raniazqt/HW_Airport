@@ -1,10 +1,9 @@
 package com.hw.airport.config;
 
+import com.hw.airport.model.ActiveFlight;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import com.hw.airport.model.ActiveFlight;
-import com.hw.airport.model.PassengerQueue;
 
 public class AirportSimulator {
 
@@ -33,7 +32,7 @@ public class AirportSimulator {
 			//TODO: Ask user about the flights to check in and the time, max size of the queue, how often to fill the queue 
 			
 			queuePopulatingRate = 6000;
-			maxOpndCheckinDesk = 1;
+			maxOpndCheckinDesk = 5;
 			passToDeskRatio = 5;
 
 		}

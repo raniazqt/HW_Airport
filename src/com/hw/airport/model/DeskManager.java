@@ -1,15 +1,15 @@
 package com.hw.airport.model;
 
+import com.hw.airport.config.AirportSimulator;
+import com.hw.airport.config.AppContainer;
+import com.hw.airport.service.DeskSvc;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
-
-import com.hw.airport.config.AirportSimulator;
-import com.hw.airport.config.AppContainer;
-import com.hw.airport.service.DeskSvc;
 
 public class DeskManager extends Observable implements Observer{
 	//	LOG = LoggerManager.
@@ -39,6 +39,7 @@ public class DeskManager extends Observable implements Observer{
 			Desk desk = this.openAndRunDesk();
 			openedDeskList.add(desk);
 			System.out.println("Desk opened");
+			System.out.println("DESK ID: " + desk.getId());
 			setChanged();
 			notifyObservers(desk);
 			
@@ -51,8 +52,9 @@ public class DeskManager extends Observable implements Observer{
 		String threadName = "DESK_" + opndDskSz + "_THREAD";
 
 		System.out.println("Opening Desk # " + opndDskSz + " and run it on thread " + threadName);
-		
 		Desk desk = deskSvc.openDesk();
+		System.out.println("OPENED DESK ID: " + desk.getId());
+
 		desk.setThreadName(threadName);
 		DeskThread deskThread = new DeskThread(desk, threadName );
 		deskThreadList.add(deskThread);

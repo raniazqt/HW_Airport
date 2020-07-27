@@ -35,8 +35,3 @@ public class XmlHandler
         xStream.toXML(objToSave, new FileWriter(filePath));
     }
 }
-
-// TODO: get gui settings from a config file.
-// TODO: draw gui with empty panels.
-// TODO: clean up the draw functions.
-// TODO: visual gui polish.

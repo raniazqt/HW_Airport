@@ -1,45 +1,27 @@
 package com.hw.airport.GUI_S2;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.BorderFactory;
-import javax.swing.DefaultListModel;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-
 import com.hw.airport.config.AppContainer;
 import com.hw.airport.config.CheckInDeskPanelSettings;
 import com.hw.airport.model.Desk;
 import com.hw.airport.service.GUISvc;
 
-public class CheckInDeskPanel extends JPanel implements GUIElement<JPanel>
+import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class CheckInDeskPanel extends JPanel implements GUIElement
 {
-	private List<DeskPanel> deskPanels = new ArrayList<>();
+	private List<DeskPanel> deskPanels;
 	private CheckInDeskPanelSettings guiSettings;
+	private GUISvc guiDataSvc;
+	private int currentTableIndex;
 
-	private GUISvc guiDataSvc = AppContainer.getGuiSvc();
-
-	private DefaultListModel<Desk> model = new DefaultListModel<Desk>();
-
-
-	//  private GUISvc guiSvc = AppContainer.getGuiSvc();
-
-
-	public CheckInDeskPanel(CheckInDeskPanelSettings guiSettings, int deskCnt)
+	public CheckInDeskPanel(CheckInDeskPanelSettings guiSettings)
 	{
 		this.guiSettings = guiSettings;
-		this.setLayout(guiSettings.Layout);
-		this.setFont(guiSettings.LabelFont);
-		this.setBackground(guiSettings.BackGroundColor);
-		this.setBorder(guiSettings.BorderType);
-
-		for (int i=0; i <deskCnt; i++) {
-			this.deskPanels.add(new DeskPanel(guiSettings, null));
-		}
+		deskPanels = new ArrayList<>();
+		guiDataSvc = AppContainer.getGuiSvc();
+		currentTableIndex = 1;
 	}
 
 	@Override
@@ -49,62 +31,24 @@ public class CheckInDeskPanel extends JPanel implements GUIElement<JPanel>
 	}
 
 	@Override
-	public void draw(){
-	//	this.setPreferredSize(new Dimension(200, 200));
-		//this.add(new JLabel("Check-in Desk Panel", SwingConstants.CENTER));
-		//	this.setBackground(new Color(255));
-		//this.setOpaque(true);
-	//	this.setBackground(Color.white);
-	//	this.setBorder(BorderFactory.createLineBorder(Color.black, 1));
-		for(DeskPanel deskPanel: deskPanels){
-			deskPanel.add(new JLabel("Desk # 1", SwingConstants.CENTER));
-			deskPanel.draw();
-			//add(deskPanel);
-		}
-		/*
-		 * if (deskPanels.size() >0) { 
-		 */
-		//	this.ad(deskPanels);
-		/*JScrollPane scrollPane = new JScrollPane(deskPanels); 
-		scrollPane.setBorder(guiSettings.BorderType);
-		scrollPane.setBackground(guiSettings.LabelColor); 
-		this.add(scrollPane); 
-		 */
-
+	public void draw()
+	{
 	}
 
 	@Override
-	public void update(Object targetObj)
+	public void init(Object targetObj)
 	{
-		if (null != targetObj) {
-			DeskPanel crntDeskPanel;
-			Desk desk = (Desk)targetObj;
-
-			crntDeskPanel = findDeskPanel(desk);
-			if (null == crntDeskPanel) {
-				crntDeskPanel= new DeskPanel(guiSettings, desk); 
-				deskPanels.add(crntDeskPanel);
-			}
-			crntDeskPanel.update();
-			//	crntDeskPanel.draw();
-			//	model.addAll(guiDataSvc.getOpenedDeskList());
-			draw();
-		}
-		/*
-		 * List<Desk> openDeskList = guiDataSvc.getOpenedDeskList(); // deskPanels = new
-		 * ArrayList<>();
-		 * 
-		 * for (Desk desk : openDeskList) { crntDeskPanel = findDeskPanel(desk); if
-		 * (null == crntDeskPanel) { crntDeskPanel= new DeskPanel(guiSettings, desk);
-		 * deskPanels.add(crntDeskPanel); } crntDeskPanel.update(); } this.draw();
-		 */   
+		this.setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
+		this.setFont(guiSettings.LabelFont);
+		this.setBackground(guiSettings.BackGroundColor);
+		this.setBorder(guiSettings.BorderType);
 	}
 
 	private DeskPanel findDeskPanel(Desk desk) {
 		if (null != desk) {
 			for (DeskPanel panel : deskPanels) {
 				if (null != panel.getDesk()) {
-					if (panel.getDesk().getId() == desk.getId()) {
+					if (panel.getDesk().getId().equals(desk.getId())) {
 						return panel;
 					}
 				}
@@ -115,9 +59,25 @@ public class CheckInDeskPanel extends JPanel implements GUIElement<JPanel>
 
 
 	@Override
-	public void refreshGUI(Object args) {
+	public void refresh(Object args)
+	{
+		if (null != args) {
+			Desk updatedDesk = (Desk) args;
+			DeskPanel crntDeskTable = findDeskPanel(updatedDesk);
+			if (null == crntDeskTable) {
+				crntDeskTable= new DeskPanel(guiSettings, updatedDesk);
+				crntDeskTable.init(args);
+				crntDeskTable.draw();
+				deskPanels.add(crntDeskTable);
 
+				JScrollPane crntDeskScrollPane = crntDeskTable.getSelf();
+				crntDeskScrollPane.setBorder(BorderFactory.createTitledBorder("DESK #" + currentTableIndex));
+				add(crntDeskScrollPane);
+				currentTableIndex++;
+			}
+			else {
+				crntDeskTable.refresh(updatedDesk);
+			}
+		}
 	}
-
-
 }

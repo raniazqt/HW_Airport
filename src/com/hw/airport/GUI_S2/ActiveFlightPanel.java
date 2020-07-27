@@ -1,30 +1,20 @@
 package com.hw.airport.GUI_S2;
 
 import com.hw.airport.config.ActiveFlightPanelSettings;
-import com.hw.airport.config.AppContainer;
 import com.hw.airport.model.ActiveFlight;
-import com.hw.airport.service.GUISvc;
 
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
 
-public class ActiveFlightPanel extends JPanel implements GUIElement<JPanel>
+public class ActiveFlightPanel extends JPanel implements GUIElement
 {
     private final ActiveFlightPanelSettings guiSettings;
     private List<FlightPanel> flightPanels;
-    private int currentFlightCount;
-    
-    private GUISvc guiDataSvc = AppContainer.getGuiSvc();
 
     public ActiveFlightPanel(ActiveFlightPanelSettings guiSettings)
     {
         this.guiSettings = guiSettings;
-        this.setLayout(guiSettings.Layout);
-        this.setFont(guiSettings.LabelFont);
-        this.setBackground(guiSettings.BackGroundColor);
-        this.setBorder(guiSettings.BorderType);
     }
 
     @Override
@@ -36,33 +26,52 @@ public class ActiveFlightPanel extends JPanel implements GUIElement<JPanel>
     @Override
     public void draw()
     {
-        for(int i = 0; i < currentFlightCount; i++)
-        {
-            flightPanels.get(i).draw();
-            add(flightPanels.get(i));
+        this.setLayout(guiSettings.Layout);
+        this.setFont(guiSettings.LabelFont);
+        this.setBackground(guiSettings.BackGroundColor);
+        this.setBorder(guiSettings.BorderType);
+    }
+
+    private FlightPanel findFlightPanel(ActiveFlight activeFlight) {
+        if (null != activeFlight) {
+            for (FlightPanel panel : flightPanels) {
+                if (!"".equals(panel.getActiveFlightCode())) {
+                    if (panel.getActiveFlightCode().equals(activeFlight.getFlightCode())) {
+                        return panel;
+                    }
+                }
+            }
         }
+        return null;
     }
 
     @Override
-    public void update(Object targetObj)
+    public void init(Object targetObj)
     {
-        List<ActiveFlight> openFlightList = guiDataSvc.getActiveFlightsInformation();
-        currentFlightCount = openFlightList.size();
-        flightPanels = new ArrayList<>(currentFlightCount);
-
-        for(int i = 0; i <currentFlightCount; i++)
-        {
-            FlightPanel flightPanel = new FlightPanel(guiSettings);
-            flightPanel.update(openFlightList.get(i));
-            flightPanels.add(flightPanel);
-        }
+        flightPanels = new ArrayList<>();
     }
 
-
-
 	@Override
-	public void refreshGUI(Object targetObj) {
-		// TODO Auto-generated method stub
+	public void refresh(Object targetObj) {
+		ActiveFlight activeFlightToUpdate = (ActiveFlight) targetObj;
+		if (activeFlightToUpdate == null)
+		    return;
+
+		FlightPanel panelToUpdate = findFlightPanel(activeFlightToUpdate);
+		if(panelToUpdate != null) {
+		    panelToUpdate.refresh(activeFlightToUpdate);
+        }
+		else {
+		    FlightPanel flightPanelToAdd = new FlightPanel(guiSettings);
+		    flightPanelToAdd.setActiveFlightCode(activeFlightToUpdate.getFlightCode());
+		    flightPanelToAdd.init(activeFlightToUpdate);
+		    flightPanelToAdd.draw();
+		    flightPanels.add(flightPanelToAdd);
+
+            JScrollPane currentFlightScrollPane = flightPanelToAdd.getSelf();
+            currentFlightScrollPane.setBorder(BorderFactory.createTitledBorder("FLIGHT #" + flightPanelToAdd.getActiveFlightCode()));
+            add(currentFlightScrollPane);
+		}
 		
 	}
 }

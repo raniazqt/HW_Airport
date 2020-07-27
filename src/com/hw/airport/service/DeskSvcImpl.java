@@ -1,12 +1,12 @@
 package com.hw.airport.service;
 
-import java.util.Random;
-
 import com.hw.airport.config.AppContainer;
 import com.hw.airport.enums.DESK_STATUS;
 import com.hw.airport.exception.HWAirportException;
 import com.hw.airport.model.Booking;
 import com.hw.airport.model.Desk;
+
+import java.util.Random;
 
 public class DeskSvcImpl implements DeskSvc{
 
@@ -16,7 +16,7 @@ public class DeskSvcImpl implements DeskSvc{
 
 	@Override
 	public Desk openDesk() {
-		return new Desk(new Random(0).nextInt(),DESK_STATUS.AVAILABLE);
+		return new Desk(new Random().nextInt(),DESK_STATUS.AVAILABLE);
 	}
 
 	@Override

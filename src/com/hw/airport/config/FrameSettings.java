@@ -1,15 +1,14 @@
 package com.hw.airport.config;
 
-import javax.swing.*;
-
-public class MasterFrameSettings {
+public class FrameSettings
+{
     private int mainScreenWidth;
     private int mainScreenHeight;
     private int exitOperation;
 
     private String mainScreenTitle;
 
-    public MasterFrameSettings(int mainScrWidth, int mainScrHeight, int exitOp, String mainScrTitle) {
+    public FrameSettings(int mainScrWidth, int mainScrHeight, int exitOp, String mainScrTitle) {
         this.mainScreenWidth = mainScrWidth;
         this.mainScreenHeight = mainScrHeight;
         this.mainScreenTitle = mainScrTitle;
