@@ -68,9 +68,9 @@ public class UserConfigFrame extends JFrame {
 
 				if (openDeskVal.matches("[1-9]+") & simExRateVal.matches("[1-9]+") & queuPopval.matches(".*\\d.*")) {
 
-					boolean popuInputStat = (Integer.parseInt(queuPopval) > 100)&(Integer.parseInt(queuPopval) < 3000);
+					boolean popuInputStat = (Integer.parseInt(queuPopval) > 3000);
 
-					if (!(popuInputStat)) {
+					if (popuInputStat) {
 						AirportSimulator.getInstnce().setMaxOpndCheckinDesk(Integer.parseInt(openDeskVal));
 						AirportSimulator.getInstnce().setSimExcRate(Integer.parseInt(simExRateVal));
 						AirportSimulator.getInstnce().setQueuePopulatingRate(Integer.parseInt(queuPopval));
@@ -86,8 +86,7 @@ public class UserConfigFrame extends JFrame {
 							e.printStackTrace();
 						}
 
-					} else {// msg for in valid values
-					}
+					} 
 				}
 			}
 
@@ -97,8 +96,8 @@ public class UserConfigFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
 				AirportSimulator.getInstnce().setMaxOpndCheckinDesk(2);
-				AirportSimulator.getInstnce().setSimExcRate(1);
-				AirportSimulator.getInstnce().setQueuePopulatingRate(1000);
+				AirportSimulator.getInstnce().setSimExcRate(2);
+				AirportSimulator.getInstnce().setQueuePopulatingRate(2000);
 
 				// AppContainer.getGui().displayAirportMonitorScreen();
 				ApplicationManager appManager = new ApplicationManager();
