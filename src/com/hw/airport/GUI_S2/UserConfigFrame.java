@@ -72,8 +72,8 @@ public class UserConfigFrame extends JFrame {
 
 					if (!(popuInputStat)) {
 						AirportSimulator.getInstnce().setMaxOpndCheckinDesk(Integer.parseInt(openDeskVal));
-						AirportSimulator.getInstnce().setSimExcRate(Long.parseLong(simExRateVal));
-						AirportSimulator.getInstnce().setQueuePopulatingRate(Long.parseLong(queuPopval));
+						AirportSimulator.getInstnce().setSimExcRate(Integer.parseInt(simExRateVal));
+						AirportSimulator.getInstnce().setQueuePopulatingRate(Integer.parseInt(queuPopval));
 						AppContainer.getGui().displayAirportMonitorScreen();
 
 						// AppContainer.getGui().displayAirportMonitorScreen();
