@@ -16,7 +16,7 @@ public class AirportGUIImpl implements AirportGUI
 	{
 		guiSvc = AppContainer.getGuiSvc();
 
-		FrameSettings userConfigFrameSettings = new FrameSettings(800,600,
+		FrameSettings userConfigFrameSettings = new FrameSettings(350,260,
 				WindowConstants.EXIT_ON_CLOSE, "Simulation Configuration Screen");
 		GUIComponentSettings userConfigPanelSettings = new GUIComponentSettings(new GridLayout(0,2), new Color(0xFFFFFFFF, true),
 				new Color(0x090909), new Font("Dialog", Font.BOLD, 12), BorderFactory.createBevelBorder(1));
@@ -31,7 +31,7 @@ public class AirportGUIImpl implements AirportGUI
 	@Override
 	public void displayConfigScreen(){
 		
-		FrameSettings userConfigFrameSettings = new FrameSettings(800,600,
+		FrameSettings userConfigFrameSettings = new FrameSettings(350,260,
 				WindowConstants.EXIT_ON_CLOSE, "Simulation Configuration Screen");
 		GUIComponentSettings userConfigPanelSettings = new GUIComponentSettings(new GridLayout(0,2), new Color(0xFFFFFFFF, true),
 				new Color(0x090909), new Font("Dialog", Font.BOLD, 12), BorderFactory.createBevelBorder(1));

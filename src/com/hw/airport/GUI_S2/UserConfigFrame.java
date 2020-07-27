@@ -25,28 +25,35 @@ public class UserConfigFrame extends JFrame {
 	}
 
 	public void init() {
+		
 		setLayout(configPanelSettings.Layout);
 		setFont(configPanelSettings.LabelFont);
 		setBackground(configPanelSettings.BackGroundColor);
 		setForeground(configPanelSettings.LabelColor);
 
-		JLabel simRateLabel = new JLabel("Simulation Rate:");
+		JLabel simRateLabel = new JLabel("Simulation Rate:",JLabel.CENTER);
 		add(simRateLabel);
 
 		JTextField simRateVal = new JTextField();
 		add(simRateVal);
 
-		JLabel quePopulationRateLabel = new JLabel("Queue Population Rate:");
+		JLabel quePopulationRateLabel = new JLabel("Queue Population Rate:",JLabel.CENTER);
 		add(quePopulationRateLabel);
 
 		JTextField quePopulationRateVal = new JTextField();
 		add(quePopulationRateVal);
 
-		JLabel maxOpenDeskLabel = new JLabel("Max Open Desks:");
+		JLabel maxOpenDeskLabel = new JLabel("Max Open Desks:",JLabel.CENTER);
 		add(maxOpenDeskLabel);
 
 		JTextField maxOpenDeskVal = new JTextField();
 		add(maxOpenDeskVal);
+		
+		JLabel passToDeskLabel = new JLabel("Pass desk:",JLabel.CENTER);
+		add(passToDeskLabel);
+
+		JTextField passToDeskVal = new JTextField();
+		add(passToDeskVal);
 
 		JButton applySettingsBtn = new JButton("Start");
 		JButton applyDefaultBtn = new JButton("Default");
@@ -61,11 +68,9 @@ public class UserConfigFrame extends JFrame {
 
 				if (openDeskVal.matches("[1-9]+") & simExRateVal.matches("[1-9]+") & queuPopval.matches(".*\\d.*")) {
 
-					boolean deskInputStat = openDeskVal.isBlank();
-					boolean simInputStat = simExRateVal.isBlank();
-					boolean popuInputStat = queuPopval.isBlank() || (Integer.parseInt(queuPopval) > 1000);
+					boolean popuInputStat = (Integer.parseInt(queuPopval) > 100)&(Integer.parseInt(queuPopval) < 3000);
 
-					if (!(deskInputStat & simInputStat & popuInputStat)) {
+					if (!(popuInputStat)) {
 						AirportSimulator.getInstnce().setMaxOpndCheckinDesk(Integer.parseInt(openDeskVal));
 						AirportSimulator.getInstnce().setSimExcRate(Long.parseLong(simExRateVal));
 						AirportSimulator.getInstnce().setQueuePopulatingRate(Long.parseLong(queuPopval));
