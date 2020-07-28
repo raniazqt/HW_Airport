@@ -46,6 +46,7 @@ public class SimToolBar extends JToolBar implements GUIElement
     {
         if(isInit)
             return;
+
         JLabel settingsLabel;
         String dataValue;
         Map<String, Integer> simSettings = guiDataSvc.retrieveSimulatorSettings();
@@ -57,6 +58,8 @@ public class SimToolBar extends JToolBar implements GUIElement
             add(settingsLabel);
             simulationSettings.add(settingsLabel);
         }
+
+        isInit = true;
     }
 
 	

@@ -1,9 +1,7 @@
 package com.hw.airport.GUI_S2;
 
-import com.hw.airport.config.AppContainer;
 import com.hw.airport.config.CheckInDeskPanelSettings;
 import com.hw.airport.model.Desk;
-import com.hw.airport.service.GUISvc;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -13,14 +11,12 @@ public class CheckInDeskPanel extends JPanel implements GUIElement
 {
 	private List<DeskPanel> deskPanels;
 	private CheckInDeskPanelSettings guiSettings;
-	private GUISvc guiDataSvc;
 	private int currentTableIndex;
 
 	public CheckInDeskPanel(CheckInDeskPanelSettings guiSettings)
 	{
 		this.guiSettings = guiSettings;
 		deskPanels = new ArrayList<>();
-		guiDataSvc = AppContainer.getGuiSvc();
 		currentTableIndex = 1;
 	}
 

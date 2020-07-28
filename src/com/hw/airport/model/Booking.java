@@ -1,8 +1,8 @@
 package com.hw.airport.model;
 
-import java.util.Date;
-
 import org.apache.commons.text.WordUtils;
+
+import java.util.Date;
 
 
 public class Booking {	

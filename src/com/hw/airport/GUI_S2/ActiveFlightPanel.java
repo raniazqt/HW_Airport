@@ -9,9 +9,6 @@ import java.util.List;
 
 public class ActiveFlightPanel extends JPanel implements GUIElement
 {
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private final ActiveFlightPanelSettings guiSettings;
     private List<FlightPanel> flightPanels;
@@ -40,7 +37,7 @@ public class ActiveFlightPanel extends JPanel implements GUIElement
         if (null != activeFlight) {
             for (FlightPanel panel : flightPanels) {
                 if (null != panel.getActiveFlightCode()) {
-                    if (panel.getActiveFlightCode().equals(activeFlight.getFlightCode())) {
+                    if (panel.getActiveFlightCode().equals(activeFlight.getFlightCd())) {
                         return panel;
                     }
                 }
@@ -67,14 +64,11 @@ public class ActiveFlightPanel extends JPanel implements GUIElement
         }
 		else {
 		    FlightPanel flightPanelToAdd = new FlightPanel(guiSettings);
-		    flightPanelToAdd.setActiveFlightCode(activeFlightToUpdate.getFlightCode());
 		    flightPanelToAdd.init(activeFlightToUpdate);
 		    flightPanelToAdd.draw();
 		    flightPanels.add(flightPanelToAdd);
+            add(flightPanelToAdd.getSelf());
 
-            JScrollPane currentFlightScrollPane = flightPanelToAdd.getSelf();
-            currentFlightScrollPane.setBorder(BorderFactory.createTitledBorder("FLIGHT #" + flightPanelToAdd.getActiveFlightCode()));
-            add(currentFlightScrollPane);
 		}
 		
 	}

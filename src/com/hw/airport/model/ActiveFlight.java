@@ -56,7 +56,4 @@ public class ActiveFlight {
 	public void setTotalWeight(double totalWeight) {
 		this.totalWeight = totalWeight;
 	}
-	public void setFlightCode(String flightCode) {this.flightCode = flightCode;}
-	public String getFlightCode() {return this.flightCode;}
-	
 }

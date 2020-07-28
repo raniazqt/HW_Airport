@@ -4,7 +4,6 @@ import com.hw.airport.config.GUISettings;
 import com.hw.airport.model.ActiveFlight;
 import com.hw.airport.model.Booking;
 import com.hw.airport.model.Desk;
-import com.hw.airport.model.Passenger;
 
 import javax.swing.*;
 
@@ -28,10 +27,10 @@ public class AirportMonitorFrame extends JFrame implements GUIElement
 	private void initMasterFrame()
 	{
 		setTitle (guiSettings.FrameSettings.getMainScreenTitle());
-		setSize (guiSettings.FrameSettings.getMainScreenWidth(),
-				guiSettings.FrameSettings.getMainScreenHeight());
 		setDefaultCloseOperation (EXIT_ON_CLOSE);
 		setLayout(new BoxLayout(getContentPane(), BoxLayout.PAGE_AXIS));
+		setExtendedState(JFrame.MAXIMIZED_BOTH);
+		setUndecorated(true);
 	}
 
 	private void initSubPanels()
@@ -45,8 +44,8 @@ public class AirportMonitorFrame extends JFrame implements GUIElement
 	private void addSubPanels()
 	{
 		add(simToolBar.getSelf());
-		add(checkInDeskPanel.getSelf());
 		add(flightsPanel.getSelf());
+		add(checkInDeskPanel.getSelf());
 		add(passengerPanel.getSelf());
 	}
 
@@ -60,8 +59,8 @@ public class AirportMonitorFrame extends JFrame implements GUIElement
 	public void draw()
 	{
 		simToolBar.draw();
-		checkInDeskPanel.draw();
 		flightsPanel.draw();
+		checkInDeskPanel.draw();
 		passengerPanel.draw();
 	}
 
@@ -69,15 +68,19 @@ public class AirportMonitorFrame extends JFrame implements GUIElement
 	public void init(Object args)
 	{
 		simToolBar.init(args);
-		checkInDeskPanel.init(args);
 		flightsPanel.init(args);
+		checkInDeskPanel.init(args);
 		passengerPanel.init(args);
 	}
 
 	@Override
 	public void refresh(Object args)
 	{
-		// TODO: UPDATE ORDER NEEDS SORTING.
+		refreshFrame();
+		refreshSubPanels(args);
+	}
+
+	private void refreshSubPanels(Object args) {
 		if (args instanceof Desk) {
 			checkInDeskPanel.refresh(args);
 		}
@@ -86,5 +89,10 @@ public class AirportMonitorFrame extends JFrame implements GUIElement
 		}else if (args instanceof ActiveFlight) {
 			flightsPanel.refresh(args);
 		}
+	}
+
+	private void refreshFrame() {
+		revalidate();
+		repaint();
 	}
 }
