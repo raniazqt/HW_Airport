@@ -4,61 +4,72 @@ import com.hw.airport.config.AirportSimulator;
 import com.hw.airport.config.AppContainer;
 import com.hw.airport.config.FrameSettings;
 import com.hw.airport.config.GUIComponentSettings;
+import com.hw.airport.main.ApplicationManager;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class UserConfigFrame extends JFrame
 {
-    private GUIComponentSettings configPanelSettings;
+	private GUIComponentSettings configPanelSettings;
 
-    public UserConfigFrame(FrameSettings guiSettings, GUIComponentSettings panelSettings)
-    {
-        setTitle (guiSettings.getMainScreenTitle());
-        setSize (guiSettings.getMainScreenWidth(),
-                guiSettings.getMainScreenHeight());
-        setDefaultCloseOperation (EXIT_ON_CLOSE);
-        configPanelSettings = panelSettings;
-    }
+	public UserConfigFrame(FrameSettings guiSettings, GUIComponentSettings panelSettings)
+	{
+		setTitle (guiSettings.getMainScreenTitle());
+		setSize (guiSettings.getMainScreenWidth(),
+				guiSettings.getMainScreenHeight());
+		setDefaultCloseOperation (EXIT_ON_CLOSE);
+		configPanelSettings = panelSettings;
+	}
 
-    public JFrame getSelf()
-    {
-        return this;
-    }
+	public JFrame getSelf()
+	{
+		return this;
+	}
 
-    public void init()
-    {
-        setLayout(configPanelSettings.Layout);
-        setFont(configPanelSettings.LabelFont);
-        setBackground(configPanelSettings.BackGroundColor);
-        setForeground(configPanelSettings.LabelColor);
+	public void init()
+	{
+		setLayout(configPanelSettings.Layout);
+		setFont(configPanelSettings.LabelFont);
+		setBackground(configPanelSettings.BackGroundColor);
+		setForeground(configPanelSettings.LabelColor);
 
-        JLabel simRateLabel = new JLabel("Simulation Rate:");
-        add(simRateLabel);
+		JLabel simRateLabel = new JLabel("Simulation Rate:");
+		add(simRateLabel);
 
-        JTextField simRateVal = new JTextField();
-        add(simRateVal);
+		JTextField simRateVal = new JTextField();
+		add(simRateVal);
 
-        JLabel quePopulationRateLabel = new JLabel("Queue Population Rate:");
-        add(quePopulationRateLabel);
+		JLabel quePopulationRateLabel = new JLabel("Queue Population Rate:");
+		add(quePopulationRateLabel);
 
-        JTextField quePopulationRateVal = new JTextField();
-        add(quePopulationRateVal);
+		JTextField quePopulationRateVal = new JTextField();
+		add(quePopulationRateVal);
 
-        JLabel maxOpenDeskLabel = new JLabel("Max Open Desks:");
-        add(maxOpenDeskLabel);
+		JLabel maxOpenDeskLabel = new JLabel("Max Open Desks:");
+		add(maxOpenDeskLabel);
 
-        JTextField maxOpenDeskVal = new JTextField();
-        add(maxOpenDeskVal);
+		JTextField maxOpenDeskVal = new JTextField();
+		add(maxOpenDeskVal);
 
-        JButton applySettingsBtn = new JButton("Start");
-        applySettingsBtn.addActionListener(actionEvent -> {
-            AirportSimulator.getInstnce().setMaxOpndCheckinDesk(Integer.parseInt(maxOpenDeskVal.getText()));
-            AirportSimulator.getInstnce().setSimExcRate(Long.parseLong(simRateVal.getText()));
-            AirportSimulator.getInstnce().setQueuePopulatingRate(Long.parseLong(quePopulationRateVal.getText()));
-            //start
-            AppContainer.getGui().displayAirportMonitorScreen();
-        });
+		JButton applySettingsBtn = new JButton("Start");
+		applySettingsBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent actionEvent) {
+				AirportSimulator.getInstnce().setMaxOpndCheckinDesk(Integer.parseInt(maxOpenDeskVal.getText()));
+				AirportSimulator.getInstnce().setSimExcRate(Integer.parseInt(simRateVal.getText()));
+				AirportSimulator.getInstnce().setQueuePopulatingRate(Integer.parseInt(quePopulationRateVal.getText()));
+				ApplicationManager appManager = new ApplicationManager();
+				try {
+					appManager.start();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
 
-        add(applySettingsBtn);
-    }
+		add(applySettingsBtn);
+	}
 }

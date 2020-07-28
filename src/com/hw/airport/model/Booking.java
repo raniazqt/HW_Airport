@@ -2,6 +2,9 @@ package com.hw.airport.model;
 
 import java.util.Date;
 
+import org.apache.commons.text.WordUtils;
+
+
 public class Booking {	
 	public enum BookingStatus {
 		CHECKED_IN, NOT_CHECKED_IN, PROCESSING
@@ -115,7 +118,7 @@ public class Booking {
 	}
 
 	public String getFullName() {
-		return this.firstName + " " + this.lastName;
+		return WordUtils.capitalize(this.firstName + " " + this.lastName);
 	}
 
 	public double getBaggageHeight() {

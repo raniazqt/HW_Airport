@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Observable;
 
 import com.hw.airport.exception.HWAirportException;
 import com.hw.airport.model.ActiveFlight;
@@ -13,7 +14,7 @@ import com.hw.airport.model.Booking.BookingStatus;
 import com.hw.airport.model.Flight;
 import com.hw.airport.util.FileHandler;
 
-public class DataSvcImpl implements DataSvc {
+public class DataSvcImpl extends Observable implements DataSvc {
 
 	/**
 	 * loads file data from the flight file line by line.
@@ -74,14 +75,18 @@ public class DataSvcImpl implements DataSvc {
 	@Override
 	public void updateActiveFlight(String flightCd, int psngrCnt, double weight, double volume, double totalChg) {
 		List<ActiveFlight> flights = AppData.getActiveFlights();
+		ActiveFlight activeFlight = null;
 		for (ActiveFlight flight : flights) {
 			if (flight.getFlightCd().equalsIgnoreCase(flightCd)) {
 				flight.setTotalVolume(volume);
 				flight.setTotalWeight(weight);
 				flight.setXtraChargeCollected(totalChg);
 				flight.setBoardedPsngrCnt(flight.getBoardedPsngrCnt()+1);
+				activeFlight = flight;
 			}
 		}
+		setChanged();
+		notifyObservers(activeFlight);
 	}
 
 	@Override
@@ -100,5 +105,6 @@ public class DataSvcImpl implements DataSvc {
 		AppData.addPsngrToFailedToCheckInList(passenger.getFlightCode(), passenger);
 		
 	}
+	
 
 }

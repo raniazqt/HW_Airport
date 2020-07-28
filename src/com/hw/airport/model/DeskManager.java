@@ -23,14 +23,14 @@ public class DeskManager extends Observable implements Observer{
 
 	public DeskManager() {
 		super();
-		this.executor = (ThreadPoolExecutor) Executors.newFixedThreadPool((int) sim.getMaxOpndCheckinDesk());
+		this.executor = (ThreadPoolExecutor) Executors.newCachedThreadPool();//newFixedThreadPool((int) sim.getMaxOpndCheckinDesk());
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
 		int passToDeskRatio = sim.getPassToDeskRatio();
-		int maxOpnDsk = (int) sim.getMaxOpndCheckinDesk();
+		int maxOpnDsk =  sim.getMaxOpndCheckinDesk();
 		int openedDeskCnt = openedDeskList.size();
 
 		PassengerQueue queue = PassengerQueue.getInstance();
@@ -77,8 +77,11 @@ public class DeskManager extends Observable implements Observer{
 
 	public void closeDesk(DeskThread deskThread) {
 		deskSvc.closeDesk(deskThread.getDesk());
-		deskThread.stop();
+		setChanged();
+		notifyObservers(deskThread.getDesk());
+	//	deskThread.stop();
 		System.out.println("Thread stopped");
+		
 		
 	}	
 

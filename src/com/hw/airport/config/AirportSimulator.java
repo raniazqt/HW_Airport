@@ -10,13 +10,13 @@ public class AirportSimulator {
 	//flights to check in ( flight code , check in period in seconds)
 	static List<ActiveFlight> activeFlights = new ArrayList<>();
 	//ratio of number of passengers in queue to number of opened checkin desks
-	static int passToDeskRatio;
+	static int passToDeskRatio = 5;
 	//rate for adding passengers to queue in seconds
-	static long queuePopulatingRate;
+	static int queuePopulatingRate;
 	//maximum number of allowed check-in desks
 	static int maxOpndCheckinDesk;
 	//Simulator execution rate
-	static long simExcRate;
+	static int simExcRate;
 
 	private static AirportSimulator simulator;
 
@@ -31,9 +31,9 @@ public class AirportSimulator {
 			//TODO:launch user interface to read the simulator settings		
 			//TODO: Ask user about the flights to check in and the time, max size of the queue, how often to fill the queue 
 			
-			queuePopulatingRate = 6000;
-			maxOpndCheckinDesk = 2;
-			passToDeskRatio = 5;
+	//		queuePopulatingRate = 6000;
+	//		maxOpndCheckinDesk = 2;
+	//		passToDeskRatio = 5;
 
 		}
 		return simulator;
@@ -44,15 +44,15 @@ public class AirportSimulator {
 		return passToDeskRatio;
 	}
 
-	public static double getQueuePopulatingRate() {
+	public static int getQueuePopulatingRate() {
 		return queuePopulatingRate;
 	}
 
-	public static double getMaxOpndCheckinDesk() {
+	public static int getMaxOpndCheckinDesk() {
 		return maxOpndCheckinDesk;
 	}
 
-	public static double getSimExcRate() {
+	public static int getSimExcRate() {
 		return simExcRate;
 	}
 
@@ -60,7 +60,7 @@ public class AirportSimulator {
 		this.passToDeskRatio = passToDeskRatio;
 	}
 
-	public void setQueuePopulatingRate(long queuePopulatingRate) {
+	public void setQueuePopulatingRate(int queuePopulatingRate) {
 		this.queuePopulatingRate = queuePopulatingRate;
 	}
 
@@ -68,7 +68,7 @@ public class AirportSimulator {
 		this.maxOpndCheckinDesk = maxOpndCheckinDesk;
 	}
 
-	public void setSimExcRate(long simExcRate) {
+	public void setSimExcRate(int simExcRate) {
 		this.simExcRate = simExcRate;
 	}
 
