@@ -18,16 +18,19 @@ import java.util.TimerTask;
 
 import javax.swing.SwingUtilities;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 
 public class ApplicationManager {
-	
+	private static final Logger LOG = LogManager.getLogger(ApplicationManager.class);
 	private static AirportGUI gui= AppContainer.getInstance().getGui();
 	private DataSvc dataSvc;
 	String flightsFileName = "flights.csv"; 
 	String bookingFileName = "bookings.csv";
 
 	public void InitializeApplication() throws Exception {
-		
+		LOG.debug ("Initialising application");
 		AppData.getInstance();
 		AirportSimulator.getInstnce();
 

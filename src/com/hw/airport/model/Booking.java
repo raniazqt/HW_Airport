@@ -2,7 +2,6 @@ package com.hw.airport.model;
 
 import java.util.Date;
 
-import org.apache.commons.text.WordUtils;
 
 
 public class Booking {	
@@ -118,7 +117,7 @@ public class Booking {
 	}
 
 	public String getFullName() {
-		return WordUtils.capitalize(this.firstName + " " + this.lastName);
+		return this.firstName + " " + this.lastName;
 	}
 
 	public double getBaggageHeight() {
