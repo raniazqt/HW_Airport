@@ -1,9 +1,13 @@
 package com.hw.airport.model;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.hw.airport.config.AirportSimulator;
 import com.hw.airport.config.AppContainer;
 import com.hw.airport.enums.DESK_STATUS;
 import com.hw.airport.exception.HWAirportException;
+import com.hw.airport.main.ApplicationStart;
 import com.hw.airport.service.CheckInSvc;
 import com.hw.airport.service.DeskSvc;
 import com.hw.airport.service.QueueSvc;
@@ -11,6 +15,7 @@ import com.hw.airport.service.QueueSvc;
 public class DeskThread extends Thread implements Runnable{
 
 	//private QueueSvc queueSvc = AppContainer.getQueueSvc();
+	private static Logger LOG = LogManager.getLogger(DeskThread.class);
 	private CheckInSvc checkinSvc = AppContainer.getCheckinSvc();
 	private DeskManager deskManager = AppContainer.getDeskManager();
 
@@ -79,9 +84,11 @@ public class DeskThread extends Thread implements Runnable{
 					//Step# 1								
 					checkinSvc.addPassengerToDesk(desk);
 					Thread.sleep(simRate);
+					
 					checkinSvc.updateDeskStatus(desk, DESK_STATUS.GET_PASSENGER_FROM_QUEUE);
-					System.out.println("Desk - " + desk.getThreadName() + " - processing passenger " 
-							+ desk.getPassenger().getFullName());
+					LOG.info("Desk - #{} - processing passenger [1] ", desk.getThreadName(), desk.getPassenger().getFullName());
+					//System.out.println("Desk - " +  + " - processing passenger " 
+					//		+ desk.getPassenger().getFullName());
 					passenger = desk.getPassenger();
 
 					//Step# 2
