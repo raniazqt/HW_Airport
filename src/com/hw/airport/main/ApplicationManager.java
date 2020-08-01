@@ -8,7 +8,6 @@ import com.hw.airport.model.ActiveFlight;
 import com.hw.airport.model.AppData;
 import com.hw.airport.model.DeskManager;
 import com.hw.airport.service.CheckInSvcImpl;
-import com.hw.airport.service.DataSvc;
 import com.hw.airport.service.DataSvcImpl;
 import com.hw.airport.service.FlightSvc;
 import com.hw.airport.service.QueueSvcImpl;
@@ -21,8 +20,7 @@ import javax.swing.SwingUtilities;
 
 public class ApplicationManager {
 	
-	private static AirportGUI gui= AppContainer.getInstance().getGui();
-	private DataSvc dataSvc;
+	private static final AirportGUI gui = AppContainer.getInstance().getGui();
 	String flightsFileName = "flights.csv"; 
 	String bookingFileName = "bookings.csv";
 
@@ -45,10 +43,6 @@ public class ApplicationManager {
 		
 		DataSvcImpl dataSvc = (DataSvcImpl) AppContainer.getDataSvc();
 		dataSvc.addObserver(gui);
-		/*
-		 * if (null == appContainer) { throw new RuntimeErrorException(null,
-		 * "Application did not start correctly. Notify adminstrator "); }
-		 */
 
 		//load flights and booking data from files
 		try {
@@ -72,7 +66,7 @@ public class ApplicationManager {
 	public void start() throws Exception {
 		InitializeApplication();
 
-		long rate = (long) AirportSimulator.getQueuePopulatingRate();
+		long rate = AirportSimulator.getQueuePopulatingRate();
 		long appRate = rate / 6;
 
 		TimerTask queuePopulatingTask = new QueuePopulatingTask();
@@ -81,18 +75,8 @@ public class ApplicationManager {
 		timer.scheduleAtFixedRate(queuePopulatingTask, 0, appRate);
 		System.out.println("TimerTask started");
 		
-		SwingUtilities.invokeLater(new Runnable() {
-		    public void run() {
-		    	AppContainer.getGui().displayAirportMonitorScreen();
-		    }
-		});
+		SwingUtilities.invokeLater(() -> AppContainer.getGui().displayAirportMonitorScreen());
 		
 	
 	}
-
-	/*
-	 * public static void main(String[] args) throws Exception { ApplicationManager
-	 * appManager = new ApplicationManager(); gui.displayConfigScreen();
-	 * //appManager.start(); }
-	 */
 }
