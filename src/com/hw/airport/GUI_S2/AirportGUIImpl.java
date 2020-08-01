@@ -1,21 +1,16 @@
 package com.hw.airport.GUI_S2;
 import com.hw.airport.config.*;
-import com.hw.airport.service.GUISvc;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.Observable;
 
 public class AirportGUIImpl implements AirportGUI
 {
-	private GUISvc guiSvc;
 	private GUIElement masterFrame;
 	private UserConfigFrame configFrame;
 
 	public AirportGUIImpl()
 	{
-		guiSvc = AppContainer.getGuiSvc();
-
 		FrameSettings userConfigFrameSettings = new FrameSettings(800,600,
 				WindowConstants.EXIT_ON_CLOSE, "Simulation Configuration Screen");
 		GUIComponentSettings userConfigPanelSettings = new GUIComponentSettings(new GridLayout(0,2), new Color(0xFFFFFFFF, true),
@@ -39,8 +34,8 @@ public class AirportGUIImpl implements AirportGUI
 		masterFrame.getSelf().setVisible(true);
 	}
 
-	public GUISettings getGuiSettings()
-	{
+	public GUISettings getGuiSettings() {
+
 		FrameSettings masterFrameSettings = new FrameSettings(1440,1280,
 				WindowConstants.EXIT_ON_CLOSE, "Airport Status Screen");
 
@@ -55,7 +50,6 @@ public class AirportGUIImpl implements AirportGUI
 
 		PassengerPanelSettings passengerPanelSettings = new PassengerPanelSettings(new FlowLayout(), new Color(0x090909), new Color(0xE92ECE),
 				new Font("Dialog", Font.ITALIC, 12), BorderFactory.createBevelBorder(1));
-
 
 		return new GUISettings(masterFrameSettings, simToolBarSettings,
 				checkInDeskPanelSettings, passengerPanelSettings, activeFlightPanelSettings);
