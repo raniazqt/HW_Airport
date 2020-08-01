@@ -14,6 +14,7 @@ import com.hw.airport.model.BookingCharge;
 import com.hw.airport.model.Desk;
 import com.hw.airport.model.Flight;
 import com.hw.airport.model.ActiveFlight;
+import com.hw.airport.observer.SynchronizedObservable;
 
 /**
  * 1. save startTime in a variable.
@@ -22,7 +23,7 @@ import com.hw.airport.model.ActiveFlight;
  * 4. executionRate is the simulated time.
  */
 
-public class CheckInSvcImpl extends Observable implements CheckInSvc {
+public class CheckInSvcImpl extends SynchronizedObservable implements CheckInSvc {
 
 	private BookingSvc bookingSvc = AppContainer.getBookingSvc();
 	private FlightSvc flightSvc = AppContainer.getFlightSvc();
@@ -254,7 +255,7 @@ public class CheckInSvcImpl extends Observable implements CheckInSvc {
 	public void updateDeskStatus(Desk desk, DESK_STATUS status) {
 		deskSvc.updateStatus(desk, status);
 		setChanged();
-		notifyObservers(desk);
+		notifyAll(desk);
 	}
 
 	@Override

@@ -34,17 +34,17 @@ public class ApplicationManager {
 		//gui = AppContainer.getGui();
 		//register the DeskManager as an observer to the QueueSvs
 		QueueSvcImpl queueSvc = (QueueSvcImpl) AppContainer.getQueueSvc();
-		queueSvc.addObserver(AppContainer.getDeskManager());
-		queueSvc.addObserver(gui);
+		queueSvc.registerObserver(AppContainer.getDeskManager());
+		queueSvc.registerObserver(gui);
 		
 		DeskManager deskManager = AppContainer.getDeskManager();
-		deskManager.addObserver(gui);
+		deskManager.registerObserver(gui);
 		
 		CheckInSvcImpl checkInSvc = (CheckInSvcImpl) AppContainer.getCheckinSvc();
-		checkInSvc.addObserver(gui);
+		checkInSvc.registerObserver(gui);
 		
 		DataSvcImpl dataSvc = (DataSvcImpl) AppContainer.getDataSvc();
-		dataSvc.addObserver(gui);
+		dataSvc.registerObserver(gui);
 		/*
 		 * if (null == appContainer) { throw new RuntimeErrorException(null,
 		 * "Application did not start correctly. Notify adminstrator "); }
