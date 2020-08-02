@@ -6,7 +6,6 @@ import com.hw.airport.config.FrameSettings;
 import com.hw.airport.config.GUIComponentSettings;
 import com.hw.airport.main.ApplicationManager;
 
-
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -16,7 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-public class UserConfigFrame extends JFrame implements ListSelectionListener{
+public class UserConfigFrame extends JFrame implements ListSelectionListener {
 	private GUIComponentSettings configPanelSettings;
 
 	public UserConfigFrame(FrameSettings guiSettings, GUIComponentSettings panelSettings) {
@@ -64,33 +63,33 @@ public class UserConfigFrame extends JFrame implements ListSelectionListener{
 		JTextField passengerToDeskVal = new JTextField();
 		passengerToDeskVal.setToolTipText("This sets the number of open desks per passenger (???)");
 		add(passengerToDeskVal);
-		
+
 		JLabel uiThemeLabel = new JLabel("UI Theme:", JLabel.CENTER);
 		add(uiThemeLabel);
 
-		String theme[] = { "Dark", "Medium", "Light"};
-		
+		String theme[] = { "Dark", "Medium", "Light" };
+
 		JList<String> themeListVal = new JList<String>(theme);
 		JScrollPane scrollableUIList = new JScrollPane(themeListVal);
 		themeListVal.setSelectedIndex(0);
 		themeListVal.setToolTipText("Sets UI theme");
-		
-		add(scrollableUIList);				
+
+		add(scrollableUIList);
 
 		JLabel flightListLabel = new JLabel("List of available flights:", JLabel.CENTER);
 		add(flightListLabel);
 
 		List<String> flightList = AppContainer.getBookingSvc().getAllFlightsCodeWithBooking();
-		
+
 		String[] stringArray = flightList.toArray(new String[0]);
 
 		String week[] = { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
-				
+
 		JList<String> flightListVal = new JList<String>(week);
 		JScrollPane scrollableList = new JScrollPane(flightListVal);
 		flightListVal.setToolTipText("Leave blank for all flights");
-		
-		add(scrollableList);		
+
+		add(scrollableList);
 
 		JButton applySettingsBtn = new JButton("Start");
 		JButton applyDefaultBtn = new JButton("Default");
@@ -117,7 +116,7 @@ public class UserConfigFrame extends JFrame implements ListSelectionListener{
 						AirportSimulator.getInstnce().setPassToDeskRatio(Integer.parseInt(passToDeskVal));
 						System.out.println(flightListVal.getSelectedValue());
 						System.out.println(themeListVal.getSelectedValue());
-						//DO SOMETHING HERE
+						// DO SOMETHING HERE
 						AppContainer.getGui().displayAirportMonitorScreen();
 
 						// AppContainer.getGui().displayAirportMonitorScreen();
@@ -130,10 +129,13 @@ public class UserConfigFrame extends JFrame implements ListSelectionListener{
 							e.printStackTrace();
 						}
 
-					}else {
-						
-						JOptionPane.showMessageDialog(this,"Eggs are not supposed to be green.");
+					} else {
+
+						JOptionPane.showMessageDialog(getSelf(), "Eggs are not supposed to be red.");
 					}
+				} else {
+
+					JOptionPane.showMessageDialog(getSelf(), "Eggs are not supposed to be green.");
 				}
 			}
 
@@ -167,6 +169,6 @@ public class UserConfigFrame extends JFrame implements ListSelectionListener{
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }
