@@ -4,6 +4,7 @@ import com.hw.airport.observer.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 public class AirportGUIImpl extends SynchronizedObservable implements AirportGUI
 {
@@ -24,6 +25,9 @@ public class AirportGUIImpl extends SynchronizedObservable implements AirportGUI
 
 		masterFrame.init(null);
 		masterFrame.draw();
+		
+		
+		
 	}
 
 	@Override
