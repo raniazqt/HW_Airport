@@ -90,7 +90,7 @@ public class AirportSimulator {
 		return activeFlights;
 	}
 
-	public static String genReport() {
+	public static String getReport() {
 
 		int totalPassengers = 0;
 		int totalCharge = 0;
@@ -119,7 +119,7 @@ public class AirportSimulator {
 		return report;
 	}
 
-	public static void saveReport(String report) throws IOException {
+	public static void saveReport() throws IOException {
 
 		try {
 			Files.deleteIfExists(Paths.get("./resources/files/Report.csv"));
@@ -133,7 +133,7 @@ public class AirportSimulator {
 		}
 
 		BufferedWriter writer = new BufferedWriter(new FileWriter("./resources/files/Report.csv"));
-		writer.write(report);
+		writer.write(AirportSimulator.getReport());
 
 		writer.close();
 	}
