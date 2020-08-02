@@ -64,6 +64,18 @@ public class UserConfigFrame extends JFrame implements ListSelectionListener{
 		JTextField passengerToDeskVal = new JTextField();
 		passengerToDeskVal.setToolTipText("This sets the number of open desks per passenger (???)");
 		add(passengerToDeskVal);
+		
+		JLabel uiThemeLabel = new JLabel("UI Theme:", JLabel.CENTER);
+		add(uiThemeLabel);
+
+		String theme[] = { "Dark", "Medium", "Light"};
+		
+		JList<String> themeListVal = new JList<String>(theme);
+		JScrollPane scrollableUIList = new JScrollPane(themeListVal);
+		themeListVal.setSelectedIndex(0);
+		themeListVal.setToolTipText("Sets UI theme");
+		
+		add(scrollableUIList);				
 
 		JLabel flightListLabel = new JLabel("List of available flights:", JLabel.CENTER);
 		add(flightListLabel);
@@ -92,7 +104,7 @@ public class UserConfigFrame extends JFrame implements ListSelectionListener{
 				String queuPopval = quePopulationRateVal.getText();
 				String passToDeskVal = passengerToDeskVal.getText();
 
-				if (openDeskVal.matches("[1-9]+") & simExRateVal.matches("[1-9]+") & passToDeskVal.matches(".*\\d.*")
+				if (openDeskVal.matches(".*\\d.*") & simExRateVal.matches(".*\\d.*") & passToDeskVal.matches(".*\\d.*")
 						& queuPopval.matches(".*\\d.*")) {
 
 					boolean popuInputStat = (Integer.parseInt(queuPopval) > 3000);
@@ -104,6 +116,7 @@ public class UserConfigFrame extends JFrame implements ListSelectionListener{
 						AirportSimulator.getInstnce().setQueuePopulatingRate(Integer.parseInt(queuPopval));
 						AirportSimulator.getInstnce().setPassToDeskRatio(Integer.parseInt(passToDeskVal));
 						System.out.println(flightListVal.getSelectedValue());
+						System.out.println(themeListVal.getSelectedValue());
 						//DO SOMETHING HERE
 						AppContainer.getGui().displayAirportMonitorScreen();
 
@@ -129,6 +142,8 @@ public class UserConfigFrame extends JFrame implements ListSelectionListener{
 				AirportSimulator.getInstnce().setMaxOpndCheckinDesk(2);
 				AirportSimulator.getInstnce().setSimExcRate(2);
 				AirportSimulator.getInstnce().setQueuePopulatingRate(2000);
+				System.out.println(flightListVal.getSelectedValue());
+				System.out.println(themeListVal.getSelectedValue());
 
 				// AppContainer.getGui().displayAirportMonitorScreen();
 				ApplicationManager appManager = new ApplicationManager();
