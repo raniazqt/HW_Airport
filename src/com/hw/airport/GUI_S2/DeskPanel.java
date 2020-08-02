@@ -5,10 +5,9 @@ import com.hw.airport.enums.DESK_STATUS;
 import com.hw.airport.model.Booking;
 import com.hw.airport.model.Desk;
 
-import java.util.concurrent.ExecutionException;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.util.concurrent.ExecutionException;
 
 public class DeskPanel implements GUIElement
 {
@@ -17,6 +16,7 @@ public class DeskPanel implements GUIElement
 	private JTable deskTable;
 	private DefaultTableModel model;
 	private Desk desk;
+	private int deskIndex;
 
 	public DeskPanel(CheckInDeskPanelSettings guiSettings, Desk desk)
 	{
@@ -29,8 +29,8 @@ public class DeskPanel implements GUIElement
 	public JScrollPane getSelf()
 	{
 		JScrollPane scrollPane = new JScrollPane(deskTable);
-		scrollPane.setBorder(guiSettings.BorderType);
 		scrollPane.setBackground(guiSettings.LabelColor);
+		scrollPane.setBorder(guiSettings.BorderType);
 
 		return scrollPane;
 	}
@@ -49,7 +49,6 @@ public class DeskPanel implements GUIElement
 		deskTable.setLayout(guiSettings.Layout);
 		deskTable.setFont(guiSettings.LabelFont);
 		deskTable.setBackground(guiSettings.BackGroundColor);
-		deskTable.setBorder(guiSettings.BorderType);
 		deskTable.setForeground(guiSettings.LabelColor);
 	}
 
@@ -67,7 +66,6 @@ public class DeskPanel implements GUIElement
 	}
 
 	private void getDataModel(Object arg){
-
 		SwingWorker<String[][], Void> worker = new SwingWorker<String[][], Void>() {
 			@Override
 			protected String[][] doInBackground() throws Exception {
@@ -75,6 +73,7 @@ public class DeskPanel implements GUIElement
 				Desk updatedDesk = (Desk) arg;
 				String[][] data = new String[2][2];
 				if (null != updatedDesk){
+					desk = updatedDesk;
 					if (updatedDesk.getStatus().equals(DESK_STATUS.CLOSED)) {
 						data = new String[1][2];
 						data[0][0] = "Status";
@@ -112,5 +111,13 @@ public class DeskPanel implements GUIElement
 		};
 		worker.execute();
 
+	}
+
+	public int getDeskIndex() {
+		return deskIndex;
+	}
+
+	public void setDeskIndex(int deskIndex) {
+		this.deskIndex = deskIndex;
 	}
 }

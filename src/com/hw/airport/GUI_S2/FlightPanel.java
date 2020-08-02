@@ -29,9 +29,7 @@ public class FlightPanel implements GUIElement
 		scrollPane.setBackground(guiSettings.BackGroundColor);
 		scrollPane.setForeground(guiSettings.LabelColor);
 		scrollPane.setFont(guiSettings.LabelFont);
-
-		scrollPane.setBorder(BorderFactory.createTitledBorder(BorderFactory.createBevelBorder(1),
-				"FLIGHT #"+activeFlightCode, 1, 0,guiSettings.LabelFont, guiSettings.LabelColor));
+		scrollPane.setBorder(guiSettings.BorderType);
 
 		return scrollPane;
 	}
@@ -105,5 +103,4 @@ public class FlightPanel implements GUIElement
 	public void setActiveFlightCode(String activeFlightCode) {
 		this.activeFlightCode = activeFlightCode;
 	}
-
 }

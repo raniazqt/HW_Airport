@@ -1,6 +1,7 @@
 package com.hw.airport.GUI_S2;
 
 import com.hw.airport.config.CheckInDeskPanelSettings;
+import com.hw.airport.enums.DESK_STATUS;
 import com.hw.airport.model.Desk;
 
 import javax.swing.*;
@@ -57,6 +58,8 @@ public class CheckInDeskPanel extends JPanel implements GUIElement
 	@Override
 	public  void refresh(Object args)
 	{
+		clearClosedPanels();
+
 		if(!(args instanceof Desk))
 			return;
 
@@ -76,5 +79,27 @@ public class CheckInDeskPanel extends JPanel implements GUIElement
 		else {
 			crntDeskPanel.refresh(updatedDesk);
 		}
+	}
+
+	private void clearClosedPanels() {
+		DeskPanel closedPanel = findClosedDeskPanel();
+		if(closedPanel != null)
+		{
+			removeAll();
+			deskPanels.remove(closedPanel);
+			for(DeskPanel panel : deskPanels)
+			{
+				add(panel.getSelf());
+			}
+		}
+	}
+
+	private DeskPanel findClosedDeskPanel()
+	{
+		for(DeskPanel panel : deskPanels) {
+			if(panel.getDesk().getStatus() == DESK_STATUS.CLOSED)
+				return panel;
+		}
+		return null;
 	}
 }

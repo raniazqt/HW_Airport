@@ -4,6 +4,7 @@ import com.hw.airport.config.ActiveFlightPanelSettings;
 import com.hw.airport.model.ActiveFlight;
 
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,8 +68,13 @@ public class ActiveFlightPanel extends JPanel implements GUIElement
 		    flightPanelToAdd.init(activeFlightToUpdate);
 		    flightPanelToAdd.draw();
 		    flightPanels.add(flightPanelToAdd);
-            add(flightPanelToAdd.getSelf());
+            JScrollPane crntFlightScrollPane = flightPanelToAdd.getSelf();
 
+            TitledBorder borderToCreate = BorderFactory.createTitledBorder("FLIGHT #" + flightPanelToAdd.getActiveFlightCode());
+            borderToCreate.setTitleColor(guiSettings.LabelColor);
+            borderToCreate.setTitleFont(guiSettings.LabelFont);
+            crntFlightScrollPane.setBorder(borderToCreate);
+            add(crntFlightScrollPane);
 		}
 		
 	}
