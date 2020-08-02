@@ -3,7 +3,7 @@ package com.hw.airport.config;
 import javax.swing.border.Border;
 import java.awt.*;
 
-public class PassengerPanelSettings
+public class PassengerPanelSettings 
 {
     public LayoutManager Layout;
     public Color BackGroundColor;

@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.hw.airport.config.AirportSimulator;
 import com.hw.airport.config.AppContainer;
 import com.hw.airport.exception.HWAirportException;
 import com.hw.airport.model.AppData;
@@ -26,6 +27,8 @@ public class ReportSvcImpl implements ReportSvc {
 	private BookingSvc bookingSvc = AppContainer.getBookingSvc();
 	private FlightSvc flightSvc = AppContainer.getFlightSvc();
 	private BaggageSvc baggageSvc = AppContainer.getBaggageSvc();
+	
+	private AirportSimulator airSim = AirportSimulator.getInstnce();
 
 	@Override
 	public ReportData generateSummaryReportPerFlight(String flightCode, List<Booking> bookings) {
