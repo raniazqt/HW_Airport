@@ -1,20 +1,18 @@
 package com.hw.airport.GUI_S2;
 import com.hw.airport.config.*;
-import com.hw.airport.service.GUISvc;
+import com.hw.airport.observer.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Observable;
 
-public class AirportGUIImpl implements AirportGUI
+public class AirportGUIImpl extends SynchronizedObservable implements AirportGUI
 {
-	private GUISvc guiSvc;
 	private GUIElement masterFrame;
 	private UserConfigFrame configFrame;
 
 	public AirportGUIImpl()
 	{
-		guiSvc = AppContainer.getGuiSvc();
+		super();
 
 		FrameSettings userConfigFrameSettings = new FrameSettings(450,360,
 				WindowConstants.EXIT_ON_CLOSE, "Simulation Configuration Screen");
@@ -72,8 +70,8 @@ public class AirportGUIImpl implements AirportGUI
 	}
 
 	@Override
-	public void update(Observable o, Object arg) {
-		this.masterFrame.refresh(arg);
+	public void onNotify(Object args) {
+		this.masterFrame.refresh(args);
 	}
 }
 
