@@ -29,3 +29,15 @@ src/module-info.java
 .settings/org.eclipse.m2e.core.prefs
 /.classpath
 
+pom.xml
+.idea/misc.xml
+.idea/libraries/xstream_1_4_12.xml
+.idea/libraries/poi_4_1.xml
+.idea/libraries/mockito_all_1_9_5.xml
+.idea/libraries/Java_EE_6_Java_EE_6.xml
+.idea/libraries/commons_lang3_3_1.xml
+.idea/dictionaries/user.xml
+.idea/compiler.xml
+.idea/misc.xml
+.idea/libraries/xstream_1_4_12.xml
+.idea/libraries/commons_lang3_3_1.xml
