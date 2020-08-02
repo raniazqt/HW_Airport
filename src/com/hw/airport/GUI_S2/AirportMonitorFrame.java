@@ -1,49 +1,60 @@
 package com.hw.airport.GUI_S2;
 
+import com.hw.airport.config.AirportSimulator;
 import com.hw.airport.config.GUISettings;
 import com.hw.airport.model.ActiveFlight;
 import com.hw.airport.model.Booking;
 import com.hw.airport.model.Desk;
 import com.hw.airport.model.Passenger;
 
+import java.io.IOException;
+
 import javax.swing.*;
 
-public class AirportMonitorFrame extends JFrame implements GUIElement
-{
+public class AirportMonitorFrame extends JFrame implements GUIElement {
 	private GUISettings guiSettings;
 	private GUIElement flightsPanel;
 	private GUIElement checkInDeskPanel;
 	private GUIElement passengerPanel;
 	private GUIElement simToolBar;
 
-	public AirportMonitorFrame(GUISettings guiSettings)
-	{
+	public AirportMonitorFrame(GUISettings guiSettings) {
 		this.guiSettings = guiSettings;
+
+		this.addWindowListener(new java.awt.event.WindowAdapter() {
+			@Override
+			public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+				try {
+					AirportSimulator.getInstnce();
+					AirportSimulator.saveReport();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+		});
 
 		initMasterFrame();
 		initSubPanels();
 		addSubPanels();
 	}
 
-	private void initMasterFrame()
-	{
-		setTitle (guiSettings.FrameSettings.getMainScreenTitle());
-		setSize (guiSettings.FrameSettings.getMainScreenWidth(),
-				guiSettings.FrameSettings.getMainScreenHeight());
-		setDefaultCloseOperation (EXIT_ON_CLOSE);
+	private void initMasterFrame() {
+		setTitle(guiSettings.FrameSettings.getMainScreenTitle());
+		setSize(guiSettings.FrameSettings.getMainScreenWidth(), guiSettings.FrameSettings.getMainScreenHeight());
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLayout(new BoxLayout(getContentPane(), BoxLayout.PAGE_AXIS));
 	}
 
-	private void initSubPanels()
-	{
+	private void initSubPanels() {
 		simToolBar = new SimToolBar(guiSettings.GUIComponentSettings);
 		flightsPanel = new ActiveFlightPanel(guiSettings.ActiveFlightPanelSettings);
 		checkInDeskPanel = new CheckInDeskPanel(guiSettings.CheckInDeskPanelSettings);
 		passengerPanel = new PassengerPanel(guiSettings.PassengerPanelSettings);
 	}
 
-	private void addSubPanels()
-	{
+	private void addSubPanels() {
 		add(simToolBar.getSelf());
 		add(checkInDeskPanel.getSelf());
 		add(flightsPanel.getSelf());
@@ -51,14 +62,12 @@ public class AirportMonitorFrame extends JFrame implements GUIElement
 	}
 
 	@Override
-	public JFrame getSelf()
-	{
+	public JFrame getSelf() {
 		return this;
 	}
 
 	@Override
-	public void draw()
-	{
+	public void draw() {
 		simToolBar.draw();
 		checkInDeskPanel.draw();
 		flightsPanel.draw();
@@ -66,8 +75,7 @@ public class AirportMonitorFrame extends JFrame implements GUIElement
 	}
 
 	@Override
-	public void init(Object args)
-	{
+	public void init(Object args) {
 		simToolBar.init(args);
 		checkInDeskPanel.init(args);
 		flightsPanel.init(args);
@@ -75,15 +83,13 @@ public class AirportMonitorFrame extends JFrame implements GUIElement
 	}
 
 	@Override
-	public void refresh(Object args)
-	{
+	public void refresh(Object args) {
 		// TODO: UPDATE ORDER NEEDS SORTING.
 		if (args instanceof Desk) {
 			checkInDeskPanel.refresh(args);
-		}
-		else if (args instanceof Booking) {
+		} else if (args instanceof Booking) {
 			passengerPanel.refresh(null);
-		}else if (args instanceof ActiveFlight) {
+		} else if (args instanceof ActiveFlight) {
 			flightsPanel.refresh(args);
 		}
 	}

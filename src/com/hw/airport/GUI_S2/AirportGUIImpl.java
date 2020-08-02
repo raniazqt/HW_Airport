@@ -4,6 +4,7 @@ import com.hw.airport.observer.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 public class AirportGUIImpl extends SynchronizedObservable implements AirportGUI
 {
@@ -14,7 +15,7 @@ public class AirportGUIImpl extends SynchronizedObservable implements AirportGUI
 	{
 		super();
 
-		FrameSettings userConfigFrameSettings = new FrameSettings(350,260,
+		FrameSettings userConfigFrameSettings = new FrameSettings(450,360,
 				WindowConstants.EXIT_ON_CLOSE, "Simulation Configuration Screen");
 		GUIComponentSettings userConfigPanelSettings = new GUIComponentSettings(new GridLayout(0,2), new Color(0xFFFFFFFF, true),
 				new Color(0x090909), new Font("Dialog", Font.BOLD, 12), BorderFactory.createBevelBorder(1));
@@ -24,12 +25,15 @@ public class AirportGUIImpl extends SynchronizedObservable implements AirportGUI
 
 		masterFrame.init(null);
 		masterFrame.draw();
+		
+		
+		
 	}
 
 	@Override
 	public void displayConfigScreen(){
 		
-		FrameSettings userConfigFrameSettings = new FrameSettings(350,260,
+		FrameSettings userConfigFrameSettings = new FrameSettings(450,360,
 				WindowConstants.EXIT_ON_CLOSE, "Simulation Configuration Screen");
 		GUIComponentSettings userConfigPanelSettings = new GUIComponentSettings(new GridLayout(0,2), new Color(0xFFFFFFFF, true),
 				new Color(0x090909), new Font("Dialog", Font.BOLD, 12), BorderFactory.createBevelBorder(1));
