@@ -104,7 +104,7 @@ public class UserConfigFrame extends JFrame implements ListSelectionListener{
 				String queuPopval = quePopulationRateVal.getText();
 				String passToDeskVal = passengerToDeskVal.getText();
 
-				if (openDeskVal.matches("[1-9]+") & simExRateVal.matches("[1-9]+") & passToDeskVal.matches(".*\\d.*")
+				if (openDeskVal.matches(".*\\d.*") & simExRateVal.matches(".*\\d.*") & passToDeskVal.matches(".*\\d.*")
 						& queuPopval.matches(".*\\d.*")) {
 
 					boolean popuInputStat = (Integer.parseInt(queuPopval) > 3000);
