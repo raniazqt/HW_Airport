@@ -8,7 +8,6 @@ import com.hw.airport.service.DeskSvc;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
@@ -76,9 +75,9 @@ public class DeskManager extends SynchronizedObservable implements Observer {
 
 	public void closeDesk(DeskThread deskThread) {
 		deskSvc.closeDesk(deskThread.getDesk());
+		openedDeskList.remove(deskThread.getDesk());
 		setChanged();
 		notifyAll(deskThread.getDesk());
-	//	deskThread.stop();
 		System.out.println("Thread stopped");
 	}
 }
