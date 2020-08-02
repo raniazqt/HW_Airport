@@ -34,21 +34,8 @@ public class ReportSvcImpl implements ReportSvc {
 
 	public void getFlightReport() {
 
-		String heading = "Flight Code,Passengers Boarded,Total Extra Baggage Charge, Total Baggage Weight, Total Baggage Volume \n ";
-
-		String report = "";
-
-		for (ActiveFlight flight : airSim.getActiveFlight()) {
-
-			report = report + flight.getFlightCd() + "," + flight.getBoardedPsngrCnt() + ","
-					+ flight.getXtraChargeCollected() + "," + flight.getTotalWeight() + "," + flight.getTotalVolume();
-			System.out.println("**********************RPT**********");
-		}
-
-		report = "Check In Report\n" + heading + report;
-
 		try {
-			Files.deleteIfExists(Paths.get("./resources/files/Report.csv"));
+			Files.deleteIfExists(Paths.get("./resources/files/FlightsReport.txt"));
 
 		} catch (NoSuchFileException e) {
 			System.out.println("No such file/directory exists");
@@ -58,17 +45,46 @@ public class ReportSvcImpl implements ReportSvc {
 			System.out.println("Invalid permissions.");
 		}
 
-		BufferedWriter writer;
+		File output = new File("./resources/files/FlightsReport.txt");
+		FileWriter fr = null;
+		BufferedWriter br = null;
+
 		try {
-			writer = new BufferedWriter(new FileWriter("./resources/files/Report.csv"));
+			fr = new FileWriter(output);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		br = new BufferedWriter(fr);
 
-			writer.write(report);
+		String newLine = System.getProperty("line.separator");
+		try {
+			br.write(String.format("%-20s", "Flight#") + String.format("%-20s", "Passengers Count")
+					+ String.format("%-20s", "Total Volume") + String.format("%-20s", "Total Weight")
+					+ String.format("%-20s", "Extra Fees") + newLine);
 
-			writer.close();
+			for (ActiveFlight flight : airSim.getActiveFlight()) {
+				br.write(String.format("%-20s", flight.getFlightCd())
+						+ String.format("%-20s", flight.getBoardedPsngrCnt())
+						+ String.format("%-20s", flight.getTotalVolume())
+						+ String.format("%-20s", flight.getTotalWeight())
+						+ String.format("%-20s", flight.getXtraChargeCollected())
+						+ newLine);
+
+			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			try {
+				br.close();
+				fr.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
 		}
+
 	}
 
 	
