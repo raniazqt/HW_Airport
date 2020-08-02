@@ -12,9 +12,10 @@ import com.hw.airport.model.AppData;
 import com.hw.airport.model.Booking;
 import com.hw.airport.model.Booking.BookingStatus;
 import com.hw.airport.model.Flight;
+import com.hw.airport.observer.SynchronizedObservable;
 import com.hw.airport.util.FileHandler;
 
-public class DataSvcImpl extends Observable implements DataSvc {
+public class DataSvcImpl extends SynchronizedObservable implements DataSvc {
 
 	/**
 	 * loads file data from the flight file line by line.
@@ -86,7 +87,7 @@ public class DataSvcImpl extends Observable implements DataSvc {
 			}
 		}
 		setChanged();
-		notifyObservers(activeFlight);
+		notifyAll(activeFlight);
 	}
 
 	@Override

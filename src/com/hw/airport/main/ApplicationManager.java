@@ -8,6 +8,7 @@ import com.hw.airport.model.ActiveFlight;
 import com.hw.airport.model.AppData;
 import com.hw.airport.model.DeskManager;
 import com.hw.airport.service.CheckInSvcImpl;
+import com.hw.airport.service.DataSvc;
 import com.hw.airport.service.DataSvcImpl;
 import com.hw.airport.service.FlightSvc;
 import com.hw.airport.service.QueueSvcImpl;
@@ -20,7 +21,8 @@ import javax.swing.SwingUtilities;
 
 public class ApplicationManager {
 	
-	private static final AirportGUI gui = AppContainer.getInstance().getGui();
+	private static AirportGUI gui= AppContainer.getInstance().getGui();
+	private DataSvc dataSvc;
 	String flightsFileName = "flights.csv"; 
 	String bookingFileName = "bookings.csv";
 
@@ -32,17 +34,21 @@ public class ApplicationManager {
 		//gui = AppContainer.getGui();
 		//register the DeskManager as an observer to the QueueSvs
 		QueueSvcImpl queueSvc = (QueueSvcImpl) AppContainer.getQueueSvc();
-		queueSvc.addObserver(AppContainer.getDeskManager());
-		queueSvc.addObserver(gui);
+		queueSvc.registerObserver(AppContainer.getDeskManager());
+		queueSvc.registerObserver(gui);
 		
 		DeskManager deskManager = AppContainer.getDeskManager();
-		deskManager.addObserver(gui);
+		deskManager.registerObserver(gui);
 		
 		CheckInSvcImpl checkInSvc = (CheckInSvcImpl) AppContainer.getCheckinSvc();
-		checkInSvc.addObserver(gui);
+		checkInSvc.registerObserver(gui);
 		
 		DataSvcImpl dataSvc = (DataSvcImpl) AppContainer.getDataSvc();
-		dataSvc.addObserver(gui);
+		dataSvc.registerObserver(gui);
+		/*
+		 * if (null == appContainer) { throw new RuntimeErrorException(null,
+		 * "Application did not start correctly. Notify adminstrator "); }
+		 */
 
 		//load flights and booking data from files
 		try {
@@ -66,7 +72,7 @@ public class ApplicationManager {
 	public void start() throws Exception {
 		InitializeApplication();
 
-		long rate = AirportSimulator.getQueuePopulatingRate();
+		long rate = (long) AirportSimulator.getQueuePopulatingRate();
 		long appRate = rate / 6;
 
 		TimerTask queuePopulatingTask = new QueuePopulatingTask();
@@ -75,8 +81,18 @@ public class ApplicationManager {
 		timer.scheduleAtFixedRate(queuePopulatingTask, 0, appRate);
 		System.out.println("TimerTask started");
 		
-		SwingUtilities.invokeLater(() -> AppContainer.getGui().displayAirportMonitorScreen());
+		SwingUtilities.invokeLater(new Runnable() {
+		    public void run() {
+		    	AppContainer.getGui().displayAirportMonitorScreen();
+		    }
+		});
 		
 	
 	}
+
+	/*
+	 * public static void main(String[] args) throws Exception { ApplicationManager
+	 * appManager = new ApplicationManager(); gui.displayConfigScreen();
+	 * //appManager.start(); }
+	 */
 }

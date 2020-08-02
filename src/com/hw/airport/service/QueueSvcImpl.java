@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Observable;
 import java.util.Random;
 
 import com.hw.airport.config.AppContainer;
@@ -14,9 +13,9 @@ import com.hw.airport.model.Booking;
 import com.hw.airport.model.Booking.BookingStatus;
 import com.hw.airport.model.Flight;
 import com.hw.airport.model.PassengerQueue;
-import com.hw.airport.service.BookingSvc;
+import com.hw.airport.observer.SynchronizedObservable;
 
-public class QueueSvcImpl extends Observable implements QueueSvc {
+public class QueueSvcImpl extends SynchronizedObservable implements QueueSvc {
 
 	BookingSvc bookingSvc = AppContainer.getBookingSvc();
 
@@ -27,7 +26,7 @@ public class QueueSvcImpl extends Observable implements QueueSvc {
 	public synchronized Booking getPassengerFromQueue() {
 		Booking passenger = passengerQ.removePassengerFromQueue();
 		setChanged();
-		notifyObservers(passenger);
+		notifyAll(passenger);
 		return passenger ;
 	}
 
@@ -117,7 +116,7 @@ public class QueueSvcImpl extends Observable implements QueueSvc {
 
 			//notify observer - DeskManager - with the change
 			setChanged();
-			notifyObservers(passengerToAdd);
+			notifyAll(passengerToAdd);
 		}
 		return passengerToAdd;
 	}
@@ -151,9 +150,6 @@ public class QueueSvcImpl extends Observable implements QueueSvc {
 	public LinkedList<Booking> getAllPassengersFromQueue() {
 		return passengerQ.getPassengerList();
 	}
-	 {
-		
-}
 }
 
 

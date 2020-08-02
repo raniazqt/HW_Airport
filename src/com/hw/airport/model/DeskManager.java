@@ -2,16 +2,17 @@ package com.hw.airport.model;
 
 import com.hw.airport.config.AirportSimulator;
 import com.hw.airport.config.AppContainer;
+import com.hw.airport.observer.Observer;
+import com.hw.airport.observer.SynchronizedObservable;
 import com.hw.airport.service.DeskSvc;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
-import java.util.Observer;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
-public class DeskManager extends Observable implements Observer{
+public class DeskManager extends SynchronizedObservable implements Observer {
 	//	LOG = LoggerManager.
 	private volatile List<Desk> openedDeskList = new ArrayList<Desk>();
 	private AirportSimulator sim = AirportSimulator.getInstnce();
@@ -19,31 +20,9 @@ public class DeskManager extends Observable implements Observer{
 	private ThreadPoolExecutor executor;
 	private List<DeskThread> deskThreadList = new ArrayList<DeskThread>();
 
-
-
 	public DeskManager() {
 		super();
 		this.executor = (ThreadPoolExecutor) Executors.newCachedThreadPool();//newFixedThreadPool((int) sim.getMaxOpndCheckinDesk());
-	}
-
-	@Override
-	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		int passToDeskRatio = sim.getPassToDeskRatio();
-		int maxOpnDsk =  sim.getMaxOpndCheckinDesk();
-		int openedDeskCnt = openedDeskList.size();
-
-		PassengerQueue queue = PassengerQueue.getInstance();
-		if ((queue.getQueueSize() > 0 && openedDeskCnt == 0) ||
-				(queue.getQueueSize() > passToDeskRatio * openedDeskCnt && openedDeskCnt < maxOpnDsk)){
-			Desk desk = this.openAndRunDesk();
-			openedDeskList.add(desk);
-			System.out.println("Desk opened");
-			System.out.println("DESK ID: " + desk.getId());
-			setChanged();
-			notifyObservers(desk);
-			
-		}
 	}
 
 	private Desk openAndRunDesk() {
@@ -63,6 +42,26 @@ public class DeskManager extends Observable implements Observer{
 		return desk;
 	}
 
+	@Override
+	public void onNotify(Object args) {
+		// TODO Auto-generated method stub
+		int passToDeskRatio = sim.getPassToDeskRatio();
+		int maxOpnDsk =  sim.getMaxOpndCheckinDesk();
+		int openedDeskCnt = openedDeskList.size();
+
+		PassengerQueue queue = PassengerQueue.getInstance();
+		if ((queue.getQueueSize() > 0 && openedDeskCnt == 0) ||
+				(queue.getQueueSize() > passToDeskRatio * openedDeskCnt && openedDeskCnt < maxOpnDsk)){
+			Desk desk = this.openAndRunDesk();
+			openedDeskList.add(desk);
+			System.out.println("Desk opened");
+			System.out.println("DESK ID: " + desk.getId());
+			setChanged();
+			notifyAll(desk);
+
+		}
+	}
+
 	public int getOpenedDeskCount() {
 		return openedDeskList.size();
 		
@@ -78,12 +77,8 @@ public class DeskManager extends Observable implements Observer{
 	public void closeDesk(DeskThread deskThread) {
 		deskSvc.closeDesk(deskThread.getDesk());
 		setChanged();
-		notifyObservers(deskThread.getDesk());
+		notifyAll(deskThread.getDesk());
 	//	deskThread.stop();
 		System.out.println("Thread stopped");
-		
-		
-	}	
-
-
+	}
 }
