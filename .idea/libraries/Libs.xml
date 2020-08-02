@@ -3,9 +3,7 @@
     <CLASSES>
       <root url="file://$PROJECT_DIR$/resources/Libs" />
     </CLASSES>
-    <JAVADOC>
-      <root url="file://$PROJECT_DIR$/resources/Libs/poi-4.1.2/docs/apidocs/dev" />
-    </JAVADOC>
+    <JAVADOC />
     <SOURCES />
     <jarDirectory url="file://$PROJECT_DIR$/resources/Libs" recursive="false" />
   </library>

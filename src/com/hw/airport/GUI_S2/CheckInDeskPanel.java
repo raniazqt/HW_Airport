@@ -1,9 +1,8 @@
 package com.hw.airport.GUI_S2;
 
-import com.hw.airport.config.AppContainer;
 import com.hw.airport.config.CheckInDeskPanelSettings;
+import com.hw.airport.enums.DESK_STATUS;
 import com.hw.airport.model.Desk;
-import com.hw.airport.service.GUISvc;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -13,14 +12,12 @@ public class CheckInDeskPanel extends JPanel implements GUIElement
 {
 	private List<DeskPanel> deskPanels;
 	private CheckInDeskPanelSettings guiSettings;
-	private GUISvc guiDataSvc;
 	private int currentTableIndex;
 
 	public CheckInDeskPanel(CheckInDeskPanelSettings guiSettings)
 	{
 		this.guiSettings = guiSettings;
 		deskPanels = new ArrayList<>();
-		guiDataSvc = AppContainer.getGuiSvc();
 		currentTableIndex = 1;
 	}
 
@@ -61,6 +58,8 @@ public class CheckInDeskPanel extends JPanel implements GUIElement
 	@Override
 	public  void refresh(Object args)
 	{
+		clearClosedPanels();
+
 		if(!(args instanceof Desk))
 			return;
 
@@ -80,5 +79,27 @@ public class CheckInDeskPanel extends JPanel implements GUIElement
 		else {
 			crntDeskPanel.refresh(updatedDesk);
 		}
+	}
+
+	private void clearClosedPanels() {
+		DeskPanel closedPanel = findClosedDeskPanel();
+		if(closedPanel != null)
+		{
+			removeAll();
+			deskPanels.remove(closedPanel);
+			for(DeskPanel panel : deskPanels)
+			{
+				add(panel.getSelf());
+			}
+		}
+	}
+
+	private DeskPanel findClosedDeskPanel()
+	{
+		for(DeskPanel panel : deskPanels) {
+			if(panel.getDesk().getStatus() == DESK_STATUS.CLOSED)
+				return panel;
+		}
+		return null;
 	}
 }

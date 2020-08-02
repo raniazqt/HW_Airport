@@ -1,15 +1,11 @@
 package com.hw.airport.GUI_S2;
 
 import com.hw.airport.config.ActiveFlightPanelSettings;
-import com.hw.airport.enums.DESK_STATUS;
 import com.hw.airport.model.ActiveFlight;
-import com.hw.airport.model.Booking;
-import com.hw.airport.model.Desk;
-
-import java.util.concurrent.ExecutionException;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.util.concurrent.ExecutionException;
 
 public class FlightPanel implements GUIElement
 {
@@ -30,8 +26,10 @@ public class FlightPanel implements GUIElement
 	public JScrollPane getSelf()
 	{
 		JScrollPane scrollPane = new JScrollPane(flightTable);
+		scrollPane.setBackground(guiSettings.BackGroundColor);
+		scrollPane.setForeground(guiSettings.LabelColor);
+		scrollPane.setFont(guiSettings.LabelFont);
 		scrollPane.setBorder(guiSettings.BorderType);
-		scrollPane.setBackground(guiSettings.LabelColor);
 
 		return scrollPane;
 	}
@@ -43,6 +41,7 @@ public class FlightPanel implements GUIElement
 		flightTable.setFont(guiSettings.LabelFont);
 		flightTable.setBackground(guiSettings.BackGroundColor);
 		flightTable.setBorder(guiSettings.BorderType);
+		flightTable.setForeground(guiSettings.LabelColor);
 	}
 
 	@Override
@@ -64,8 +63,9 @@ public class FlightPanel implements GUIElement
 			@Override
 			protected String[][] doInBackground() throws Exception {
 				String[][] data = new String[6][2];
-				if (args != null && args instanceof ActiveFlight) {
+				if (args instanceof ActiveFlight) {
 					ActiveFlight updatedFlight = (ActiveFlight) args;
+					setActiveFlightCode(updatedFlight.getFlightCd());
 					data[0][0] = "Flight CD";
 					data[0][1] = updatedFlight.getFlightCd();
 					data[1][0] = "Timer";
@@ -96,12 +96,11 @@ public class FlightPanel implements GUIElement
 		};
 		worker.execute();
 	}
-	
+
 	public String getActiveFlightCode() {
 		return activeFlightCode;
 	}
-	public void setActiveFlightCode(String activeFlightCode) { 
+	public void setActiveFlightCode(String activeFlightCode) {
 		this.activeFlightCode = activeFlightCode;
 	}
-
 }

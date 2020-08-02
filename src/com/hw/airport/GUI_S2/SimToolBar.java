@@ -13,9 +13,8 @@ public class SimToolBar extends JToolBar implements GUIElement
 {
     private GUIComponentSettings simToolBarSettings;
     private List<JLabel> simulationSettings;
-    private boolean isInit;
-    
     private GUISvc guiDataSvc = AppContainer.getGuiSvc();
+    private boolean init;
 
     public SimToolBar(GUIComponentSettings guiSettings)
     {
@@ -26,7 +25,7 @@ public class SimToolBar extends JToolBar implements GUIElement
         this.setBackground(guiSettings.BackGroundColor);
         this.setBorder(guiSettings.BorderType);
         this.setFloatable(false);
-        this.isInit = false;
+        init = false;
     }
 
     @Override
@@ -44,14 +43,14 @@ public class SimToolBar extends JToolBar implements GUIElement
     @Override
     public void init(Object targetObj)
     {
-        if(isInit)
-            return;
-        JLabel settingsLabel;
-        String dataValue;
+        removeAll();
+        repaint();
+        revalidate();
+
         Map<String, Integer> simSettings = guiDataSvc.retrieveSimulatorSettings();
         for(Map.Entry<String,Integer> entry : simSettings.entrySet()){
-            dataValue = entry.getKey().toString().concat(entry.getValue().toString());
-            settingsLabel = new JLabel(dataValue);
+            String dataValue = entry.getKey().concat(entry.getValue().toString());
+            JLabel settingsLabel = new JLabel(dataValue);
             settingsLabel.setFont(simToolBarSettings.LabelFont);
             settingsLabel.setForeground(simToolBarSettings.LabelColor);
             add(settingsLabel);
@@ -63,7 +62,6 @@ public class SimToolBar extends JToolBar implements GUIElement
 
 	@Override
 	public void refresh(Object targetObj) {
-		// TODO Auto-generated method stub
-		
+
 	}
 }

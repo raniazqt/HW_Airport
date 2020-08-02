@@ -60,7 +60,7 @@ public class AirportGUIImpl extends SynchronizedObservable implements AirportGUI
 				new Font("Dialog", Font.ITALIC, 12), BorderFactory.createBevelBorder(2));
 
 		CheckInDeskPanelSettings checkInDeskPanelSettings = new CheckInDeskPanelSettings(new FlowLayout(), new Color(0x090909), new Color(0xE9BA00),
-				new Font("Dialog", Font.PLAIN, 12), BorderFactory.createBevelBorder(3));
+				new Font("Dialog", Font.PLAIN, 12), BorderFactory.createBevelBorder(1));
 
 		ActiveFlightPanelSettings activeFlightPanelSettings = new ActiveFlightPanelSettings(new FlowLayout(), new Color(0x090909), new Color(0x11DBE9),
 				new Font("Dialog", Font.BOLD, 12), BorderFactory.createBevelBorder(1));

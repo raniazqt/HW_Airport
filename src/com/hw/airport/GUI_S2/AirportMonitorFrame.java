@@ -5,11 +5,9 @@ import com.hw.airport.config.GUISettings;
 import com.hw.airport.model.ActiveFlight;
 import com.hw.airport.model.Booking;
 import com.hw.airport.model.Desk;
-import com.hw.airport.model.Passenger;
-
-import java.io.IOException;
 
 import javax.swing.*;
+import java.io.IOException;
 
 public class AirportMonitorFrame extends JFrame implements GUIElement {
 	private GUISettings guiSettings;
@@ -84,7 +82,16 @@ public class AirportMonitorFrame extends JFrame implements GUIElement {
 
 	@Override
 	public void refresh(Object args) {
-		// TODO: UPDATE ORDER NEEDS SORTING.
+		refreshFrame();
+		refreshSubPanels(args);
+	}
+
+	private void refreshFrame() {
+		repaint();
+		revalidate();
+	}
+
+	private void refreshSubPanels(Object args) {
 		if (args instanceof Desk) {
 			checkInDeskPanel.refresh(args);
 		} else if (args instanceof Booking) {

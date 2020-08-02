@@ -21,3 +21,5 @@ public class GUIComponentSettings
         this.BorderType = borderType;
     }
 }
+
+// TODO: make all settings classes inherit from this one.
