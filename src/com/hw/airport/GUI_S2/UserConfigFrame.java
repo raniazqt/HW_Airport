@@ -130,6 +130,9 @@ public class UserConfigFrame extends JFrame implements ListSelectionListener{
 							e.printStackTrace();
 						}
 
+					}else {
+						
+						JOptionPane.showMessageDialog(this,"Eggs are not supposed to be green.");
 					}
 				}
 			}

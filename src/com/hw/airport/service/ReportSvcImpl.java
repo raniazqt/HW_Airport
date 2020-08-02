@@ -16,6 +16,7 @@ import java.util.Map;
 import com.hw.airport.config.AirportSimulator;
 import com.hw.airport.config.AppContainer;
 import com.hw.airport.exception.HWAirportException;
+import com.hw.airport.model.ActiveFlight;
 import com.hw.airport.model.AppData;
 import com.hw.airport.model.Booking;
 import com.hw.airport.model.Flight;
@@ -23,13 +24,67 @@ import com.hw.airport.model.FlightExtrasAndCharges;
 import com.hw.airport.model.ReportData;
 
 public class ReportSvcImpl implements ReportSvc {
-	
+
 	private BookingSvc bookingSvc = AppContainer.getBookingSvc();
 	private FlightSvc flightSvc = AppContainer.getFlightSvc();
 	private BaggageSvc baggageSvc = AppContainer.getBaggageSvc();
-	
+	AppData data = AppData.getInstance();
+
 	private AirportSimulator airSim = AirportSimulator.getInstnce();
 
+	public void getFlightReport() {
+
+		String heading = "Flight Code,Passengers Boarded,Total Extra Baggage Charge, Total Baggage Weight, Total Baggage Volume \n ";
+
+		String report = "";
+
+		for (ActiveFlight flight : airSim.getActiveFlight()) {
+
+			report = report + flight.getFlightCd() + "," + flight.getBoardedPsngrCnt() + ","
+					+ flight.getXtraChargeCollected() + "," + flight.getTotalWeight() + "," + flight.getTotalVolume();
+			System.out.println("**********************RPT**********");
+		}
+
+		report = "Check In Report\n" + heading + report;
+
+		try {
+			Files.deleteIfExists(Paths.get("./resources/files/Report.csv"));
+
+		} catch (NoSuchFileException e) {
+			System.out.println("No such file/directory exists");
+		} catch (DirectoryNotEmptyException e) {
+			System.out.println("Directory is not empty.");
+		} catch (IOException e) {
+			System.out.println("Invalid permissions.");
+		}
+
+		BufferedWriter writer;
+		try {
+			writer = new BufferedWriter(new FileWriter("./resources/files/Report.csv"));
+
+			writer.write(report);
+
+			writer.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	
+	public void getSuccPassengerReport() {
+		
+	
+		
+	}
+	
+	public void getFailPassengerReport() {
+		
+	
+		
+	}
+	
+	
 	@Override
 	public ReportData generateSummaryReportPerFlight(String flightCode, List<Booking> bookings) {
 
@@ -45,11 +100,10 @@ public class ReportSvcImpl implements ReportSvc {
 		}
 
 		data.setFlightCode(flightCode);
-	/**	try {
-			xtraCharge = bookingSvc.calculateExtraChargeForFlight(flightCode);
-		} catch (HWAirportException e) {
-			// TODO Auto-generated catch block
-		}*/
+		/**
+		 * try { xtraCharge = bookingSvc.calculateExtraChargeForFlight(flightCode); }
+		 * catch (HWAirportException e) { // TODO Auto-generated catch block }
+		 */
 		try {
 			psgrCnt = bookingSvc.getCountOfCheckedInPassengersByFlight(flightCode);
 		} catch (HWAirportException e) {

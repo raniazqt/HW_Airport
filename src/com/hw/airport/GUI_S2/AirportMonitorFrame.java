@@ -1,10 +1,14 @@
 package com.hw.airport.GUI_S2;
 
 import com.hw.airport.config.AirportSimulator;
+import com.hw.airport.config.AppContainer;
 import com.hw.airport.config.GUISettings;
 import com.hw.airport.model.ActiveFlight;
 import com.hw.airport.model.Booking;
 import com.hw.airport.model.Desk;
+import com.hw.airport.service.BaggageSvc;
+import com.hw.airport.service.ReportSvc;
+import com.hw.airport.service.ReportSvcImpl;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -16,22 +20,10 @@ public class AirportMonitorFrame extends JFrame implements GUIElement {
 	private GUIElement passengerPanel;
 	private GUIElement simToolBar;
 
+	public ReportSvc reportSvc = new ReportSvcImpl();
+
 	public AirportMonitorFrame(GUISettings guiSettings) {
 		this.guiSettings = guiSettings;
-
-		this.addWindowListener(new java.awt.event.WindowAdapter() {
-			@Override
-			public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-				try {
-					AirportSimulator.getInstnce();
-					AirportSimulator.saveReport();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-			}
-		});
 
 		initMasterFrame();
 		initSubPanels();
