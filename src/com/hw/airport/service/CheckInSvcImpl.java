@@ -1,8 +1,5 @@
 package com.hw.airport.service;
 
-import java.util.List;
-import java.util.Observable;
-
 import com.hw.airport.config.AppContainer;
 import com.hw.airport.enums.DESK_STATUS;
 import com.hw.airport.exception.HWAirportException;
@@ -255,7 +252,7 @@ public class CheckInSvcImpl extends SynchronizedObservable implements CheckInSvc
 	public void updateDeskStatus(Desk desk, DESK_STATUS status) {
 		deskSvc.updateStatus(desk, status);
 		setChanged();
-		notifyAll(desk);
+		notifyObservers(desk);
 	}
 
 	@Override

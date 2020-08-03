@@ -1,10 +1,11 @@
-package com.hw.airport.main;
+package com.hw.airport.threading;
 
-import java.util.TimerTask;
 import com.hw.airport.config.AppContainer;
 import com.hw.airport.exception.HWAirportException;
 import com.hw.airport.model.Booking;
 import com.hw.airport.service.QueueSvc;
+
+import java.util.TimerTask;
 
 public class QueuePopulatingTask extends TimerTask{
 

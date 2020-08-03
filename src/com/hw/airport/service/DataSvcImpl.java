@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Observable;
 
 import com.hw.airport.exception.HWAirportException;
 import com.hw.airport.model.ActiveFlight;
@@ -87,7 +86,7 @@ public class DataSvcImpl extends SynchronizedObservable implements DataSvc {
 			}
 		}
 		setChanged();
-		notifyAll(activeFlight);
+		notifyObservers(activeFlight);
 	}
 
 	@Override

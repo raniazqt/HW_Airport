@@ -26,7 +26,7 @@ public class QueueSvcImpl extends SynchronizedObservable implements QueueSvc {
 	public synchronized Booking getPassengerFromQueue() {
 		Booking passenger = passengerQ.removePassengerFromQueue();
 		setChanged();
-		notifyAll(passenger);
+		notifyObservers(passenger);
 		return passenger ;
 	}
 
@@ -116,7 +116,7 @@ public class QueueSvcImpl extends SynchronizedObservable implements QueueSvc {
 
 			//notify observer - DeskManager - with the change
 			setChanged();
-			notifyAll(passengerToAdd);
+			notifyObservers(passengerToAdd);
 		}
 		return passengerToAdd;
 	}

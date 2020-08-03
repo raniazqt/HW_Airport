@@ -6,28 +6,26 @@ import com.hw.airport.config.AppContainer;
 import com.hw.airport.exception.HWAirportException;
 import com.hw.airport.model.ActiveFlight;
 import com.hw.airport.model.AppData;
-import com.hw.airport.model.DeskManager;
-import com.hw.airport.service.CheckInSvcImpl;
-import com.hw.airport.service.DataSvc;
-import com.hw.airport.service.DataSvcImpl;
-import com.hw.airport.service.FlightSvc;
-import com.hw.airport.service.QueueSvcImpl;
+import com.hw.airport.threading.DeskManager;
+import com.hw.airport.model.SimulationTimer;
+import com.hw.airport.service.*;
+import com.hw.airport.threading.QueuePopulatingTask;
+import com.hw.airport.threading.TimerUpdateTask;
 
+import javax.swing.*;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import javax.swing.SwingUtilities;
 
 
 public class ApplicationManager {
 	
 	private static AirportGUI gui= AppContainer.getInstance().getGui();
-	private DataSvc dataSvc;
+	private SimulationTimer appTimer;
 	String flightsFileName = "flights.csv"; 
 	String bookingFileName = "bookings.csv";
 
 	public void InitializeApplication() throws Exception {
-		
+		appTimer = new SimulationTimer();
 		AppData.getInstance();
 		AirportSimulator.getInstnce();
 
@@ -64,8 +62,6 @@ public class ApplicationManager {
 		
 		FlightSvc flightSvc = AppContainer.getFlightSvc();
 		flightSvc.setFlights(AppData.getFlightsInfo());
-
-		
 	}
 
 	//TODO: MUST BE CALLED FROM THE CONFIG FRAME TO START THE SIMULATION. 
@@ -74,19 +70,18 @@ public class ApplicationManager {
 
 		long rate = (long) AirportSimulator.getQueuePopulatingRate();
 		long appRate = rate / 6;
+		double timerRate = 5000;
+		System.out.println("Timer RATE: " + timerRate);
 
 		TimerTask queuePopulatingTask = new QueuePopulatingTask();
 		//running timer task as daemon thread
 		Timer timer = new Timer();
+		appTimer.start(1000, timerRate);
 		timer.scheduleAtFixedRate(queuePopulatingTask, 0, appRate);
+		timer.scheduleAtFixedRate(new TimerUpdateTask(appTimer), 0, 5000);
+
 		System.out.println("TimerTask started");
-		
-		SwingUtilities.invokeLater(new Runnable() {
-		    public void run() {
-		    	AppContainer.getGui().displayAirportMonitorScreen();
-		    }
-		});
-		
+		SwingUtilities.invokeLater(() -> AppContainer.getGui().displayAirportMonitorScreen());
 	
 	}
 
