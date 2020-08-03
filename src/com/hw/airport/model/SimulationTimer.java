@@ -32,7 +32,7 @@ public class SimulationTimer extends SynchronizedObservable
             System.out.println("CURRENT TIME: " + currentTime);
             if(currentTime >= endTime)
             {
-                notifyObservers();
+                notifyObservers("TIME ELAPSED");
                 System.out.println("TIME ELAPSED: " + currentTime + " END TIME: " + endTime);
                 stop();
             }

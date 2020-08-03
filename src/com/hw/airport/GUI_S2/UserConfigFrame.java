@@ -12,7 +12,7 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class UserConfigFrame extends JFrame implements ListSelectionListener, GUIElement{
+public class UserConfigFrame extends JFrame implements ListSelectionListener, GUIElement {
 	private SimulationToolBarSettings configPanelSettings;
 
 	public UserConfigFrame(UserConfigFrameSettings frameSettings) {
@@ -40,7 +40,7 @@ public class UserConfigFrame extends JFrame implements ListSelectionListener, GU
 		add(simRateLabel);
 
 		JTextField simRateVal = new JTextField();
-		simRateVal.setToolTipText("This controls overall sim speed (1-9)");
+		simRateVal.setToolTipText("This controls overall sim speed (Greater than 500)");
 		add(simRateVal);
 
 		JLabel quePopulationRateLabel = new JLabel("Queue Population Rate:", JLabel.CENTER);
@@ -91,20 +91,18 @@ public class UserConfigFrame extends JFrame implements ListSelectionListener, GU
 				if (openDeskVal.matches(".*\\d.*") & simExRateVal.matches(".*\\d.*") & passToDeskVal.matches(".*\\d.*")
 						& queuPopval.matches(".*\\d.*")) {
 
-					boolean popuInputStat = (Integer.parseInt(queuPopval) > 3000);
+					boolean popuInputStat = (Integer.parseInt(queuPopval) >= 3000);
 					boolean passToDeskStat = (Integer.parseInt(passToDeskVal) > 0);
+					boolean rateInputStat = (Integer.parseInt(simExRateVal) >= 500);
+					boolean passInputStat = (Integer.parseInt(passToDeskVal) > 0);
 
-					if (popuInputStat & passToDeskStat) {
+					if (popuInputStat & passToDeskStat & rateInputStat & passInputStat) {
 						AirportSimulator.getInstnce().setMaxOpndCheckinDesk(Integer.parseInt(openDeskVal));
 						AirportSimulator.getInstnce().setSimExcRate(Integer.parseInt(simExRateVal));
 						AirportSimulator.getInstnce().setQueuePopulatingRate(Integer.parseInt(queuPopval));
 						AirportSimulator.getInstnce().setPassToDeskRatio(Integer.parseInt(passToDeskVal));
-						setVisible(false);
 						AppContainer.getGui().setAirportGuiSettings("resources/gui/monitor/"+ themeListVal.getSelectedValue()+".xml");
-						AppContainer.getGui().displayAirportMonitorScreen();
-						// AppContainer.getGui().displayAirportMonitorScreen();
 						ApplicationManager appManager = new ApplicationManager();
-						// gui.displayConfigScreen();
 						try {
 							appManager.start();
 						} catch (Exception e) {
@@ -114,7 +112,7 @@ public class UserConfigFrame extends JFrame implements ListSelectionListener, GU
 
 					} else {
 
-						JOptionPane.showMessageDialog(getSelf(), "Eggs are not supposed to be red.");
+						JOptionPane.showMessageDialog(getSelf(), "Sim rate has to be greater than 500\nPopulation rate should be greater than 1\nMax open desks greater than 1\nDesk rate greater than 1");
 					}
 				} else {
 
@@ -130,7 +128,6 @@ public class UserConfigFrame extends JFrame implements ListSelectionListener, GU
 				AirportSimulator.getInstnce().setMaxOpndCheckinDesk(2);
 				AirportSimulator.getInstnce().setSimExcRate(2);
 				AirportSimulator.getInstnce().setQueuePopulatingRate(2000);
-				setVisible(false);
 				AppContainer.getGui().setAirportGuiSettings("resources/gui/monitor/"+ themeListVal.getSelectedValue()+".xml");
 				ApplicationManager appManager = new ApplicationManager();
 				try {

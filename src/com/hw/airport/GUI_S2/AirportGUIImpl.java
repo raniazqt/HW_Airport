@@ -15,8 +15,6 @@ public class AirportGUIImpl extends SynchronizedObservable implements AirportGUI
 
 	public AirportGUIImpl()
 	{
-		masterFrame = null;
-		configFrame = null;
 		setUserConfigFrameSettings();
 	}
 
@@ -30,7 +28,7 @@ public class AirportGUIImpl extends SynchronizedObservable implements AirportGUI
 
 	@Override
 	public void displayAirportMonitorScreen() {
-		masterFrame = new AirportMonitorFrame(airPortGuiSettings);
+		configFrame.getSelf().setVisible(false);
 		masterFrame.init(null);
 		masterFrame.draw();
 		masterFrame.getSelf().setVisible(true);
@@ -45,6 +43,7 @@ public class AirportGUIImpl extends SynchronizedObservable implements AirportGUI
 		{
 			e.printStackTrace();
 		}
+		masterFrame = new AirportMonitorFrame(airPortGuiSettings);
 	}
 
 	@Override

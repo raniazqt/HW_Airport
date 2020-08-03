@@ -1,13 +1,13 @@
 <?xml version="1.0" ?>
 <com.hw.airport.config.UserConfigFrameSettings>
-    <mainScreenWidth>450</mainScreenWidth>
-    <mainScreenHeight>360</mainScreenHeight>
+    <mainScreenWidth>800</mainScreenWidth>
+    <mainScreenHeight>600</mainScreenHeight>
     <exitOperation>3</exitOperation>
     <mainScreenTitle>User Configuration Screen</mainScreenTitle>
     <componentSettings>
         <Layout class="java.awt.GridLayout">
-            <hgap>0</hgap>
-            <vgap>0</vgap>
+            <hgap>3</hgap>
+            <vgap>10</vgap>
             <rows>0</rows>
             <cols>2</cols>
         </Layout>
@@ -34,7 +34,7 @@
             <tracking class="null"/>
         </LabelFont>
         <BorderType class="javax.swing.border.BevelBorder">
-            <bevelType>1</bevelType>
+            <bevelType>2</bevelType>
         </BorderType>
     </componentSettings>
 </com.hw.airport.config.UserConfigFrameSettings>

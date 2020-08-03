@@ -37,6 +37,7 @@ public class ApplicationManager {
 		
 		DeskManager deskManager = AppContainer.getDeskManager();
 		deskManager.registerObserver(gui);
+		appTimer.registerObserver(deskManager);
 		
 		CheckInSvcImpl checkInSvc = (CheckInSvcImpl) AppContainer.getCheckinSvc();
 		checkInSvc.registerObserver(gui);
@@ -70,7 +71,7 @@ public class ApplicationManager {
 
 		long rate = (long) AirportSimulator.getQueuePopulatingRate();
 		long appRate = rate / 6;
-		double timerRate = 5000;
+		double timerRate = 30.0/1000.0;
 		System.out.println("Timer RATE: " + timerRate);
 
 		TimerTask queuePopulatingTask = new QueuePopulatingTask();
@@ -78,11 +79,10 @@ public class ApplicationManager {
 		Timer timer = new Timer();
 		appTimer.start(1000, timerRate);
 		timer.scheduleAtFixedRate(queuePopulatingTask, 0, appRate);
-		timer.scheduleAtFixedRate(new TimerUpdateTask(appTimer), 0, 5000);
+		timer.scheduleAtFixedRate(new TimerUpdateTask(appTimer), 0, 500);
 
 		System.out.println("TimerTask started");
 		SwingUtilities.invokeLater(() -> AppContainer.getGui().displayAirportMonitorScreen());
-	
 	}
 
 	/*

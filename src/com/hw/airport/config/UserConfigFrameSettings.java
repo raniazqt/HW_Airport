@@ -12,3 +12,4 @@ public class UserConfigFrameSettings extends AirportMonitorFrameSettings {
         componentSettings = new SimulationToolBarSettings(layoutManager, backGroundColor, labelColor, labelFont, borderType);
     }
 }
+
