@@ -1,15 +1,19 @@
 package com.hw.airport.model;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.hw.airport.observer.SynchronizedObservable;
 
-public class SimulationTimer extends SynchronizedObservable
-{
+public class SimulationTimer extends SynchronizedObservable{
+	
     private double startTime;
     private double currentTime;
     private double endTime;
     private double timeRate;
     private boolean isRunning;
 
+    Logger LOG = LogManager.getLogger(SimulationTimer.class);
     public SimulationTimer() {}
 
     public void start(double simulationDuration, double simRate)
@@ -20,21 +24,21 @@ public class SimulationTimer extends SynchronizedObservable
         timeRate = simRate;
         isRunning = true;
 
-        System.out.println("START CALLED !");
+        LOG.debug("Simulation timer start called!");
     }
 
     public void tick()
     {
-        System.out.println("TICK CALLED !");
+        LOG.debug("Simulation timer started ticking!");
         while(isRunning)
         {
             currentTime += timeRate;
-            System.out.println("CURRENT TIME: " + currentTime);
+            LOG.debug("Current Simulation time: {}", currentTime);
             if(currentTime >= endTime)
             {
+            	setChanged();
                 notifyObservers("TIME ELAPSED");
-                System.out.println("TIME ELAPSED: " + currentTime + " END TIME: " + endTime);
-                stop();
+                LOG.debug("Simulation time has ended. Current time {} , End time {} " , currentTime , endTime);                
             }
         }
     }

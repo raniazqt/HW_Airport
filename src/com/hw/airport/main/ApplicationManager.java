@@ -18,14 +18,14 @@ import java.util.TimerTask;
 
 
 public class ApplicationManager {
-	
+
 	private static AirportGUI gui= AppContainer.getInstance().getGui();
-	private SimulationTimer appTimer;
+
 	String flightsFileName = "flights.csv"; 
 	String bookingFileName = "bookings.csv";
 
 	public void InitializeApplication() throws Exception {
-		appTimer = new SimulationTimer();
+
 		AppData.getInstance();
 		AirportSimulator.getInstnce();
 
@@ -34,14 +34,14 @@ public class ApplicationManager {
 		QueueSvcImpl queueSvc = (QueueSvcImpl) AppContainer.getQueueSvc();
 		queueSvc.registerObserver(AppContainer.getDeskManager());
 		queueSvc.registerObserver(gui);
-		
+
 		DeskManager deskManager = AppContainer.getDeskManager();
 		deskManager.registerObserver(gui);
-		appTimer.registerObserver(deskManager);
-		
+
+
 		CheckInSvcImpl checkInSvc = (CheckInSvcImpl) AppContainer.getCheckinSvc();
 		checkInSvc.registerObserver(gui);
-		
+
 		DataSvcImpl dataSvc = (DataSvcImpl) AppContainer.getDataSvc();
 		dataSvc.registerObserver(gui);
 		/*
@@ -56,11 +56,11 @@ public class ApplicationManager {
 		} catch (HWAirportException e) {
 			throw new Exception("Application failed to load data. Contact adminstrator");
 		}
-		
+
 		//create list of flights being boarding based on user entry
 		AppData.getActiveFlights().add(new ActiveFlight("AF999", 10));
 		AppData.getActiveFlights().add(new ActiveFlight("AA123", 10));
-		
+
 		FlightSvc flightSvc = AppContainer.getFlightSvc();
 		flightSvc.setFlights(AppData.getFlightsInfo());
 	}
@@ -69,25 +69,15 @@ public class ApplicationManager {
 	public void start() throws Exception {
 		InitializeApplication();
 
-		long rate = (long) AirportSimulator.getQueuePopulatingRate();
-		long appRate = rate / 6;
-		double timerRate = 30.0/1000.0;
-		System.out.println("Timer RATE: " + timerRate);
+		TimerManager timerManager = new TimerManager();
+		SimulationTimer appTimer = timerManager.setupTimer();
+		//register observers which need to be notified every time the timer task is executed 
+		//DeskManager need to be notified when attempting to add passenger the queue
+		appTimer.registerObserver(AppContainer.getDeskManager());
+		//TimerManager needs to be notified when the simulation time has ended to stop the queue populating task
+		appTimer.registerObserver(timerManager);
 
-		TimerTask queuePopulatingTask = new QueuePopulatingTask();
-		//running timer task as daemon thread
-		Timer timer = new Timer();
-		appTimer.start(1000, timerRate);
-		timer.scheduleAtFixedRate(queuePopulatingTask, 0, appRate);
-		timer.scheduleAtFixedRate(new TimerUpdateTask(appTimer), 0, 500);
-
-		System.out.println("TimerTask started");
 		SwingUtilities.invokeLater(() -> AppContainer.getGui().displayAirportMonitorScreen());
 	}
 
-	/*
-	 * public static void main(String[] args) throws Exception { ApplicationManager
-	 * appManager = new ApplicationManager(); gui.displayConfigScreen();
-	 * //appManager.start(); }
-	 */
 }

@@ -3,13 +3,11 @@ package com.hw.airport.service;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Observer;
-import java.util.Queue;
 
 import com.hw.airport.exception.HWAirportException;
 import com.hw.airport.model.Booking;
 import com.hw.airport.model.Flight;
-import com.hw.airport.model.FlightExtrasAndCharges;
+import com.hw.airport.observer.Observer;
 
 public interface QueueSvc {
 

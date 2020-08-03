@@ -50,6 +50,7 @@ public class DeskThread extends Thread implements Runnable{
 			if (checkinSvc.isQueueEmpty()) {
 				//close desk & stop thread
 				deskManager.closeDesk(this);
+				deskManager.checkOtherDesksStatus();
 			}else {
 				
 				try {

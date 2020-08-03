@@ -13,8 +13,12 @@ import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class DeskManager extends SynchronizedObservable implements Observer {
-	//	LOG = LoggerManager.
+	Logger LOG = LogManager.getLogger(DeskManager.class);
+	
 	private volatile List<Desk> openedDeskList = new ArrayList<Desk>();
 	private AirportSimulator sim = AirportSimulator.getInstnce();
 	private DeskSvc deskSvc = AppContainer.getDeskSvc();
@@ -27,45 +31,48 @@ public class DeskManager extends SynchronizedObservable implements Observer {
 	}
 
 	private Desk openAndRunDesk() {
-		
+
 		int opndDskSz = this.openedDeskList.size()+1;
 		String threadName = "DESK_" + opndDskSz + "_THREAD";
 
-		System.out.println("Opening Desk # " + opndDskSz + " and run it on thread " + threadName);
+		LOG.debug("Opening Desk # {} and run it on thread {} ", opndDskSz, threadName);
 		Desk desk = deskSvc.openDesk();
-		System.out.println("OPENED DESK ID: " + desk.getId());
+		LOG.debug("OPENED DESK ID: {} ", desk.getId());
 
 		desk.setThreadName(threadName);
 		DeskThread deskThread = new DeskThread(desk, threadName );
 		deskThreadList.add(deskThread);
 		executor.execute(deskThread);
-		
+
 		return desk;
 	}
 
 	@Override
 	public void onNotify(Object args) {
-		// TODO Auto-generated method stub
+
 		int passToDeskRatio = sim.getPassToDeskRatio();
 		int maxOpnDsk =  sim.getMaxOpndCheckinDesk();
 		int openedDeskCnt = openedDeskList.size();
 
-		PassengerQueue queue = PassengerQueue.getInstance();
-		if ((queue.getQueueSize() > 0 && openedDeskCnt == 0) ||
-				(queue.getQueueSize() > passToDeskRatio * openedDeskCnt && openedDeskCnt < maxOpnDsk)){
-			Desk desk = this.openAndRunDesk();
-			openedDeskList.add(desk);
-			System.out.println("Desk opened");
-			System.out.println("DESK ID: " + desk.getId());
-			setChanged();
-			notifyObservers(desk);
-
+		//the notification is coming from the simulator timer to notify that time has elapsed. End simulation!
+		if (args instanceof String && "TIME ELAPSED".equalsIgnoreCase((String)args)) {
+			this.executor.shutdown();
+		}else {
+			PassengerQueue queue = PassengerQueue.getInstance();
+			if ((queue.getQueueSize() > 0 && openedDeskCnt == 0) ||
+					(queue.getQueueSize() > passToDeskRatio * openedDeskCnt && openedDeskCnt < maxOpnDsk)){
+				Desk desk = this.openAndRunDesk();
+				openedDeskList.add(desk);
+				LOG.debug("Desk ID {} opened ", desk.getId());
+				setChanged();
+				notifyObservers(desk);
+			}
 		}
 	}
 
 	public int getOpenedDeskCount() {
 		return openedDeskList.size();
-		
+
 	}
 	public List<Desk> getOpenedDeskList() {
 		return openedDeskList;
@@ -80,6 +87,17 @@ public class DeskManager extends SynchronizedObservable implements Observer {
 		openedDeskList.remove(deskThread.getDesk());
 		setChanged();
 		notifyObservers(deskThread.getDesk());
-		System.out.println("Thread stopped");
+	}
+
+	/*this method is called when trying to get a passenger from the queue and it is empty.
+	 * In this case we check if all passengers were processed, then the simulator has ended
+	 * and we need to notify the UI to close the simulator screen
+	 * If there are still more passengers available in the master list, then the queue is temporary empty
+	 * because of the populating rate being slower than the desk processing passengers rate. Leave the simulator running
+	 *  
+	 */
+	public void checkOtherDesksStatus() {
+		// TODO Auto-generated method stub
+		
 	}
 }
