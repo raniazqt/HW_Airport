@@ -1,28 +1,20 @@
 package com.hw.airport.GUI_S2;
 
-import com.hw.airport.config.AirportSimulator;
-import com.hw.airport.config.AppContainer;
-import com.hw.airport.config.GUISettings;
+import com.hw.airport.config.AirportGuiSettings;
 import com.hw.airport.model.ActiveFlight;
 import com.hw.airport.model.Booking;
 import com.hw.airport.model.Desk;
-import com.hw.airport.service.BaggageSvc;
-import com.hw.airport.service.ReportSvc;
-import com.hw.airport.service.ReportSvcImpl;
 
 import javax.swing.*;
-import java.io.IOException;
 
 public class AirportMonitorFrame extends JFrame implements GUIElement {
-	private GUISettings guiSettings;
+	private AirportGuiSettings guiSettings;
 	private GUIElement flightsPanel;
 	private GUIElement checkInDeskPanel;
 	private GUIElement passengerPanel;
 	private GUIElement simToolBar;
 
-	public ReportSvc reportSvc = new ReportSvcImpl();
-
-	public AirportMonitorFrame(GUISettings guiSettings) {
+	public AirportMonitorFrame(AirportGuiSettings guiSettings) {
 		this.guiSettings = guiSettings;
 
 		initMasterFrame();
@@ -31,14 +23,14 @@ public class AirportMonitorFrame extends JFrame implements GUIElement {
 	}
 
 	private void initMasterFrame() {
-		setTitle(guiSettings.FrameSettings.getMainScreenTitle());
-		setSize(guiSettings.FrameSettings.getMainScreenWidth(), guiSettings.FrameSettings.getMainScreenHeight());
+		setTitle(guiSettings.AirPortMonitorFrameSettings.getMainScreenTitle());
+		setSize(guiSettings.AirPortMonitorFrameSettings.getMainScreenWidth(), guiSettings.AirPortMonitorFrameSettings.getMainScreenHeight());
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLayout(new BoxLayout(getContentPane(), BoxLayout.PAGE_AXIS));
 	}
 
 	private void initSubPanels() {
-		simToolBar = new SimToolBar(guiSettings.GUIComponentSettings);
+		simToolBar = new SimToolBar(guiSettings.SimulationToolBarSettings);
 		flightsPanel = new ActiveFlightPanel(guiSettings.ActiveFlightPanelSettings);
 		checkInDeskPanel = new CheckInDeskPanel(guiSettings.CheckInDeskPanelSettings);
 		passengerPanel = new PassengerPanel(guiSettings.PassengerPanelSettings);
@@ -46,8 +38,8 @@ public class AirportMonitorFrame extends JFrame implements GUIElement {
 
 	private void addSubPanels() {
 		add(simToolBar.getSelf());
-		add(checkInDeskPanel.getSelf());
 		add(flightsPanel.getSelf());
+		add(checkInDeskPanel.getSelf());
 		add(passengerPanel.getSelf());
 	}
 

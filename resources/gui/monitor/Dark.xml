@@ -1,0 +1,162 @@
+<?xml version="1.0" ?>
+<com.hw.airport.config.AirportGuiSettings>
+    <AirPortMonitorFrameSettings>
+        <mainScreenWidth>1440</mainScreenWidth>
+        <mainScreenHeight>1280</mainScreenHeight>
+        <exitOperation>3</exitOperation>
+        <mainScreenTitle>Airport Monitor Screen</mainScreenTitle>
+    </AirPortMonitorFrameSettings>
+    <SimulationToolBarSettings>
+        <Layout class="java.awt.FlowLayout" serialization="custom">
+            <java.awt.FlowLayout>
+                <default>
+                    <align>1</align>
+                    <alignOnBaseline>false</alignOnBaseline>
+                    <hgap>5</hgap>
+                    <newAlign>1</newAlign>
+                    <serialVersionOnStream>1</serialVersionOnStream>
+                    <vgap>5</vgap>
+                </default>
+            </java.awt.FlowLayout>
+        </Layout>
+        <BackGroundColor>
+            <red>9</red>
+            <green>9</green>
+            <blue>9</blue>
+            <alpha>255</alpha>
+        </BackGroundColor>
+        <LabelColor>
+            <red>49</red>
+            <green>233</green>
+            <blue>45</blue>
+            <alpha>255</alpha>
+        </LabelColor>
+        <LabelFont>
+            <superscript class="null"></superscript>
+            <size class="null"></size>
+            <posture class="null"></posture>
+            <family class="string">Dialog</family>
+            <transform class="null"></transform>
+            <tracking class="null"></tracking>
+            <weight class="float">2.0</weight>
+            <width class="null"></width>
+        </LabelFont>
+        <BorderType class="javax.swing.border.BevelBorder">
+            <bevelType>1</bevelType>
+        </BorderType>
+    </SimulationToolBarSettings>
+    <CheckInDeskPanelSettings>
+        <Layout class="java.awt.FlowLayout" serialization="custom">
+            <java.awt.FlowLayout>
+                <default>
+                    <align>1</align>
+                    <alignOnBaseline>false</alignOnBaseline>
+                    <hgap>5</hgap>
+                    <newAlign>1</newAlign>
+                    <serialVersionOnStream>1</serialVersionOnStream>
+                    <vgap>5</vgap>
+                </default>
+            </java.awt.FlowLayout>
+        </Layout>
+        <BackGroundColor>
+            <red>9</red>
+            <green>9</green>
+            <blue>9</blue>
+            <alpha>255</alpha>
+        </BackGroundColor>
+        <LabelColor>
+            <red>233</red>
+            <green>186</green>
+            <blue>0</blue>
+            <alpha>255</alpha>
+        </LabelColor>
+        <LabelFont>
+            <superscript class="null"></superscript>
+            <size class="null"></size>
+            <posture class="null"></posture>
+            <family class="string">Dialog</family>
+            <transform class="null"></transform>
+            <tracking class="null"></tracking>
+            <weight class="float">2.0</weight>
+            <width class="null"></width>
+        </LabelFont>
+        <BorderType class="javax.swing.border.BevelBorder"
+                    reference="../../SimulationToolBarSettings/BorderType"></BorderType>
+    </CheckInDeskPanelSettings>
+    <PassengerPanelSettings>
+        <Layout class="java.awt.FlowLayout" serialization="custom">
+            <java.awt.FlowLayout>
+                <default>
+                    <align>1</align>
+                    <alignOnBaseline>false</alignOnBaseline>
+                    <hgap>5</hgap>
+                    <newAlign>1</newAlign>
+                    <serialVersionOnStream>1</serialVersionOnStream>
+                    <vgap>5</vgap>
+                </default>
+            </java.awt.FlowLayout>
+        </Layout>
+        <BackGroundColor>
+            <red>9</red>
+            <green>9</green>
+            <blue>9</blue>
+            <alpha>255</alpha>
+        </BackGroundColor>
+        <LabelColor>
+            <red>233</red>
+            <green>46</green>
+            <blue>206</blue>
+            <alpha>255</alpha>
+        </LabelColor>
+        <LabelFont>
+            <superscript class="null"></superscript>
+            <size class="null"></size>
+            <posture class="null"></posture>
+            <family class="string">Dialog</family>
+            <transform class="null"></transform>
+            <tracking class="null"></tracking>
+            <weight class="float">2.0</weight>
+            <width class="null"></width>
+        </LabelFont>
+        <BorderType class="javax.swing.border.BevelBorder"
+                    reference="../../SimulationToolBarSettings/BorderType"></BorderType>
+    </PassengerPanelSettings>
+    <ActiveFlightPanelSettings>
+        <Layout class="java.awt.FlowLayout" serialization="custom">
+            <java.awt.FlowLayout>
+                <default>
+                    <align>1</align>
+                    <alignOnBaseline>false</alignOnBaseline>
+                    <hgap>5</hgap>
+                    <newAlign>1</newAlign>
+                    <serialVersionOnStream>1</serialVersionOnStream>
+                    <vgap>5</vgap>
+                </default>
+            </java.awt.FlowLayout>
+        </Layout>
+        <BackGroundColor>
+            <red>9</red>
+            <green>9</green>
+            <blue>9</blue>
+            <alpha>255</alpha>
+        </BackGroundColor>
+        <LabelColor>
+            <red>17</red>
+            <green>219</green>
+            <blue>233</blue>
+            <alpha>255</alpha>
+        </LabelColor>
+        <LabelFont>
+            <superscript class="null"></superscript>
+            <size class="null"></size>
+            <posture class="null"></posture>
+            <family class="string">Dialog</family>
+            <transform class="null"></transform>
+            <tracking class="null"></tracking>
+            <weight class="float">2.0</weight>
+            <width class="null"></width>
+        </LabelFont>
+        <BorderType class="javax.swing.border.BevelBorder"
+                    reference="../../SimulationToolBarSettings/BorderType"></BorderType>
+    </ActiveFlightPanelSettings>
+</com.hw.airport.config.AirportGuiSettings>

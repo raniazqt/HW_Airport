@@ -4,6 +4,7 @@ import com.hw.airport.GUI_S2.AirportGUI;
 import com.hw.airport.GUI_S2.AirportGUIImpl;
 import com.hw.airport.model.*;
 import com.hw.airport.service.*;
+import com.hw.airport.threading.DeskManager;
 
 import java.util.Map;
 

@@ -1,7 +1,9 @@
-package com.hw.airport.model;
+package com.hw.airport.threading;
 
 import com.hw.airport.config.AirportSimulator;
 import com.hw.airport.config.AppContainer;
+import com.hw.airport.model.Desk;
+import com.hw.airport.model.PassengerQueue;
 import com.hw.airport.observer.Observer;
 import com.hw.airport.observer.SynchronizedObservable;
 import com.hw.airport.service.DeskSvc;
@@ -56,7 +58,7 @@ public class DeskManager extends SynchronizedObservable implements Observer {
 			System.out.println("Desk opened");
 			System.out.println("DESK ID: " + desk.getId());
 			setChanged();
-			notifyAll(desk);
+			notifyObservers(desk);
 
 		}
 	}
@@ -77,7 +79,7 @@ public class DeskManager extends SynchronizedObservable implements Observer {
 		deskSvc.closeDesk(deskThread.getDesk());
 		openedDeskList.remove(deskThread.getDesk());
 		setChanged();
-		notifyAll(deskThread.getDesk());
+		notifyObservers(deskThread.getDesk());
 		System.out.println("Thread stopped");
 	}
 }

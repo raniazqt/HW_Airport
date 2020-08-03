@@ -1,7 +1,7 @@
 package com.hw.airport.GUI_S2;
 
 import com.hw.airport.config.AppContainer;
-import com.hw.airport.config.GUIComponentSettings;
+import com.hw.airport.config.SimulationToolBarSettings;
 import com.hw.airport.service.GUISvc;
 
 import javax.swing.*;
@@ -11,12 +11,12 @@ import java.util.Map;
 
 public class SimToolBar extends JToolBar implements GUIElement
 {
-    private GUIComponentSettings simToolBarSettings;
+    private SimulationToolBarSettings simToolBarSettings;
     private List<JLabel> simulationSettings;
     private GUISvc guiDataSvc = AppContainer.getGuiSvc();
     private boolean init;
 
-    public SimToolBar(GUIComponentSettings guiSettings)
+    public SimToolBar(SimulationToolBarSettings guiSettings)
     {
         this.simToolBarSettings = guiSettings;
         this.simulationSettings = new ArrayList<>();

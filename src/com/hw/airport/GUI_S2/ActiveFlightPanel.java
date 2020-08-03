@@ -37,7 +37,7 @@ public class ActiveFlightPanel extends JPanel implements GUIElement
     private FlightPanel findFlightPanel(ActiveFlight activeFlight) {
         if (null != activeFlight) {
             for (FlightPanel panel : flightPanels) {
-                if (null != panel.getActiveFlightCode()) {
+                if (!"".equals(panel.getActiveFlightCode())) {
                     if (panel.getActiveFlightCode().equals(activeFlight.getFlightCd())) {
                         return panel;
                     }

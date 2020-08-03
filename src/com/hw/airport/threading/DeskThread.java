@@ -1,12 +1,12 @@
-package com.hw.airport.model;
+package com.hw.airport.threading;
 
 import com.hw.airport.config.AirportSimulator;
 import com.hw.airport.config.AppContainer;
 import com.hw.airport.enums.DESK_STATUS;
 import com.hw.airport.exception.HWAirportException;
+import com.hw.airport.model.Booking;
+import com.hw.airport.model.Desk;
 import com.hw.airport.service.CheckInSvc;
-import com.hw.airport.service.DeskSvc;
-import com.hw.airport.service.QueueSvc;
 
 public class DeskThread extends Thread implements Runnable{
 

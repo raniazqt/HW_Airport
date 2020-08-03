@@ -8,6 +8,6 @@ public interface Observable {
 
     void registerObserver(Observer o);
     void removeObserver(Observer o);
-    void notifyAll(Object args);
+    void notifyObservers(Object args);
     void clearObservers();
 }

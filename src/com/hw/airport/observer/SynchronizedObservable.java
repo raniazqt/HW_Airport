@@ -34,7 +34,7 @@ public class SynchronizedObservable implements Observable {
     }
 
     @Override
-    public void notifyAll(Object args) {
+    public void notifyObservers(Object args) {
         Object[] observableLocal;
         synchronized (this)
         {
@@ -47,6 +47,23 @@ public class SynchronizedObservable implements Observable {
 
         for(Object o : observableLocal) {
             ((Observer)o).onNotify(args);
+        }
+    }
+
+    public void notifyObservers()
+    {
+        Object[] observableLocal;
+        synchronized (this)
+        {
+            if (!changed)
+                return;
+
+            observableLocal = observers.toArray();
+            clearChanged();
+        }
+
+        for(Object o : observableLocal) {
+            ((Observer)o).onNotify(null);
         }
     }
 

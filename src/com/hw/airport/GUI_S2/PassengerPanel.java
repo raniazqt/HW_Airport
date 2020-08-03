@@ -1,19 +1,14 @@
 package com.hw.airport.GUI_S2;
 
-import java.util.List;
-import java.util.concurrent.ExecutionException;
-
-import javax.swing.BoxLayout;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.SwingWorker;
-import javax.swing.table.DefaultTableModel;
-
 import com.hw.airport.config.AppContainer;
 import com.hw.airport.config.PassengerPanelSettings;
 import com.hw.airport.model.Booking;
 import com.hw.airport.service.GUISvc;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class PassengerPanel extends JPanel implements GUIElement
 {
@@ -34,50 +29,57 @@ public class PassengerPanel extends JPanel implements GUIElement
 	}
 
 	@Override
-	public JPanel getSelf()
+	public JScrollPane getSelf()
 	{
-		return this;
+		JScrollPane scrollPane = new JScrollPane(passengerJTable);
+		scrollPane.setBackground(guiSettings.BackGroundColor);
+		scrollPane.setBorder(guiSettings.BorderType);
+		scrollPane.setForeground(guiSettings.LabelColor);
+
+		return scrollPane;
 	}
 
 	@Override
 	public void draw()
 	{
-		JScrollPane scrollPane = new JScrollPane(passengerJTable);
-		scrollPane.setBorder(guiSettings.BorderType);
-		scrollPane.setBackground(guiSettings.LabelColor);
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		this.setBackground(guiSettings.BackGroundColor);
+		this.setFont(guiSettings.LabelFont);
+		this.setForeground(guiSettings.LabelColor);
+		this.setBorder(guiSettings.BorderType);
 
-		this.add(scrollPane);
+		passengerJTable.setBorder(guiSettings.BorderType);
+		passengerJTable.setBackground(guiSettings.BackGroundColor);
+		passengerJTable.setFont(guiSettings.LabelFont);
+		passengerJTable.setForeground(guiSettings.LabelColor);
+		passengerJTable.getTableHeader().setFont(guiSettings.LabelFont);
+		passengerJTable.getTableHeader().setBackground(guiSettings.BackGroundColor);
+		passengerJTable.getTableHeader().setForeground(guiSettings.LabelColor);
 	}
 
 	@Override
 	public void init(Object targetObj)
 	{
 		fetchUpdatedPassengerData();
-
-		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		this.passengerJTable.setBorder(guiSettings.BorderType);
-		this.passengerJTable.setBackground(guiSettings.BackGroundColor);
-		this.passengerJTable.setFont(guiSettings.LabelFont);
-		this.passengerJTable.setForeground(guiSettings.LabelColor);
 	}
 
 	private void fetchUpdatedPassengerData() {
-		SwingWorker<String[][], Void> worker = new SwingWorker<String[][], Void>() {
+		SwingWorker<String[][], Void> worker = new SwingWorker<>() {
 			@Override
-			protected  String[][] doInBackground() throws Exception {
+			protected String[][] doInBackground() {
 				passengersList = guiSvc.getQueuePassengersList();
 				String[][] data = new String[passengersList.size()][5];
 				int i = 0;
-				synchronized(passengersList) {
-					for(Booking booking : passengersList){
+				synchronized (passengersList) {
+					for (Booking booking : passengersList) {
 						data[i][0] = booking.getFullName();
 						data[i][1] = booking.getRefCode().toUpperCase();
 						data[i][2] = booking.getFlightCode().toUpperCase();
-						
-						String dim = Double.toString(booking.getBaggageWidth()) + " X " 
-								+ Double.toString(booking.getBaggageHeight()) + " X" 
-								+ Double.toString(booking.getBaggageLength());
-						
+
+						String dim = booking.getBaggageWidth() + " X "
+								+ booking.getBaggageHeight() + " X"
+								+ booking.getBaggageLength();
+
 						data[i][3] = dim;
 						data[i][4] = Double.toString(booking.getTotalBaggageWeight());
 						i++;

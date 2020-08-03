@@ -3,7 +3,7 @@ package com.hw.airport.config;
 import javax.swing.border.Border;
 import java.awt.*;
 
-public class GUIComponentSettings
+public class SimulationToolBarSettings
 {
     public LayoutManager Layout;
     public Color BackGroundColor;
@@ -11,8 +11,8 @@ public class GUIComponentSettings
     public Font LabelFont;
     public Border BorderType;
 
-    public GUIComponentSettings(LayoutManager layoutManager,
-                                Color backGroundColor, Color labelColor, Font labelFont, Border borderType)
+    public SimulationToolBarSettings(LayoutManager layoutManager,
+                                     Color backGroundColor, Color labelColor, Font labelFont, Border borderType)
     {
         this.Layout = layoutManager;
         this.BackGroundColor = backGroundColor;
@@ -21,5 +21,3 @@ public class GUIComponentSettings
         this.BorderType = borderType;
     }
 }
-
-// TODO: make all settings classes inherit from this one.
