@@ -5,6 +5,7 @@ import com.hw.airport.model.ActiveFlight;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.util.concurrent.ExecutionException;
 
 public class FlightPanel implements GUIElement
@@ -19,6 +20,7 @@ public class FlightPanel implements GUIElement
 		this.guiSettings = guiSettings;
 		model = new DefaultTableModel();
 		flightTable = new JTable();
+		flightTable.setPreferredSize(new Dimension(400,150));
 		activeFlightCode = "";
 	}
 
@@ -30,6 +32,7 @@ public class FlightPanel implements GUIElement
 		scrollPane.setForeground(guiSettings.LabelColor);
 		scrollPane.setFont(guiSettings.LabelFont);
 		scrollPane.setBorder(guiSettings.BorderType);
+		scrollPane.setPreferredSize(flightTable.getPreferredSize());
 
 		return scrollPane;
 	}

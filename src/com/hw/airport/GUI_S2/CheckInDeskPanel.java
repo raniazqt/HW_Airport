@@ -5,6 +5,7 @@ import com.hw.airport.enums.DESK_STATUS;
 import com.hw.airport.model.Desk;
 
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,13 +13,13 @@ public class CheckInDeskPanel extends JPanel implements GUIElement
 {
 	private List<DeskPanel> deskPanels;
 	private CheckInDeskPanelSettings guiSettings;
-	private int currentTableIndex;
+	private int currentDeskIndex;
 
 	public CheckInDeskPanel(CheckInDeskPanelSettings guiSettings)
 	{
 		this.guiSettings = guiSettings;
 		deskPanels = new ArrayList<>();
-		currentTableIndex = 1;
+		currentDeskIndex = 1;
 	}
 
 	@Override
@@ -72,9 +73,13 @@ public class CheckInDeskPanel extends JPanel implements GUIElement
 			deskPanels.add(crntDeskPanel);
 
 			JScrollPane crntDeskScrollPane = crntDeskPanel.getSelf();
-			crntDeskScrollPane.setBorder(BorderFactory.createTitledBorder("DESK #" + currentTableIndex));
+			TitledBorder borderToCreate = BorderFactory.createTitledBorder("DESK #" + currentDeskIndex);
+			borderToCreate.setTitleColor(guiSettings.LabelColor);
+			borderToCreate.setTitleFont(guiSettings.LabelFont);
+			crntDeskScrollPane.setBorder(borderToCreate);
+
 			add(crntDeskScrollPane);
-			currentTableIndex++;
+			currentDeskIndex++;
 		}
 		else {
 			crntDeskPanel.refresh(updatedDesk);

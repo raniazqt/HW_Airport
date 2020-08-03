@@ -7,6 +7,7 @@ import com.hw.airport.model.Desk;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.util.concurrent.ExecutionException;
 
 public class DeskPanel implements GUIElement
@@ -23,14 +24,22 @@ public class DeskPanel implements GUIElement
 		this.desk = desk;
 		this.guiSettings = guiSettings;
 		this.deskTable = new JTable();
+		this.deskTable.setPreferredSize(new Dimension(100,180));
 		this.model = new DefaultTableModel();
 	}
 
 	public JScrollPane getSelf()
 	{
+		deskTable.setLayout(guiSettings.Layout);
+		deskTable.setFont(guiSettings.LabelFont);
+		deskTable.setBackground(guiSettings.BackGroundColor);
+		deskTable.setForeground(guiSettings.LabelColor);
+
 		JScrollPane scrollPane = new JScrollPane(deskTable);
-		scrollPane.setBackground(guiSettings.LabelColor);
+		scrollPane.setBackground(guiSettings.BackGroundColor);
 		scrollPane.setBorder(guiSettings.BorderType);
+		scrollPane.setForeground(guiSettings.LabelColor);
+		scrollPane.setPreferredSize(deskTable.getSize());
 
 		return scrollPane;
 	}
@@ -46,10 +55,7 @@ public class DeskPanel implements GUIElement
 
 	public void draw()
 	{
-		deskTable.setLayout(guiSettings.Layout);
-		deskTable.setFont(guiSettings.LabelFont);
-		deskTable.setBackground(guiSettings.BackGroundColor);
-		deskTable.setForeground(guiSettings.LabelColor);
+
 	}
 
 	@Override
@@ -62,7 +68,6 @@ public class DeskPanel implements GUIElement
 	public void refresh(Object arg)
 	{
 		getDataModel(arg);
-		
 	}
 
 	private void getDataModel(Object arg){

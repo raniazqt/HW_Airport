@@ -1,6 +1,6 @@
 package com.hw.airport.config;
 
-public class FrameSettings
+public class AirportMonitorFrameSettings
 {
     private int mainScreenWidth;
     private int mainScreenHeight;
@@ -8,7 +8,7 @@ public class FrameSettings
 
     private String mainScreenTitle;
 
-    public FrameSettings(int mainScrWidth, int mainScrHeight, int exitOp, String mainScrTitle) {
+    public AirportMonitorFrameSettings(int mainScrWidth, int mainScrHeight, int exitOp, String mainScrTitle) {
         this.mainScreenWidth = mainScrWidth;
         this.mainScreenHeight = mainScrHeight;
         this.mainScreenTitle = mainScrTitle;
