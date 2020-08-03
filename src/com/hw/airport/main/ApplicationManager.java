@@ -4,33 +4,32 @@ import com.hw.airport.GUI.AirportGUI;
 import com.hw.airport.config.AirportSimulator;
 import com.hw.airport.config.AppContainer;
 import com.hw.airport.exception.HWAirportException;
-import com.hw.airport.model.ActiveFlight;
 import com.hw.airport.model.AppData;
-import com.hw.airport.threading.DeskManager;
 import com.hw.airport.model.SimulationTimer;
-import com.hw.airport.service.*;
-import javax.swing.*;
-
+import com.hw.airport.service.CheckInSvcImpl;
+import com.hw.airport.service.DataSvcImpl;
+import com.hw.airport.service.FlightSvc;
+import com.hw.airport.service.QueueSvcImpl;
+import com.hw.airport.threading.DeskManager;
+import com.hw.airport.threading.TimerManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 
 public class ApplicationManager {
 
-	static Logger LOG = LogManager.getLogger(ApplicationManager.class);
-	private static AirportGUI gui= AppContainer.getInstance().getGui();
+	private String flightsFileName = "flights.csv";
+	private String bookingFileName = "bookings.csv";
 
-	String flightsFileName = "flights.csv"; 
-	String bookingFileName = "bookings.csv";
-	static DeskManager deskManager = AppContainer.getDeskManager();
+	private static Logger LOG = LogManager.getLogger(ApplicationManager.class);
+	private static AirportGUI gui= AppContainer.getInstance().getGui();
+	private static DeskManager deskManager = AppContainer.getDeskManager();
 
 	public void InitializeApplication() throws Exception {
 
 		AppData.getInstance();
 		AirportSimulator.getInstnce();
 
-		//gui = AppContainer.getGui();
-		//register the DeskManager as an observer to the QueueSvs
 		QueueSvcImpl queueSvc = (QueueSvcImpl) AppContainer.getQueueSvc();
 		queueSvc.registerObserver(AppContainer.getDeskManager());
 		queueSvc.registerObserver(gui);
@@ -44,47 +43,36 @@ public class ApplicationManager {
 
 		DataSvcImpl dataSvc = (DataSvcImpl) AppContainer.getDataSvc();
 		dataSvc.registerObserver(gui);
-		/*
-		 * if (null == appContainer) { throw new RuntimeErrorException(null,
-		 * "Application did not start correctly. Notify adminstrator "); }
-		 */
 
 		//load flights and booking data from files
 		try {
 			AppData.setFlightsInfo(dataSvc.loadFlightsData(flightsFileName));
 			AppData.setBookingList(dataSvc.loadBookingData(bookingFileName));
 		} catch (HWAirportException e) {
-			throw new Exception("Application failed to load data. Contact adminstrator");
+			throw new Exception("Application failed to load data. Contact administrator");
 		}
 
-		//create list of flights being boarding based on user entry
-		/*
-		 * AppData.getActiveFlights().add(new ActiveFlight("AF999", 10));
-		 * AppData.getActiveFlights().add(new ActiveFlight("AA123", 10));
-		 */
 		FlightSvc flightSvc = AppContainer.getFlightSvc();
 		flightSvc.setFlights(AppData.getFlightsInfo());
 	}
 
-	//TODO: MUST BE CALLED FROM THE CONFIG FRAME TO START THE SIMULATION. 
+	//TODO: MUST BE CALLED FROM THE CONFIG FRAME TO START THE SIMULATION.
 	public void start() throws Exception {
 		InitializeApplication();
 
 		TimerManager timerManager = new TimerManager();
 		SimulationTimer appTimer = timerManager.setupTimer();
-		//register observers which need to be notified every time the timer task is executed 
+		//register observers which need to be notified every time the timer task is executed
 		//DeskManager need to be notified when attempting to add passenger the queue
 		appTimer.registerObserver(AppContainer.getDeskManager());
 		//TimerManager needs to be notified when the simulation time has ended to stop the queue populating task
 		deskManager.registerObserver(timerManager);
 		appTimer.registerObserver(gui);
-
-		
 	}
-	
+
 	public static void main(String[] args) throws Exception {
 		ApplicationManager appManager = new ApplicationManager();
-		appManager.InitializeApplication();		
+		appManager.InitializeApplication();
 		LOG.debug("Collecting settings from user");
 		gui.displayConfigScreen();
 	}

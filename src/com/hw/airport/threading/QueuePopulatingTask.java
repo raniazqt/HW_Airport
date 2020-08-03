@@ -5,11 +5,10 @@ import com.hw.airport.exception.HWAirportException;
 import com.hw.airport.model.Booking;
 import com.hw.airport.observer.Observer;
 import com.hw.airport.service.QueueSvc;
-
-import java.util.TimerTask;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.TimerTask;
 
 public class QueuePopulatingTask extends TimerTask implements Observer{
 	Logger LOG = LogManager.getLogger(QueuePopulatingTask.class);
@@ -17,7 +16,6 @@ public class QueuePopulatingTask extends TimerTask implements Observer{
 	QueueSvc queueSvc = AppContainer.getQueueSvc();
 	@Override
 	public void run() {
-
 		try {
 			Booking passenger = queueSvc.addPassengerToQueue();
 			int queueSize = queueSvc.getCountOfPassangerInQueue();

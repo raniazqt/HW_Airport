@@ -87,28 +87,6 @@ public class CheckInSvcImpl extends SynchronizedObservable implements CheckInSvc
 		return !flightSatus && isNotCheckedIn;	
 	}
 
-	/*public boolean isMaxFltCpctyVolWghtStsExceeded(String flightCd) {
-		double currentFlightBagVolume;
-		boolean isMaxVolumeExceeded = false;
-		boolean isMaxWeightExceeded = false;
-		boolean isMaxPassengerCountExceeded = false;
-		try {
-			currentFlightBagVolume = baggageSvc.getTheTotalBagVolumesOnFlight(flightCd);
-
-			double currentFlightBagWeight = baggageSvc.getTheTotalBagWeightOnFlight(flightCd);
-			int currentFlightPassengerCount = flightSvc.getPassengerCountForFlight(flightCd);
-
-			isMaxVolumeExceeded = flightSvc.isMaxVolumeExceededForFlight(flightCd, currentFlightBagVolume);
-			isMaxWeightExceeded = flightSvc.isMaxWeightExceededForFlight(flightCd, currentFlightBagWeight);
-			isMaxPassengerCountExceeded = flightSvc.isMaxPassengerCountExceededForFlight(flightCd, currentFlightPassengerCount);
-		} catch (HWAirportException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return !isMaxVolumeExceeded && !isMaxWeightExceeded && !isMaxPassengerCountExceeded;	
-
-	}*/
-
 	public boolean isMaxFltCpctyVolWghtStsExceeded(String flightCd) {
 		double currentFlightBagVolume;
 		boolean isMaxVolumeExceeded = false;
