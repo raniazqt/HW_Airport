@@ -37,11 +37,12 @@ public class TimerManager extends SynchronizedObservable implements Observer{
 
 	public SimulationTimer setupTimer() {
 		long rate = (long) AirportSimulator.getQueuePopulatingRate();
-		long queuePopulatingRate = rate / 6;
+		long queuePopulatingRate = rate;
 		double timerRate = 1;
+		int simRunningRate = AirportSimulator.getSimRunningRate();
 
 		//Configure simulator timer task
-		appTimer.start(100, timerRate);
+		appTimer.start(simRunningRate, timerRate);
 
 
 		//schedule timer tasks to run as daemon thread

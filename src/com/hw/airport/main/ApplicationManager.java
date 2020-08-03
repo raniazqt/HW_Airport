@@ -9,21 +9,20 @@ import com.hw.airport.model.AppData;
 import com.hw.airport.threading.DeskManager;
 import com.hw.airport.model.SimulationTimer;
 import com.hw.airport.service.*;
-import com.hw.airport.threading.QueuePopulatingTask;
-import com.hw.airport.threading.TimerUpdateTask;
-
 import javax.swing.*;
-import java.util.Timer;
-import java.util.TimerTask;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 
 public class ApplicationManager {
 
+	static Logger LOG = LogManager.getLogger(ApplicationManager.class);
 	private static AirportGUI gui= AppContainer.getInstance().getGui();
 
 	String flightsFileName = "flights.csv"; 
 	String bookingFileName = "bookings.csv";
-	DeskManager deskManager = AppContainer.getDeskManager();
+	static DeskManager deskManager = AppContainer.getDeskManager();
 
 	public void InitializeApplication() throws Exception {
 
@@ -59,9 +58,10 @@ public class ApplicationManager {
 		}
 
 		//create list of flights being boarding based on user entry
-		AppData.getActiveFlights().add(new ActiveFlight("AF999", 10));
-		AppData.getActiveFlights().add(new ActiveFlight("AA123", 10));
-
+		/*
+		 * AppData.getActiveFlights().add(new ActiveFlight("AF999", 10));
+		 * AppData.getActiveFlights().add(new ActiveFlight("AA123", 10));
+		 */
 		FlightSvc flightSvc = AppContainer.getFlightSvc();
 		flightSvc.setFlights(AppData.getFlightsInfo());
 	}
@@ -79,6 +79,13 @@ public class ApplicationManager {
 		deskManager.registerObserver(timerManager);
 		appTimer.registerObserver(gui);
 
-		SwingUtilities.invokeLater(() -> AppContainer.getGui().displayAirportMonitorScreen());
+		
+	}
+	
+	public static void main(String[] args) throws Exception {
+		ApplicationManager appManager = new ApplicationManager();
+		appManager.InitializeApplication();		
+		LOG.debug("Collecting settings from user");
+		gui.displayConfigScreen();
 	}
 }

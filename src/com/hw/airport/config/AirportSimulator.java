@@ -25,6 +25,7 @@ public class AirportSimulator {
 	static int maxOpndCheckinDesk;
 	// Simulator execution rate
 	static int simExcRate;
+	static int simRunningRate;
 
 	private static AirportSimulator simulator;
 
@@ -82,6 +83,14 @@ public class AirportSimulator {
 
 	public static AirportSimulator getSimulator() {
 		return simulator;
+	}
+
+	public static int getSimRunningRate() {
+		return simRunningRate;
+	}
+
+	public static void setSimRunningRate(int simRunningRate) {
+		AirportSimulator.simRunningRate = simRunningRate;
 	}
 	
 }
