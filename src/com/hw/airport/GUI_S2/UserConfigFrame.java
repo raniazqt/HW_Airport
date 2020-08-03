@@ -67,7 +67,7 @@ public class UserConfigFrame extends JFrame implements ListSelectionListener, GU
 		JLabel uiThemeLabel = new JLabel("UI Theme:", JLabel.CENTER);
 		add(uiThemeLabel);
 
-		String theme[] = { "Dark", "Medium", "Light"};
+		String theme[] = { "Dark", "Medium", "Light" };
 
 		JList<String> themeListVal = new JList<String>(theme);
 		JScrollPane scrollableUIList = new JScrollPane(themeListVal);
@@ -112,7 +112,13 @@ public class UserConfigFrame extends JFrame implements ListSelectionListener, GU
 							e.printStackTrace();
 						}
 
+					} else {
+
+						JOptionPane.showMessageDialog(getSelf(), "Eggs are not supposed to be red.");
 					}
+				} else {
+
+					JOptionPane.showMessageDialog(getSelf(), "Eggs are not supposed to be green.");
 				}
 			}
 
