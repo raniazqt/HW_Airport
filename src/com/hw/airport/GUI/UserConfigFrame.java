@@ -127,9 +127,9 @@ public class UserConfigFrame extends JFrame implements ListSelectionListener, GU
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
 				AirportSimulator.getInstnce().setMaxOpndCheckinDesk(2);
-				AirportSimulator.getInstnce().setSimExcRate(2);
-				AirportSimulator.getInstnce().setQueuePopulatingRate(2000);
-				AppContainer.getGui().setAirportGuiSettings("resources/gui/monitor/"+ themeListVal.getSelectedValue()+".xml");
+				AirportSimulator.getInstnce().setSimExcRate(500);
+				AirportSimulator.getInstnce().setQueuePopulatingRate(4000);
+				AppContainer.getGui().setAirportGuiSettings("resources/gui/monitor/Dark.xml");
 				ApplicationManager appManager = new ApplicationManager();
 				setVisible(false);
 				try {
