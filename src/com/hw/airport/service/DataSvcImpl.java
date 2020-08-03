@@ -102,7 +102,9 @@ public class DataSvcImpl extends SynchronizedObservable implements DataSvc {
 
 	@Override
 	public void addPsgrToFailedToCheckedList(Booking passenger) {
-		AppData.addPsngrToFailedToCheckInList(passenger.getFlightCode(), passenger);
+		if (null != passenger) {
+			AppData.addPsngrToFailedToCheckInList(passenger.getFlightCode(), passenger);
+		}
 		
 	}
 	

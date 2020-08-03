@@ -17,8 +17,6 @@ import java.util.Map;
 
 public class AirportSimulator {
 
-	// flights to check in ( flight code , check in period in seconds)
-	static List<ActiveFlight> activeFlights = new ArrayList<>();
 	// ratio of number of passengers in queue to number of opened checkin desks
 	static int passToDeskRatio = 5;
 	// rate for adding passengers to queue in seconds
@@ -85,9 +83,5 @@ public class AirportSimulator {
 	public static AirportSimulator getSimulator() {
 		return simulator;
 	}
-
-	public static List<ActiveFlight> getActiveFlight() {
-		return activeFlights;
-	}
-
+	
 }

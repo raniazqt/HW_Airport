@@ -51,12 +51,11 @@ public class QueueSvcImpl extends SynchronizedObservable implements QueueSvc {
 		}
 
 	}
-	//TODO:WHAT IS THIS?
 	@Override
-	public void dropQueue(List<Booking> Queue, Map<String, Booking> bookingMap) throws HWAirportException {
-
-		bookingMap.get(Queue.remove(0).getRefCode()).setCheckInStatus(BookingStatus.PROCESSING);
-
+	public void emptyQueue()  {
+		passengerQ.setPassengerList(new LinkedList<Booking>());
+		setChanged();
+		notify();
 	}
 
 	@Override
@@ -106,7 +105,7 @@ public class QueueSvcImpl extends SynchronizedObservable implements QueueSvc {
 
 	@Override
 	public synchronized Booking addPassengerToQueue() throws HWAirportException {
-		
+
 		Booking passengerToAdd = bookingSvc.getRandomBooking();
 
 		if (null != passengerToAdd && passengerToAdd.getCheckInStatus().equals(BookingStatus.NOT_CHECKED_IN)) {
@@ -145,7 +144,7 @@ public class QueueSvcImpl extends SynchronizedObservable implements QueueSvc {
 	public int getCountOfPassangerInQueue() {
 		return passengerQ.getQueueSize();
 	}
-	
+
 	@Override
 	public LinkedList<Booking> getAllPassengersFromQueue() {
 		return passengerQ.getPassengerList();

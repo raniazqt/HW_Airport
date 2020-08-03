@@ -83,4 +83,5 @@ public class SynchronizedObservable implements Observable {
     public synchronized boolean hasChanged() {
         return changed;
     }
+
 }

@@ -7,6 +7,8 @@ import com.hw.airport.model.PassengerQueue;
 import com.hw.airport.observer.Observer;
 import com.hw.airport.observer.SynchronizedObservable;
 import com.hw.airport.service.DeskSvc;
+import com.hw.airport.service.ReportSvc;
+import com.hw.airport.service.ReportSvcImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +20,8 @@ import org.apache.logging.log4j.Logger;
 
 public class DeskManager extends SynchronizedObservable implements Observer {
 	Logger LOG = LogManager.getLogger(DeskManager.class);
+	
+	ReportSvc reportSvc = new ReportSvcImpl();
 	
 	private volatile List<Desk> openedDeskList = new ArrayList<Desk>();
 	private AirportSimulator sim = AirportSimulator.getInstnce();
@@ -56,7 +60,13 @@ public class DeskManager extends SynchronizedObservable implements Observer {
 
 		//the notification is coming from the simulator timer to notify that time has elapsed. End simulation!
 		if (args instanceof String && "TIME ELAPSED".equalsIgnoreCase((String)args)) {
-			this.executor.shutdown();
+			
+			reportSvc.getFlightReport();
+			
+			executor.shutdownNow();
+			setChanged();
+			notifyObservers("DESKS_CLOSED");
+			
 		}else {
 			PassengerQueue queue = PassengerQueue.getInstance();
 			if ((queue.getQueueSize() > 0 && openedDeskCnt == 0) ||

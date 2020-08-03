@@ -30,8 +30,6 @@ public class SimulationTimer extends SynchronizedObservable{
     public void tick()
     {
         LOG.debug("Simulation timer started ticking!");
-        while(isRunning)
-        {
             currentTime += timeRate;
             LOG.debug("Current Simulation time: {}", currentTime);
             if(currentTime >= endTime)
@@ -41,7 +39,6 @@ public class SimulationTimer extends SynchronizedObservable{
                 LOG.debug("Simulation time has ended. Current time {} , End time {} " , currentTime , endTime);                
             }
         }
-    }
 
     public void pause(boolean value)
     {

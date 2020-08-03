@@ -15,7 +15,7 @@ public interface QueueSvc {
 
 	public void addQueue(List<Booking> Queue) throws HWAirportException;
 
-	public void dropQueue(List<Booking> Queue, Map<String, Booking> bookingMap) throws HWAirportException;
+	public void emptyQueue();
 
 	Booking getPassengerFromQueue();
 

@@ -63,7 +63,9 @@ public class AirportGUIImpl extends SynchronizedObservable implements AirportGUI
 
 	@Override
 	public void onNotify(Object args) {
-		this.masterFrame.refresh(args);
+	//	if (args instanceof String && "SIMULATON_FINISHED".equalsIgnoreCase((String)args)) {
+			this.masterFrame.refresh(args);
+		
 	}
 
 	protected void setUserConfigFrameSettings() {

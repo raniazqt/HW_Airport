@@ -1,1 +1,3 @@
 Flight#             Passengers Count    Total Volume        Total Weight        Extra Fees          
+AF999               6                   26680.0             40.0                610.0               
+AA123               2                   138768.0            91.0                730.0               

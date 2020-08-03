@@ -23,6 +23,7 @@ public class ApplicationManager {
 
 	String flightsFileName = "flights.csv"; 
 	String bookingFileName = "bookings.csv";
+	DeskManager deskManager = AppContainer.getDeskManager();
 
 	public void InitializeApplication() throws Exception {
 
@@ -75,7 +76,8 @@ public class ApplicationManager {
 		//DeskManager need to be notified when attempting to add passenger the queue
 		appTimer.registerObserver(AppContainer.getDeskManager());
 		//TimerManager needs to be notified when the simulation time has ended to stop the queue populating task
-		appTimer.registerObserver(timerManager);
+		deskManager.registerObserver(timerManager);
+		appTimer.registerObserver(gui);
 
 		SwingUtilities.invokeLater(() -> AppContainer.getGui().displayAirportMonitorScreen());
 	}

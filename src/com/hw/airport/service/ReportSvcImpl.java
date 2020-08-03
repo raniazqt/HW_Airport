@@ -19,21 +19,20 @@ import java.util.Map;
 public class ReportSvcImpl implements ReportSvc {
 
 	private AppData data = AppData.getInstance();
-	private AirportSimulator airSim = AirportSimulator.getInstnce();
+//	private AirportSimulator airSim = AirportSimulator.getInstnce();
 
 	@Override
 	public void getFlightReport() {
 
-		try {
-			Files.deleteIfExists(Paths.get("./resources/files/FlightsReport.txt"));
-
-		} catch (NoSuchFileException e) {
-			System.out.println("No such file/directory exists");
-		} catch (DirectoryNotEmptyException e) {
-			System.out.println("Directory is not empty.");
-		} catch (IOException e) {
-			System.out.println("Invalid permissions.");
-		}
+		/*
+		 * try { Files.deleteIfExists(Paths.get("./resources/files/FlightsReport.txt"));
+		 * 
+		 * } catch (NoSuchFileException e) {
+		 * System.out.println("No such file/directory exists"); } catch
+		 * (DirectoryNotEmptyException e) {
+		 * System.out.println("Directory is not empty."); } catch (IOException e) {
+		 * System.out.println("Invalid permissions."); }
+		 */
 
 		File output = new File("./resources/files/FlightsReport.txt");
 		FileWriter fr = null;
@@ -53,7 +52,7 @@ public class ReportSvcImpl implements ReportSvc {
 					+ String.format("%-20s", "Total Volume") + String.format("%-20s", "Total Weight")
 					+ String.format("%-20s", "Extra Fees") + newLine);
 
-			for (ActiveFlight flight : airSim.getActiveFlight()) {
+			for (ActiveFlight flight : data.getActiveFlights()) {
 				br.write(String.format("%-20s", flight.getFlightCd())
 						+ String.format("%-20s", flight.getBoardedPsngrCnt())
 						+ String.format("%-20s", flight.getTotalVolume())
