@@ -1,19 +1,16 @@
-package com.hw.airport.main;
-
-import java.util.TimerTask;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+package com.hw.airport.threading;
 
 import com.hw.airport.config.AirportSimulator;
 import com.hw.airport.model.SimulationTimer;
 import com.hw.airport.observer.Observer;
 import com.hw.airport.observer.SynchronizedObservable;
-import com.hw.airport.threading.QueuePopulatingTask;
-import com.hw.airport.threading.TimerUpdateTask;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class TimerManager extends SynchronizedObservable implements Observer{
 

@@ -17,7 +17,6 @@ public class DeskPanel implements GUIElement
 	private JTable deskTable;
 	private DefaultTableModel model;
 	private Desk desk;
-	private int deskIndex;
 
 	public DeskPanel(CheckInDeskPanelSettings guiSettings, Desk desk)
 	{
@@ -71,26 +70,26 @@ public class DeskPanel implements GUIElement
 	}
 
 	private void getDataModel(Object arg){
-		SwingWorker<String[][], Void> worker = new SwingWorker<String[][], Void>() {
+		SwingWorker<String[][], Void> worker = new SwingWorker<>() {
 			@Override
-			protected String[][] doInBackground() throws Exception {
+			protected String[][] doInBackground() {
 				// Simulate doing something useful.
 				Desk updatedDesk = (Desk) arg;
 				String[][] data = new String[2][2];
-				if (null != updatedDesk){
+				if (null != updatedDesk) {
 					desk = updatedDesk;
 					if (updatedDesk.getStatus().equals(DESK_STATUS.CLOSED)) {
 						data = new String[1][2];
 						data[0][0] = "Status";
 						data[0][1] = "DESK CLOSED";
 
-					}else {
+					} else {
 						data = new String[2][2];
 						data[0][0] = "Status";
 						data[0][1] = updatedDesk.getStatus().getValue();
 						data[1][0] = "Passenger";
 						Booking passenger = updatedDesk.getPassenger();
-						if(passenger != null){
+						if (passenger != null) {
 							data[1][1] = passenger.getFullName();
 						}
 					}
@@ -101,11 +100,11 @@ public class DeskPanel implements GUIElement
 
 				return data;
 			}
-			
+
 			protected void done() {
 				try {
 					String[][] data = get();
-					model.setDataVector(data, new String[] {"",""});
+					model.setDataVector(data, new String[]{"", ""});
 					deskTable.setModel(model);
 				} catch (InterruptedException | ExecutionException e) {
 					// TODO Auto-generated catch block
@@ -116,13 +115,5 @@ public class DeskPanel implements GUIElement
 		};
 		worker.execute();
 
-	}
-
-	public int getDeskIndex() {
-		return deskIndex;
-	}
-
-	public void setDeskIndex(int deskIndex) {
-		this.deskIndex = deskIndex;
 	}
 }

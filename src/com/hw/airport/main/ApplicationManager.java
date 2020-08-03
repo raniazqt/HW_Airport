@@ -4,24 +4,26 @@ import com.hw.airport.GUI.AirportGUI;
 import com.hw.airport.config.AirportSimulator;
 import com.hw.airport.config.AppContainer;
 import com.hw.airport.exception.HWAirportException;
-import com.hw.airport.model.ActiveFlight;
 import com.hw.airport.model.AppData;
 import com.hw.airport.model.SimulationTimer;
-import com.hw.airport.service.*;
-import javax.swing.*;
-
+import com.hw.airport.service.CheckInSvcImpl;
+import com.hw.airport.service.DataSvcImpl;
+import com.hw.airport.service.FlightSvc;
+import com.hw.airport.service.QueueSvcImpl;
+import com.hw.airport.threading.DeskManager;
+import com.hw.airport.threading.TimerManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 
 public class ApplicationManager {
 
-	static Logger LOG = LogManager.getLogger(ApplicationManager.class);
-	private static AirportGUI gui= AppContainer.getInstance().getGui();
+	private String flightsFileName = "flights.csv";
+	private String bookingFileName = "bookings.csv";
 
-	String flightsFileName = "flights.csv";
-	String bookingFileName = "bookings.csv";
-	static DeskManager deskManager = AppContainer.getDeskManager();
+	private static Logger LOG = LogManager.getLogger(ApplicationManager.class);
+	private static AirportGUI gui= AppContainer.getInstance().getGui();
+	private static DeskManager deskManager = AppContainer.getDeskManager();
 
 	public void InitializeApplication() throws Exception {
 
@@ -47,14 +49,9 @@ public class ApplicationManager {
 			AppData.setFlightsInfo(dataSvc.loadFlightsData(flightsFileName));
 			AppData.setBookingList(dataSvc.loadBookingData(bookingFileName));
 		} catch (HWAirportException e) {
-			throw new Exception("Application failed to load data. Contact adminstrator");
+			throw new Exception("Application failed to load data. Contact administrator");
 		}
 
-		//create list of flights being boarding based on user entry
-		/*
-		 * AppData.getActiveFlights().add(new ActiveFlight("AF999", 10));
-		 * AppData.getActiveFlights().add(new ActiveFlight("AA123", 10));
-		 */
 		FlightSvc flightSvc = AppContainer.getFlightSvc();
 		flightSvc.setFlights(AppData.getFlightsInfo());
 	}
@@ -71,8 +68,6 @@ public class ApplicationManager {
 		//TimerManager needs to be notified when the simulation time has ended to stop the queue populating task
 		deskManager.registerObserver(timerManager);
 		appTimer.registerObserver(gui);
-
-
 	}
 
 	public static void main(String[] args) throws Exception {

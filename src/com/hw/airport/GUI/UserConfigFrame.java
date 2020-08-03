@@ -1,35 +1,25 @@
 package com.hw.airport.GUI;
 
+import com.hw.airport.config.AirportSimulator;
+import com.hw.airport.config.AppContainer;
+import com.hw.airport.config.SimulationToolBarSettings;
+import com.hw.airport.config.UserConfigFrameSettings;
+import com.hw.airport.model.ActiveFlight;
+import com.hw.airport.model.AppData;
+import com.hw.airport.model.SimulationTimer;
+import com.hw.airport.threading.TimerManager;
+
+import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-
-import com.hw.airport.config.AirportSimulator;
-import com.hw.airport.config.AppContainer;
-import com.hw.airport.config.SimulationToolBarSettings;
-import com.hw.airport.config.UserConfigFrameSettings;
-import com.hw.airport.main.TimerManager;
-import com.hw.airport.model.ActiveFlight;
-import com.hw.airport.model.AppData;
-import com.hw.airport.model.SimulationTimer;
-
 public class UserConfigFrame extends JFrame implements ListSelectionListener, GUIElement {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private SimulationToolBarSettings configPanelSettings;
 
