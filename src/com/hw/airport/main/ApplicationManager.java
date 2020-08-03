@@ -1,6 +1,6 @@
 package com.hw.airport.main;
 
-import com.hw.airport.GUI_S2.AirportGUI;
+import com.hw.airport.GUI.AirportGUI;
 import com.hw.airport.config.AirportSimulator;
 import com.hw.airport.config.AppContainer;
 import com.hw.airport.exception.HWAirportException;
@@ -84,10 +84,4 @@ public class ApplicationManager {
 		System.out.println("TimerTask started");
 		SwingUtilities.invokeLater(() -> AppContainer.getGui().displayAirportMonitorScreen());
 	}
-
-	/*
-	 * public static void main(String[] args) throws Exception { ApplicationManager
-	 * appManager = new ApplicationManager(); gui.displayConfigScreen();
-	 * //appManager.start(); }
-	 */
 }

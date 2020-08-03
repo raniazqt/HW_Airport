@@ -1,7 +1,7 @@
 package com.hw.airport.config;
 
-import com.hw.airport.GUI_S2.AirportGUI;
-import com.hw.airport.GUI_S2.AirportGUIImpl;
+import com.hw.airport.GUI.AirportGUI;
+import com.hw.airport.GUI.AirportGUIImpl;
 import com.hw.airport.model.*;
 import com.hw.airport.service.*;
 import com.hw.airport.threading.DeskManager;
@@ -43,6 +43,8 @@ public class AppContainer {
 	private static CheckInSvc checkinSvc;
 
 	private static GUISvc guiSvc;
+
+	private static ReportSvc reportSvc;
 	
 	public static AppContainer getInstance() {
 		if (appContainer == null) {
@@ -59,6 +61,7 @@ public class AppContainer {
 			deskManager = new DeskManager();
 			guiSvc = new GUISvcImpl();
 			gui = new AirportGUIImpl();
+			reportSvc = new ReportSvcImpl();
 		}
 
 		return appContainer;
@@ -118,5 +121,6 @@ public class AppContainer {
 
 	public static GUISvc getGuiSvc() { return guiSvc; }
 
+	public static ReportSvc getReportSvc() { return  reportSvc; }
 
 }

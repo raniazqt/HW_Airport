@@ -1,4 +1,4 @@
-package com.hw.airport.GUI_S2;
+package com.hw.airport.GUI;
 
 import com.hw.airport.config.AirportGuiSettings;
 import com.hw.airport.model.ActiveFlight;
@@ -23,8 +23,8 @@ public class AirportMonitorFrame extends JFrame implements GUIElement {
 	}
 
 	private void initMasterFrame() {
-		setTitle(guiSettings.AirPortMonitorFrameSettings.getMainScreenTitle());
-		setSize(guiSettings.AirPortMonitorFrameSettings.getMainScreenWidth(), guiSettings.AirPortMonitorFrameSettings.getMainScreenHeight());
+		setTitle(guiSettings.AirPortMonitorFrameSettings.getTitle());
+		setSize(guiSettings.AirPortMonitorFrameSettings.getWidth(), guiSettings.AirPortMonitorFrameSettings.getHeight());
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLayout(new BoxLayout(getContentPane(), BoxLayout.PAGE_AXIS));
 	}

@@ -1,4 +1,4 @@
-package com.hw.airport.GUI_S2;
+package com.hw.airport.GUI;
 
 import com.hw.airport.config.AirportSimulator;
 import com.hw.airport.config.AppContainer;
@@ -16,8 +16,8 @@ public class UserConfigFrame extends JFrame implements ListSelectionListener, GU
 	private SimulationToolBarSettings configPanelSettings;
 
 	public UserConfigFrame(UserConfigFrameSettings frameSettings) {
-		setTitle(frameSettings.getMainScreenTitle());
-		setSize(frameSettings.getMainScreenWidth(), frameSettings.getMainScreenHeight());
+		setTitle(frameSettings.getTitle());
+		setSize(frameSettings.getWidth(), frameSettings.getHeight());
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		configPanelSettings = frameSettings.componentSettings;
 	}
@@ -103,6 +103,7 @@ public class UserConfigFrame extends JFrame implements ListSelectionListener, GU
 						AirportSimulator.getInstnce().setPassToDeskRatio(Integer.parseInt(passToDeskVal));
 						AppContainer.getGui().setAirportGuiSettings("resources/gui/monitor/"+ themeListVal.getSelectedValue()+".xml");
 						ApplicationManager appManager = new ApplicationManager();
+						setVisible(false);
 						try {
 							appManager.start();
 						} catch (Exception e) {
@@ -130,6 +131,7 @@ public class UserConfigFrame extends JFrame implements ListSelectionListener, GU
 				AirportSimulator.getInstnce().setQueuePopulatingRate(2000);
 				AppContainer.getGui().setAirportGuiSettings("resources/gui/monitor/"+ themeListVal.getSelectedValue()+".xml");
 				ApplicationManager appManager = new ApplicationManager();
+				setVisible(false);
 				try {
 					appManager.start();
 				} catch (Exception e) {
