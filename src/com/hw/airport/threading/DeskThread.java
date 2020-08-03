@@ -46,10 +46,12 @@ public class DeskThread extends Thread implements Runnable{
 		int simRate = AirportSimulator.getSimExcRate();
 		boolean checkinStatus = false;
 		Booking passenger = null;
-		while (!desk.getStatus().equals(DESK_STATUS.CLOSED)) {
+		boolean activeThread = true;
+		while (!desk.getStatus().equals(DESK_STATUS.CLOSED) && activeThread) {
 			if (checkinSvc.isQueueEmpty()) {
 				//close desk & stop thread
 				deskManager.closeDesk(this);
+				deskManager.checkOtherDesksStatus();
 			}else {
 				
 				try {
@@ -111,8 +113,10 @@ public class DeskThread extends Thread implements Runnable{
 					//Step# 6
 					Thread.sleep(simRate);
 					checkinStatus = true;
-				} catch (HWAirportException | InterruptedException e) {
+				} catch (HWAirportException e) {
 						System.out.println("Exception :" + e.getMessage());
+				} catch (InterruptedException e) {
+					activeThread = false;
 				}finally {
 					//Step# 7
 					checkinSvc.updateDeskStatus(desk, DESK_STATUS.UPDATE_PASSENGER_FLIGHT_DATA);

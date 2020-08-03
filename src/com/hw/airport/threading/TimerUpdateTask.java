@@ -14,14 +14,9 @@ public class TimerUpdateTask extends TimerTask
     @Override
     public void run() {
        try {
-           if(timerObject.isRunning())
-           {
+           if(timerObject.isRunning()){
                timerObject.tick();
-           }
-           else {
-               cancel();
-               System.out.println("CANCELING TIMER TASK....");
-           }
+           }        
        }
        catch (Exception e) {
            e.printStackTrace();
