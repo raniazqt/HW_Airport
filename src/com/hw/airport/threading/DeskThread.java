@@ -103,7 +103,7 @@ public class DeskThread extends Thread implements Runnable{
 
 					//Step# 5
 					Thread.sleep(simRate);
-					if (passenger.getXtraBagVolChrg() != 0 || passenger.getXtraBagVolChrg() !=0 ) {
+					if (passenger.getXtraBagVolChrg() != 0) {
 						//passenger needs to pay extra baggage charge
 						//TODO: Not sure what to do in this case
 						checkinSvc.updateDeskStatus(desk, DESK_STATUS.PROCESS_PAYMENT);

@@ -6,15 +6,14 @@ import com.hw.airport.config.AppContainer;
 import com.hw.airport.exception.HWAirportException;
 import com.hw.airport.model.ActiveFlight;
 import com.hw.airport.model.AppData;
-import com.hw.airport.threading.DeskManager;
 import com.hw.airport.model.SimulationTimer;
-import com.hw.airport.service.*;
-import com.hw.airport.threading.QueuePopulatingTask;
-import com.hw.airport.threading.TimerUpdateTask;
+import com.hw.airport.service.CheckInSvcImpl;
+import com.hw.airport.service.DataSvcImpl;
+import com.hw.airport.service.FlightSvc;
+import com.hw.airport.service.QueueSvcImpl;
+import com.hw.airport.threading.DeskManager;
 
 import javax.swing.*;
-import java.util.Timer;
-import java.util.TimerTask;
 
 
 public class ApplicationManager {
@@ -30,8 +29,6 @@ public class ApplicationManager {
 		AppData.getInstance();
 		AirportSimulator.getInstnce();
 
-		//gui = AppContainer.getGui();
-		//register the DeskManager as an observer to the QueueSvs
 		QueueSvcImpl queueSvc = (QueueSvcImpl) AppContainer.getQueueSvc();
 		queueSvc.registerObserver(AppContainer.getDeskManager());
 		queueSvc.registerObserver(gui);
@@ -45,10 +42,6 @@ public class ApplicationManager {
 
 		DataSvcImpl dataSvc = (DataSvcImpl) AppContainer.getDataSvc();
 		dataSvc.registerObserver(gui);
-		/*
-		 * if (null == appContainer) { throw new RuntimeErrorException(null,
-		 * "Application did not start correctly. Notify adminstrator "); }
-		 */
 
 		//load flights and booking data from files
 		try {
