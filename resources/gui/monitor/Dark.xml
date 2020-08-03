@@ -160,16 +160,14 @@
                     reference="../../SimulationToolBarSettings/BorderType"></BorderType>
     </ActiveFlightPanelSettings>
     <EndOfSimulationFrameSettings>
-        <mainScreenWidth>800</mainScreenWidth>
-        <mainScreenHeight>600</mainScreenHeight>
+        <mainScreenWidth>400</mainScreenWidth>
+        <mainScreenHeight>200</mainScreenHeight>
         <exitOperation>3</exitOperation>
-        <mainScreenTitle>User Configuration Screen</mainScreenTitle>
+        <mainScreenTitle>Simulation End Screen</mainScreenTitle>
         <componentSettings>
             <Layout class="java.awt.GridLayout">
-                <hgap>3</hgap>
-                <vgap>10</vgap>
-                <rows>0</rows>
-                <cols>2</cols>
+                <rows>3</rows>
+                <cols>3</cols>
             </Layout>
             <BackGroundColor>
                 <red>255</red>

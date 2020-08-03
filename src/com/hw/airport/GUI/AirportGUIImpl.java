@@ -38,7 +38,6 @@ public class AirportGUIImpl extends SynchronizedObservable implements AirportGUI
 
 	@Override
 	public void displayEndOfSimulationScreen() {
-		endOfSimFrame = new EndOfSimulationFrame(airPortGuiSettings);
 		endOfSimFrame.init(AppContainer.getReportSvc());
 		endOfSimFrame.draw();
 		endOfSimFrame.getSelf().setVisible(true);
@@ -54,6 +53,7 @@ public class AirportGUIImpl extends SynchronizedObservable implements AirportGUI
 			e.printStackTrace();
 		}
 		masterFrame = new AirportMonitorFrame(airPortGuiSettings);
+		endOfSimFrame = new EndOfSimulationFrame(airPortGuiSettings);
 	}
 
 	@Override

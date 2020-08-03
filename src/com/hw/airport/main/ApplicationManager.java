@@ -84,10 +84,4 @@ public class ApplicationManager {
 		System.out.println("TimerTask started");
 		SwingUtilities.invokeLater(() -> AppContainer.getGui().displayAirportMonitorScreen());
 	}
-
-	/*
-	 * public static void main(String[] args) throws Exception { ApplicationManager
-	 * appManager = new ApplicationManager(); gui.displayConfigScreen();
-	 * //appManager.start(); }
-	 */
 }

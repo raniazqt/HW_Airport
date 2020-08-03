@@ -13,13 +13,11 @@ public class EndOfSimulationFrame extends JFrame implements GUIElement {
 
     public EndOfSimulationFrame(AirportGuiSettings guiSettings)
     {
+        frameSettings = guiSettings.EndOfSimulationFrameSettings;
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         setTitle(frameSettings.getTitle());
         setSize(frameSettings.getWidth(), frameSettings.getHeight());
-
         System.out.println("WIDTH: " + frameSettings.getWidth() + " HEIGHT: " + frameSettings.getHeight());
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-        frameSettings = guiSettings.EndOfSimulationFrameSettings;
     }
 
     @Override
@@ -41,6 +39,8 @@ public class EndOfSimulationFrame extends JFrame implements GUIElement {
             reportSvc.getSuccPassengerReport();
         });
 
+        JLabel spaceLabel = new JLabel();
+        add(spaceLabel);
         add(genRprtBtn);
     }
 
