@@ -24,7 +24,7 @@ public class DeskPanel implements GUIElement
 		this.desk = desk;
 		this.guiSettings = guiSettings;
 		this.deskTable = new JTable();
-		this.deskTable.setPreferredSize(new Dimension(100,180));
+		this.deskTable.setPreferredSize(new Dimension(100,100));
 		this.model = new DefaultTableModel();
 	}
 

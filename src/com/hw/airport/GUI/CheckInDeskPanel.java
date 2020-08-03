@@ -6,6 +6,8 @@ import com.hw.airport.model.Desk;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
+
+import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,6 +42,7 @@ public class CheckInDeskPanel extends JPanel implements GUIElement
 		this.setFont(guiSettings.LabelFont);
 		this.setBackground(guiSettings.BackGroundColor);
 		this.setBorder(guiSettings.BorderType);
+		this.setPreferredSize(new Dimension(1440,100));
 	}
 
 	private DeskPanel findDeskPanel(Desk desk) {
