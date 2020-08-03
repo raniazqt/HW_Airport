@@ -117,7 +117,7 @@ public class UserConfigFrame extends JFrame implements ListSelectionListener, GU
 					}
 				} else {
 
-					JOptionPane.showMessageDialog(getSelf(), "Eggs are not supposed to be green.");
+					JOptionPane.showMessageDialog(getSelf(), "Parameters cannot be left blank and must be numbers.");
 				}
 			}
 
