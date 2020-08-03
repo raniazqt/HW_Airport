@@ -159,4 +159,43 @@
         <BorderType class="javax.swing.border.BevelBorder"
                     reference="../../SimulationToolBarSettings/BorderType"></BorderType>
     </ActiveFlightPanelSettings>
+    <EndOfSimulationFrameSettings>
+        <mainScreenWidth>800</mainScreenWidth>
+        <mainScreenHeight>600</mainScreenHeight>
+        <exitOperation>3</exitOperation>
+        <mainScreenTitle>User Configuration Screen</mainScreenTitle>
+        <componentSettings>
+            <Layout class="java.awt.GridLayout">
+                <hgap>3</hgap>
+                <vgap>10</vgap>
+                <rows>0</rows>
+                <cols>2</cols>
+            </Layout>
+            <BackGroundColor>
+                <red>255</red>
+                <green>255</green>
+                <blue>255</blue>
+                <alpha>255</alpha>
+            </BackGroundColor>
+            <LabelColor>
+                <red>9</red>
+                <green>9</green>
+                <blue>9</blue>
+                <alpha>255</alpha>
+            </LabelColor>
+            <LabelFont>
+                <size class="null"/>
+                <weight class="float">2.0</weight>
+                <transform class="null"/>
+                <superscript class="null"/>
+                <posture class="null"/>
+                <family class="string">Dialogue</family>
+                <width class="null"/>
+                <tracking class="null"/>
+            </LabelFont>
+            <BorderType class="javax.swing.border.BevelBorder">
+                <bevelType>2</bevelType>
+            </BorderType>
+        </componentSettings>
+    </EndOfSimulationFrameSettings>
 </com.hw.airport.config.AirportGuiSettings>

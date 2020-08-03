@@ -1,5 +1,6 @@
-package com.hw.airport.GUI_S2;
+package com.hw.airport.GUI;
 import com.hw.airport.config.AirportGuiSettings;
+import com.hw.airport.config.AppContainer;
 import com.hw.airport.config.UserConfigFrameSettings;
 import com.hw.airport.observer.SynchronizedObservable;
 import com.hw.airport.util.XmlHandler;
@@ -10,6 +11,8 @@ public class AirportGUIImpl extends SynchronizedObservable implements AirportGUI
 {
 	private GUIElement masterFrame;
 	private GUIElement configFrame;
+	private GUIElement endOfSimFrame;
+
 	private AirportGuiSettings airPortGuiSettings;
 	private UserConfigFrameSettings configFrameSettings;
 
@@ -28,10 +31,17 @@ public class AirportGUIImpl extends SynchronizedObservable implements AirportGUI
 
 	@Override
 	public void displayAirportMonitorScreen() {
-		configFrame.getSelf().setVisible(false);
 		masterFrame.init(null);
 		masterFrame.draw();
 		masterFrame.getSelf().setVisible(true);
+	}
+
+	@Override
+	public void displayEndOfSimulationScreen() {
+		endOfSimFrame = new EndOfSimulationFrame(airPortGuiSettings);
+		endOfSimFrame.init(AppContainer.getReportSvc());
+		endOfSimFrame.draw();
+		endOfSimFrame.getSelf().setVisible(true);
 	}
 
 	@Override
