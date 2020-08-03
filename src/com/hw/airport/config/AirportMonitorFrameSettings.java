@@ -15,11 +15,11 @@ public class AirportMonitorFrameSettings
         this.exitOperation = exitOp;
     }
 
-    public String getMainScreenTitle() { return this.mainScreenTitle;}
+    public String getTitle() { return this.mainScreenTitle;}
 
-    public int getMainScreenWidth() { return mainScreenWidth; }
+    public int getWidth() { return mainScreenWidth; }
 
-    public int getMainScreenHeight() { return mainScreenHeight; }
+    public int getHeight() { return mainScreenHeight; }
 
     public int getExitOperation() { return exitOperation; }
 }

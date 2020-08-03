@@ -1,4 +1,4 @@
-package com.hw.airport.GUI_S2;
+package com.hw.airport.GUI;
 
 import com.hw.airport.config.AppContainer;
 import com.hw.airport.config.PassengerPanelSettings;

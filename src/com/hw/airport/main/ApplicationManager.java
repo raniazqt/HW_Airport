@@ -1,6 +1,6 @@
 package com.hw.airport.main;
 
-import com.hw.airport.GUI_S2.AirportGUI;
+import com.hw.airport.GUI.AirportGUI;
 import com.hw.airport.config.AirportSimulator;
 import com.hw.airport.config.AppContainer;
 import com.hw.airport.exception.HWAirportException;
@@ -79,5 +79,4 @@ public class ApplicationManager {
 
 		SwingUtilities.invokeLater(() -> AppContainer.getGui().displayAirportMonitorScreen());
 	}
-
 }
