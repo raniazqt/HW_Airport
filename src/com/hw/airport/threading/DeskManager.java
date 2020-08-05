@@ -9,14 +9,13 @@ import com.hw.airport.observer.SynchronizedObservable;
 import com.hw.airport.service.DeskSvc;
 import com.hw.airport.service.ReportSvc;
 import com.hw.airport.service.ReportSvcImpl;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class DeskManager extends SynchronizedObservable implements Observer {
 	Logger LOG = LogManager.getLogger(DeskManager.class);
@@ -60,13 +59,13 @@ public class DeskManager extends SynchronizedObservable implements Observer {
 
 		//the notification is coming from the simulator timer to notify that time has elapsed. End simulation!
 		if (args instanceof String && "TIME ELAPSED".equalsIgnoreCase((String)args)) {
-			
-			reportSvc.getFlightReport();
-			
-			executor.shutdownNow();
+
 			setChanged();
+			reportSvc.getFlightReport();
+			executor.shutdownNow();
+
 			notifyObservers("DESKS_CLOSED");
-			
+
 		}else {
 			PassengerQueue queue = PassengerQueue.getInstance();
 			if ((queue.getQueueSize() > 0 && openedDeskCnt == 0) ||

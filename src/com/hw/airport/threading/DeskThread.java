@@ -127,7 +127,7 @@ public class DeskThread extends Thread implements Runnable{
 								+ desk.getPassenger().getFullName() + " check in was completed successfully");
 					}else {
 						System.out.println("Desk - " + desk.getThreadName() + " - processing passenger " 
-								+ desk.getPassenger().getFullName() + "check in was not successfull");
+								+ desk.getPassenger().getFullName() + "check in was not successful");
 					}
 
 				}
@@ -135,8 +135,6 @@ public class DeskThread extends Thread implements Runnable{
 				
 				//Step# 8
 				checkinSvc.clearDesk(desk);
-
-
 			}
 		}
 

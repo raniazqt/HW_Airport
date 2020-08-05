@@ -33,19 +33,16 @@ public class TimerManager extends SynchronizedObservable implements Observer{
 	}
 
 	public SimulationTimer setupTimer() {
-		long rate = (long) AirportSimulator.getQueuePopulatingRate();
-		long queuePopulatingRate = rate;
 		double timerRate = 1;
+		long queuePopulatingRate = AirportSimulator.getQueuePopulatingRate();
 		int simRunningRate = AirportSimulator.getSimRunningRate();
 
 		//Configure simulator timer task
 		appTimer.start(simRunningRate, timerRate);
 
-
 		//schedule timer tasks to run as daemon thread
-		executor.scheduleAtFixedRate(queuePopulatingTask, 0, queuePopulatingRate,TimeUnit.MILLISECONDS);
-
-		executor.scheduleWithFixedDelay(simTimerTask, 0,600,TimeUnit.MILLISECONDS);
+		executor.scheduleAtFixedRate(queuePopulatingTask, 0, queuePopulatingRate, TimeUnit.MILLISECONDS);
+		executor.scheduleWithFixedDelay(simTimerTask, 0,queuePopulatingRate, TimeUnit.MILLISECONDS);
 		
 		LOG.debug("Simulator Timer has started");
 		LOG.debug("Populating queue task has started");
@@ -57,13 +54,14 @@ public class TimerManager extends SynchronizedObservable implements Observer{
 	public void onNotify(Object args) {
 		//the notification is coming from the simulator timer to notify that time has elapsed. End simulation!
 		if (args instanceof String && "DESKS_CLOSED".equalsIgnoreCase((String)args)) {
+			System.out.println("SIMULATION DONE..");
 			LOG.debug("Simulator time has ended. End simulation");
 			appTimer.stop(); 
 			queuePopulatingTask.cancel(); 
 			simTimerTask.cancel();
 			executor.shutdown();
 			setChanged();
-			notifyObservers("SIMULATON_FINISHED");
+			notifyObservers("SIMULATION_FINISHED");
 		}
 	}
 }

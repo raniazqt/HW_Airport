@@ -20,9 +20,15 @@ public class ActiveFlightPanel extends JPanel implements GUIElement
 	}
 
 	@Override
-	public JPanel getSelf()
+	public JScrollPane getSelf()
 	{
-		return this;
+		JScrollPane scrollPaneForPanel = new JScrollPane(this);
+		scrollPaneForPanel.setBorder(guiSettings.BorderType);
+		scrollPaneForPanel.setForeground(guiSettings.LabelColor);
+		scrollPaneForPanel.setBackground(guiSettings.BackGroundColor);
+		scrollPaneForPanel.setFont(guiSettings.LabelFont);
+
+		return scrollPaneForPanel;
 	}
 
 	@Override

@@ -25,9 +25,15 @@ public class CheckInDeskPanel extends JPanel implements GUIElement
 	}
 
 	@Override
-	public JPanel getSelf()
+	public JScrollPane getSelf()
 	{
-		return this;
+		JScrollPane scrollPaneForPanel = new JScrollPane(this);
+		scrollPaneForPanel.setBorder(guiSettings.BorderType);
+		scrollPaneForPanel.setForeground(guiSettings.LabelColor);
+		scrollPaneForPanel.setBackground(guiSettings.BackGroundColor);
+		scrollPaneForPanel.setFont(guiSettings.LabelFont);
+
+		return scrollPaneForPanel;
 	}
 
 	@Override
@@ -62,7 +68,10 @@ public class CheckInDeskPanel extends JPanel implements GUIElement
 	@Override
 	public  void refresh(Object args)
 	{
-		clearClosedPanels();
+		if(args instanceof String && args.equals("DESKS_CLOSED"))
+		{
+			closeDeskPanels();
+		}
 
 		if(!(args instanceof Desk))
 			return;
@@ -89,25 +98,14 @@ public class CheckInDeskPanel extends JPanel implements GUIElement
 		}
 	}
 
-	private void clearClosedPanels() {
-		DeskPanel closedPanel = findClosedDeskPanel();
-		if(closedPanel != null)
+	private void closeDeskPanels() {
+		removeAll();
+		for(DeskPanel deskPanel : deskPanels)
 		{
-			removeAll();
-			deskPanels.remove(closedPanel);
-			for(DeskPanel panel : deskPanels)
-			{
-				add(panel.getSelf());
-			}
-		}
-	}
+			if(deskPanel.getDesk().getStatus() != DESK_STATUS.CLOSED)
+				deskPanel.getDesk().setStatus(DESK_STATUS.CLOSED);
 
-	private DeskPanel findClosedDeskPanel()
-	{
-		for(DeskPanel panel : deskPanels) {
-			if(panel.getDesk().getStatus() == DESK_STATUS.CLOSED)
-				return panel;
+			add(deskPanel.getSelf());
 		}
-		return null;
 	}
 }

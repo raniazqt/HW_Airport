@@ -67,7 +67,14 @@ public class AirportMonitorFrame extends JFrame implements GUIElement {
 	@Override
 	public void refresh(Object args) {
 		refreshFrame();
-		refreshSubPanels(args);
+
+		if(args instanceof String && args.equals("DESKS_CLOSED"))
+		{
+			checkInDeskPanel.refresh(args);
+		}
+		else {
+			refreshSubPanels(args);
+		}
 	}
 
 	private void refreshFrame() {

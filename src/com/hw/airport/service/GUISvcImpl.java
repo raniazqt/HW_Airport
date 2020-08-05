@@ -21,6 +21,7 @@ public class GUISvcImpl implements GUISvc {
 		map.put("Simulation Rate: ", AirportSimulator.getSimExcRate());
 		map.put("Max Open Desks: ", AirportSimulator.getMaxOpndCheckinDesk());
 		map.put("Queue Population Rate: ", AirportSimulator.getQueuePopulatingRate());
+		map.put("Check-In Speed: ", AirportSimulator.getSimRunningRate());
 		
 		return map;
 	}
